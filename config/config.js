@@ -8,8 +8,8 @@ var config = {
     app: {
       name: 'mailman'
     },
-    port: 3000,
-    db: 'postgres://localhost/mailman-development'
+    port: process.env.PORT || 3000,
+    db: process.env.DATABASE_URL || 'postgres://localhost/mailman-development'
   },
 
   test: {
@@ -17,8 +17,8 @@ var config = {
     app: {
       name: 'mailman'
     },
-    port: 3000,
-    db: 'postgres://localhost/mailman-test'
+    port: process.env.PORT || 3000,
+    db: process.env.DATABASE_URL || 'postgres://localhost/mailman-test'
   },
 
   production: {
@@ -26,8 +26,8 @@ var config = {
     app: {
       name: 'mailman'
     },
-    port: 3000,
-    db: 'postgres://localhost/mailman-production'
+    port: process.env.PORT || 3000,
+    db: process.env.DATABASE_URL || 'postgres://localhost/mailman-test'
   }
 };
 
