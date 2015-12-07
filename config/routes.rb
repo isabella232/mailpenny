@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
     root 'emails#welcome'
 
-    post 'emails/recieve'
+    post 'emails/recieve' => 'emails#recieve'
     get 'emails/recieve'
+
     get 'emails/welcome'
 
 
