@@ -9,9 +9,9 @@
 development:
  adapter: postgresql
  encoding: utf8
- database: df2ar28i0gehe1
- username: tisokckcsbzshg
- password: dzZZUs1_EgZ0jAytaB-JuyG1sO
+ database: rails_app
+ username: postgres
+ password: Waleed_123
  pool: 5
  port: 5432
 # Warning: The database defined as "test" will be erased and

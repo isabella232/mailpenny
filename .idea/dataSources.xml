@@ -4,9 +4,9 @@
     <data-source source="LOCAL" name="Rails mailman: development" uuid="c96454e4-c51e-4118-827b-60c576ccd84d">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/df2ar28i0gehe1</jdbc-url>
-      <user-name>tisokckcsbzshg</user-name>
-      <user-password>dfcedfd0dff0dff0dfffdfd9df9bdff5dfefdfcddff0df9adfc0dfebdfd3dfdedfcbdfe8df87dfe0dfdfdfd3dfeddf9bdfd9dfe5</user-password>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/rails_app</jdbc-url>
+      <user-name>postgres</user-name>
+      <user-password>dffddfcbdfc6dfcfdfcfdfcedff5df9bdf98df99</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails mailman: test" uuid="d82c3294-6481-4467-a903-1b067f49ce91">
