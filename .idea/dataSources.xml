@@ -4,13 +4,17 @@
     <data-source source="LOCAL" name="Rails mailman: development" uuid="c96454e4-c51e-4118-827b-60c576ccd84d">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:&lt;%= ENV['DATABASE_URL'] %&gt;</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/mailman_development</jdbc-url>
+      <user-name>mailman</user-name>
+      <user-password>dfd9dfdfdfdadfcfdfd8dfd9dfcfdfc9dfd8dfcfdfdedfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails mailman: test" uuid="d82c3294-6481-4467-a903-1b067f49ce91">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:&lt;%= ENV['DATABASE_URL'] %&gt;</jdbc-url>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/mailman_test</jdbc-url>
+      <user-name>mailman</user-name>
+      <user-password>dfd9dfdfdfdadfcfdfd8dfd9dfcfdfc9dfd8dfcfdfdedfdadfcbdfd9dfd9dfdddfc5dfd8dfce</user-password>
       <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails mailman: production" uuid="e307e78f-5bdf-400d-b764-d43d96d6faa6">
