@@ -9,7 +9,7 @@
 development:
  adapter: postgresql
   encoding: utf8
-  database: ENV['DATABASE_URL']
+  database: <%= ENV['DATABASE_URL'] %>
   pool: 5
 
 # Warning: The database defined as "test" will be erased and
@@ -18,12 +18,12 @@ development:
 test:
    adapter: postgresql
     encoding: utf8
-    database: ENV['DATABASE_URL']
+    database: <%= ENV['DATABASE_URL'] %>
     pool: 5
 
 production:
   adapter: postgresql
    encoding: utf8
-   database: ENV['DATABASE_URL']
+   database: <%= ENV['DATABASE_URL'] %>
    pool: 5
 
