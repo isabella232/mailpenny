@@ -4,7 +4,7 @@ class EmailsController < ApplicationController
 
   def recieve
 
-    logger.debug(params.to_s);
+ 
     email = Email.new;
     email.from = params['sender'];
     email.to = params['recipient'];
