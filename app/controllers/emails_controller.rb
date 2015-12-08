@@ -3,11 +3,11 @@ class EmailsController < ApplicationController
 
 
   def recieve
-    params['recipient']
 
+    logger.debug(params.to_s);
     email = Email.new;
     email.from = params['sender'];
-    email.to = params.to_s;
+    email.to = params['recipient'];
     email.subject = params['subject'];
     email.body = params['body-plain'];
     email.save;
