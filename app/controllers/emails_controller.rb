@@ -7,7 +7,7 @@ class EmailsController < ApplicationController
 
     email = Email.new;
     email.from = params['sender'];
-    email.to = params['to'];
+    email.to = params.to_s;
     email.subject = params['subject'];
     email.body = params['body-plain'];
     email.save;
