@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
     get 'emails/welcome'
 
+    get 'emails/create_address' => 'emails#create_address'
 
 
   # Example of regular route:
