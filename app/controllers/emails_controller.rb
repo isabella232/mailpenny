@@ -40,6 +40,7 @@ class EmailsController < ApplicationController
                        to: 'waleedsulehria@gmail.com',
                        subject: 'Coinbase address',
                        text: params.to_s }
+   mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
 
     render json: params.to_s
   end
