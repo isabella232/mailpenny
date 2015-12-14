@@ -7,17 +7,13 @@ class EmailsController < ApplicationController
     email.subject = params['subject']
     email.body = params['body-plain']
     email.save
-    logger.debug(params.to_s)
-    mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
+
     address = create_address
     btc_address = address['address']
-    # Define your message parameters
-    message_params = { from: 'waleed@mailman.ninja',
-                       to: email.from,
-                       subject: 'Coinbase address',
-                       text: 'Pay the amount of reward in BTC at this address :'+btc_address }
-    # Send your message through the client
-    mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
+
+
+    send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address
+
     render template: 'emails/recieve'
   end
 
@@ -33,20 +29,21 @@ class EmailsController < ApplicationController
     return address
   end
   def payment_recieved
+    address = params['address'];
+    amount = params['amount'];
+    send_email "waleedsulehria@gmail.com",""+address+amount
+    render json: params.to_s
+  end
 
-    logger.info "recieved1"
-    amount = params['native_amount']['amount']
-    status = params['data']['status']
-    logger.info "recieved2"
-
-
+  def send_email(to,text)
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
     message_params = { from: 'waleed@mailman.ninja',
-                       to: 'waleedsulehria@gmail.com',
+                       to: to,
                        subject: 'Coinbase address',
-                       text: amount.to_s+status.to_s}
+                       text:  text}
     # Send your message through the client
     mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
-    render json: params.to_s
+
+
   end
 end
