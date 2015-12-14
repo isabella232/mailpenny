@@ -29,9 +29,9 @@ class EmailsController < ApplicationController
     return address
   end
   def payment_recieved
-    address = params['address'];
-    amount = params['amount'];
-    send_email "waleedsulehria@gmail.com",""+address+amount
+    address = params['address']
+    amount = params['amount']
+    send_email 'waleedsulehria@gmail.com', '' + address.to_s + amount.to_s
     render json: params.to_s
   end
 
@@ -40,7 +40,7 @@ class EmailsController < ApplicationController
     message_params = { from: 'waleed@mailman.ninja',
                        to: to,
                        subject: 'Coinbase address',
-                       text:  text}
+                       text:  text }
     # Send your message through the client
     mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
 
