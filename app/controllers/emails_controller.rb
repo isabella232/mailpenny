@@ -10,12 +10,12 @@ class EmailsController < ApplicationController
 
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
     address = create_address
-    btc_address = address['address']
+
     # Define your message parameters
     message_params = { from: 'waleed@mailman.ninja',
                        to: email.from,
                        subject: 'Coinbase address',
-                       text: 'Pay the amount of reward in BTC at this address :'+btc_address }
+                       text: 'Pay the amount of reward in BTC at this address :'+address.to_s }
     # Send your message through the client
     mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
     render template: 'emails/recieve'
