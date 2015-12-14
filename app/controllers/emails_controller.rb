@@ -7,7 +7,7 @@ class EmailsController < ApplicationController
     email.subject = params['subject']
     email.body = params['body-plain']
     email.save
-
+    logger.debug(params.to_s)
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
     address = create_address
     btc_address = address['address']
