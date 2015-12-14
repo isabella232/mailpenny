@@ -10,8 +10,6 @@ Rails.application.routes.draw do
 
     get 'emails/welcome'
 
-    get 'emails/create_address' => 'emails#create_address'
-
     post 'emails/payment_recieved' => 'emails#payment_recieved'
 
   # Example of regular route:
