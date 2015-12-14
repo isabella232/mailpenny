@@ -1,0 +1,29 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* nav bar */
+
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+}
+
+#feedback-form-parent{
+  height: 750px;
+}
+
+#attrib-icons li {
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+#attrib-icons li img {
+  margin: 5px;
+  width: 100px;
+}
