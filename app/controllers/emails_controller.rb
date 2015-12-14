@@ -27,10 +27,12 @@ class EmailsController < ApplicationController
   def create_address
     logger.debug('i am in the create address')
     require 'coinbase/wallet'
-
     client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
     account = client.create_account(name: 'mynewaccount1')
-    address = account.create_address
+    address = account.create_address(callback_url: 'https://floating-plains-7200.herokuapp.com/payment_recieved')
     render json: address.to_s
+  end
+  def payment_recieved
+    render json: params.to_s
   end
 end
