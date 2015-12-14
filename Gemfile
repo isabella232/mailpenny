@@ -42,5 +42,9 @@ gem 'coinbase'
 # mailgun gem
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 
-# sqlite3 gem
-gem 'sqlite3'
+group :development, :test do
+  gem 'sqlite3'
+end
+group :production do
+  gem 'pg'
+end
