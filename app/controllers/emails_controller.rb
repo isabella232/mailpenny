@@ -32,7 +32,7 @@ class EmailsController < ApplicationController
     address = params['address']
     amount = params['amount']
     send_email 'waleedsulehria@gmail.com', '' + address.to_s + amount.to_s
-    render json: params.to_s
+    render template: 'emails/recieve'
   end
 
   def send_email(to,text)
