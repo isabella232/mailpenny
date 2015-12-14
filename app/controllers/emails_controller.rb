@@ -33,15 +33,20 @@ class EmailsController < ApplicationController
     return address
   end
   def payment_recieved
-    logger.debug(params.to_s)
-    mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
 
+    logger.info "recieved1"
+    amount = params['native_amount']['amount']
+    status = params['data']['status']
+    logger.info "recieved2"
+
+
+    mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
     message_params = { from: 'waleed@mailman.ninja',
                        to: 'waleedsulehria@gmail.com',
                        subject: 'Coinbase address',
-                       text: params.to_s }
-   mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
-
+                       text: amount.to_s+status.to_s}
+    # Send your message through the client
+    mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
     render json: params.to_s
   end
 end
