@@ -30,6 +30,12 @@ class EmailsController < ApplicationController
     address = params['address']
     amount = params['amount']
     email = Email.find_by_btc_address(address)
+    rec_amt = RecievedAmount.new
+    rec_amt.email = email
+    rec_amt.amount = amount.to_f
+    rec_amt.btc_address = address
+    rec_amt.save
+
     send_email email.to, 'Hurry up! Reply to this Email in 48 hours and get ' + amount.to_s + ' BTC'
     render template: 'emails/recieve'
   end
