@@ -6,12 +6,10 @@ class EmailsController < ApplicationController
     email.to = params['To']
     email.subject = params['subject']
     email.body = params['body-plain']
-    email.save
-
     address = create_address
     btc_address = address['address']
-
-
+    email.btc_address = btc_address.to_s;
+    email.save
     send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address
 
     render template: 'emails/recieve'
@@ -31,7 +29,8 @@ class EmailsController < ApplicationController
   def payment_recieved
     address = params['address']
     amount = params['amount']
-    send_email 'waleedsulehria@gmail.com', '' + address.to_s + amount.to_s
+    email = Email.find_by_btc_address(address)
+    send_email email.to, 'Hurry up! Reply to this Email in 48 hours and get ' + amount.to_s + ' BTC'
     render template: 'emails/recieve'
   end
 
