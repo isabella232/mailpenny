@@ -2,7 +2,7 @@
 class EmailsController < ApplicationController
   def recieve
     email = Email.new
-    email.from = params['sender']
+    email.from = params['from']
     email.to = params['To']
     email.subject = params['subject']
     email.body = params['body-plain']
