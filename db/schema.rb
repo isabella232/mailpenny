@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215142950) do
+ActiveRecord::Schema.define(version: 20151216102959) do
 
   create_table "emails", force: true do |t|
     t.string   "to"
@@ -20,15 +20,24 @@ ActiveRecord::Schema.define(version: 20151215142950) do
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "btc_address"
+    t.string   "user_id"
   end
 
-  create_table "recieved_amounts", force: true do |t|
-    t.string   "btc_address"
+  create_table "transactions", force: true do |t|
     t.float    "amount"
+    t.string   "to"
+    t.string   "btc_address"
+    t.integer  "email_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "email_id"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email"
+    t.string   "coinbase_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
