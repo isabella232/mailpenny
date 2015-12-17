@@ -8,10 +8,12 @@ class EmailsController < ApplicationController
 
             transaction = Transaction.find_by_email_id(email.id)
             to = email.to
-            Rails.logger.info "Year: #{params['subject'].to_s}"
+            email1 = Email.new
+            email1.subject = params['subject'].to_s
+            email1.save
             amount = transaction.amount.to_s
             send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-        
+
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
