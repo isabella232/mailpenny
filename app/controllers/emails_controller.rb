@@ -7,9 +7,8 @@ class EmailsController < ApplicationController
           transaction = Transaction.find_by_email_id(email.id)
           if(transaction.present? && transaction.count ==1)
             to = email.to
-            account = email.user.coinbase_id.to_s
             amount = transaction.amount.to_s
-            send_money(id,amount,to)
+            send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
           end
         end
 
@@ -41,7 +40,7 @@ class EmailsController < ApplicationController
           email.body = params['body-plain']
           user = User.new
           user.email = email.from
-          user.coinbase_id = 'b2411493-3d92-5c11-b6ad-aee0a0a446a7'
+          user.coinbase_id = '114b91b8-2ecc-5304-b49b-7a0ac970a9b7'
           account = find_account(user.coinbase_id.to_s);
           user.coinbase_id = account['id']
           address = create_address(account)
