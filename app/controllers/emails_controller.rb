@@ -1,16 +1,18 @@
 # This class is to listen and send emails
 class EmailsController < ApplicationController
   def recieve
-      email = Email.find_by_to(params['from'])
+
+      email = Email.find_by_to(params['from'].to_s)
+
       if(email.present?)
-        if(email.subject.to_s == params['subject'].to_s)
-          transaction = Transaction.find_by_email_id(email.id)
-          if(transaction.present?)
+
+
+            
+            transaction = Transaction.find_by_email_id(email.id)
             to = email.to
+            logger.info("hey i am in")
             amount = transaction.amount.to_s
             send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-          end
-        end
 
       else
         user = User.find_by_email(params['from'])
