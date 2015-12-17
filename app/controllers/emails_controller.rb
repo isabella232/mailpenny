@@ -5,7 +5,7 @@ class EmailsController < ApplicationController
       if(email.present?)
         if(email.subject.to_s == params['subject'].to_s)
           transaction = Transaction.find_by_email_id(email.id)
-          if(transaction.present? && transaction.count ==1)
+          if(transaction.present?)
             to = email.to
             amount = transaction.amount.to_s
             send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
