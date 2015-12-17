@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'emails/welcome'
 
     post 'emails/payment_recieved' => 'emails#payment_recieved'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

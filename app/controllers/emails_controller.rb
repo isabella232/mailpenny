@@ -1,51 +1,61 @@
 # This class is to listen and send emails
 class EmailsController < ApplicationController
   def recieve
+      email = Email.find_by_to(params['from'])
+      if(email.present?)
+        if(email.subject.to_s == params['subject'].to_s)
+          transaction = Transaction.find_by_email_id(email.id)
+          if(transaction.present? && transaction.count ==1)
+            to = email.to
+            account = email.user.coinbase_id.to_s
+            amount = transaction.amount.to_s
+            send_money(id,amount,to)
+          end
+        end
 
-      user = User.find_by_email(params['from'])
-
-      if(user.present?)
-        email = Email.new
-        email.from = params['from']
-        email.to = params['To']
-        email.subject = params['subject']
-        email.body = params['body-plain']
-        account = find_account(user.coinbase_id.to_s);
-        address = create_address(account)
-        btc_address = address['address']
-        email.user = user
-        email.save
-        transaction = Transaction.new
-        transaction.btc_address = btc_address.to_s
-        transaction.email = email
-        transaction.user = user
-        transaction.save
-
-        send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
       else
+        user = User.find_by_email(params['from'])
+        if(user.present?)
+          email = Email.new
+          email.from = params['from']
+          email.to = params['To']
+          email.subject = params['subject']
+          email.body = params['body-plain']
+          account = find_account(user.coinbase_id.to_s);
+          address = create_address(account)
+          btc_address = address['address']
+          email.user = user
+          email.save
+          transaction = Transaction.new
+          transaction.btc_address = btc_address.to_s
+          transaction.email = email
+          transaction.user = user
+          transaction.save
 
-        email = Email.new
-        email.from = params['from']
-        email.to = params['To']
-        email.subject = params['subject']
-        email.body = params['body-plain']
-        user = User.new
-        user.email = email.from
-        account = create_account
-        user.coinbase_id = account['id']
-        address = create_address(account)
-        btc_address = address['address']
-        email.save
-        user.save
-        transaction = Transaction.new
-        transaction.btc_address = btc_address.to_s
-        transaction.email = email
-        transaction.user = user
-        transaction.save
-        send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
-
+          send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
+        else
+          email = Email.new
+          email.from = params['from']
+          email.to = params['To']
+          email.subject = params['subject']
+          email.body = params['body-plain']
+          user = User.new
+          user.email = email.from
+          user.coinbase_id = 'b2411493-3d92-5c11-b6ad-aee0a0a446a7'
+          account = find_account(user.coinbase_id.to_s);
+          user.coinbase_id = account['id']
+          address = create_address(account)
+          btc_address = address['address']
+          email.save
+          user.save
+          transaction = Transaction.new
+          transaction.btc_address = btc_address.to_s
+          transaction.email = email
+          transaction.user = user
+          transaction.save
+          send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
+        end
       end
-
       render template: 'emails/recieve'
   end
 
@@ -79,13 +89,20 @@ class EmailsController < ApplicationController
     render template: 'emails/recieve'
   end
 
+
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
-    message_params = { from: 'waleed@mailman.ninja',
+    message_params = { from: 'user <user@sandbox050314df0b744b97beecf2742a588852.mailgun.org>',
                        to: to,
                        subject: subject,
                        text:  text }
     # Send your message through the client
     mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
+  end
+  def send_money(id,amount,to)
+    require 'coinbase/wallet'
+    client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
+    tx = client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
+    render template: 'emails/recieve'
   end
 end
