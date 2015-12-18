@@ -5,15 +5,15 @@ class EmailsController < ApplicationController
       email = Email.find_by_to(params['from'].to_s)
 
       if(email.present?)
-
+        if(params['subject'].to_s.include? 'Re: ')
+          str = params['subject'].to_s.slice 'Re: '
+          if(str == email.subject)
             transaction = Transaction.find_by_email_id(email.id)
             to = email.to
-            email1 = Email.new
-            email1.subject = params['subject'].to_s
-            email1.save
             amount = transaction.amount.to_s
             send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-
+          end
+        end
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
@@ -103,7 +103,7 @@ class EmailsController < ApplicationController
   def send_money(id,amount,to)
     require 'coinbase/wallet'
     client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
-    tx = client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
-    render template: 'emails/recieve'
+    client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
+
   end
 end
