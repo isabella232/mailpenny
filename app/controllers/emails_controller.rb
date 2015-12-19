@@ -4,11 +4,16 @@ class EmailsController < ApplicationController
 
     email = Email.find_by_to(params['from'].to_s)
       if(email.present?)
-
-        transaction = Transaction.find_by_email_id(email.id)
-        to = email.to
-        amount = transaction.amount.to_s
-        send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
+        subject1 = email.subject
+        subject2 = params['subject'].to_s
+        subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
+        if(subject1== subject2)
+          
+          transaction = Transaction.find_by_email_id(email.id)
+          to = email.to
+          amount = transaction.amount.to_s
+          send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
+        end
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
