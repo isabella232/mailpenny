@@ -1,69 +1,57 @@
+# This mailer contains the email templates for the reward module.
+# Assume alice is the person setting the reward, and bob is the person recieving
+# the reward.
+# Alice and Bob are both User instances
 class RewardMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: 'mailman@mailman.ninja'
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.invoice_due.subject
-  #
-  def invoice_due
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # First email, asking Alice for the invoice amount to be paid.
+  def invoice_due(invoice_info)
+    @btc_address = invoice_info[:btc_address]
+    @alice = invoice_info[:alice]
+    @subject = invoice_info[:subject]
+    mail to: @alice.email, subject: @subject
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.invoice_paid.subject
-  #
-  def invoice_paid
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # Second email, notifying Alice that the invoice amount has been paid.
+  def invoice_paid(payment_info)
+    @btc_address = payment_info[:btc_address]
+    @alice = payment_info[:alice]
+    @subject = payment_info[:subject]
+    @amount = payment_info[:amount]
+    mail to: @alice.email, subject: @subject
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.reward_available.subject
-  #
-  def reward_available
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # Third email, notifying Bob that the reward amount is available.
+  def reward_available(reward_info)
+    @bob = reward_info[:bob]
+    @subject = reward_info[:subject]
+    @amount = reward_info[:amount]
+    mail to: @bob.email, subject: @subject
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.reward_payment.subject
-  #
-  def reward_payment
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # Fourth email, telling Bob that he is being awarded the reward
+  def reward_payment(reward_info)
+    @bob = reward_info[:bob]
+    @subject = reward_info[:subject]
+    @amount = reward_info[:amount]
+    mail to: @bob.email, subject: @subject
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.reward_paid.subject
-  #
-  def reward_paid
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # Fifth email, telling Alice that Bob has been paid the reward
+  def reward_paid(reward_info)
+    @alice = reward_info[:alice]
+    @subject = reward_info[:subject]
+    @amount = reward_info[:amount]
+    mail to: @alice.email, subject: @subject
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.reward_mailer.reward_expired.subject
-  #
-  def reward_expired
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  # Incase the time elapses, tell Alice and Bob that the reward has expired
+  def reward_expired(reward_info)
+    @alice = reward_info[:alice]
+    @bob = reward_info[:bob]
+    @subject = reward_info[:subject]
+    @amount = reward_info[:amount]
+    mail to: [@alice.email, @bob.email], subject: @subject
   end
 end
