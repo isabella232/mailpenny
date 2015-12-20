@@ -9,7 +9,7 @@ class EmailsController < ApplicationController
         #subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
           email1 = Email.new
           email1.subject = params['subject'].to_s
-          email1.body = params['body-plain'].to_s
+          #email1.body = params['body-plain'].to_s
           email1.to = params['To'].to_s
           email1.from = params['from']
           email1.save
