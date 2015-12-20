@@ -2,7 +2,7 @@
 class EmailsController < ApplicationController
   def recieve
     subject1 = params['subject'].to_s
-    subject1 = subject2.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
+    subject1 = subject1.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
     email = Email.find_by_to_and_subject(params['from'].to_s,subject1)
       if(email.present?)
           email1 = Email.new
