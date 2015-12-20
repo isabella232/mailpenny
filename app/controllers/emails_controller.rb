@@ -5,6 +5,10 @@ class EmailsController < ApplicationController
     subject1 = subject1.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
     email = Email.find_by_to_and_subject(params['from'].to_s,subject1)
       if(email.present?)
+        dt1 = email.created_at.to_datetime
+        dt2 = Time.now.to_datetime
+        dt1 = dt1 + 47.5.hours
+        if(dt1 >= dt2)
           email1 = Email.new
           email1.subject = subject1
           #email1.body = params['body-plain'].to_s
@@ -15,7 +19,7 @@ class EmailsController < ApplicationController
           #to = email.to
           #amount = transaction.amount.to_s
           #send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-
+         end
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
