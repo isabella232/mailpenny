@@ -8,15 +8,10 @@ class EmailsController < ApplicationController
         subject2 = params['subject'].to_s
         subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
         if(subject1 == subject2)
-          dt = email.created_at.to_datetime
-          dt = dt + 47.5.hours
-          dt_now = Time.now.to_datetime
-            if(dt >= dt_now)
               transaction = Transaction.find_by_email_id(email.id)
               to = email.to
               amount = transaction.amount.to_s
               send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-            end
         end
       else
         user = User.find_by_email(params['from'])
