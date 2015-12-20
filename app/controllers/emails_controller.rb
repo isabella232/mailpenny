@@ -6,7 +6,7 @@ class EmailsController < ApplicationController
       if(email.present?)
         subject1 = email.subject
         subject2 = params['subject'].to_s
-        subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
+        subject2 = subject2.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
 
           email1 = Email.new
           email1.subject = subject2
