@@ -1,20 +1,16 @@
 # This class is to listen and send emails
 class EmailsController < ApplicationController
   def recieve
-
-    email = Email.find_by_to(params['from'].to_s)
+    subject1 = params['subject'].to_s
+    subject1 = subject2.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
+    email = Email.find_by_to_and_subject(params['from'].to_s,subject1)
       if(email.present?)
-        subject1 = email.subject
-        subject2 = params['subject'].to_s
-        subject2 = subject2.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
-        if(subject2==subject1)
           email1 = Email.new
           email1.subject = subject2
           #email1.body = params['body-plain'].to_s
           email1.to = params['To'].to_s
           email1.from = params['from']
           email1.save
-        end
           #transaction = Transaction.find_by_email_id(email.id)
           #to = email.to
           #amount = transaction.amount.to_s
