@@ -7,14 +7,14 @@ class EmailsController < ApplicationController
         subject1 = email.subject
         subject2 = params['subject'].to_s
         subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
-        if(subject1 == subject2)
+
           email1 = Email.new
-          email1.subject = params['subject'].to_s
+          email1.subject = subject2
           #email1.body = params['body-plain'].to_s
           email1.to = params['To'].to_s
           email1.from = params['from']
           email1.save
-        end
+
           #transaction = Transaction.find_by_email_id(email.id)
           #to = email.to
           #amount = transaction.amount.to_s
