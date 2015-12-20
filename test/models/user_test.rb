@@ -1,14 +1,12 @@
 require 'test_helper'
 # User tests
 class UserTest < ActiveSupport::TestCase
-
   def setup
     @user = User.new
     @user.name = 'John Smith'
     @user.email = 'john@example.com'
-# TODO uncomment these when passwords are set
-#    @user.password = 'foobarbe'
-#    @user.password_confirmation = 'foobarbe'
+    @user.password = 'foobarbe'
+    @user.password_confirmation = 'foobarbe'
   end
 
   test 'should be valid' do
@@ -61,9 +59,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not duplicate_user.valid?
   end
 
-  # TODO uncomment this test when passwords are accepted
-  # test 'password should have a minimum length of 8' do
-  #   @user.password = @user.password_confirmation = 'a' * 7
-  #   assert_not @user.valid?
-  # end
+  test 'password should have a minimum length of 8' do
+    @user.password = @user.password_confirmation = 'a' * 7
+    assert_not @user.valid?
+  end
 end
