@@ -7,10 +7,8 @@ class EmailsController < ApplicationController
         subject1 = email.subject
         subject2 = params['subject'].to_s
         subject2 = subject2.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
-        logger.info('hey i am waleed')
-        if(subject1 == subject2)
           email1 = Email.new
-          email1.subject = params['subject'].to_s.gsub(/([\[\(] *)?(RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
+          email1.subject = subject2
           email1.user = email.user
           email1.body = params['body-plain']
           email1.to = params['To']
@@ -21,7 +19,7 @@ class EmailsController < ApplicationController
           #to = email.to
           #amount = transaction.amount.to_s
           #send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-        end
+
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
