@@ -16,7 +16,6 @@ class EmailsController < ApplicationController
             email1.to = params['To'].to_s
             email1.from = params['from']
             email1.save
-
             transaction = Transaction.find_by_email_id_and_to(email.id,'mailman')
             if(transaction.present?)
               to = email.to
@@ -38,7 +37,6 @@ class EmailsController < ApplicationController
           email.from = params['from']
           email.to = params['To']
           email.subject = params['subject']
-          email.body = params['body-plain']
           account = find_account(user.coinbase_id.to_s);
           address = create_address(account)
           btc_address = address['address']
@@ -49,14 +47,12 @@ class EmailsController < ApplicationController
           transaction.email = email
           transaction.user = user
           transaction.save
-
           send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
         else
           email = Email.new
           email.from = params['from']
           email.to = params['To']
           email.subject = params['subject']
-          email.body = params['body-plain']
           user = User.new
           user.email = email.from
           user.coinbase_id = '114b91b8-2ecc-5304-b49b-7a0ac970a9b7'
