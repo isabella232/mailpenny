@@ -22,7 +22,7 @@ class RewardMailerTest < ActionMailer::TestCase
   end
 
   test 'invoice_paid' do
-    mail = RewardMailer.invoice_due(
+    mail = RewardMailer.invoice_paid(
       alice: alice,
       subject: subject,
       btc_address: btc_address,
