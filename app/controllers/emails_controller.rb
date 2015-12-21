@@ -9,17 +9,19 @@ class EmailsController < ApplicationController
         dt2 = Time.now.to_datetime
         dt1 = dt1 + 47.5.hours
         if(dt1 >= dt2)
-          email1 = Email.new
-          email1.subject = subject1
-          #email1.body = params['body-plain'].to_s
-          email1.to = params['To'].to_s
-          email1.from = params['from']
-          email1.save
-          #transaction = Transaction.find_by_email_id(email.id)
-          #to = email.to
-          #amount = transaction.amount.to_s
-          #send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
-         end
+          transaction = Transaction.find_by_email_id_and_to(email.id,email.to)
+          if(!transaction.present?)
+            email1 = Email.new
+            email1.subject = subject1
+            email1.to = params['To'].to_s
+            email1.from = params['from']
+            email1.save
+            #transaction = Transaction.find_by_email_id(email.id)
+            #to = email.to
+            #amount = transaction.amount.to_s
+            #send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
+          end
+        end
       else
         user = User.find_by_email(params['from'])
         if(user.present?)
