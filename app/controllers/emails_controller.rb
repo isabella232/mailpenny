@@ -16,10 +16,19 @@ class EmailsController < ApplicationController
             email1.to = params['To'].to_s
             email1.from = params['from']
             email1.save
-            #transaction = Transaction.find_by_email_id(email.id)
-            #to = email.to
-            #amount = transaction.amount.to_s
-            #send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
+
+            transaction = Transaction.find_by_email_id_and_to(email.id,'mailman')
+            if(transaction.present?)
+              to = email.to
+              amount = transaction.amount.to_s
+              send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',amount,to)
+              transaction1 = Transaction.new
+              transaction1.amount = transaction.amount
+              transaction1.user = transaction.user
+              transaction1.email = email
+              transaction1.btc_address = email.to
+              transaction1.save
+            end
           end
         end
       else
