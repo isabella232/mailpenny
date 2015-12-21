@@ -7,7 +7,7 @@ class RewardMailerTest < ActionMailer::TestCase
   bob = User.new(email: 'ali@example.com')
   subject = 'I Vooshed my website'
   btc_address = '1BitcoinKKKKKKKK'
-  amount = '0.004'
+  amount = 0.004
 
   test 'invoice_due' do
     mail = RewardMailer.invoice_due(
@@ -32,7 +32,7 @@ class RewardMailerTest < ActionMailer::TestCase
     assert_equal [alice.email], mail.to
     assert_equal [mailman], mail.from
     assert_match btc_address, mail.body.encoded
-    assert_match amount, mail.body.encoded
+    assert_match amount.to_s, mail.body.encoded
   end
 
   test 'reward_available' do
@@ -54,29 +54,32 @@ class RewardMailerTest < ActionMailer::TestCase
     assert_equal subject, mail.subject
     assert_equal [bob.email], mail.to
     assert_equal [mailman], mail.from
-    assert_match amount, mail.body.encoded
+    assert_match amount.to_s, mail.body.encoded
   end
 
   test 'reward_paid' do
     mail = RewardMailer.reward_paid(
       alice: alice,
       bob: bob,
-      amount: amount
+      amount: amount,
+      subject: subject
     )
     assert_equal subject, mail.subject
     assert_equal [alice.email], mail.to
     assert_equal [mailman], mail.from
-    assert_match amount, mail.body.encoded
+    assert_match amount.to_s, mail.body.encoded
   end
 
   test 'reward_expired' do
     mail = RewardMailer.reward_expired(
       alice: alice,
       bob: bob,
-      amount: amount
+      amount: amount,
+      subject: subject
     )
     assert_equal subject, mail.subject
-    assert_true mail.to.include? alice.email
-    assert_true mail.from.include? bob.email
+    assert mail.to.include? alice.email
+    assert mail.to.include? bob.email
+    assert_equal [mailman], mail.from
   end
 end
