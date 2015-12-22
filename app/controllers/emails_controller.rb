@@ -15,7 +15,8 @@ class EmailsController < ApplicationController
           if(!transaction.present?)
             email1 = Email.new
             email1.subject = subject1
-            email1.to = params['To'].to_s
+            to = params['To'].to_s
+            email1.to = to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
             from = params['from'].to_s
             from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
             email1.from = from
