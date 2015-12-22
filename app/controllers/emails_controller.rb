@@ -2,8 +2,10 @@
 class EmailsController < ApplicationController
   def recieve
     subject1 = params['subject'].to_s
+    from = params['from'].to_s
+    from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
     subject1 = subject1.gsub(/([\[\(] *)?(re|Re|RE|FWD?) *([-:;)\]][ :;\])-]*|$)|\]+ *$/, '')
-    email = Email.find_by_to_and_subject(params['from'].to_s,subject1)
+    email = Email.find_by_to_and_subject(from,subject1)
       if(email.present?)
         dt1 = email.created_at.to_datetime
         dt2 = Time.now.to_datetime
@@ -14,7 +16,9 @@ class EmailsController < ApplicationController
             email1 = Email.new
             email1.subject = subject1
             email1.to = params['To'].to_s
-            email1.from = params['from']
+            from = params['from'].to_s
+            from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
+            email1.from = from
             email1.save
             transaction = Transaction.find_by_email_id_and_to(email.id,'mailman')
             if(transaction.present?)
@@ -31,11 +35,15 @@ class EmailsController < ApplicationController
           end
         end
       else
-        user = User.find_by_email(params['from'])
+        from = params['from'].to_s
+        from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
+        user = User.find_by_email(from)
         if(user.present?)
           email = Email.new
-          email.from = params['from']
-          email.to = params['To']
+
+          email.from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
+          to = params['To'].to_s
+          email.to = to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
           email.subject = params['subject']
           account = find_account(user.coinbase_id.to_s);
           address = create_address(account)
@@ -50,8 +58,12 @@ class EmailsController < ApplicationController
           send_email email.from,"Pay the amount of reward in BTC at this address :"+btc_address,'BTC address'
         else
           email = Email.new
-          email.from = params['from']
-          email.to = params['To']
+          from = params['from'].to_s
+          from = from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
+          email.from = from
+          to = params['To'].to_s
+          to = to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i]
+          email.to = to
           email.subject = params['subject']
           user = User.new
           user.email = email.from
