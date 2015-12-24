@@ -5,6 +5,15 @@
 class RewardMailer < ActionMailer::Base
   default from: 'mailman@mailman.ninja'
 
+  # A test email to check up on the configurations
+  def test_mail
+    @recipients = 'aminshahgilani@gmail.com'
+    @from = 'postmaster@sandbox0574dfb215d14874ac51fb9f9052131b.mailgun.org'
+    @subject = 'test from the Rails Console'
+    @body = 'This is a test email'
+    mail to: @recipients, from: @from, subject: @subject, body: @body
+  end
+
   # First email, asking Alice for the invoice amount to be paid.
   def invoice_due(invoice_info)
     @btc_address = invoice_info[:btc_address]
