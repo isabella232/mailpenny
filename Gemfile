@@ -28,6 +28,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'coinbase'
 # Mailgun gem
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
+# Mail gem
+gem 'mail', '2.6.3'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

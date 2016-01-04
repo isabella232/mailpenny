@@ -1,5 +1,6 @@
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence over
+  # those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -14,7 +15,18 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.raise_delivery_errors = true
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    tls:                  true,
+    address:              'smtp.mailgun.org',
+    port:                 465,
+    domain:               'sandbox0574dfb215d14874ac51fb9f9052131b.mailgun.org',
+    user_name: 'postmaster@sandbox0574dfb215d14874ac51fb9f9052131b.mailgun.org',
+    password:             'd6acc20fc6038c5b0f8002bb3eec2bb9',
+    authentication:       :plain
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
