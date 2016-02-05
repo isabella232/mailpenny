@@ -1,5 +1,6 @@
 # This class is to listen and send emails
 class EmailsController < ApplicationController
+  require 'logger'
   def recieve
     subject1 = params['subject'].to_s
     from = params['from'].to_s
@@ -118,6 +119,11 @@ class EmailsController < ApplicationController
 
 
   def send_email(to,text,subject)
+
+    logger = Logger.new(STDOUT)
+    logger.level = Logger::WARN
+    logger.debug("sending email");
+
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
     message_params = { from: 'user <user@sandbox050314df0b744b97beecf2742a588852.mailgun.org>',
                        to: to,

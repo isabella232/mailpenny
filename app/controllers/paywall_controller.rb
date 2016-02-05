@@ -1,0 +1,2 @@
+class PaywallController < ApplicationController
+end
