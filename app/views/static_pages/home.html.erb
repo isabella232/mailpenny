@@ -1,149 +1,159 @@
-  <section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Home Page</title>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<header>
+	<div class="container">
+
+		<div class="row">
+		<img id='icon_image' src="images/footer-email.png">
 
 
-    <div class="jumbotron">
-      <div class="container">
-        <h2>Meet Mailman <i class="fa fa-envelope-o"></i></h2>
-        <p>
-          Reward timely replies with Bitcoin, and filter spam with the Blockchain!
-        </p>
-      </div>
-    </div>
+			<div class="navigation">
+				<nav class="navbar navbar-default">
 
+				  <div class="container-fluid">
+				    <!-- Brand and toggle get grouped for better mobile display -->
 
-    <div class="container">
-      <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-          <div class="well">
-            <p>
-              <strong>Update</strong>: never in a million years did I think I'd win!
-              After I made Mailman, I learnt that Mongodb for storing transactions is a bad
-              idea. Hence I'm <strong>currently disabling Mailman's</strong> withdrawal functions!
-              test it with a few coins, and I'll send those back to you manually. Emails should still
-              work!<br />
-              <strong>Please leave your email, and I'll get back to you once Mailman is live.</strong><br /><br />
-              Dear Alpha Tester <br />
-              Welcome to Mailman. If you'd like access to the code,
-              <a href="https://twitter.com/home?status=@amingilani hey, I'd like to review the source for mailman">
-                          tweet for it.</a>
-            </p>
-            <p>
-              Mailman has two primary functions:
-              <ul>
-                <li>
-                  Reward replies:
-                  <br /> Automatically notify and deliver rewards to recepients if they reply within 48 hours of your email.
-                  <strong>Otherwise you get your money back.</strong>
-                </li>
-                <li>
-                  Fight spam:
-                  <br /> Issue users a custom "@mailman.ninja" email address which charges 200 bits to deliver the email.
-                  <strongs>You recieve the fee.
-                  </strongs>
-                </li>
-              </ul>
-            </p>
-            <p>
-              Documentation:
-              <br />
-              <ol>
-                <li>
-                  Rewarding replies:
-                  <ol>
-                    <li>
-                      Include CC: Mailman &lt;mailman@mailman.ninja&gt; in your email.
-                    </li>
-                    <li>
-                      Pay invoice to the BTC address mailman issues.
-                    </li>
-                    <li>
-                      Wait for the reply, mailman will handle the rest.
-                      <br /> If you don't get a reply within 48 hours, Mailman will send you your money back.
-                    </li>
-                  </ol>
-                </li>
-                <li>
-                  Charge for delivery: //=&gt;
-                  <strong>Coming soon</strong>
-                  <ol>
-                    <li>
-                      Sign up for Mailman. Recieve your custom email address.
-                    </li>
-                    <li>
-                      Use your new email address in places where you expect spambots to harvest it.
-                      <br />
-                      <pre>$ git config --global user.email "john@mailman.ninja"
-                        <br />&lt;a href="mailto:john@mailman.ninja"&gt;Email&lt;/a&gt;</pre>
-                    </li>
-                    <li>
-                      Wait for people to email you, Mailman will handle the rest.
-                    </li>
-                  </ol>
-                </li>
-              </ol>
-            </p>
-            <p>
-              Found a bug? Report it. <a href="https://github.com/mailmanhq/mailman/issues/new"><i class="fa fa-github"></i> Github</a> or <a href="mailto:bugs@mailman.ninja"><i class="fa fa-envelope-o"></i> Email</a>
-              <br /> Need help or wanna say hey? <a href="https://www.reddit.com/r/mailman"><i class="fa fa-reddit"></i> Reddit</a> or <a href="mailto:hey@mailman.ninja"><i class="fa fa-envelope-o"></i> Email</a>
-            </p>
-          </div>
-        </div>
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				    </div>
 
-        <div class="col-xs-12 col-md-6">
-          <div id="feedback-form-parent" class="well message-mail">
-            <iframe src="https://docs.google.com/forms/d/1U4YzllFd31H2Rd-5etXBtnUfVg51JP0kqR8INDEJMCY/viewform?embedded=true" style="height:100%;width:100%;" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="well">
-            <p>Things still left to do:</p>
-            <ol>
-              <li>Enable signups</li>
-              <li>Make the website not look like a 5 year old made it</li>
-              <li>HTML Emails</li>
-              <li>Refactor code</li>
-              <li>Open source it</li>
-            </ol>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div id="attrib-icons" class="well">
-            <ul>
-              <li>Made in
-                <br />
-                <a href="https://en.wikipedia.org/wiki/Pakistan">
-                  <img class="img-circle" src="img/icons/pakistan.png" alt="Pakistan" />
-                </a>
-              </li>
-              <li>Uses
-                <br />
-                <a href="https://nodejs.org/">
-                  <img class="img-circle" src="img/icons/nodejs.png" alt="Node.js" />
-                </a>
-              </li>
-              <li>Distributed via
-                <br />
-                <a href="https://github.com/mailmanhq/mailman">
-                  <img class="img-circle" src="img/icons/github.png" alt="Github" />
-                </a>
-              </li>
-              <li>Deployed on
-                <br />
-                <a href="https://www.heroku.com/">
-                  <img class="img-circle" src="img/icons/heroku.png" alt="Heroku" />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
-  </section>
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav navbar-right">
+				        <li><a href="#">HOME</a></li>
+				        <li><a href="#">HOW IT WORKS</a></li>
+				        <li><a href="#">ABOUT</a></li>
+				        <li><a href="#">CONTACT</a></li>
+				      </ul>
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7">
+				<img src="images/plane.png">
+			</div>
+			<div class="col-md-5">
+				<div class="head-text">
+					<h1>Making Your Emails</h1>
+					<h1>More Important</h1>
+					<h2>With The Power Of <span>Bitcoin</span></h2>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="email">
+	<div class="container">
+		<h1>It Is As Simple As Sending An Email.</h1>
+		<div class="row">
+			<div class="col-md-4">
+				<img src="images/letter.png">
+				<h3>CC</h3>
+				<h3>Mailman@mailman.com</h3>
+			</div>
+			<div class="col-md-4">
+				<div class="padd">
+					<img src="images/email.png">
+					<h3>Pay BTC Reward</h3>
+					<h3>On Given Address</h3>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<img src="images/e-box.png">
+				<h3>Reciever Gets</h3>
+				<h3>Rewarded On Reply</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="about-us">
+	<div class="container">
+		<div class="row">
+			<h1>ABOUT US</h1>
+			<p>Over <span>201.4</span> million emails are sent worldwide every day which include <span>123.9</span> million business emails and <span>77.5</span> million consumer emails. Regularly you recieve and send many important emails that are not read or replied. <span>Mailman</span> is a service which increases the importance of your emails by the method of incentivized emails with the power of <span>blockchain</span>, so that right person recieving the right emails should read, get benefit and reply the important emails.</p>
+			<p><span>Mailman</span> notifies the reciever of the email and handles the transactions by using cutting edge <span>open source</span> technologies to maximise the ease and efficiency of the working system. <span>The team</span> behind mailman works long hours and consumes great amount of <span>coffee</span> and <span>tea</span> to keep the users satisfied with the service. <span>Mailman</span> is made in <span>Pakistan</span> and uses the following technologies.</p>
+		</div>
+		<div class="row">
+			<div class="about-img">
+				<ul>
+					<li><img src="images/p-1.png"></li>
+					<li><img src="images/p-2.png"></li>
+					<li><img src="images/p-3.png"></li>
+					<li><img src="images/p-4.png"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="team">
+	<div class="container">
+		<h1>The Team</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<img src="images/letter.png">
+				<h3>Amin Shah Gilani</h3>
+				<h3>CEO</h3>
+			</div>
+			<div class="col-md-6">
+				<img src="images/letter.png">
+				<h3>Rana Waleed Asmat</h3>
+				<h3>CTO</h3>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="contact">
+	<div class="container">
+		<h1>Contact Us</h1>
+		<div class="row">
+			<div class="col-md-6">
+				<form>
+					<input type="email" placeholder="Email">
+					<input type="text" placeholder="Subject">
+					<textarea placeholder="Message ...."></textarea>
+					<input id="contact_submit" type="submit" value="Submit">
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div class="contact-text">
+					<h3>Work hours : Monday - Friday(9am - 7pm)</h3>
+					<h3>support@mailman.ninja</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<div class="row">
+			<img src="images/footer-email.png">
+			<ul>
+		        <li><a href="#">HOME</a></li>
+		        <li><a href="#">HOW IT WORKS</a></li>
+		        <li><a href="#">ABOUT</a></li>
+		        <li><a href="#">CONTACT</a></li>
+			</ul>
+			<h6>&copy; 2014-2016 Mailman.ninja . All Rights Reserved</h6>
+		</div>
+	</div>
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+</body>
+</html>
