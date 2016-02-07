@@ -30,8 +30,7 @@ gem 'coinbase'
 gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 # Mail gem
 gem 'mail', '2.6.3'
-
-
+# For cron tasks and stuff
 gem 'whenever', require: false
 
 group :development, :test do
@@ -48,6 +47,7 @@ group :test do
 end
 
 group :production do
+  gem 'unicorn'
   gem 'pg',             '0.18.4'
   gem 'rails_12factor', '0.0.2'
   gem 'puma',           '2.11.1'
