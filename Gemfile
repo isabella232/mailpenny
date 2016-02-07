@@ -1,17 +1,16 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
-
+gem 'rails', '4.2.5.1'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.4'
 # Bootstrap with sass
 gem 'bootstrap-will_paginate', '0.0.10'
-gem 'bootstrap-sass',          '3.2.0.0'
+gem 'bootstrap-sass',          '3.3.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -34,21 +33,20 @@ gem 'mail', '2.6.3'
 gem 'whenever', require: false
 
 group :development, :test do
-  gem 'sqlite3',     '1.3.9'
-  gem 'byebug',      '3.4.0'
-  gem 'web-console', '2.0.0.beta3'
-  gem 'spring',      '1.1.3'
+  gem 'sqlite3',     '1.3.11'
+  gem 'byebug',      '8.2.2'
+  gem 'web-console', '3.1.1'
+  gem 'spring',      '1.6.3'
 end
 
 group :test do
-  gem 'minitest-reporters', '1.0.5'
+  gem 'minitest-reporters', '1.1.7'
   gem 'mini_backtrace',     '0.1.3'
-  gem 'guard-minitest',     '2.3.1'
+  gem 'guard-minitest',     '2.4.4'
 end
 
 group :production do
   gem 'unicorn'
   gem 'pg',             '0.18.4'
-  gem 'rails_12factor', '0.0.2'
-  gem 'puma',           '2.11.1'
+  gem 'puma',           '2.16.0'
 end
