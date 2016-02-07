@@ -35,7 +35,6 @@ gem 'whenever', require: false
 group :development, :test do
   gem 'sqlite3',     '1.3.11'
   gem 'byebug',      '8.2.2'
-  gem 'web-console', '3.1.1'
   gem 'spring',      '1.6.3'
 end
 
