@@ -30,3 +30,6 @@ production:
  encoding: utf8
  database: <%= ENV['DATABASE_URL'] %>
  pool: 5
+ host: localhost
+ username: rails
+ password: <%= ENV['APP_DATABASE_PASSWORD'] %>
