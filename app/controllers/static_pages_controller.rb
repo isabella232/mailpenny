@@ -6,5 +6,9 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
+    email = params['email'];
+    subject = params['subject'];
+    message = params['message'];
+
   end
 end
