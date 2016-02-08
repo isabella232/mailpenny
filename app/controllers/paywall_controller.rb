@@ -27,7 +27,9 @@ class PaywallController < ApplicationController
       user.emails << email
       user.save
       send_email(email.to.to_s,"Hey i am Using Paywall. Pay the amound idiot ",email.subject);
+      render template: 'emails/recieve'
     end
+
 
   end
   def send_email(to,text,subject)
