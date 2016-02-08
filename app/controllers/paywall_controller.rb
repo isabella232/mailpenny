@@ -6,10 +6,21 @@ class PaywallController < ApplicationController
 
   def register
 
+    if(params.has_key?'email')
+      user = User.new;
+      cred = Credential.new;
+      user.email = params['email']
+      cred.username = user.email.split('@').first
+      cred.password = params['password']
+      user.save;
+      cred.save;
+      render template: 'paywall/register'
+    else
+      render template: 'paywall/register'
+    end
   end
 
   def recieve
-
     email = Email.new
     email.to = params['To'].to_s;
     email.subject = params['subject'].to_s;

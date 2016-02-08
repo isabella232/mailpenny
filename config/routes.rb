@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'emails/create_address' => 'emails#create_address'
   post 'emails/payment_recieved' => 'emails#payment_recieved'
   post 'paywall/recieve' => 'paywall#recieve'
+  get 'paywall/register' => 'paywall#register'
+  post 'paywall/register' => 'paywall#register'
 end
