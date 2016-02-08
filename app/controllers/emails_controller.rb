@@ -136,6 +136,5 @@ class EmailsController < ApplicationController
     require 'coinbase/wallet'
     client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
     client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
-
   end
 end
