@@ -53,6 +53,7 @@ class PaywallController < ApplicationController
       user.transactions << trans;
       trans.email = email;
       trans.save;
+      email.save;
     end
     render text: "It is Done";
   end
