@@ -44,7 +44,7 @@ class PaywallController < ApplicationController
       account = find_account(user.coinbase_id.to_s);
       address = create_address(account)
       btc_address = address['address']
-      send_email(email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC @ this BTC address to push your email forward",email.subject);
+      send_email(email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC on the given BTC address to push your email forward :"+btc_address,email.subject);
     end
     render text: "It is Done";
   end
