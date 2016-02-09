@@ -6,6 +6,7 @@ class PaywallController < ApplicationController
 
   def register
 
+    @notif = "";
     if(params.has_key?'email')
       user = User.new;
       cred = Credential.new;
@@ -14,8 +15,10 @@ class PaywallController < ApplicationController
       cred.password = params['password']
       user.save;
       cred.save;
+      @notif = "Done!!!!"
       render template: 'paywall/register'
     else
+      @notif="";
       render template: 'paywall/register'
     end
   end
