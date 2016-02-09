@@ -35,13 +35,14 @@ class PaywallController < ApplicationController
     username = email.to.split('@').first;
     email.save
     cred = Credential.find_by_username(username);
-    if(!cred.nil?)
+    if(cred.present?)
       user =  User.find(cred.user_id);
       user.emails << email
       user.save
       send_email(email.from.to_s,"Hey i am Using Paywall. Pay the amount idiot ",email.subject);
       render template: 'emails/recieve'
     end
+    render template: 'emails/recieve'
 
 
   end
