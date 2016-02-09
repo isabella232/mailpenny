@@ -29,18 +29,17 @@ class PaywallController < ApplicationController
     email.subject = params['subject'].to_s;
     email.from = params['from'].to_s;
     email.body = params['body-plain'].to_s;
-    email.header = params['message-headers'].to_s;
+    #email.header = params['message-headers'].to_s;
     email.to = email.to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     username = email.to.split('@').first;
     email.save
-
     cred = Credential.find_by_username(username);
     if(!cred.nil?)
       user =  User.find(cred.user_id);
       user.emails << email
       user.save
-      send_email(email.to.to_s,"Hey i am Using Paywall. Pay the amound idiot ",email.subject);
+      send_email(email.from.to_s,"Hey i am Using Paywall. Pay the amount idiot ",email.subject);
       render template: 'emails/recieve'
     end
 
