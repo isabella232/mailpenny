@@ -41,11 +41,8 @@ class PaywallController < ApplicationController
       user.emails << email
       user.save
       send_email(email.from.to_s,"Hey i am Using Paywall. Pay the amount idiot ",email.subject);
-      render template: 'emails/recieve'
     end
-    render template: 'emails/recieve'
-
-
+    render text: "It is Done";
   end
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
