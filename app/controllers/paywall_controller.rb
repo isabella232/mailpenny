@@ -45,6 +45,15 @@ class PaywallController < ApplicationController
       address = create_address(account)
       btc_address = address['address']
       send_email(email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC on the given BTC address to push your email forward :"+btc_address,email.subject);
+      trans = Transaction.new;
+      trans.btc_address =btc_address;
+      trans.to = "mailman";
+      trans.amount = 0.0001;
+      trans.status = "pending";
+      trans.save;
+      user.transactions << trans;
+      email.transactions << trans;
+
     end
     render text: "It is Done";
   end
@@ -67,5 +76,14 @@ class PaywallController < ApplicationController
                        text:  text }
     # Send your message through the client
     mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
+  end
+  def payment_recieved
+    address = params['address'];
+    transaction = Transaction.find_by_btc_address(address.to_s)
+    em = transaction.email;
+    user = em.user;
+    em_addr = user.email.to_s;
+    send_email(em_addr,"This emails is from abcd"+'\n'+em.body,em.subject);
+    render text: "Mail sent";
   end
 end

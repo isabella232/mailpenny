@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   post 'paywall/recieve' => 'paywall#recieve'
   get 'paywall/register' => 'paywall#register'
   post 'paywall/register' => 'paywall#register'
+  post 'paywall/payment_recieved' => 'paywall#payment_recieved'
 end
