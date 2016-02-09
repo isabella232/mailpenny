@@ -13,6 +13,7 @@ class PaywallController < ApplicationController
       user.email = params['email']
       cred.username = user.email.split('@').first
       cred.password = params['password']
+      user.credential = cred;
       user.save;
       cred.save;
       @notif = "Done!!!!"
