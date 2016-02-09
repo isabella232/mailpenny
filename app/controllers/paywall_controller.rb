@@ -31,7 +31,7 @@ class PaywallController < ApplicationController
     email.from = params['from'].to_s;
     email.body = params['body-plain'].to_s;
     #email.header = params['message-headers'].to_s;
-    email.to = email.to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
+    #email.to = email.to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     username = email.to.split('@').first;
     email.save
