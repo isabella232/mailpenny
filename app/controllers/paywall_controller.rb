@@ -40,9 +40,24 @@ class PaywallController < ApplicationController
       user =  User.find(cred.user_id);
       user.emails << email
       user.save
-      send_email(email.from.to_s,"Hey i am Using Paywall. Pay the amount idiot ",email.subject);
+      user.coinbase_id = '114b91b8-2ecc-5304-b49b-7a0ac970a9b7'
+      account = find_account(user.coinbase_id.to_s);
+      address = create_address(account)
+      btc_address = address['address']
+      send_email(email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC @ this BTC address to push your email forward",email.subject);
     end
     render text: "It is Done";
+  end
+
+  def find_account(id)
+    require 'coinbase/wallet'
+    client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
+    account = client.account(id)
+    return account
+  end
+  def create_address(account)
+    address = account.create_address(callback_url: 'https://floating-plains-7200.herokuapp.com/paywall/payment_recieved')
+    return address
   end
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
