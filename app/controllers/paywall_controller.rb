@@ -69,13 +69,13 @@ class PaywallController < ApplicationController
     return address
   end
   def send_email(to,text,subject)
-    mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
-    message_params = { from: 'user <user@sandbox050314df0b744b97beecf2742a588852.mailgun.org>',
+    mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
+    message_params = { from: 'user <user@mailman.ninja>',
                        to: to,
                        subject: subject,
                        text:  text }
     # Send your message through the client
-    mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
+    mg_client.send_message 'mailman.ninja', message_params
   end
   def payment_recieved
     address = params['address'];
@@ -83,7 +83,7 @@ class PaywallController < ApplicationController
     email = transaction.email;
     user = transaction.user;
     em_addr = user.email.to_s;
-    send_email(em_addr,"This emails is from abcd"+'\n'+email.body,email.subject);
+    send_email(em_addr,"This emails is from "+email.from+'\n'+email.body,email.subject);
     render text: "Mail sent";
   end
 end
