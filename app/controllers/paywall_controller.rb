@@ -3,7 +3,9 @@ class PaywallController < ApplicationController
   def login
 
   end
+  def home
 
+  end
   def register
 
     @notif = "";
@@ -16,8 +18,7 @@ class PaywallController < ApplicationController
       user.credential = cred;
       user.save;
       cred.save;
-      @notif = "Done!!!!"
-      render template: 'paywall/register'
+      redirect_to :action => 'login'
     else
       @notif="";
       render template: 'paywall/register'

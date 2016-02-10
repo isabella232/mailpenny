@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160209021949) do
+ActiveRecord::Schema.define(version: 20160210191155) do
 
   create_table "credentials", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +48,9 @@ ActiveRecord::Schema.define(version: 20160209021949) do
     t.string   "coinbase_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "reward"
+    t.string   "name"
+    t.string   "picture"
   end
 
 end
