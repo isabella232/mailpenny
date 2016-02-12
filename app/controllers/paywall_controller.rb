@@ -89,7 +89,7 @@ class PaywallController < ApplicationController
   end
   def send_email_att(from,to,text,subject,address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'user <user@mailman.ninja>',
+    message_params = { from: from,
                        to: to,
                        subject: subject,
                        text:  text ,
