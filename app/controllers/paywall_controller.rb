@@ -46,7 +46,7 @@ class PaywallController < ApplicationController
       address = create_address(account)
       btc_address = address['address']
       qr(btc_address)
-      send_email_att(email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC on the given BTC address to push your email forward :"+btc_address,email.subject,btc_address);
+      send_email_att(email.to,email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC on the given BTC address to push your email forward :"+btc_address,email.subject,btc_address);
       trans = Transaction.new;
       trans.btc_address =btc_address;
       trans.to = "mailman";
@@ -66,7 +66,6 @@ class PaywallController < ApplicationController
     png = qr.to_img                                             # returns an instance of ChunkyPNG
     address = "tmp/"+address+".png"
     png.resize(90, 90).save(address)
-    render :text => "QR generated"
   end
 
   def find_account(id)
@@ -88,7 +87,7 @@ class PaywallController < ApplicationController
     # Send your message through the client
     mg_client.send_message 'mailman.ninja', message_params
   end
-  def send_email_att(to,text,subject,address)
+  def send_email_att(from,to,text,subject,address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
     message_params = { from: 'user <user@mailman.ninja>',
                        to: to,
