@@ -1,23 +1,24 @@
 class PaywallController < ApplicationController
+  require 'securerandom'
 
   def login
-
   end
+
   def home
-
   end
-  def register
 
+  def register
     @notif = "";
     if(params.has_key?'email')
       user = User.new;
       cred = Credential.new;
       user.email = params['email']
       cred.username = user.email.split('@').first
-      cred.password = params['password']
+      cred.password = SecureRandom.base64(10)
       user.credential = cred;
       user.save;
       cred.save;
+      send_email(user.email,"You Password for mailman account : "+cred.password,"Mailman Credentials");
       redirect_to :action => 'login'
     else
       @notif="";
@@ -65,7 +66,7 @@ class PaywallController < ApplicationController
     qr = RQRCode::QRCode.new( address, :size => 4, :level => :h )
     png = qr.to_img                                             # returns an instance of ChunkyPNG
     address = "tmp/"+address+".png"
-    png.resize(90, 90).save(address)
+    png.resize(180, 180).save(address)
   end
 
   def find_account(id)
@@ -80,7 +81,7 @@ class PaywallController < ApplicationController
   end
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'user <user@mailman.ninja>',
+    message_params = { from: 'mailman <mailman@mailman.ninja>',
                        to: to,
                        subject: subject,
                        text:  text }
@@ -109,7 +110,6 @@ class PaywallController < ApplicationController
     # Send your message through the client
     mg_client.send_message 'mailman.ninja', message_params
     redirect_to :action => 'login'
-
   end
 
   def payment_recieved

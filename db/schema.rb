@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210191155) do
+ActiveRecord::Schema.define(version: 20160216232905) do
 
   create_table "credentials", force: true do |t|
     t.integer  "user_id"
@@ -51,6 +51,13 @@ ActiveRecord::Schema.define(version: 20160210191155) do
     t.float    "reward"
     t.string   "name"
     t.string   "picture"
+  end
+
+  create_table "whitelists", force: true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
