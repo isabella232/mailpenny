@@ -2,11 +2,39 @@ class PaywallController < ApplicationController
   require 'securerandom'
 
   def login
+    if(params.has_key?'email')
+      user= User.find_by_email(params['email'])
+      if(user.present?)
+        cred= user.credential
+        if(cred.present?)
+          if(cred.password== params['password'])
+            session[:email] = user.email;
+            redirect_to :action => 'home'
+          end
+        end
+      end
+    end
   end
 
   def home
+    email = session[:email]
+    user = User.find_by_email(email)
+    @mail = user.email
   end
-
+  def settings
+    email = session['email'];
+    user = User.find_by_email(email)
+    @mail = user.email
+  end
+  def logout
+    reset_session
+    redirect_to :action => 'login'
+  end
+  def transactions
+    email = session['email'];
+    user = User.find_by_email(email)
+    @mail = user.email
+  end
   def register
     @notif = "";
     if(params.has_key?'email');

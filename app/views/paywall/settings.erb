@@ -4,15 +4,16 @@
   <a id="logout" href="logout">Logout</a>
 </div>
 <div id="form">
-  <form class="form-inline" action="home.erb" role="form">
+  <form class="form-inline" action="settings" role="form">
     <div class="form-group">
       <label class="sr-only" for="pwd">Username:</label>
-      <input disabled="true" id="inp1" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Username" value="<%= @mail %>">
+      <input id="inp1" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Username" value="<%= @mail %>">
     </div></br>
     <div class="form-group">
       <label class="sr-only" for="pwd">Bitcoin address:</label>
-      <input disabled="true" id="inp2" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Bitcoin address">
+      <input id="inp2" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Bitcoin address">
     </div></br>
     <button id="btn_form" type="submit" class="btn btn-default">Change</button>
   </form>
+
 </div>

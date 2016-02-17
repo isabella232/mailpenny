@@ -1,0 +1,50 @@
+.upper_nav{
+    margin-left: 80%;
+    margin-top: 2%;
+}
+a#logout{
+    padding: 10px;
+    background-color: #4285F4;
+    color: white;
+    border-radius: 10px;
+}
+a#trans{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
+a#sett{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
+div#form{
+    margin-left: 40%;
+    margin-top: 15%;
+}
+.form-group{
+    margin-top: 2%;
+}
+#btn_form{
+    margin-top: 2%;
+    margin-left: 47%;
+    background-color: #D9453C;
+    color: white;
+}
+#inp1{
+    color: #D9453C;
+
+}
+
+#inp2{
+    color: #D9453C;
+}
+.tble_trans{
+
+    width: 50%;
+    margin-left: 30%;
+    margin-top: 10%;
+    color: #D9453C;
+}

@@ -15,7 +15,11 @@ Rails.application.routes.draw do
   post 'paywall/register' => 'paywall#register'
   post 'paywall/payment_recieved' => 'paywall#payment_recieved'
   get 'paywall/login' => 'paywall#login'
+  post 'paywall/login' => 'paywall#login'
+  get 'paywall/logout' => 'paywall#logout'
   get 'paywall/home' => 'paywall#home'
+  get 'paywall/settings' => 'paywall#settings'
+  get 'paywall/transactions' => 'paywall#transactions'
   get 'paywall/qr' => 'paywall#qr'
   get 'paywall/send_complex_message' => 'paywall#send_complex_message'
 end
