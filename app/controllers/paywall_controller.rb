@@ -9,17 +9,20 @@ class PaywallController < ApplicationController
 
   def register
     @notif = "";
-    if(params.has_key?'email')
+    if(params.has_key?'email');
       user = User.new;
       cred = Credential.new;
-      user.email = params['email']
-      cred.username = user.email.split('@').first
-      cred.password = SecureRandom.base64(10)
+      user.email = params['email'];
+      flt = params['reward'];
+      flt = flt.to_f;
+      user.reward = flt;
+      cred.username = user.email.split('@').first;
+      cred.password = SecureRandom.base64(10);
       user.credential = cred;
       user.save;
       cred.save;
       send_email(user.email,"You Password for mailman account : "+cred.password,"Mailman Credentials");
-      redirect_to :action => 'login'
+      redirect_to :action => 'login';
     else
       @notif="";
       render template: 'paywall/register'
