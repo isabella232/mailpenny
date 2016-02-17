@@ -13,24 +13,13 @@
     </tr>
     </thead>
     <tbody>
+   <% @user.transactions.all.each do |t|%>
     <tr>
-      <td>10:44</td>
-      <td>john@example.com</td>
-      <td>Closed</td>
+      <td><%=t.updated_at%></td>
+      <td><%=t.from%></td>
+      <td><%=t.status%></td>
     </tr>
-    <tr>
-      <td>9:15</td>
-      <td>mary@example.com</td>
-      <td>Closed</td>
-    </tr>
-    <tr>
-      <td>12:00</td>
-      <td>july@example.com</td>
-      <td>Open</td>
-    </tr>
+    <% end%>
     </tbody>
   </table>
-
-
-
 </div>

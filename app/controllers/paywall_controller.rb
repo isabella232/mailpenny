@@ -8,8 +8,8 @@ class PaywallController < ApplicationController
         cred= user.credential
         if(cred.present?)
           if(cred.password== params['password'])
-            session[:email] = user.email;
-            redirect_to :action => 'settings'
+            session[:user_id] = user.id;
+            redirect_to :action => 'home'
           end
         end
       end
@@ -17,23 +17,35 @@ class PaywallController < ApplicationController
   end
 
   def home
-    email = session[:email]
-    user = User.find_by_email(email)
+    id = session[:user_id].to_i;
+    if(id===0)
+      redirect_to :action => 'login'
+    else
+    user = User.find(id);
     @mail = user.email
+    end
   end
   def settings
-    email = session['email'];
-    user = User.find_by_email(email)
-    @mail = user.email
+    id = session[:user_id].to_i;
+    if(id===0)
+      redirect_to :action => 'login'
+    else
+      user = User.find(id);
+      @mail = user.email
+    end
   end
   def logout
     reset_session
     redirect_to :action => 'login'
   end
   def transactions
-    email = session['email'];
-    user = User.find_by_email(email)
-    @mail = user.email
+    id = session[:user_id].to_i;
+    if(id===0)
+      redirect_to :action => 'login'
+    else
+      @user = User.find(id);
+      @mail = @user.email
+    end
   end
   def register
     @notif = "";
@@ -80,7 +92,8 @@ class PaywallController < ApplicationController
       qr(btc_address)
       send_email_att(email.to,email.from.to_s,"Hey i am Using Paywall. Pay the 1 mBTC on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
       trans = Transaction.new;
-      trans.btc_address =btc_address;
+      trans.from = email.from;
+      trans.btc_address = btc_address;
       trans.to = "mailman";
       trans.amount = 0.0001;
       trans.status = "pending";
@@ -146,6 +159,7 @@ class PaywallController < ApplicationController
   def payment_recieved
     address = params['address'];
     transaction = Transaction.find_by_btc_address(address.to_s)
+    transaction.status = "closed"
     email = transaction.email;
     user = transaction.user;
     em_addr = user.email.to_s;
