@@ -9,7 +9,7 @@ class PaywallController < ApplicationController
         if(cred.present?)
           if(cred.password== params['password'])
             session[:email] = user.email;
-            redirect_to :action => 'home'
+            redirect_to :action => 'settings'
           end
         end
       end
