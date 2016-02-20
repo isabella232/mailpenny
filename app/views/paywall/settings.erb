@@ -14,7 +14,7 @@
     <%= f.text_field :name ,:class=>'form-control',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>
     <br>
     <%= f.label :reward %><br>
-    <%= f.number_field :reward ,:class=>'form-control' ,:id=>"inp3" ,:style=> 'width: 250px' ,:value=>@user.reward,:required=>true,:step=>'0.001' %>
+    <%= f.number_field :reward ,:class=>'form-control' ,:id=>"inp3" ,:style=> 'width: 250px' ,:value=>@user.reward,:required=>true,:step=>'0.0001' %>
     <br>
     <%= f.submit "Change", class: "btn btn-primary" ,:style=> 'margin-left: 175px' %>
 <% end %>
