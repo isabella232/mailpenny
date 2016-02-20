@@ -1,5 +1,5 @@
 .upper_nav{
-    margin-left: 70%;
+    margin-left: 90%;
     margin-top: 2%;
 }
 a#logout{
@@ -39,19 +39,7 @@ div#form{
     background-color: #D9453C;
     color: white;
 }
-#inp1{
-    color: #D9453C;
-    width: 50%;
-}
-
-#inp2{
-    color: #D9453C;
-}
-#inp3{
-    color: #D9453C;
-}
 .tble_trans{
-
     width: 50%;
     margin-left: 30%;
     margin-top: 10%;
