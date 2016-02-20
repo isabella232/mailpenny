@@ -213,6 +213,7 @@ class PaywallController < ApplicationController
     address = params['address'];
     transaction = Transaction.find_by_btc_address(address.to_s)
     transaction.status = "closed"
+    transaction.save;
     email = transaction.email;
     user = transaction.user;
     em_addr = user.email.to_s;
