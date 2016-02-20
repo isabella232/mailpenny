@@ -28,5 +28,8 @@ test:
 production:
  adapter: postgresql
  encoding: utf8
- database: <%= ENV['DATABASE_URL'] %>
+ database: mailman_production
  pool: 5
+ host: localhost
+ username: rails
+ password: <%= ENV['APP_DATABASE_PASSWORD'] %>
