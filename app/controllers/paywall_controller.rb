@@ -1,6 +1,5 @@
 class PaywallController < ApplicationController
   require 'securerandom'
-
   def login
     if(params.has_key?'email')
       user= User.find_by_email(params['email'])
@@ -9,7 +8,7 @@ class PaywallController < ApplicationController
         if(cred.present?)
           if(cred.password== params['password'])
             session[:user_id] = user.id;
-            redirect_to :action => 'home'
+            redirect_to :action => 'settings'
           end
         end
       end
@@ -25,19 +24,67 @@ class PaywallController < ApplicationController
     @mail = user.email
     end
   end
-  def settings
+  def whitelist
+    @user= User.new
     id = session[:user_id].to_i;
+    @id=id
     if(id===0)
       redirect_to :action => 'login'
     else
-      user = User.find(id);
-      @mail = user.email
+      @user = User.find(id);
+      @mail = @user.email
+    end
+  end
+  def whitelist_delete
+    logger.debug params.inspect
+    @id = params['whitelist']['id']
+    Whitelist.all.destroy(@id)
+    respond_to do |format|
+      format.js   { render :template => 'paywall/delete_list.js.erb' }
+    end
+  end
+  def whitelist_add
+    logger.debug params.inspect
+    email = params['whitelist']['email'];
+    @w = Whitelist.new
+    @w.email = email;
+    id = params['whitelist']['id'].to_i;
+    user = User.find(id)
+    user.whitelists << @w
+    @w.save
+    user.save
+    respond_to do |format|
+      format.js   { render :template => 'paywall/add_list.js.erb' }
+    end
+  end
+  def settings
+    @user= User.new
+    id = session[:user_id].to_i;
+    @id=id
+    if(id===0)
+      redirect_to :action => 'login'
+    else
+      @user = User.find(id);
+      @mail = @user.email
     end
   end
   def logout
     reset_session
     redirect_to :action => 'login'
   end
+
+  def update_user
+    id = params['user']['id'].to_i;
+    @user = User.find(id)
+    @user.email = params['user']['email']
+    @user.BTC_address = params['user']['name']
+    @user.reward = params['user']['reward'].to_f
+    @user.save
+    respond_to do |format|
+      format.js   { render :template => 'paywall/user_update' }
+    end
+  end
+
   def transactions
     id = session[:user_id].to_i;
     if(id===0)
@@ -85,6 +132,12 @@ class PaywallController < ApplicationController
       user =  User.find(cred.user_id);
       user.emails << email
       user.save
+      wlist = user.whitelists.find_by_email(email.from);
+      if(wlist.present?)
+        send_email(user.email,"This emails is from "+email.from+''+email.body,email.subject);
+        render text: "It is done"
+        return
+      end
       user.coinbase_id = '114b91b8-2ecc-5304-b49b-7a0ac970a9b7'
       account = find_account(user.coinbase_id.to_s);
       address = create_address(account)
@@ -163,7 +216,7 @@ class PaywallController < ApplicationController
     email = transaction.email;
     user = transaction.user;
     em_addr = user.email.to_s;
-    send_email(em_addr,"This emails is from "+email.from+'\n'+email.body,email.subject);
+    send_email(em_addr,"This emails is from "+email.from+''+email.body,email.subject);
     render text: "Mail sent";
   end
 end

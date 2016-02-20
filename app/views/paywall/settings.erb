@@ -1,19 +1,40 @@
 <div class="upper_nav">
+  <a id="white" href="whitelist">White List</a>
   <a id="sett" href="settings">Settings</a>
   <a id="trans" href="transactions">Transactions</a>
   <a id="logout" href="logout">Logout</a>
 </div>
 <div id="form">
-  <form class="form-inline" action="settings" role="form">
+<%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true,:class=>'form-inline'  do |f| %>
+    <%= f.hidden_field :id, :value => @id %>
+    <%=  f.label :email %><br>
+    <%= f.email_field :email,:class=>'form-control',:id=>"inp1" ,:style=> 'width: 250px' ,:value => @user.email.to_s,:required=>true %>
+    <br>
+    <%= f.label :BTC_Address %><br>
+    <%= f.text_field :name ,:class=>'form-control',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>
+    <br>
+    <%= f.label :reward %><br>
+    <%= f.number_field :reward ,:class=>'form-control' ,:id=>"inp3" ,:style=> 'width: 250px' ,:value=>@user.reward,:required=>true,:step=>'0.001' %>
+    <br>
+    <%= f.submit "Change", class: "btn btn-primary" ,:style=> 'margin-left: 175px' %>
+<% end %>
+</div>
+<!--
+<div id="form">
+  <form role="form" class="form-inline" method="post" <%= link_to 'test', :action => :delete_list , remote: true do %>
     <div class="form-group">
       <label class="sr-only" for="pwd">Username:</label>
-      <input id="inp1" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Username" value="<%= @mail %>">
+      <input disabled="true" name="email" id="inp1" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Username" value="<%= @mail %>">
     </div></br>
     <div class="form-group">
       <label class="sr-only" for="pwd">Bitcoin address:</label>
-      <input id="inp2" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Bitcoin address">
+      <input disabled="true" name="btc" id="inp2" style="width: 250%" type="text" class="form-control" id="pwd" placeholder="Bitcoin address">
     </div></br>
-    <button id="btn_form" type="submit" class="btn btn-default">Change</button>
+    <div class="form-group">
+      <label class="sr-only" for="pwd">Bitcoin address:</label>
+      <input disabled="true" id="inp3" style="width: 250%" type="number" class="form-control" id="pwd" placeholder="Reward Amount e.g 0.02">
+    </div></br>
+        <input id="btn_form" type="submit" class="btn btn-default">
+    <% end %>
   </form>
-
-</div>
+</div> -->

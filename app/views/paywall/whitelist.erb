@@ -1,0 +1,35 @@
+<div class="upper_nav">
+  <a id="white" href="#">White List</a>
+  <a id="sett" href="settings">Settings</a>
+  <a id="trans" href="transactions">Transactions</a>
+  <a id="logout" href="logout">Logout</a>
+</div>
+
+<div class="tble_trans">
+  <%= form_for Whitelist.new ,:url=>'whitelist_add',remote:true do |f|%>
+      <%= f.text_field :email ,:style=>'width:250px;margin-left:10px;',:placeholder =>'Email'%>
+      <%=f.hidden_field :id,:value=>@user.id%>
+      <%= f.submit "Add" , class: "btn btn-success" ,:style=>'margin-left:300px'%>
+  <%end%>
+  <table id="tr_white" class="table table-hover" style="max-height: 100px;">
+    <thead>
+    <tr>
+      <th>Email</th>
+    </tr>
+    </thead>
+    <tbody style="height: 200px;">
+    <% @user.whitelists.all.each do |t|%>
+        <tr id="<%=t.id%>">
+          <td><%= form_for Whitelist.new ,:url => 'whitelist_delete',:class=>'form-inline',:style=>'float:left;',:remote => true do |f| %>
+              <%= f.text_field :email , :value => t.email,:disabled=>'true',:style=>'width:250px;' %>
+              <%=f.hidden_field :id,:value=> t.id %>
+              <%= f.submit "Delete" , class: "btn btn-danger" ,:style=>'margin-left:300px' %>
+          <%end%>
+          </td>
+        </tr>
+    <% end%>
+    </tbody>
+  </table>
+
+
+</div>

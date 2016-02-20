@@ -1,5 +1,5 @@
 .upper_nav{
-    margin-left: 80%;
+    margin-left: 70%;
     margin-top: 2%;
 }
 a#logout{
@@ -20,6 +20,12 @@ a#sett{
     color: white;
     border-radius: 10px;
 }
+a#white{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
 div#form{
     margin-left: 40%;
     margin-top: 15%;
@@ -35,10 +41,13 @@ div#form{
 }
 #inp1{
     color: #D9453C;
-
+    width: 50%;
 }
 
 #inp2{
+    color: #D9453C;
+}
+#inp3{
     color: #D9453C;
 }
 .tble_trans{

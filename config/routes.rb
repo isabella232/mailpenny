@@ -22,4 +22,9 @@ Rails.application.routes.draw do
   get 'paywall/transactions' => 'paywall#transactions'
   get 'paywall/qr' => 'paywall#qr'
   get 'paywall/send_complex_message' => 'paywall#send_complex_message'
+  post 'paywall/update_user' => 'paywall#update_user'
+  post 'paywall/whitelist_delete' => 'paywall#whitelist_delete'
+  get 'paywall/whitelist'
+  post 'paywall/whitelist_add' => 'paywall#whitelist_add'
+  post 'paywall/update_user' => 'paywall#update_user'
 end
