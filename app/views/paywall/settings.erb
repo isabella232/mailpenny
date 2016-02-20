@@ -8,7 +8,7 @@
 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true,:class=>'form-inline'  do |f| %>
     <%= f.hidden_field :id, :value => @id %>
     <%=  f.label :email %><br>
-    <%= f.email_field :email,:class=>'form-control',:id=>"inp1" ,:style=> 'width: 250px' ,:value => @user.email.to_s,:required=>true %>
+    <%= f.email_field :email,:class=>'form-control',:id=>"inp1" ,:style=> 'width: 250px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
     <br>
     <%= f.label :BTC_Address %><br>
     <%= f.text_field :name ,:class=>'form-control',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>

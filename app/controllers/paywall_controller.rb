@@ -76,7 +76,7 @@ class PaywallController < ApplicationController
   def update_user
     id = params['user']['id'].to_i;
     @user = User.find(id)
-    @user.email = params['user']['email']
+    #@user.email = params['user']['email']
     @user.BTC_address = params['user']['name']
     @user.reward = params['user']['reward'].to_f
     @user.save
