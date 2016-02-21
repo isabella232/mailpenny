@@ -225,10 +225,11 @@ class PaywallController < ApplicationController
   def payment_transfer
     id = session[:user_id].to_i;
     user = User.find(id)
-    if(user.present? && user.wallet_amount>=0.0001)
+    if(user.present?)
       send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',user.wallet_amount.to_f,user.email);
     end
-    redirect_to :action => 'transactions'
+    user.wallet_amount = user.wallet_amount.to_f-user.wallet_amount.to_f;
+    render text: "Money Sent!!!"
   end
   def send_money(id,amount,to)
     require 'coinbase/wallet'

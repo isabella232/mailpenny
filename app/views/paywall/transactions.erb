@@ -6,7 +6,6 @@
   </button>
   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
     <li class="mdl-menu__item"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' %></li>
-
     <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %></li>
     <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %></li>
     <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true  %></li>
@@ -59,7 +58,7 @@
   <%= form_tag "payment_transfer" , method: 'post',remote: true do |f|%>
 
   <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
-    <button type="submit" class="mdl-button">Transfer</button>
+    <button type="submit" class="mdl-button yes">Transfer</button>
   <% end%>
     <button type="button" class="mdl-button close">Cancel</button>
   </div>
@@ -74,6 +73,9 @@
     dialog.showModal();
   });
   dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+  dialog.querySelector('.yes').addEventListener('click', function() {
     dialog.close();
   });
 </script>
