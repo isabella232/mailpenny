@@ -53,7 +53,7 @@
   <div class="mdl-dialog__content">
     <p>
         Are you sure you want to transfer <h3><%=@user.wallet_amount%> BTC</h3> to your address<br>
-        <h3><%=@user.BTC_address%></h3>
+        <p><%=@user.BTC_address%></p>
     <p>
   </div>
   <%= form_tag "payment_transfer" , method: 'post',remote: true do |f|%>
