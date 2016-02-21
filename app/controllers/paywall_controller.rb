@@ -216,8 +216,23 @@ class PaywallController < ApplicationController
     transaction.save;
     email = transaction.email;
     user = transaction.user;
+    user.wallet_amount =user.wallet_amount.to_f + transaction.amount.to_f;
+    user.save;
     em_addr = user.email.to_s;
     send_email(em_addr,"This emails is from "+email.from+''+email.body,email.subject);
     render text: "Mail sent";
+  end
+  def payment_transfer
+    id = session[:user_id].to_i;
+    user = User.find(id)
+    if(user.present? && user.wallet_amount.to_f>=0.0001)
+      send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',user.wallet_amount,user.BTC_address);
+    end
+    redirect_to :action => 'transactions'
+  end
+  def send_money(id,amount,to)
+    require 'coinbase/wallet'
+    client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
+    client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
   end
 end

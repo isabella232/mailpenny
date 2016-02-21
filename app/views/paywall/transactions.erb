@@ -1,19 +1,33 @@
 <div class="upper_nav" style="margin-left: 90%;">
+
   <button id="demo-menu-lower-right"
           class="mdl-button mdl-js-button mdl-button--icon">
     <i class="material-icons">more_vert</i>
   </button>
-
   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-    <li class="mdl-menu__item"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true %></li>
+    <li class="mdl-menu__item"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' %></li>
+
+    <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %></li>
+    <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %></li>
+    <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true  %></li>
   </ul>
+  <div class="mdl-tooltip" for="whitelist">
+    This is the list<br>where you will add your family,friends etc<br> who you do not want to pay
+  </div>
+  <div class="mdl-tooltip" for="settings">
+    Here you will<br>manage your email,BTC address<br> and the reward amount
+  </div>
+  <div class="mdl-tooltip" for="transactions">
+    This is where you<br>can see all the transactions<br> and transfer of funds to your address
+  </div>
   <!-- <a id="white" href="whitelist">White List</a>
   <a id="sett" href="settings">Settings</a>
   <a id="trans" href="transactions">Transactions</a>
   <a id="logout" href="logout">Logout</a> -->
+</div>
+<div style="margin-left: 75%;">
+  <h4>Earned : <%=@user.wallet_amount.to_f%> BTC</h4>
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored show-modal">Add to Wallet</button>
 </div>
 <div class="tble_trans">
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
@@ -35,3 +49,31 @@
     </tbody>
   </table>
 </div>
+<dialog class="mdl-dialog">
+  <div class="mdl-dialog__content">
+    <p>
+        Are you sure you want to transfer <h3><%=@user.wallet_amount%> BTC</h3> to your address<br>
+        <h3><%=@user.BTC_address%></h3>
+    <p>
+  </div>
+  <%= form_tag "payment_transfer" , method: 'post',remote: true do |f|%>
+
+  <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+    <button type="submit" class="mdl-button">Transfer</button>
+  <% end%>
+    <button type="button" class="mdl-button close">Cancel</button>
+  </div>
+</dialog>
+<script>
+  var dialog = document.querySelector('dialog');
+  var showModalButton = document.querySelector('.show-modal');
+  if (! dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+  }
+  showModalButton.addEventListener('click', function() {
+    dialog.showModal();
+  });
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+</script>

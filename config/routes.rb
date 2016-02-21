@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   get 'paywall/whitelist'
   post 'paywall/whitelist_add' => 'paywall#whitelist_add'
   post 'paywall/update_user' => 'paywall#update_user'
+  post 'paywall/payment_transfer' => 'paywall#payment_transfer'
 end

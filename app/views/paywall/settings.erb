@@ -5,11 +5,21 @@
   </button>
 
   <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-    <li class="mdl-menu__item"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true %></li>
-    <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true %></li>
+    <li class="mdl-menu__item"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' %></li>
+
+    <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %></li>
+    <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %></li>
+    <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true  %></li>
   </ul>
+  <div class="mdl-tooltip" for="whitelist">
+    This is the list<br>where you will add your family,friends etc<br> who you do not want to pay
+  </div>
+  <div class="mdl-tooltip" for="settings">
+    Here you will<br>manage your email,BTC address<br> and the reward amount
+  </div>
+  <div class="mdl-tooltip" for="transactions">
+    This is where you<br>can see all the transactions<br> and transfer of funds to your address
+  </div>
   <!-- <a id="white" href="whitelist">White List</a>
   <a id="sett" href="settings">Settings</a>
   <a id="trans" href="transactions">Transactions</a>
@@ -41,6 +51,7 @@
     <%= f.submit "Change", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ,:style=> 'margin-left: 175px;background-color: #D9453C;' %>
 <% end %>
 </div>
+
 <!--
 <div id="form">
   <form role="form" class="form-inline" method="post" <%= link_to 'test', :action => :delete_list , remote: true do %>

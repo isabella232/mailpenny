@@ -11,52 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160219085314) do
+ActiveRecord::Schema.define(version: 20160221004633) do
 
-  create_table "credentials", force: true do |t|
+  create_table "credentials", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "username"
-    t.string   "password"
+    t.string   "username",   limit: 255
+    t.string   "password",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "emails", force: true do |t|
-    t.string   "to"
-    t.string   "from"
-    t.string   "subject"
-    t.string   "body"
+  create_table "emails", force: :cascade do |t|
+    t.string   "to",         limit: 255
+    t.string   "from",       limit: 255
+    t.string   "subject",    limit: 255
+    t.string   "body",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_id"
-    t.string   "header"
+    t.string   "user_id",    limit: 255
+    t.string   "header",     limit: 255
   end
 
-  create_table "transactions", force: true do |t|
+  create_table "transactions", force: :cascade do |t|
     t.float    "amount"
-    t.string   "to"
-    t.string   "btc_address"
+    t.string   "to",          limit: 255
+    t.string   "btc_address", limit: 255
     t.integer  "email_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.string   "from"
+    t.string   "status",      limit: 255
+    t.string   "from",        limit: 255
   end
 
-  create_table "users", force: true do |t|
-    t.string   "email"
-    t.string   "coinbase_id"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",         limit: 255
+    t.string   "coinbase_id",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "reward"
-    t.string   "name"
-    t.string   "picture"
-    t.string   "BTC_address"
+    t.string   "name",          limit: 255
+    t.string   "picture",       limit: 255
+    t.string   "BTC_address",   limit: 255
+    t.float    "wallet_amount"
   end
 
-  create_table "whitelists", force: true do |t|
-    t.string   "email"
+  create_table "whitelists", force: :cascade do |t|
+    t.string   "email",      limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
