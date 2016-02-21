@@ -230,7 +230,7 @@ class PaywallController < ApplicationController
     end
     user.wallet_amount = user.wallet_amount.to_f-user.wallet_amount.to_f;
     user.save
-    redirect_to action: 'transactions'
+    render text: "Payment Sent"
   end
   def send_money(id,amount,to)
     require 'coinbase/wallet'
