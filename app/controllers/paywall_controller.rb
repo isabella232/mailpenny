@@ -142,9 +142,8 @@ class PaywallController < ApplicationController
       account = find_account(user.coinbase_id.to_s);
       address = create_address(account)
       btc_address = address['address']
-      #qr(btc_address)
-      #send_email_att(email.to,email.from.to_s,"Hey i am Using Paywall. Pay the"+ user.reward.to_s+" on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
-      send_email(email.from,"Hey I am using paywall",email.subject);
+      qr(btc_address)
+      send_email_att(email.to,email.from.to_s,"Hey i am Using Paywall. Pay the"+ user.reward.to_s+" on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
       trans = Transaction.new;
       trans.from = email.from;
       trans.btc_address = btc_address;
