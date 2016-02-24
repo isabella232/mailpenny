@@ -137,6 +137,7 @@ class PaywallController < ApplicationController
         if(cred.present?)
           cred.activated=1;
           cred.password=pass;
+          cred.save
         end
       end
       redirect_to :action => 'login'
