@@ -122,7 +122,6 @@ class PaywallController < ApplicationController
       cred = Credential.find(id)
       if(cred.present? && cred.activated===0 )
         @cred = cred;
-        render :layout => 'setpassword'
       else
         redirect_to :action => 'login'
       end
