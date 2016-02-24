@@ -138,9 +138,10 @@ class PaywallController < ApplicationController
           cred.activated=1;
           cred.password=pass;
           cred.save
+          redirect_to :action => 'login'
         end
       end
-      redirect_to :action => 'login'
+      redirect_to :action => 'setpassword'
   end
   def recieve
     email = Email.new
