@@ -141,7 +141,7 @@ class PaywallController < ApplicationController
           redirect_to :action => 'login'
         end
       end
-      redirect_to :action => 'setpassword'
+      
   end
   def recieve
     email = Email.new
