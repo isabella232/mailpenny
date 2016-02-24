@@ -105,17 +105,44 @@ class PaywallController < ApplicationController
       user.reward = flt;
       cred.username = user.email.split('@').first;
       cred.password = SecureRandom.base64(10);
+      cred.activated = 0;
       user.credential = cred;
       user.save;
       cred.save;
-      send_email(user.email,"You Password for Whitemail account : "+cred.password,"Whitemail Credentials");
+      url = "http://whitemail.io/setpassword?id="+cred.id;
+      send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
       redirect_to :action => 'login';
     else
       @notif="";
       render template: 'paywall/register'
     end
   end
-
+  def setpassword
+    if(params.has_key?'id')
+      id = params['id'].to_i;
+      cred = Credential.find(id)
+      if(cred.present? && cred.activated===0 )
+        @cred = cred;
+        render :layout => 'setpassword'
+      else
+        redirect_to :action => 'login'
+      end
+    else
+      redirect_to :action => 'login'
+    end
+  end
+  def activate
+      if(params.has_key?'password')
+          pass = params['password'];
+          id = params['id'].to_i;
+          cred = Credential.find(id)
+        if(cred.present?)
+          cred.activated=1;
+          cred.password=pass;
+        end
+      end
+      redirect_to :action => 'login'
+  end
   def recieve
     email = Email.new
     email.to = params['To'].to_s;
