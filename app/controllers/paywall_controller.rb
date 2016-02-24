@@ -104,14 +104,13 @@ class PaywallController < ApplicationController
       flt = flt.to_f;
       user.reward = flt;
       cred.username = user.email.split('@').first;
-      cred.password = SecureRandom.base64(10);
       cred.activated = 0;
       user.credential = cred;
       user.save;
       cred.save;
-      url = "http://whitemail.io/setpassword?id="+cred.id;
+      url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
       send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
-      redirect_to :action => 'login';
+      @message = "Email has been sent to your account to set your password"
     else
       @notif="";
       render template: 'paywall/register'
