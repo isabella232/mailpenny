@@ -108,7 +108,7 @@ class PaywallController < ApplicationController
       user.credential = cred;
       user.save;
       cred.save;
-      send_email(user.email,"You Password for mailman account : "+cred.password,"Mailman Credentials");
+      send_email(user.email,"You Password for Whitemail account : "+cred.password,"Whitemail Credentials");
       redirect_to :action => 'login';
     else
       @notif="";
@@ -178,12 +178,12 @@ class PaywallController < ApplicationController
   end
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'mailman <mailman@mailman.ninja>',
+    message_params = { from: 'mailman <mailman@whitemail.io>',
                        to: to,
                        subject: subject,
                        text:  text }
     # Send your message through the client
-    mg_client.send_message 'mailman.ninja', message_params
+    mg_client.send_message 'whitemail.io', message_params
   end
   def send_email_att(from,to,text,subject,address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
@@ -194,18 +194,18 @@ class PaywallController < ApplicationController
                        attachment: File.new(File.join("tmp", address+'.png')),
                        multipart: true }
     # Send your message through the client
-    mg_client.send_message 'mailman.ninja', message_params
+    mg_client.send_message 'whitemail.io', message_params
   end
   def send_complex_message
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'user <user@mailman.ninja>',
+    message_params = { from: 'user <user@whitemail.io>',
                        to: 'waleed@payload.tech',
                        subject: 'hey  ',
                        text:  'Hello' ,
                        attachment: File.new(File.join("tmp", 'really_cool_qr_image.png')),
                        multipart: true }
     # Send your message through the client
-    mg_client.send_message 'mailman.ninja', message_params
+    mg_client.send_message 'whitemail.io', message_params
     redirect_to :action => 'login'
   end
 
