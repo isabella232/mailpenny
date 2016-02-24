@@ -173,7 +173,7 @@ class PaywallController < ApplicationController
     return account
   end
   def create_address(account)
-    address = account.create_address(callback_url: 'https://floating-plains-7200.herokuapp.com/paywall/payment_recieved')
+    address = account.create_address(callback_url: 'https://whitemail.io/payment_recieved')
     return address
   end
   def send_email(to,text,subject)
