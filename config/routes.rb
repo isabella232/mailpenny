@@ -30,4 +30,5 @@ Rails.application.routes.draw do
   post 'payment_transfer' => 'paywall#payment_transfer'
   get 'setpassword' => 'paywall#setpassword'
   post 'setpassword' => 'paywall#setpassword'
+  post 'activate' => 'paywall#activate'
 end
