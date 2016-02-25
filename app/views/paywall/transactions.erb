@@ -1,16 +1,11 @@
 <img src="/images/mailman-logo.png" width="70" style="float: left;margin-left: 5%;" >
-<div class="upper_nav" style="margin-left: 90%;">
-
-  <button id="demo-menu-lower-right"
-          class="mdl-button mdl-js-button mdl-button--icon">
-    <i class="material-icons">more_vert</i>
-  </button>
-  <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="demo-menu-lower-right">
-    <li class="mdl-menu__item" style="font-size: 12px;"><%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' %></li>
-    <li class="mdl-menu__item"><%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %></li>
-    <li class="mdl-menu__item"><%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %></li>
-    <li class="mdl-menu__item"><%= link_to "Logout",'logout',"data-no-turbolink" => true  %></li>
-  </ul>
+<div class="upper_nav" style="margin-left: 63%;">
+  <div >
+    <%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %>
+    <%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist'%>
+    <%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %>
+    <%= link_to "Logout",'logout',"data-no-turbolink" => true ,:style => 'color:#D9453C;'  %>
+  </div>
   <div class="mdl-tooltip" for="whitelist">
     This is the list<br>where you will add your family,friends etc<br> who you do not want to pay
   </div>
@@ -25,8 +20,8 @@
   <a id="trans" href="transactions">Transactions</a>
   <a id="logout" href="logout">Logout</a> -->
 </div>
-<div style="margin-left: 75%;">
-  <h4>Earned : <%=@user.wallet_amount.to_f%> BTC</h4>
+<div style="margin-left: 75%;margin-top: 5%;">
+  <h4 style="font-family: 'Champagne & Limousines'">Earned : <%=@user.wallet_amount.to_f%> BTC</h4>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored show-modal" data-toggle="modal" data-target="#myModal">Add to Wallet</button>
 </div>
 <div class="tble_trans">
