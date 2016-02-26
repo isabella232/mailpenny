@@ -1,10 +1,10 @@
 <img src="/images/mailman-logo.png" width="70" style="float: left;margin-left: 5%;" >
 <div class="upper_nav" style="margin-left: 63%;">
   <div >
-    <%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings' %>
-    <%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist'%>
-    <%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions' %>
-    <%= link_to "Logout",'logout',"data-no-turbolink" => true ,:style => 'color:#D9453C;'  %>
+    <%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings',:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;' %>
+    <%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' ,:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;'%>
+    <%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions',:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;' %>
+    <%= link_to "Logout",'logout',"data-no-turbolink" => true ,:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;color:#D9453C;' %>
   </div>
   <div class="mdl-tooltip" for="whitelist">
     This is the list<br>where you will add your family,friends etc<br> who you do not want to pay
@@ -24,7 +24,7 @@
   <h4 style="font-family: 'Champagne & Limousines'">Earned : <%=@user.wallet_amount.to_f%> BTC</h4>
   <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored show-modal" data-toggle="modal" data-target="#myModal">Add to Wallet</button>
 </div>
-<div class="tble_trans">
+<div class="tble_trans" style='width: 50%;margin-left: 35%;margin-top: 10%;'>
   <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
     <tr>
