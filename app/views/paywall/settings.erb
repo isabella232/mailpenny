@@ -30,7 +30,7 @@
     <%= f.hidden_field :id, :value => @id %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <%= f.email_field :email,:class=>'mdl-textfield__input',:id=>"inp1" ,:style=> 'width: 300px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
-      <label class="mdl-textfield__label" for="sample4">Email</label>
+      <label class="mdl-textfield__label" for="sample4">Personal Email</label>
       <span class="mdl-textfield__error">Its not an email</span>
     </div>
     </br>
