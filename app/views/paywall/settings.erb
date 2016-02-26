@@ -25,7 +25,7 @@
   <p style="font-size: 12px;color: #4285F4;margin-left: -30%;">*This is your public email address and you can use it anywhere you want,all the non-spam emails will be redirected to your private email address. Soon you will be able to change and set your own username.</p>
 
 </div>
-<div id="form" style="margin-top: -1%;">
+<div id="form" style="margin-top: -0.5%;">
 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
     <%= f.hidden_field :id, :value => @id %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
