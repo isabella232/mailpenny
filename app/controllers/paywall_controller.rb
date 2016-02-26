@@ -102,15 +102,24 @@ class PaywallController < ApplicationController
       flt = params['reward'];
       flt = flt.to_f;
       user.reward = flt;
-      cred.username = user.email.split('@').first;
+      cred.username = params['username'];
       cred.activated = 0;
-      user.credential = cred;
-      user.save;
-      cred.save;
-      url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
-      send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
-      @message = "Email has been sent to your account to set your password"
-    else
+      flag = cred.save;
+      if(flag===true)
+        user.credential = cred;
+        flag1 = user.save;
+        if(flag1===true)
+          url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
+          send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
+          @message = "Email has been sent to your account to set your password"
+        else
+          @message = "Account already exists with this email";
+          cred.destroy
+        end
+      else
+        @message = "Username not available"
+      end
+     else
       @notif="";
       render template: 'paywall/register'
     end
