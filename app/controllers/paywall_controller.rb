@@ -139,7 +139,7 @@ class PaywallController < ApplicationController
           cred.save
           redirect_to :action => 'login'
           email = cred.user.email.to_s;
-          send_email(email,"Hey"+cred.username+"this is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
+          send_email(email,"Hey,"+cred.username+"@whitemail.io is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
         end
       end
   end
