@@ -1,3 +1,14 @@
+a{
+    font-family: "Champagne & Limousines";
+    font-size: 25px;
+    margin-left: 20px;
+}
+.tble_white{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 10%;
+    color: #D9453C;
+}
 .upper_nav{
     margin-left: 90%;
     margin-top: 2%;
@@ -44,15 +55,4 @@ div#form{
     margin-left: 35%;
     margin-top: 10%;
     color: #D9453C;
-}
-.tble_white{
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 10%;
-    color: #D9453C;
-}
-a{
-    font-family: "Champagne & Limousines";
-    font-size: 25px;
-    margin-left: 20px;
 }
