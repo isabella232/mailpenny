@@ -84,7 +84,6 @@ class PaywallController < ApplicationController
       format.js   { render :template => 'paywall/user_update' }
     end
   end
-
   def transactions
     id = session[:user_id].to_i;
     if(id===0)
@@ -139,6 +138,8 @@ class PaywallController < ApplicationController
           cred.password=pass;
           cred.save
           redirect_to :action => 'login'
+          email = cred.user.email.to_s;
+          send_email(email,"Hey"+cred.username+"this is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
         end
       end
   end
@@ -245,7 +246,7 @@ class PaywallController < ApplicationController
     user.wallet_amount =user.wallet_amount.to_f + transaction.amount.to_f;
     user.save;
     em_addr = user.email.to_s;
-    send_email(em_addr,"This emails is from "+email.from+''+email.body,email.subject);
+    send_email(email.from,email.body+"Sent via Whitemail",email.subject);
     render text: "Mail sent";
   end
   def payment_transfer
