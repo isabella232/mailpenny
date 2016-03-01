@@ -31,6 +31,7 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 gem 'mail', '2.6.3'
 # For cron tasks and stuff
 gem 'whenever', require: false
+gem 'twilio-ruby'
 
 gem 'rqrcode_png'
 group :development, :test do

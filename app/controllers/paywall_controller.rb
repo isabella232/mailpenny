@@ -273,4 +273,16 @@ class PaywallController < ApplicationController
     client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
     client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
   end
+  def send_sms(to,body)
+    number_to_send_to = to
+    twilio_sid = "AC01b345fbd6d4a9bf4aeac9d39811dbd2"
+    twilio_token = "a4f4229b588bb20692cd628fc0b5ff63"
+    twilio_phone_number = "7146811075"
+    @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
+    @twilio_client.account.sms.messages.create(
+        :from => "+1#{twilio_phone_number}",
+        :to => number_to_send_to,
+        :body => body
+    )
+  end
 end

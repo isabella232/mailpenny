@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224030909) do
+ActiveRecord::Schema.define(version: 20160301033941) do
 
   create_table "credentials", force: :cascade do |t|
     t.integer  "user_id"
@@ -46,15 +46,18 @@ ActiveRecord::Schema.define(version: 20160224030909) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",         limit: 255
-    t.string   "coinbase_id",   limit: 255
+    t.string   "email",             limit: 255
+    t.string   "coinbase_id",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "reward"
-    t.string   "name",          limit: 255
-    t.string   "picture",       limit: 255
-    t.string   "BTC_address",   limit: 255
+    t.string   "name",              limit: 255
+    t.string   "picture",           limit: 255
+    t.string   "BTC_address",       limit: 255
     t.float    "wallet_amount"
+    t.string   "phone"
+    t.integer  "verified"
+    t.integer  "verification_code"
   end
 
   create_table "whitelists", force: :cascade do |t|
