@@ -184,7 +184,7 @@ class PaywallController < ApplicationController
       trans.from = email.from;
       trans.btc_address = btc_address;
       trans.to = "mailman";
-      trans.amount = 0.0001;
+      trans.amount = user.reward;
       trans.status = "pending";
       user.transactions << trans;
       trans.email = email;
@@ -255,7 +255,7 @@ class PaywallController < ApplicationController
     user.wallet_amount =user.wallet_amount.to_f + transaction.amount.to_f;
     user.save;
     em_addr = user.email.to_s;
-    send_email(email.from,email.body+"Sent via Whitemail",email.subject);
+    send_email(em_addr,email.body+"Sent via Whitemail",email.subject);
     render text: "Mail sent";
   end
   def payment_transfer
