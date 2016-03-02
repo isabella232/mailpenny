@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'kg_blank_space_sketchregular';
+  src: url("fonts/kgblankspacesketch-webfont.eot");
+  src: url("fonts/kgblankspacesketch-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/kgblankspacesketch-webfont.woff2") format("woff2"), url("fonts/kgblankspacesketch-webfont.woff") format("woff"), url("fonts/kgblankspacesketch-webfont.ttf") format("truetype"), url("fonts/kgblankspacesketch-webfont.svg#kg_blank_space_sketchregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 12, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+body {
+  background: #4285f4;
+}
+
+/* line 15, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+.btn {
+  background-color: #D9453C;
+  width: 75%;
+}
+
+/* line 19, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+.txt {
+  width: 75%;
+  margin-bottom: 15px;
+}
+
+/* line 23, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+.div_form {
+  margin-left: 70%;
+  margin-top: 20%;
+}
+
+/* line 28, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+#member {
+  font-size: 15px;
+}
+
+/* line 32, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+#mem_elem {
+  margin-top: 40px;
+  margin-left: 7%;
+}
+
+/* line 36, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+a {
+  color: #D9453C;
+  font-size: 25px;
+}
+
+/* line 41, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+h1 {
+  position: absolute;
+  margin-top: 19%;
+  margin-left: 5%;
+  font-family: kgblankspacesketch;
+  color: #F2F2F2;
+  text-align: center;
+}
+
+/* line 49, /home/gilani/Sandbox/whitemail/app/assets/stylesheets/login.css.scss */
+#line {
+  position: absolute;
+  margin-left: 45%;
+  top: 30%;
+}
