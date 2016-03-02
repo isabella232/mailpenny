@@ -29,14 +29,22 @@
 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
     <%= f.hidden_field :id, :value => @id %>
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <%= f.email_field :email,:class=>'mdl-textfield__input',:id=>"inp1" ,:style=> 'width: 300px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
-      <label class="mdl-textfield__label" for="sample4">Personal Email</label>
-      <span class="mdl-textfield__error">Its not an email</span>
+    <%= f.email_field :email,:class=>'mdl-textfield__input',:id=>"inp1" ,:style=> 'width: 300px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
+    <label class="mdl-textfield__label" for="sample4">Personal Email</label>
+    <span class="mdl-textfield__error">Its not an email</span>
     </div>
     </br>
-      </br>
+    </br>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <%= f.text_field :phone,:class=>'mdl-textfield__input',:id=>"inp2" ,:style=> 'width: 300px' ,:value => @user.phone.to_s,:required=>true %>
+    <label class="mdl-textfield__label" for="sample4">Phone Number</label>
+    </div>
+    </br>
+    </br>
   <!--  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
        <%= f.text_field :name ,:class=>'mdl-textfield__input',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>
+
+
        <label class="mdl-textfield__label" for="sample4">BTC Address</label>
        <span class="mdl-textfield__error">Invalid Value ...</span>
     </div>

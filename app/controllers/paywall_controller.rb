@@ -77,8 +77,9 @@ class PaywallController < ApplicationController
     id = params['user']['id'].to_i;
     @user = User.find(id)
     #@user.email = params['user']['email']
-    @user.BTC_address = params['user']['name']
-    @user.reward = params['user']['reward'].to_f
+    #@user.BTC_address = params['user']['name']
+    @user.phone = params['user']['phone'].to_s;
+    @user.reward = params['user']['reward'].to_f;
     @user.save
     respond_to do |format|
       format.js   { render :template => 'paywall/user_update' }
