@@ -1,56 +1,43 @@
-<img src="/images/mailman-logo.png" width="70" style="float: left;margin-left: 5%;" >
-<div class="upper_nav" style="margin-left: 63%;">
-  <div >
-    <%= link_to "Settings",'settings',"data-no-turbolink" => true ,:id => 'settings',:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;' %>
-    <%= link_to "Whitelist",'whitelist',"data-no-turbolink" => true,:id => 'whitelist' ,:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;'%>
-    <%= link_to "Transaction",'transactions',"data-no-turbolink" => true ,:id => 'transactions',:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;' %>
-    <%= link_to "Logout",'logout',"data-no-turbolink" => true ,:style => 'font-family: "Champagne & Limousines";font-size: 25px;margin-left: 20px;color:#D9453C;' %>
-  </div>
-  <div class="mdl-tooltip" for="whitelist">
-    This is the list<br>where you will add your family,friends etc<br> who you do not want to pay
-  </div>
-  <div class="mdl-tooltip" for="settings">
-    Here you will<br>manage your email,BTC address<br> and the reward amount
-  </div>
-  <div class="mdl-tooltip" for="transactions">
-    This is where you<br>can see all the transactions<br> and transfer of funds to your address
-  </div>
-  <!-- <a id="white" href="whitelist">White List</a>
-  <a id="sett" href="settings">Settings</a>
-  <a id="trans" href="transactions">Transactions</a>
-  <a id="logout" href="logout">Logout</a> -->
-</div>
-
-<div class="tble_trans">
-  <%= form_for Whitelist.new ,:url=>'whitelist_add',remote:true do |f|%>
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <%= f.text_field :email,:class=>'mdl-textfield__input', :required=>'true'%>
-      <label class="mdl-textfield__label" for="sample3">Email</label>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-push-9 col-lg-4 col-lg-push-8">
+      <div>
+        <%= form_for Whitelist.new, class: 'form-inline',:url=>'whitelist_add', remote: true do |f|%>
+        <div class="whitelist-form">
+        <div class="form-group">
+        </div>
+        <label class="sr-only" for="emailToWhitelist">Email</label>
+        <%= f.text_field :email, placeholder: '', id: 'emailToWhitelist', required:'true'%>
+        <%=f.hidden_field :id,:value=>@user.id%>
+        <button class="btn btn-default" type="submit">Add
+        </button>
+        <%end%>
+        </div>
       </div>
-      <%=f.hidden_field :id,:value=>@user.id%>
-      <button type="submit" class ="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" style="margin-left:270px;"><i class="material-icons">add</i>
-      </button>
-  <%end%>
-  <table id="tr_white" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-    <thead>
-    <tr>
-      <th class="mdl-data-table__cell--non-numeric">Email</th>
-      <th class="mdl-data-table__cell--non-numeric">Delete</th>
-    </tr>
-    </thead>
-    <tbody style="height: 200px;">
-    <% @user.whitelists.all.each do |t|%>
-        <tr id="<%=t.id%>">
-          <td class="mdl-data-table__cell--non-numeric"><%= form_for Whitelist.new ,:url => 'whitelist_delete',:class=>'form-inline',:style=>'float:left;',:remote => true do |f| %>
-              <%= f.text_field :email , :value => t.email,:disabled=>'true',:style=>'width:250px;' %>
-              <%=f.hidden_field :id,:value=> t.id %>
-              <%= f.submit "Delete" , class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ,:style=>'margin-left:280px;background-color:#D9453C;' %>
-          <%end%>
-          </td>
-        </tr>
-    <% end%>
-    </tbody>
-  </table>
-
-
+    </div>
+    <div class="col-xs-12 col-sm-8 col-sm-pull-4 col-lg-8 col-lg-pull-4">
+      <div class="message-logs">
+        <table class="table" id="tr_white">
+          <thead>
+            <tr>
+              <th class="mdl-data-table__cell--non-numeric">Email</th>
+              <th class="mdl-data-table__cell--non-numeric">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user.whitelists.all.each do |t|%>
+            <tr id="<%=t.id%>">
+              <td class="mdl-data-table__cell--non-numeric"><%= form_for Whitelist.new ,:url => 'whitelist_delete',:class=>'form-inline',:remote => true do |f| %>
+                <%= f.text_field :email, :value => t.email,:disabled=>'true' %>
+                <%= f.hidden_field :id, :value=> t.id %>
+                <%= f.submit "Delete", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %>
+                <%end%>
+              </td>
+            </tr>
+            <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
