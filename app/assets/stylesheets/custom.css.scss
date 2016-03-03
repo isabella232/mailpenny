@@ -1,29 +1,40 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-
-/* nav bar */
-
-.navbar-brand
-{
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
-    text-align: center;
-    margin: auto;
+/* Clearing the top for the nav bar */
+body {
+  padding-top: 70px;
+  padding-bottom: 70px
 }
 
-#feedback-form-parent{
-  height: 750px;
+/* BEGIN FOOTER STYLES*/
+.footer {
+  background-color: #333;
 }
 
-#attrib-icons li {
-  font-weight: bold;
-  display: inline-block;
+/* unvisited link */
+.footer-text a:link {
+    color: gray;
+}
+
+/* visited link */
+.footer-text a:visited {
+    color: gray;
+}
+
+/* mouse over link */
+.footer-text a:hover {
+    color: gray;
+}
+
+/* selected link */
+.footer-text a:active {
+    color: gray;
+}
+
+.footer-text {
+  margin-top: 5px;
   text-align: center;
+  height: 100%;
+  color: gray;
+  text-decoration: none;
+  font-size: 80%;
 }
-
-#attrib-icons li img {
-  margin: 5px;
-  width: 100px;
-}
+/* END FOOTER STYLES*/

@@ -1,0 +1,173 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+ */
+
+/* Clearing the top for the nav bar */
+/* line 3, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+/* BEGIN FOOTER STYLES*/
+/* line 10, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer {
+  background-color: #333;
+}
+
+/* unvisited link */
+/* line 15, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer-text a:link {
+  color: gray;
+}
+
+/* visited link */
+/* line 20, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer-text a:visited {
+  color: gray;
+}
+
+/* mouse over link */
+/* line 25, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer-text a:hover {
+  color: gray;
+}
+
+/* selected link */
+/* line 30, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer-text a:active {
+  color: gray;
+}
+
+/* line 34, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/custom.css.scss */
+.footer-text {
+  margin-top: 5px;
+  text-align: center;
+  height: 100%;
+  color: gray;
+  text-decoration: none;
+  font-size: 80%;
+}
+
+/* END FOOTER STYLES*/
+
+.upper_nav{
+    margin-left: 90%;
+    margin-top: 2%;
+}
+a#logout{
+    padding: 10px;
+    background-color: #4285F4;
+    color: white;
+    border-radius: 10px;
+}
+a#trans{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
+a#sett{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
+a#white{
+    padding: 10px;
+    background-color: #4cae4c;
+    color: white;
+    border-radius: 10px;
+}
+.form-group{
+    margin-top: 2%;
+}
+#btn_form{
+    margin-top: 2%;
+    margin-left: 47%;
+    background-color: #D9453C;
+    color: white;
+}
+.tble_trans{
+    width: 50%;
+    margin-left: 35%;
+    margin-top: 10%;
+    color: #D9453C;
+}
+@font-face {
+  font-family: 'kg_blank_space_sketchregular';
+  src: url("fonts/kgblankspacesketch-webfont.eot");
+  src: url("fonts/kgblankspacesketch-webfont.eot?#iefix") format("embedded-opentype"), url("fonts/kgblankspacesketch-webfont.woff2") format("woff2"), url("fonts/kgblankspacesketch-webfont.woff") format("woff"), url("fonts/kgblankspacesketch-webfont.ttf") format("truetype"), url("fonts/kgblankspacesketch-webfont.svg#kg_blank_space_sketchregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 12, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+body {
+  background: #4285f4;
+}
+
+/* line 15, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+.btn {
+  background-color: #D9453C;
+  width: 75%;
+}
+
+/* line 19, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+.txt {
+  width: 75%;
+  margin-bottom: 15px;
+}
+
+/* line 23, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+.div_form {
+  margin-left: 70%;
+  margin-top: 20%;
+}
+
+/* line 28, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+#member {
+  font-size: 15px;
+}
+
+/* line 32, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+#mem_elem {
+  margin-top: 40px;
+  margin-left: 7%;
+}
+
+/* line 36, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+a {
+  color: #D9453C;
+  font-size: 25px;
+}
+
+/* line 41, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+h1 {
+  position: absolute;
+  margin-top: 19%;
+  margin-left: 5%;
+  font-family: kgblankspacesketch;
+  color: #F2F2F2;
+  text-align: center;
+}
+
+/* line 49, /home/gilani/Sandbox/blackmail/app/assets/stylesheets/login.css.scss */
+#line {
+  position: absolute;
+  margin-left: 45%;
+  top: 30%;
+}
