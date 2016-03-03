@@ -1,21 +1,39 @@
 <div class="container">
-  <p style="color:#a94442;font-size: 18px;margin-left: 20%;"><%=@message%><p>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <img src="/img/logo/logo-gray-transparent.png" alt="" />
-        <h1>Making Your </br>Emails</br> More Human Again</h1>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <p>
+        <%= @message %>
+        <p></div>
       </div>
-    </div>
-    <div class="col-xs-12 col-md-6">
-      <div class="div_form">
-        <form role="form" action="register" method="post">
-          <div class="form-group">
-            <input style="border-radius:0;" type="text" class="form-control txt" name="username" placeholder="Username">
-            <input style="border-radius:0;" type="email" class="form-control txt" name="email" placeholder="Email">
-            <input style="border-radius:0;" type="number" class="form-control txt" name="reward" step="0.0001" placeholder="reward eg. 0.02">
-            <button style="border-radius:0;"  type="submit" class="btn">Register  </button>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 login-columns">
+          <div class="border-right branding-block">
+            <img alt="BLACKMAIL" class="big-logo" src="/img/logo/logo-gray-transparent.png"/>
+            <h2>Get Paid To Read Your Mail</h2>
+            <h3>
+              Charge senders to send you mail
+            </h3>
           </div>
-        </form>
-      </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 login-columns">
+          <div class="user-form">
+            <form action="register" method="post" role="form">
+              <div class="form-group">
+                <input class="form-control txt" name="username" placeholder="Username" style="border-radius:0;" type="text">
+                <input class="form-control txt" name="email" placeholder="Email" style="border-radius:0;" type="email">
+                <input class="form-control txt" name="reward" placeholder="reward eg. 0.02" step="0.0001" style="border-radius:0;" type="number">
+                <button class="btn btn-default" style="border-radius:0;" type="submit">Register
+                </button>
+              </div>
+            </form>
+          <p>Already a user?
+            <a href="login">Login</a>
+          </p>
+          </div>
+        </div>
+      </form>
     </div>
+  </form>
+</div>
+</div>
 </div>
