@@ -31,4 +31,7 @@ Rails.application.routes.draw do
   get 'setpassword' => 'paywall#setpassword'
   post 'setpassword' => 'paywall#setpassword'
   post 'activate' => 'paywall#activate'
+
+  # profile
+  get 'profile' => 'paywall#profile'
 end

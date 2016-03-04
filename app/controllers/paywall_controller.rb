@@ -1,5 +1,9 @@
 class PaywallController < ApplicationController
   require 'securerandom'
+  def profile
+    # this will link to the public profile for a given user
+  end
+
   def login
     if(params.has_key?'email')
       user= User.find_by_email(params['email'])
@@ -112,9 +116,9 @@ class PaywallController < ApplicationController
         if(flag1===true)
           url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
           send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
-          @message = "Email has been sent to your account to set your password"
+          flash[:success] = "An email has been sent to your inbox!"
         else
-          @message = "Account already exists with this email";
+          flash[:warning] = "An account with this email already exists";
           cred.destroy
         end
       else
