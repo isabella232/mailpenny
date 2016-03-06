@@ -34,4 +34,7 @@ Rails.application.routes.draw do
 
   # profile
   get 'profile' => 'paywall#profile'
+
+  # billing
+  get 'billing' => 'paywall#billing'
 end
