@@ -15,45 +15,45 @@ ActiveRecord::Schema.define(version: 20160301033941) do
 
   create_table "credentials", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "username",   limit: 255
-    t.string   "password",   limit: 255
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "activated"
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string   "to",         limit: 255
-    t.string   "from",       limit: 255
-    t.string   "subject",    limit: 255
-    t.string   "body",       limit: 255
+    t.string   "to"
+    t.string   "from"
+    t.string   "subject"
+    t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_id",    limit: 255
-    t.string   "header",     limit: 255
+    t.string   "user_id"
+    t.string   "header"
   end
 
   create_table "transactions", force: :cascade do |t|
     t.float    "amount"
-    t.string   "to",          limit: 255
-    t.string   "btc_address", limit: 255
+    t.string   "to"
+    t.string   "btc_address"
     t.integer  "email_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",      limit: 255
-    t.string   "from",        limit: 255
+    t.string   "status"
+    t.string   "from"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",             limit: 255
-    t.string   "coinbase_id",       limit: 255
+    t.string   "email"
+    t.string   "coinbase_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "reward"
-    t.string   "name",              limit: 255
-    t.string   "picture",           limit: 255
-    t.string   "BTC_address",       limit: 255
+    t.string   "name"
+    t.string   "picture"
+    t.string   "BTC_address"
     t.float    "wallet_amount"
     t.string   "phone"
     t.integer  "verified"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160301033941) do
   end
 
   create_table "whitelists", force: :cascade do |t|
-    t.string   "email",      limit: 255
+    t.string   "email"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

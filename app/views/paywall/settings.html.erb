@@ -1,0 +1,135 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="settings-notice">
+        <p>
+          Feel free to publish:
+          <strong><%=@user.credential.username%>@whitemail.io</strong>
+          as your contact email everywhere!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="settings-profile">
+        <h2 class="section-heading">Profile</h2>
+        <div id="form">
+          <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+          <%= f.hidden_field :id, :value => @id %>
+          <label for="firstName">First Name</label><br>
+          <%= f.email_field :email, :id=>"firstName", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <label for="lastName">Last Name</label><br>
+          <%= f.email_field :email, :id=>"lastName", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <label for="username">Username</label><br>
+          <%= f.email_field :email, :id=>"username", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <label for="password">Password</label><br>
+          <%= f.email_field :email, :id=>"password", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <%= f.submit "Change", class: 'btn btn-default'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="settings-notification">
+        <h2 class="section-heading">Notifications</h2>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="settings-email">
+              <h3>Email</h3>
+              <div id="form">
+                <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+                <%= f.hidden_field :id, :value => @id %>
+                <label for="reward">Reward Amount</label><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
+                <label for="email">Email</label><br>
+                <%= f.email_field :email, :id=>"email", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+                <%= f.submit "Add", class: 'btn btn-default'%>
+                <% end %>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Verified</th>
+                    <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="settings-phone">
+              <h3>Phone</h3>
+              <div id="form">
+                <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+                <%= f.hidden_field :id, :value => @id %>
+                <label for="reward">Reward Amount</label><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
+                <label for="phone">Phone Numbers</label><br>
+                <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
+                <%= f.submit "Add", class: 'btn btn-default'%>
+                <% end %>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Phone</th>
+                    <th>Verified</th>
+                    <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="settings-proof">
+        <h2 class="section-heading">Proof</h2>
+        <p>
+          text_field_twitter
+          <br>
+          verified/unverified
+        </p>
+        <p>
+          text_field_twitters
+          <br>
+          verified/unverified
+        </p>
+        <p>
+          text_field_LinkedIn
+          <br>
+          verified/unverified
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
