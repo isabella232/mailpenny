@@ -1,8 +1,69 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-      <button data-target="#add-card" data-toggle="collapse" class="btn btn-primary">Add Card</button>
+      <p>
+        Quick Load
+      </p>
+      <a class="btn btn-default" href="#">$5</a>
+      <a class="btn btn-default" href="#">$20</a>
+      <a class="btn btn-default" href="#">$100</a>
+      <a class="btn btn-default" href="#">Other</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+      <p>
+        Cards
+      </p>
+      <table class="table">
 
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Last 4 Digits</th>
+            <th>Expiration</th>
+            <th>Primary</th>
+            <th>Del</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Waleed Jani
+            </td>
+            <td>
+              0007
+            </td>
+            <td>
+              02/10
+            </td>
+            <td>
+              Yes
+            </td>
+            <td>
+              Del
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Gilani Jani
+            </td>
+            <td>
+              1337
+            </td>
+            <td>
+              02/10
+            </td>
+            <td>
+              Yes
+            </td>
+            <td>
+              Del
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-link" data-target="#add-card" data-toggle="collapse">Add a new card</button>
       <div class="collapse" id="add-card">
         <form action="" id="payment-form" method="POST">
           <span class="payment-errors"></span>
@@ -32,7 +93,7 @@
             <input data-stripe="exp-year" size="4" type="text"/>
           </div>
 
-          <button type="submit" class="btn btn-success">Add Card</button>
+          <button class="btn btn-success" type="submit">Add</button>
         </form>
       </div>
     </div>
