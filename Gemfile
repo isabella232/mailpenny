@@ -31,7 +31,10 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 gem 'mail', '2.6.3'
 # For cron tasks and stuff
 gem 'whenever', require: false
+# The Twilio client
 gem 'twilio-ruby'
+# The Stripe client
+gem 'stripe', '~> 1.36', '>= 1.36.1'
 
 gem 'rqrcode_png'
 group :development, :test do
