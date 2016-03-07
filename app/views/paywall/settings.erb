@@ -26,39 +26,24 @@
 
 </div>
 <div id="form" style="margin-top: 10%;margin-left: 40%;">
-<%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+<%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true,role:'form'  do |f| %>
     <%= f.hidden_field :id, :value => @id %>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <%= f.email_field :email,:class=>'mdl-textfield__input',:id=>"inp1" ,:style=> 'width: 300px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
-    <label class="mdl-textfield__label" for="sample4">Personal Email</label>
-    <span class="mdl-textfield__error">Its not an email</span>
+    <div class="form-group">
+    <%= f.email_field :email,:class=>'form-control',:id=>"inp1" ,:style=> 'width: 300px' ,:value => @user.email.to_s,:required=>true ,:disabled=>true %>
     </div>
-    </br>
-    </br>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <%= f.text_field :phone,:class=>'mdl-textfield__input',:id=>"inp2" ,:style=> 'width: 300px' ,:value => @user.phone.to_s,:required=>true %>
-    <label class="mdl-textfield__label" for="sample4">Phone Number</label>
+    <div class="form-group">
+    <%= f.text_field :phone,:class=>'form-control',:id=>"inp2" ,:style=> 'width: 300px' ,:value => @user.phone.to_s,:required=>true,placeholder:"Phone Number" %>
     </div>
-    </br>
-    </br>
   <!--  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-       <%= f.text_field :name ,:class=>'mdl-textfield__input',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>
-
-
+    <%= f.text_field :name ,:class=>'mdl-textfield__input',:id=>"inp2" ,:style=> 'width: 250px' ,:value=>@user.BTC_address.to_s,:required=>true %>
        <label class="mdl-textfield__label" for="sample4">BTC Address</label>
        <span class="mdl-textfield__error">Invalid Value ...</span>
     </div>
       </br> -->
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <%= f.number_field :reward ,:class=>'mdl-textfield__input' ,:id=>"inp3" ,:style=> 'width: 300px' ,:value=>@user.reward,:required=>true,:step=>'0.0001' %>
-
-        <label class="mdl-textfield__label" for="sample4">Reward Amount</label>
-
-        <span class="mdl-textfield__error">Input is not a number!</span>
+      <div class="form-group">
+    <%= f.number_field :reward ,:class=>'form-control' ,:id=>"inp3" ,:style=> 'width: 300px' ,:value=>@user.reward,:required=>true,:step=>'0.0001',placeholder:"Reward" %>
       </div>
-        <br>
-      </br>
-    <%= f.submit "Change", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" ,:style=> 'margin-left: 250px;background-color: #D9453C;' %>
+    <%= f.submit "Change", class: "btn btn-danger" ,:style=> 'margin-left: 225px;background-color: #D9453C;' %>
 <% end %>
 </div>
 
