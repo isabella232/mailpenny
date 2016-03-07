@@ -40,12 +40,34 @@
               <div id="form">
                 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
-                <label for="email">Email</label><br>
-                <%= f.email_field :email, :id=>"email", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
                 <label for="reward">Reward Amount</label><br>
                 <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
-                <%= f.submit "Change", class: 'btn btn-default'%>
+                <label for="email">Email</label><br>
+                <%= f.email_field :email, :id=>"email", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+                <%= f.submit "Add", class: 'btn btn-default'%>
                 <% end %>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Verified</th>
+                    <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -55,12 +77,34 @@
               <div id="form">
                 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
-                <label for="phone">Phone Numbers</label><br>
-                <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
                 <label for="reward">Reward Amount</label><br>
                 <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
-                <%= f.submit "Change", class: 'btn btn-default'%>
+                <label for="phone">Phone Numbers</label><br>
+                <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
+                <%= f.submit "Add", class: 'btn btn-default'%>
                 <% end %>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Phone</th>
+                    <th>Verified</th>
+                    <th>Delete</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                      <td>
+                        bla
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
