@@ -36,5 +36,7 @@ Rails.application.routes.draw do
   get 'profile' => 'paywall#profile'
 
   # billing
-  get 'billing' => 'paywall#billing'
+  get 'billing' => 'paywall#billing', as: :billing
+  # add a card
+  post 'add-card' => 'payment_handler#add_card'
 end
