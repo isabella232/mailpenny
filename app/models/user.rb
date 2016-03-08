@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :phones
   has_many :user_emails
   has_many :ccards
+  has_one :social_medium
 
   validates_uniqueness_of :email
 end

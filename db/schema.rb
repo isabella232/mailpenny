@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308083246) do
+ActiveRecord::Schema.define(version: 20160308083849) do
 
   create_table "ccards", force: :cascade do |t|
     t.integer  "zip"
@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(version: 20160308083246) do
     t.float    "sms"
     t.float    "call"
     t.float    "email"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "social_media", force: :cascade do |t|
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "linkedin"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
