@@ -35,8 +35,11 @@ gem 'whenever', require: false
 gem 'twilio-ruby'
 # The Stripe client
 gem 'stripe', '~> 1.36', '>= 1.36.1'
+# JSON library
+gem 'json', '~> 1.8', '>= 1.8.3'
+# QR code generator
+gem 'rqrcode_png', '~> 0.1.5'
 
-gem 'rqrcode_png'
 group :development, :test do
   gem 'sqlite3',     '1.3.11'
   gem 'byebug',      '8.2.2'
