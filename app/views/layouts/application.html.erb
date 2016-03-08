@@ -44,9 +44,6 @@
   <!-- Font Awesome -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
 
-  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
   <!-- Styles for the pages -->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 
@@ -87,6 +84,51 @@
   ga('create', 'UA-74822546-1', 'auto');
   ga('send', 'pageview');
 
+</script>
+<script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+<script type="text/javascript">
+  // This identifies your website in the createToken call below
+  Stripe.setPublishableKey('pk_test_tThBPcIgR9dcYcXJt14b4VmQ');
+
+  jQuery(function ($) {
+    $('#add-card-form')
+      .submit(function (event) {
+        var $form = $(this);
+
+        // Disable the submit button to prevent repeated clicks
+        $form.find('button')
+          .prop('disabled', true);
+
+        Stripe.card
+          .createToken($form, stripeResponseHandler);
+
+        // Prevent the form from submitting with the default action
+        return false;
+      });
+  });
+
+  function stripeResponseHandler(status, response) {
+    var $form = $('#add-card-form');
+
+    if (response.error) {
+      // Show the errors on the form
+      $form.find('.payment-errors')
+        .text(response.error.message);
+      $form.find('button')
+        .prop('disabled', false);
+    } else {
+      console.log(response);
+      token = response.id;
+      card = JSON.stringify(response.card);
+      // response contains id and card, which contains additional card details
+      // Insert the token into the form so it gets submitted to the server
+      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+      $form.append($('<input type="hidden" name="cardDetails" />').val(card));
+      // and submit
+      $form.get(0)
+        .submit();
+    }
+  }
 </script>
 </body>
 
