@@ -290,4 +290,10 @@ class PaywallController < ApplicationController
         :body => body
     )
   end
+  def add_amount_user(user_id,amount)
+    user = User.find(user_id.to_i);
+    if(user.present?)
+      user.wallet_amount = user.wallet_amount+amount.to_f;
+    end
+  end
 end
