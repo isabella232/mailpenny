@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308083849) do
+ActiveRecord::Schema.define(version: 20160308100311) do
 
   create_table "ccards", force: :cascade do |t|
-    t.integer  "zip"
+    t.integer  "address_zip"
     t.string   "address_line1"
     t.string   "address_line2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
+    t.string   "address_city"
+    t.string   "address_state"
+    t.string   "address_country"
     t.string   "brand"
     t.integer  "exp_month"
     t.integer  "exp_year"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20160308083849) do
     t.string   "last4"
     t.boolean  "primary"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "credentials", force: :cascade do |t|
