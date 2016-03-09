@@ -7,12 +7,17 @@ class PaymentHandlerController < ApplicationController
     # Get the credit card details submitted by the form
     user_id = session[:user_id].to_i
     token = params[:stripeToken]
-
     card_string = params[:cardDetails]
+
+    user = find_user_by_id user_id
     card = card_string_to_card card_string
 
+    user.card << card
+
     add_card_by_user_id card, user_id
-    create_customer_with_token token
+    customer = create_customer_with_token token
+
+    user.save
 
     redirect_to :billing
   end
@@ -23,8 +28,8 @@ class PaymentHandlerController < ApplicationController
     Stripe.api_key = 'sk_test_FFIHFNSi40UgAnEO9HxBbaPr'
   end
 
-  def add_card_by_user_id(card, user_id)
-    User.findBy(id: user_id).card << card
+  def find_user_by_id(card, user_id)
+    User.findBy(id: user_id)
   end
 
   def card_string_to_card(card_string)
