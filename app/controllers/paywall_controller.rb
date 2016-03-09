@@ -1,8 +1,9 @@
 class PaywallController < ApplicationController
-  require 'securerandom'
-  def intialize
+  before_action :set_user_if_in_session
+
+  def set_user_if_in_session
     id = session[:user_id]
-    @username = User.find_by(id: id).credential.username unless user_id.nil?
+    @current_user = User.find_by(id: id)
   end
   def profile
     # this will link to the public profile for a given user
