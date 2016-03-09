@@ -1,5 +1,10 @@
 class PaywallController < ApplicationController
-  require 'securerandom'
+  before_action :set_user_if_in_session
+
+  def set_user_if_in_session
+    id = session[:user_id]
+    @current_user = User.find_by(id: id)
+  end
   def profile
     # this will link to the public profile for a given user
   end
@@ -100,22 +105,21 @@ class PaywallController < ApplicationController
   end
   def register
     @notif = "";
-    if(params.has_key?'email');
-      user = User.new;
-      cred = Credential.new;
-      user.email = params['email'];
-      flt = params['reward'];
-      flt = flt.to_f;
-      user.reward = flt;
-      cred.username = params['username'];
-      cred.activated = 0;
-      flag = cred.save;
+    if(params.has_key?'email')
+      user = User.new
+      cred = Credential.new
+      user.email = params['email']
+      flt = params['reward']
+      flt = flt.to_i
+      cred.username = params['username']
+      cred.activated = 0
+      flag = cred.save
       if(flag===true)
         user.credential = cred;
         flag1 = user.save;
         if(flag1===true)
-          url = "http://themailman.io/setpassword?id="+cred.id.to_s;
-          send_email(user.email,"Please set your password for themailman.io. Just follow the URL : "+url,"Mailman Credentials");
+          url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
+          Notifications.verify(user: user, link: url).deliver_now
           flash[:success] = "An email has been sent to your inbox!"
         else
           flash[:warning] = "An account with this email already exists";
