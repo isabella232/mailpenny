@@ -1,5 +1,9 @@
 class PaywallController < ApplicationController
   require 'securerandom'
+  def intialize
+    id = session[:user_id]
+    @username = User.find_by(id: id).credential.username unless user_id.nil?
+  end
   def profile
     # this will link to the public profile for a given user
   end
@@ -100,16 +104,16 @@ class PaywallController < ApplicationController
   end
   def register
     @notif = "";
-    if(params.has_key?'email');
-      user = User.new;
-      cred = Credential.new;
-      user.email = params['email'];
-      flt = params['reward'];
-      flt = flt.to_f;
-      user.reward = flt;
-      cred.username = params['username'];
-      cred.activated = 0;
-      flag = cred.save;
+    if(params.has_key?'email')
+      user = User.new
+      cred = Credential.new
+      user.email = params['email']
+      flt = params['reward']
+      flt = flt.to_i
+      user.reward = flt
+      cred.username = params['username']
+      cred.activated = 0
+      flag = cred.save
       if(flag===true)
         user.credential = cred;
         flag1 = user.save;
