@@ -1,14 +1,15 @@
 class Notifications < ApplicationMailer
-
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
   #   en.notifications.verify.subject
   #
-  def verify
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  default from: 'The Mailman <mailman@themailman.io>'
+  def verify(i)
+    @to = i[:user].email
+    @subject = 'Verify Your Account'
+    @link = i[:link]
+    mail to: @to, subject: @subject
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

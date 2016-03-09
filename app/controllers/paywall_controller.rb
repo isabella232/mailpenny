@@ -119,7 +119,7 @@ class PaywallController < ApplicationController
         flag1 = user.save;
         if(flag1===true)
           url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
-          send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
+          Notifications.verify(user: user, link: url).deliver_now
           flash[:success] = "An email has been sent to your inbox!"
         else
           flash[:warning] = "An account with this email already exists";
