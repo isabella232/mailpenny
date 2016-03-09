@@ -114,8 +114,8 @@ class PaywallController < ApplicationController
         user.credential = cred;
         flag1 = user.save;
         if(flag1===true)
-          url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
-          send_email(user.email,"Please set your password for Whitemail.io. Just follow the URL : "+url,"Whitemail Credentials");
+          url = "http://themailman.io/setpassword?id="+cred.id.to_s;
+          send_email(user.email,"Please set your password for themailman.io. Just follow the URL : "+url,"Mailman Credentials");
           flash[:success] = "An email has been sent to your inbox!"
         else
           flash[:warning] = "An account with this email already exists";
@@ -153,7 +153,7 @@ class PaywallController < ApplicationController
           cred.save
           redirect_to :action => 'login'
           email = cred.user.email.to_s;
-          send_email(email,"Hey,"+cred.username+"@whitemail.io is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
+          send_email(email,"Hey,"+cred.username+"@themailman.io is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
         end
       end
   end
@@ -214,12 +214,12 @@ class PaywallController < ApplicationController
     return account
   end
   def create_address(account)
-    address = account.create_address(callback_url: 'https://whitemail.io/payment_recieved')
+    address = account.create_address(callback_url: 'https://themailman.io/payment_recieved')
     return address
   end
   def send_email(to,text,subject)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'mailman <mailman@whitemail.io>',
+    message_params = { from: 'mailman <mailman@themailman.io>',
                        to: to,
                        subject: subject,
                        text:  text }
@@ -239,7 +239,7 @@ class PaywallController < ApplicationController
   end
   def send_complex_message
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
-    message_params = { from: 'user <user@whitemail.io>',
+    message_params = { from: 'user <user@themailman.io>',
                        to: 'waleed@payload.tech',
                        subject: 'hey  ',
                        text:  'Hello' ,
@@ -260,7 +260,7 @@ class PaywallController < ApplicationController
     user.wallet_amount =user.wallet_amount.to_f + transaction.amount.to_f;
     user.save;
     em_addr = user.email.to_s;
-    send_email(em_addr,email.body+"Sent via Whitemail",email.subject);
+    send_email(em_addr,email.body+"Sent via TheMailman",email.subject);
     render text: "Mail sent";
   end
   def payment_transfer
