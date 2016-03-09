@@ -110,7 +110,6 @@ class PaywallController < ApplicationController
       user.email = params['email']
       flt = params['reward']
       flt = flt.to_i
-      user.reward = flt
       cred.username = params['username']
       cred.activated = 0
       flag = cred.save
