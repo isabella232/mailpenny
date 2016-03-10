@@ -28,10 +28,12 @@ class Notifications < ApplicationMailer
   #
   #   en.notifications.new_mail.subject
   #
-  def new_mail
-    @greeting = "Hi"
+  def new_mail(args={from: User.first, to:User.first, email: Email.new(body: 'hi\nI\'m an dude testing some shit out')})
+    @from = args[:from]
+    @to = args[:to]
+    @email = args[:email]
 
-    mail to: "to@example.org"
+    mail to: @to.email, subject: "#{@from.credential.username}: #{@email.subject}"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
