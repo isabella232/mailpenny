@@ -15,17 +15,14 @@
       <div class="settings-profile">
         <h2 class="section-heading">Profile</h2>
         <div id="form">
-          <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+          <%= form_for @user.profile,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
           <%= f.hidden_field :id, :value => @id %>
           <label for="firstName">First Name</label><br>
-          <%= f.email_field :email, :id=>"firstName", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <%= f.text_field :f_name, :id=>"firstName", :value => @user.profile.first_name,:required => true ,:disabled => true %><br>
           <label for="lastName">Last Name</label><br>
-          <%= f.email_field :email, :id=>"lastName", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+          <%= f.text_field :l_name, :id=>"lastName", :value => @user.profile.last_name,:required => true ,:disabled => true %><br>
           <label for="username">Username</label><br>
-          <%= f.email_field :email, :id=>"username", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
-          <label for="password">Password</label><br>
-          <%= f.email_field :email, :id=>"password", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
-          <%= f.submit "Change", class: 'btn btn-default'%>
+          <%= f.text_field :username, :id=>"username", :value => @user.credential.username,:required => true ,:disabled => true %><br>
           <% end %>
         </div>
       </div>
@@ -41,7 +38,7 @@
                 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.email, :required=>true, :step=>'0.0001' %><br>
                 <label for="email">Email</label><br>
                 <%= f.email_field :email, :id=>"email", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
                 <%= f.submit "Add", class: 'btn btn-default'%>
@@ -78,7 +75,7 @@
                 <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward, :required=>true, :step=>'0.0001' %><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.sms, :required=>true, :step=>'0.0001' %><br>
                 <label for="phone">Phone Numbers</label><br>
                 <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
                 <%= f.submit "Add", class: 'btn btn-default'%>

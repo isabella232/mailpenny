@@ -11,12 +11,16 @@
         </div>
         <div class="user-biography">
           <p>
-            <%=@user.profile.about%>
+            <%if(@user.profile.about.nil?)%>
+            <%="Edit info about you."%>
+            <%else%>
+            <%=@user.profile.about %>
+            <%end%>
           </p>
         </div>
         <div class="user-location">
           <p>
-            <%=@user.profile.city%>
+            <%=@user.profile.location%>
           </p>
         </div>
       </div>

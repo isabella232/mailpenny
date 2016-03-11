@@ -168,6 +168,11 @@ class PaywallController < ApplicationController
           prof.save;
           user1 = cred.user;
           user1.profile = prof;
+          rew = Reward.new
+          rew.email=0.10;
+          rew.call=0.00;
+          rew.sms=0.00;
+          user1.reward = rew;
           user1.save;
           cred.activated=1;
           cred.password=pass;
