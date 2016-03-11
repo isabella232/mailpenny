@@ -161,6 +161,9 @@ class PaywallController < ApplicationController
           id = params['id'].to_i;
           cred = Credential.find(id)
         if(cred.present?)
+          prof = Profile.new
+          prof.first_name = params['firstname'];
+          prof.last_name = params['lastname'];
           cred.activated=1;
           cred.password=pass;
           cred.save
