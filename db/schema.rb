@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309232417) do
+ActiveRecord::Schema.define(version: 20160311085300) do
 
   create_table "ccards", force: :cascade do |t|
     t.integer  "address_zip"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20160309232417) do
     t.datetime "updated_at",      null: false
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "location"
   end
 
   create_table "rewards", force: :cascade do |t|
