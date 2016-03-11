@@ -6,17 +6,17 @@
         </div>
         <div class="user-name">
           <p>
-            Amin Shah Gilani
+            <%=@user.profile.first_name+" "+@user.profile.last_name%>
           </p>
         </div>
         <div class="user-biography">
           <p>
-            Yet Another Humanoid
+            <%=@user.profile.about%>
           </p>
         </div>
         <div class="user-location">
           <p>
-            San Francisco, CA
+            <%=@user.profile.city%>
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="user-contact-info">
           <div class="user-profile-link">
             <h2>
-              blackmail.io/gilani
+              blackmail.io/<%=@cred.username%>
             </h2>
           </div>
         </div>

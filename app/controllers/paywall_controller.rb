@@ -6,7 +6,16 @@ class PaywallController < ApplicationController
     @current_user = User.find_by(id: id)
   end
   def profile
-    # this will link to the public profile for a given user
+    id = params[:username]
+    @cred = Credential.find_by_username(id);
+    if(@cred===nil)
+      redirect_to action: :register
+    else
+      @user = @cred.user
+      if(@user === nil)
+        redirect_to action: :register
+      end
+    end
   end
 
   def login
@@ -88,7 +97,7 @@ class PaywallController < ApplicationController
     #@user.email = params['user']['email']
     #@user.BTC_address = params['user']['name']
     @user.phone = params['user']['phone'].to_s;
-    @user.reward = params['user']['reward'].to_f;
+    @user.reward.email = params['user']['reward'].to_f;
     @user.save
     respond_to do |format|
       format.js   { render :template => 'paywall/user_update' }
@@ -118,7 +127,7 @@ class PaywallController < ApplicationController
         user.credential = cred;
         flag1 = user.save;
         if(flag1===true)
-          url = "http://whitemail.io/setpassword?id="+cred.id.to_s;
+          url = "http://themailman.io/setpassword?id="+cred.id.to_s;
           Notifications.verify(user: user, link: url).deliver_now
           flash[:success] = "An email has been sent to your inbox!"
         else
@@ -188,12 +197,12 @@ class PaywallController < ApplicationController
       address = create_address(account)
       btc_address = address['address']
       qr(btc_address)
-      send_email_att(email.to,email.from.to_s,"Hey i am Using Paywall. Pay the"+ user.reward.to_s+" on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
+      send_email_att(email.to,email.from.to_s,"Hey i am Using Mailman. Pay the"+ user.reward.email.to_s+" on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
       trans = Transaction.new;
       trans.from = email.from;
       trans.btc_address = btc_address;
       trans.to = "mailman";
-      trans.amount = user.reward;
+      trans.amount = user.reward.email;
       trans.status = "pending";
       user.transactions << trans;
       trans.email = email;

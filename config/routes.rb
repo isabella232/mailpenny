@@ -33,7 +33,7 @@ Rails.application.routes.draw do
   post 'activate' => 'paywall#activate'
 
   # profile
-  get 'profile' => 'paywall#profile'
+  get ':username' => 'paywall#profile'
 
   # billing
   get 'billing' => 'paywall#billing', as: :billing
