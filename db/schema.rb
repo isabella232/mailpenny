@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308100311) do
+ActiveRecord::Schema.define(version: 20160309232417) do
 
   create_table "ccards", force: :cascade do |t|
     t.integer  "address_zip"
@@ -33,22 +33,22 @@ ActiveRecord::Schema.define(version: 20160308100311) do
 
   create_table "credentials", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "username",   limit: 255
-    t.string   "password",   limit: 255
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "activated"
   end
 
   create_table "emails", force: :cascade do |t|
-    t.string   "to",         limit: 255
-    t.string   "from",       limit: 255
-    t.string   "subject",    limit: 255
-    t.string   "body",       limit: 255
+    t.string   "to"
+    t.string   "from"
+    t.string   "subject"
+    t.text     "body",       limit: 4294967295
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_id",    limit: 255
-    t.string   "header",     limit: 255
+    t.string   "user_id"
+    t.string   "header"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -91,14 +91,14 @@ ActiveRecord::Schema.define(version: 20160308100311) do
 
   create_table "transactions", force: :cascade do |t|
     t.float    "amount"
-    t.string   "to",          limit: 255
-    t.string   "btc_address", limit: 255
+    t.string   "to"
+    t.string   "btc_address"
     t.integer  "email_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status",      limit: 255
-    t.string   "from",        limit: 255
+    t.string   "status"
+    t.string   "from"
   end
 
   create_table "user_emails", force: :cascade do |t|
@@ -109,11 +109,11 @@ ActiveRecord::Schema.define(version: 20160308100311) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",             limit: 255
-    t.string   "coinbase_id",       limit: 255
+    t.string   "email"
+    t.string   "coinbase_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "BTC_address",       limit: 255
+    t.string   "BTC_address"
     t.float    "wallet_amount"
     t.string   "phone"
     t.integer  "verified"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20160308100311) do
   end
 
   create_table "whitelists", force: :cascade do |t|
-    t.string   "email",      limit: 255
+    t.string   "email"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
