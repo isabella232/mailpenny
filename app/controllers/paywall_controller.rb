@@ -164,6 +164,11 @@ class PaywallController < ApplicationController
           prof = Profile.new
           prof.first_name = params['firstname'];
           prof.last_name = params['lastname'];
+          prof.location = params['location'];
+          prof.save;
+          user1 = cred.user;
+          user1.profile = prof;
+          user1.save;
           cred.activated=1;
           cred.password=pass;
           cred.save
