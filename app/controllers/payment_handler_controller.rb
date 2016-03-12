@@ -5,10 +5,11 @@ class PaymentHandlerController < ApplicationController
     args.slice!(:from,
                 :to,
                 :amount,
-                :currency
+                :currency,
+                :ref,
+                :meta
                )
-    logger.debug(here)
-    args.payment = true
+    args[:payment] = true
     add_ledger_entry args
   end
 
@@ -38,6 +39,7 @@ class PaymentHandlerController < ApplicationController
     to = args[:to]
     amount = args[:amount]
 
+    entry[:currency] = 'USD' if args[:currency].nil?
     entry[:from_id] = from.id unless from.nil?
     entry[:to_id] = to.id
 
