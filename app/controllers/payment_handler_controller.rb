@@ -1,8 +1,20 @@
 #   This controller handles charging payments, logging them, and adding them
 # to the user's account
 class PaymentHandlerController < ApplicationController
+  def add_ledger_entry(args)
+    args.slice!(:from, :to, :amount, :currency, :payment, :deposit, :withdrawal)
+    entry = Ledger.new(args)
+    entry.save
+  end
+
+  def charge_primary_card
+    amount = params[:chargeAmount]
+    card = find_primary_card_by_user @user
+
+    charge_card card: card, amount: amount
+  end
   # adds the card to the DB
-  def add_card
+
     setup_stripe
     # Get the credit card details submitted by the form
     user_id = session[:user_id].to_i
@@ -12,7 +24,7 @@ class PaymentHandlerController < ApplicationController
     user = find_user_by_id user_id
     card = card_string_to_card card_string
 
-    user.card << card
+    user.card = card
 
     add_card_by_user_id card, user_id
     customer = create_customer_with_token token
