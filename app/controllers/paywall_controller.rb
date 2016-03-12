@@ -5,17 +5,13 @@ class PaywallController < ApplicationController
     id = session[:user_id]
     @current_user = User.find_by(id: id)
   end
+
   def profile
     id = params[:username]
     @cred = Credential.find_by_username(id);
-    if(@cred===nil)
-      redirect_to action: :register
-    else
-      @user = @cred.user
-      if(@user === nil)
-        redirect_to action: :register
-      end
-    end
+    render_404 if @cred.nil?
+    @user = @cred.user
+    redirect_to action: :register if @user.nil?
   end
 
   def login
@@ -250,7 +246,7 @@ class PaywallController < ApplicationController
                        subject: subject,
                        text:  text }
     # Send your message through the client
-    mg_client.send_message 'whitemail.io', message_params
+    mg_client.send_message 'themailman.io', message_params
   end
   def send_email_att(from,to,text,subject,address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
@@ -261,7 +257,7 @@ class PaywallController < ApplicationController
                        attachment: File.new(File.join("tmp", address+'.png')),
                        multipart: true }
     # Send your message through the client
-    mg_client.send_message 'whitemail.io', message_params
+    mg_client.send_message 'themailman.io', message_params
   end
   def send_complex_message
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
@@ -272,7 +268,7 @@ class PaywallController < ApplicationController
                        attachment: File.new(File.join("tmp", 'really_cool_qr_image.png')),
                        multipart: true }
     # Send your message through the client
-    mg_client.send_message 'whitemail.io', message_params
+    mg_client.send_message 'themailman.io', message_params
     redirect_to :action => 'login'
   end
 
