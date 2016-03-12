@@ -7,10 +7,14 @@ class PaywallController < ApplicationController
   end
 
   def profile
+    @current = false;
     id = params[:username]
     @cred = Credential.find_by_username(id);
     render_404 if @cred.nil?
     @user = @cred.user
+    if(@user.id === session[:user_id].to_i)
+      @current = true;
+    end
     redirect_to action: :register if @user.nil?
   end
 
@@ -317,5 +321,58 @@ class PaywallController < ApplicationController
     if(user.present?)
       user.wallet_amount = user.wallet_amount+amount.to_f;
     end
+  end
+  def change_pass
+    pass1 = params['password'].to_s
+    pass3 = params['old_password'].to_s
+    user = User.find(session[:user_id].to_i)
+    @done = false
+    if(user.present?)
+      cred = user.credential
+      if(cred.password.to_s===pass3)
+        cred.password = pass1
+        cred.save
+        user.save
+        @done = true
+      end
+    end
+    respond_to do |format|
+      format.js   { render :template => 'paywall/change_password.js.erb' }
+    end
+  end
+  def change_prof
+    pass1 = params['password'];
+    user = User.find(session[:user_id].to_i)
+    @done = false;
+    if(user.present?)
+      cred = user.credential;
+      if(cred.password.to_s === pass1.to_s)
+        fname  = params['fname']
+        lname  = params['lname']
+        loc = params['loc']
+        about = params['about']
+        remail = params['remail']
+        rsms = params['rsms']
+
+        reward = user.reward;
+        reward.email = remail.to_f;
+        reward.sms = rsms.to_f;
+        reward.save
+
+        profile = user.profile;
+        profile.location = loc;
+        profile.about = about;
+        profile.first_name = fname;
+        profile.last_name = lname;
+        profile.save
+        @done = true
+      end
+
+    end
+    respond_to do |format|
+      format.js {render template: 'paywall/change_prof'}
+    end
+
+
   end
 end

@@ -29,6 +29,12 @@
       <div class="row">
         <div class="user-contact-info">
           <div class="user-profile-link">
+            <%if(@current === true)%>
+              <div>
+                <button class="btn btn-default" data-toggle="modal" data-target="#pass" style="margin-left: 70%;border-radius: 3px;width: 12%;background-color: #2E2F30;color: white;display: inline;" >Password</button>
+                <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="border-radius: 3px;width: 12%;background-color: #2E2F30;color: white;display: inline;" >Edit</button>
+              </div>
+            <%end%>
             <h2>
               themailman.io/<%=@cred.username%>
             </h2>
@@ -41,7 +47,7 @@
                 <i class="fa fa-envelope fa-5x"></i>
                 <br>
                 <span class="action">Send an email</span><br>
-                <span class="price">$10</span>
+                <span class="price">$<%=@user.reward.email %></span>
               </p>
             </div>
           </div>
@@ -50,7 +56,7 @@
               <i class="fa fa-mobile fa-5x"></i>
               <br>
               <span class="action">Send a text</span><br>
-              <span class="price">$10</span>
+              <span class="price">$<%=@user.reward.sms %></span>
             </div>
           </div>
           <div class="col-sm-4">
@@ -58,16 +64,131 @@
               <i class="fa fa-phone fa-5x"></i>
               <br>
               <span class="action">Schedule a call</span><br>
-              <span class="price">$10</span>
+              <span class="price">$<%=@user.reward.call %></span>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1">
-            <div class="donate-statement"><h3>Amin Shah donates all proceeds to&#58;</h3></div>
+            <div class="donate-statement"><h3><%=@user.profile.first_name.to_s%> donates all proceeds to&#58;</h3></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- Model Content -->
+<div class="modal fade" id="myModal" role="dialog" >
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Profile</h4>
+      </div>
+      <div class="modal-body">
+        <div  class="row">
+          <p id="notif1"></p>
+          <%= form_tag("/change_prof", method: 'post', remote: true, style:'margin-left:10%;' ) do %>
+            <div>
+            <label style="display: inline">First Name:</label>
+            <input   required="true" value="<%=@user.profile.first_name %>" class="form-control" style="width: 250px;display: inline;border-radius: 3px;" name="fname">
+              <label style=" margin-left:2%;">Last Name:</label>
+              <input required="true" value="<%=@user.profile.last_name %>" class="form-control" style="width: 250px;display:inline;border-radius: 3px;" name="lname">
+            </div>
+            <br>
+            <div>
+              <label>Location:</label>
+              <input required="true" value="<%=@user.profile.location %>" class="form-control" style="width: 250px;display:inline;margin-left: 1.5%;border-radius: 3px;" name="loc">
+            </div>
+            <br>
+            <div>
+              <label>About:</label>
+              <textarea maxlength="250"  class="form-control" style="width: 250px;display:inline;margin-left: 3%;border-radius: 3px;" name="about"><%=@user.profile.about %></textarea>
+            </div>
+            <br>
+            <label >Rewards</label>
+            <br>
+            <div>
+              <label style="display: inline">Email:</label>
+              <input required="true" type="number"  min="0"  step="0.01" value="<%=@user.reward.email %>" class="form-control" style="width: 250px;display: inline;border-radius: 3px; margin-left: 3%;" name="remail">
+              <label  style=" margin-left:2.5%;">SMS:</label>
+              <input required="true" type="number" min="0"  step="0.01" value="<%=@user.reward.sms %>" class="form-control" style="width: 250px;display:inline;border-radius: 3px;margin-left: 5%;" name="rsms">
+            </div>
+           <!-- <br>
+            <div>
+              <label>Username:</label>
+              <input required="true" class="form-control" style="width: 250px;display:inline;border-radius: 3px;" name="username">
+            </div> -->
+            <br>
+            <div>
+              <label>Password:</label>
+              <input required="true" id="password_prof" class="form-control" type="password" style="width: 250px;display:inline;border-radius: 3px;" name="password">
+            </div>
+            <div>
+              <button type="submit" class="btn btn-success" style="margin-left: 85%;width: 10%;border-radius: 3px;">Save</button>
+            </div>
+          <% end %>
+        <div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="modal fade" id="pass" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Profile</h4>
+      </div>
+      <div class="modal-body">
+        <div  class="row">
+          <p id="notif"></p>
+          <%= form_tag("/change_pass", method: 'post', remote: true, style:'margin-left:10%;' ) do %>
+              <br>
+              <div>
+                <label>Password:</label>
+                <input required="true" id="old_password" class="form-control" type="password" style="width: 150px;display:inline;border-radius: 3px;" name="old_password">
+              </div>
+              <br>
+              <div>
+                <label>Password:</label>
+                <input required="true" id="password" class="form-control" type="password" style="width: 150px;display:inline;border-radius: 3px;" name="password">
+              </div>
+              <br>
+              <div>
+                <label>Re-Type:</label>
+                <input required="true" id="confirm_password" class="form-control" type="password" style="width: 150px;display:inline;border-radius: 3px;margin-left: 3.5%;" name="confirm_password">
+              </div>
+              <br>
+              <div>
+                <button type="submit" class="btn btn-success" style="margin-left: 65%;border-radius: 3px;">Save</button>
+              </div>
+          <% end %>
+     <!--     <form method="post" action="change_pass" style="margin-left: 10%; " remote='true'>
+
+          </form> -->
+          <div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var password = document.getElementById("password");
+  var confirm_password = document.getElementById("confirm_password");
+
+  function validatePassword() {
+    if (password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Passwords Don't Match");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>
