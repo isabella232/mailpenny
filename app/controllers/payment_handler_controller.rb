@@ -33,11 +33,19 @@ class PaymentHandlerController < ApplicationController
       :ref,
       :meta
     )
-    entry[:from_id] = args[:from].id unless args[:from].nil?
-    entry[:to_id] = args[:to].id
 
-    ledger = Ledger.new(entry)
-    ledger.save
+    from = args[:from]
+    to = args[:to]
+    amount = args[:amount]
+
+    entry[:from_id] = from.id unless from.nil?
+    entry[:to_id] = to.id
+
+    ActiveRecord::Base.transaction do
+      Ledger.create(entry)
+      to.increment!('wallet_amount', amount)
+      from.decrement!('wallet_amount', amount) unless from.nil?
+    end
   end
 
   def charge_primary_card
