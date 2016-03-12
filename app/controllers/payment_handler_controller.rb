@@ -1,10 +1,43 @@
 #   This controller handles charging payments, logging them, and adding them
 # to the user's account
 class PaymentHandlerController < ApplicationController
+  def make_payment(args)
+    args.slice!(:from,
+                :to,
+                :amount,
+                :currency
+               )
+    logger.debug(here)
+    args.payment = true
+    add_ledger_entry args
+  end
+
+  def add_deposit(args)
+    args.slice!(:to,
+                :amount,
+                :currency,
+                :ref,
+                :meta
+               )
+    args[:deposit] = true
+    add_ledger_entry args
+  end
+
   def add_ledger_entry(args)
-    args.slice!(:from, :to, :amount, :currency, :payment, :deposit, :withdrawal)
-    entry = Ledger.new(args)
-    entry.save
+    entry = args.slice(
+      :amount,
+      :currency,
+      :payment,
+      :deposit,
+      :withdrawal,
+      :ref,
+      :meta
+    )
+    entry[:from_id] = args[:from].id unless args[:from].nil?
+    entry[:to_id] = args[:to].id
+
+    ledger = Ledger.new(entry)
+    ledger.save
   end
 
   def charge_primary_card
@@ -15,7 +48,7 @@ class PaymentHandlerController < ApplicationController
   end
   # adds the card to the DB
 
-    setup_stripe
+  def setup_stripe
     # Get the credit card details submitted by the form
     user_id = session[:user_id].to_i
     token = params[:stripeToken]
@@ -40,7 +73,7 @@ class PaymentHandlerController < ApplicationController
     Stripe.api_key = 'sk_test_FFIHFNSi40UgAnEO9HxBbaPr'
   end
 
-  def find_user_by_id(card, user_id)
+  def find_user_by_id(_card, user_id)
     User.findBy(id: user_id)
   end
 

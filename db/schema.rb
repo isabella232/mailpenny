@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(version: 20160312055455) do
   create_table "ledgers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.decimal  "amount"
+    t.string   "currency"
+    t.boolean  "payment"
+    t.boolean  "deposit"
+    t.boolean  "withdrawal"
+    t.string   "ref"
+    t.string   "meta"
   end
 
   create_table "phones", force: :cascade do |t|
