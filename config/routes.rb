@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'charges/new'
+
+  get 'charges/create'
+
   # static pages
   root 'paywall#login'
   #get 'about'   => 'static_pages#about'
@@ -41,4 +45,7 @@ Rails.application.routes.draw do
   get 'billing' => 'paywall#billing', as: :billing
   # add a card
   post 'add-card' => 'payment_handler#add_card'
+
+  # charges
+  resources :charges
 end

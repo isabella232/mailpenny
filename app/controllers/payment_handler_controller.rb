@@ -1,6 +1,11 @@
-#   This controller handles charging payments, logging them, and adding them
+\#   This controller handles charging payments, logging them, and adding them
 # to the user's account
 class PaymentHandlerController < ApplicationController
+
+  def billing
+    #code
+  end
+
   def deposit(args)
     args.slice!(:to,
                 :amount,
