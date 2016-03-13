@@ -1,6 +1,7 @@
-\#   This controller handles charging payments, logging them, and adding them
+#   This controller handles charging payments, logging them, and adding them
 # to the user's account
 class PaymentHandlerController < ApplicationController
+before_action :set_user_if_in_session
 
   def billing
     #code

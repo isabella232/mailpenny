@@ -85,51 +85,50 @@
   ga('send', 'pageview');
 
 </script>
-<script src="https://js.stripe.com/v2/" type="text/javascript"></script>
-<script type="text/javascript">
-  // This identifies your website in the createToken call below
-  Stripe.setPublishableKey('pk_test_tThBPcIgR9dcYcXJt14b4VmQ');
 
-  jQuery(function ($) {
-    $('#add-card-form')
-      .submit(function (event) {
-        var $form = $(this);
+<%[5,10,20,50].map{|x| x*100}.each do |amount|%>
+<script>
+var handler = StripeCheckout.configure({
+  key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+  image: '/img/logo/icon-black-transparent.png',
+  locale: 'auto',
+  token: function (token) {
+    $.post('/charges', {
+      stripeToken: token.id,
+      amount: <%= amount %>,
+      user: <%= @current_user.id %>
+    });
+    }
+});
 
-        // Disable the submit button to prevent repeated clicks
-        $form.find('button')
-          .prop('disabled', true);
-
-        Stripe.card
-          .createToken($form, stripeResponseHandler);
-
-        // Prevent the form from submitting with the default action
-        return false;
-      });
+$('#btn-payment-<%= amount %>')
+  .on('click', function (e) {
+    // Open Checkout with further options
+    handler.open({
+      name: 'Mailman',
+      description: "Top-up",
+      amount: <%= amount %>,
+      label: "Add $<%=amount / 100 %>",
+      panelLabel: "Pay {{amount}}",
+      bitcoin: "true",
+      alipay: "true",
+      email: "<%= @current_user.email %>",
+      allowRememberMe: "true",
+      alipayReusable: "true",
+      locale: "auto"
+    });
+    e.preventDefault();
   });
 
-  function stripeResponseHandler(status, response) {
-    var $form = $('#add-card-form');
-
-    if (response.error) {
-      // Show the errors on the form
-      $form.find('.payment-errors')
-        .text(response.error.message);
-      $form.find('button')
-        .prop('disabled', false);
-    } else {
-      console.log(response);
-      token = response.id;
-      card = JSON.stringify(response.card);
-      // response contains id and card, which contains additional card details
-      // Insert the token into the form so it gets submitted to the server
-      $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-      $form.append($('<input type="hidden" name="cardDetails" />').val(card));
-      // and submit
-      $form.get(0)
-        .submit();
-    }
-  }
+// Close Checkout on page navigation
+$(window)
+  .on('popstate', function () {
+    handler.close();
+  });
 </script>
+
+<% end %>
+
 </body >
 
 </html>

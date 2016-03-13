@@ -1,5 +1,7 @@
 # The stripe charges controller
 class ChargesController < ApplicationController
+before_action :set_user_if_in_session
+
   def new
     amount = params[:amount].to_i
     @amount = 500

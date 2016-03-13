@@ -1,11 +1,6 @@
 class PaywallController < ApplicationController
   before_action :set_user_if_in_session
 
-  def set_user_if_in_session
-    id = session[:user_id]
-    @current_user = User.find_by(id: id)
-  end
-
   def profile
     @current = false;
     id = params[:username]
