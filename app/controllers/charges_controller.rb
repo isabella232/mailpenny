@@ -9,7 +9,6 @@ class ChargesController < ApplicationController
 
   def create
     # Amount in cents
-
     customer = Stripe::Customer.create(
       email: params[:stripeEmail],
       source: params[:stripeToken]
@@ -22,7 +21,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-    logger.debug charge
+    byebug
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
