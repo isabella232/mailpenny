@@ -5,42 +5,5 @@
 
   <button id="btn-payment-<%= amount %>">Add
     <%= amount / 100 %></button>
-    <script>
-    var handler = StripeCheckout.configure({
-      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
-      image: '/img/documentation/checkout/marketplace.png',
-      locale: 'auto',
-      token: function (token) {
-        $.post( "/charges/create", {
-          stripeToken: token.id
-        });
-      }
-    });
-
-    $('#btn-payment-<%= amount %>')
-      .on('click', function (e) {
-        // Open Checkout with further options
-        handler.open({
-          name: 'Mailman',
-          description: "Top-up",
-          amount: <%= amount%>,
-          label: "Add $<%=amount / 100 %>",
-          panelLabel: "Pay {{amount}}",
-          bitcoin: "true",
-          alipay: "true",
-          email: "@current_user.email",
-          allowRememberMe: "true",
-          alipayReusable: "true",
-          locale: "auto"
-        });
-        e.preventDefault();
-      });
-
-    // Close Checkout on page navigation
-    $(window)
-      .on('popstate', function () {
-        handler.close();
-      });
-    </script>
     <% end %>
 </div>

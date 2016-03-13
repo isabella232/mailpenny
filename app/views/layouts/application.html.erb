@@ -86,9 +86,9 @@
 
 </script>
 
-<%[5,10,20,50].map{|x| x*100}.each do |amount|%>
+<%[5,10,20,50].map{|x| x * 100}.each do |amount|%>
 <script>
-var handler = StripeCheckout.configure({
+var handler<%= amount %> = StripeCheckout.configure({
   key: '<%= Rails.configuration.stripe[:publishable_key] %>',
   image: '/img/logo/icon-black-transparent.png',
   locale: 'auto',
@@ -98,13 +98,14 @@ var handler = StripeCheckout.configure({
       amount: <%= amount %>,
       user: <%= @current_user.id %>
     });
+    console.log("<%= amount %>")
     }
 });
 
 $('#btn-payment-<%= amount %>')
   .on('click', function (e) {
     // Open Checkout with further options
-    handler.open({
+    handler<%= amount %>.open({
       name: 'Mailman',
       description: "Top-up",
       amount: <%= amount %>,
@@ -123,7 +124,7 @@ $('#btn-payment-<%= amount %>')
 // Close Checkout on page navigation
 $(window)
   .on('popstate', function () {
-    handler.close();
+    handler<%= amount %>.close();
   });
 </script>
 

@@ -11,15 +11,18 @@ before_action :set_user_if_in_session
 
   def create
     # Amount in cents
+    @amount = params[:amount]
+    @email = params[:stripeEmail]
+    @token = params[:stripeToken]
     customer = Stripe::Customer.create(
-      email: params[:stripeEmail],
-      source: params[:stripeToken]
+      email: @email,
+      source: @token
     )
 
     charge = Stripe::Charge.create(
       customer: customer.id,
       amount: @amount,
-      description: 'Rails Stripe customer',
+      description: "#{@amount} topup for #{@email}",
       currency: 'usd'
     )
 
