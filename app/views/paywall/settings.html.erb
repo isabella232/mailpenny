@@ -35,12 +35,12 @@
             <div class="settings-email">
               <h3>Email</h3>
               <div id="form">
-                <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+                <%= form_for @user,:url => 'add_email' ,:method=>'post'  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.email, :required=>true, :step=>'0.0001' %><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.email, :required=>true, :step=>'0.0001' ,:disabled => true %><br>
                 <label for="email">Email</label><br>
-                <%= f.email_field :email, :id=>"email", :value => @user.email.to_s,:required => true ,:disabled => true %><br>
+                <%= f.email_field :email, :id=>"email",:required => true  %><br>
                 <%= f.submit "Add", class: 'btn btn-default'%>
                 <% end %>
                 <table class="table">
@@ -51,18 +51,10 @@
                     <th>Delete</th>
                   </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        bla
-                      </td>
-                      <td>
-                        bla
-                      </td>
-                      <td>
-                        bla
-                      </td>
-                    </tr>
+                  <tbody id="tble_emails">
+                    <%@user.user_emails.each do |e| %>
+                      <tr><%= form_tag 'delete_emails',:method => 'post' do |f| %> <td><%=e.address%></td> <td>No </td><td><%=hidden_field_tag "id",e.id.to_s %><%=  submit_tag "delete" %> </td> <%end%> </tr>
+                    <%end%>
                   </tbody>
                 </table>
               </div>
@@ -72,10 +64,10 @@
             <div class="settings-phone">
               <h3>Phone</h3>
               <div id="form">
-                <%= form_for @user,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
+                <%= form_for @user,:url => 'add_phones' ,:method=>'post'  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.sms, :required=>true, :step=>'0.0001' %><br>
+                <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.sms, :required=>true, :step=>'0.0001' ,:disabled => true %><br>
                 <label for="phone">Phone Numbers</label><br>
                 <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
                 <%= f.submit "Add", class: 'btn btn-default'%>
@@ -88,18 +80,10 @@
                     <th>Delete</th>
                   </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        bla
-                      </td>
-                      <td>
-                        bla
-                      </td>
-                      <td>
-                        bla
-                      </td>
-                    </tr>
+                  <tbody >
+                    <%@user.phones.each do |e| %>
+                        <tr><%= form_tag 'delete_phones',:method => 'post' do |f| %> <td><%=e.number%></td> <td>No </td><td><%=hidden_field_tag "id",e.id.to_s %><%=  submit_tag "delete" %> </td> <%end%> </tr>
+                    <%end%>
                   </tbody>
                 </table>
               </div>
@@ -110,7 +94,7 @@
     </div>
     <div class="col-sm-3">
       <div class="settings-proof">
-        <h2 class="section-heading">Proof</h2>
+        <h2 class="section-heading">Social Links</h2>
         <table class="table">
           <thead>
           <tr>
@@ -122,34 +106,34 @@
           <tbody>
             <tr>
               <td>
-                Twitter.com/bla
+                Twitter.com
               </td>
               <td>
                 link
               </td>
               <td>
-                Yes
+                No
               </td>
             </tr>
             <tr>
               <td>
-                Facebook.com/bla
+                Facebook.com
               </td>
               <td>
                 link
               </td>
               <td>
-                Yes
+                No
               </td>
               <tr>
                 <td>
-                  LinkedIn.com/bla
+                  LinkedIn.com
                 </td>
                 <td>
                   link
                 </td>
                 <td>
-                  Yes
+                  No
                 </td>
               </tr>
             </tr>
