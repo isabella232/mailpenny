@@ -13,17 +13,18 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="settings-profile">
-        <h2 class="section-heading">Profile</h2>
-        <div id="form">
-          <%= form_for @user.profile,:url => 'update_user' ,:method=>'post',remote:true  do |f| %>
-          <%= f.hidden_field :id, :value => @id %>
-          <label for="firstName">First Name</label><br>
-          <%= f.text_field :f_name, :id=>"firstName", :value => @user.profile.first_name,:required => true ,:disabled => true %><br>
-          <label for="lastName">Last Name</label><br>
-          <%= f.text_field :l_name, :id=>"lastName", :value => @user.profile.last_name,:required => true ,:disabled => true %><br>
-          <label for="username">Username</label><br>
-          <%= f.text_field :username, :id=>"username", :value => @user.credential.username,:required => true ,:disabled => true %><br>
-          <% end %>
+        <h2 class="section-heading">Balance</h2>
+        <p>
+          Balance: $<%= @current_user.balance %>
+        </p>
+        <div class="Add balance">
+          <script src="https://checkout.stripe.com/checkout.js"></script>
+
+          <%[5,10,20,50].map{|x| x*100}.each do |amount|%>
+
+          <button id="btn-payment-<%= amount %>">Add
+            <%= amount / 100 %></button>
+            <% end %>
         </div>
       </div>
     </div>
