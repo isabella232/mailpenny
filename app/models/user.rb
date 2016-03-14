@@ -13,4 +13,7 @@ class User < ActiveRecord::Base
   has_many :to, class_name: 'Ledger', foreign_key: :to_id
 
   validates_uniqueness_of :email
+  def balance
+    wallet_amount / 100
+  end
 end

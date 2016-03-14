@@ -1,71 +1,7 @@
 #   This controller handles charging payments, logging them, and adding them
 # to the user's account
 class PaymentHandlerController < ApplicationController
-before_action :set_user_if_in_session
-
-  def billing
-    #code
-  end
-
-  def deposit(args)
-    args.slice!(:to,
-                :amount,
-                :currency,
-                :ref,
-                :meta
-               )
-    args[:deposit] = true
-    add_ledger_entry args
-  end
-
-  def withdraw(args)
-    args.slice!(:from,
-                :amount,
-                :currency,
-                :ref,
-                :meta
-               )
-    args[:withdrawal] = true
-    add_ledger_entry args
-  end
-
-  def make_payment(args)
-    args.slice!(:from,
-                :to,
-                :amount,
-                :currency,
-                :ref,
-                :meta
-               )
-    args[:payment] = true
-    add_ledger_entry args
-  end
-
-  def add_ledger_entry(args)
-    entry = args.slice(
-      :amount,
-      :currency,
-      :payment,
-      :deposit,
-      :withdrawal,
-      :ref,
-      :meta
-    )
-
-    from = args[:from]
-    to = args[:to]
-    amount = args[:amount]
-
-    entry[:currency] = 'USD' if args[:currency].nil?
-    entry[:from_id] = from.id unless from.nil?
-    entry[:to_id] = to.id unless to.nil?
-
-    ActiveRecord::Base.transaction do
-      Ledger.create(entry)
-      to.increment!('wallet_amount', amount) unless to.nil?
-      from.decrement!('wallet_amount', amount) unless from.nil?
-    end
-  end
+  before_action :set_user_if_in_session
 
   def charge_primary_card
     amount = params[:chargeAmount]
