@@ -362,12 +362,43 @@ class PaywallController < ApplicationController
         profile.save
         @done = true
       end
-
     end
     respond_to do |format|
       format.js {render template: 'paywall/change_prof'}
     end
-
-
+  end
+  def add_email
+    email = params['user']['email'];
+    user = User.find(session[:user_id].to_i);
+    em = UserEmail.new
+    em.address = email;
+    user.user_emails << em;
+    em.save
+    user.save;
+    @ema = em;
+    respond_to do |format|
+      format.js { render template: 'paywall/add_emails'}
+      format.html {redirect_to action: 'settings'}
+    end
+  end
+  def delete_emails
+    UserEmail.destroy(params['id'].to_i)
+    respond_to do |format|
+      format.js { render template: ''}
+      format.html {redirect_to action: "settings"}
+    end
+  end
+  def add_phones
+      phone  = Phone.new
+      phone.number = params['user']['phone'];
+      phone.save;
+      user = User.find(session[:user_id].to_i)
+      user.phones << phone
+      user.save
+      redirect_to action: 'settings'
+  end
+  def delete_phones
+    Phone.destroy(params['id'].to_i)
+    redirect_to action: 'settings'
   end
 end

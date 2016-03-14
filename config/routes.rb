@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   #get 'emails/welcome'        => 'emails#welcome'
   #get 'emails/create_address' => 'emails#create_address'
   #post 'emails/payment_recieved' => 'emails#payment_recieved'
+  get 'billing' => 'paywall#billing'
+
   post 'recieve' => 'paywall#recieve'
   get 'register' => 'paywall#register'
   post 'register' => 'paywall#register'
@@ -40,7 +42,10 @@ Rails.application.routes.draw do
   get ':username' => 'paywall#profile'
   post 'change_pass' => 'paywall#change_pass'
   post 'change_prof' => 'paywall#change_prof'
-
+  post 'add_email' => 'paywall#add_email'
+  post 'delete_emails' => 'paywall#delete_emails'
+  post 'add_phones' => 'paywall#add_phones'
+  post 'delete_phones' => 'paywall#delete_phones'
   # billing
   get 'billing' => 'payments_handler#billing', as: :billing
   # add a card

@@ -1,0 +1,1 @@
+$('#tble_emails').append('<tr><%= form_tag "delete_emails", :remote => true do |f| %> <td><%=e.address%></td> <td>No </td><td><%=hidden_field_tag "id",:value => e.id %><%=  submit_tag "delete" %> </td> <%end%> </tr>');
