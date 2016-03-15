@@ -188,7 +188,7 @@
         <h4 class="modal-title" id="emailModalLabel">Write an Email</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag '/compose-email', method: :post, class: "form" do %>
+        <%= form_tag mail_messenger_path, method: :post, class: "form" do %>
           <%= text_field_tag(
               :subject,
               params[:subject],

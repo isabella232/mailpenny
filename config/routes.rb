@@ -52,4 +52,8 @@ Rails.application.routes.draw do
 
   # charges
   resources :charges
+
+  # messenger -- because the control sends messages, get it? Hahahahaha
+  post '/messenger/mail' => 'messenger/mail', as: :mail_messenger
+  post '/messenger/text' => 'messenger/text', as: :text_messenger
 end
