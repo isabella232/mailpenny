@@ -11,14 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316151832) do
+ActiveRecord::Schema.define(version: 20160316153515) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
     t.decimal  "balance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean  "meta"
+    t.string   "meta_name"
   end
+
+  add_index "accounts", ["meta_name"], name: "index_accounts_on_meta_name", unique: true
 
   create_table "ccards", force: :cascade do |t|
     t.integer  "address_zip"
