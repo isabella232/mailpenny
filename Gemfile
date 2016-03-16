@@ -39,6 +39,8 @@ gem 'stripe', '~> 1.36', '>= 1.36.1'
 gem 'json', '~> 1.8', '>= 1.8.3'
 # QR code generator
 gem 'rqrcode_png', '~> 0.1.5'
+# Make authentication simple with devise!
+gem 'devise', '~> 3.5', '>= 3.5.6'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.11'
