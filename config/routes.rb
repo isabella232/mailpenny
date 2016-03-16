@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :humen
   get 'charges/new'
 
   get 'charges/create'
