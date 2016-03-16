@@ -68,30 +68,4 @@ class ChargesController < ApplicationController
     args[:payment] = true
     add_ledger_entry args
   end
-
-  def add_ledger_entry(args)
-    entry = args.slice(
-      :amount,
-      :currency,
-      :payment,
-      :deposit,
-      :withdrawal,
-      :ref,
-      :meta,
-      :stripe_charge_id
-    )
-
-    from = args[:from]
-    to = args[:to]
-
-    entry[:currency] = 'USD' if args[:currency].nil?
-    entry[:from_id] = from.id unless from.nil?
-    entry[:to_id] = to.id unless to.nil?
-
-    ActiveRecord::Base.transaction do
-      Ledger.create(entry)
-      to.increment!('wallet_amount', entry[:amount]) unless to.nil?
-      from.decrement!('wallet_amount', entry[:amount]) unless from.nil?
-    end
-  end
 end
