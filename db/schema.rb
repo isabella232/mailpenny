@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160313135138) do
     t.string   "to"
     t.string   "from"
     t.string   "subject"
-    t.text     "body",       limit: 4294967295
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "user_id"
