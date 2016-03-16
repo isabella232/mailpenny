@@ -15,10 +15,6 @@ class Human < ActiveRecord::Base
     fee
   end
 
-  def blabla
-    email
-  end
-
   def deposit(args)
     # add new money from outside
     args.slice!(:amount,
