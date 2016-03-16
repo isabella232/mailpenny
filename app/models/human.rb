@@ -77,8 +77,8 @@ class Human < ActiveRecord::Base
     from = account if entry[:withdrawal] || entry[:deposit]
     # take it to from the deposit account if it is a deposit
     from = Account.find_by meta_name: 'deposit' if entry[:deposit]
-    #  take it from my the person unless this is a deposit or withdrawal
-    from = args[:from].account unless entry[:deposit]
+    #  take it from my the person if this is a payment
+    from = args[:from].account if entry[:payment]
     # make sure the account is not nil
     fail if from.nil?
 
@@ -86,10 +86,18 @@ class Human < ActiveRecord::Base
     to = account if entry[:deposit]
     # send it to the withdrawal account if it is a withdrawal
     to = Account.find_by meta_name: 'withdrawal' if entry[:withdrawal]
-    # send to the person unless this is a withdrawal or deposit
-    to = args[:to].account unless entry[:withdrawal] || entry[:deposit]
+    # send to the person if this is a payment
+    to = args[:to].account if entry[:payment]
     # make sure it's going to someone
     fail if to.nil?
+
+    if entry[:payment]
+      fee_entry = entry
+      fee_amount = to.human.fee * BigDecimal(entry[:amount])
+      fee_entry[:amount] = fee_amount
+      fee_entry[:from] = to
+      fee_entry[:to] = Account.find_by(meta_name: 'revenue')
+    end
 
     entry[:currency] = 'usd' if args[:currency].nil?
     entry[:from_id] = from.id unless from.nil?
@@ -99,6 +107,12 @@ class Human < ActiveRecord::Base
       Ledger.create(entry)
       to.increment!('balance', entry[:amount])
       from.decrement!('balance', entry[:amount])
+
+      if entry[:payment]
+        Ledger.create(fee_entry)
+        fee_entry[:from].decrement!('balance', fee_entry[:amount])
+        fee_entry[:to].increment!('balance', fee_entry[:amount])
+      end
     end
   end
 end
