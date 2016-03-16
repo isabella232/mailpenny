@@ -86,7 +86,7 @@
 
 </script>
 
-<%[5,10,20,50].map{|x| x * 100}.each do |amount|%>
+<%[5,10,20,50].map{|x| x * 100}.each unless @current_user.nil? do |amount|%>
 <script>
 var handler<%= amount %> = StripeCheckout.configure({
   key: '<%= Rails.configuration.stripe[:publishable_key] %>',

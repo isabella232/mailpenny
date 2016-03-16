@@ -47,3 +47,23 @@
 .donate-statement {
   padding-top: 5%;
 }
+
+/* unvisited link */
+.no-link-decoration a:link {
+    color: gray;
+}
+
+/* visited link */
+.no-link-decoration a:visited {
+    color: gray;
+}
+
+/* mouse over link */
+.no-link-decoration a:hover {
+    color: gray;
+}
+
+/* selected link */
+.no-link-decoration a:active {
+    color: gray;
+}
