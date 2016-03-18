@@ -1,3 +1,3 @@
 class SocialMedium < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :human
 end

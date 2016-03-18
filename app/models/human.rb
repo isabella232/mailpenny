@@ -9,9 +9,15 @@ class Human < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates_exclusion_of :username, in: RestricedUsernamesIdentifier.new.initial_path_segments,
                                     message: 'That username is unavailable'
-
   has_one :account
   has_one :profile
+  has_many :ccards
+  has_many :emails
+  has_many :phones
+  has_one :reward
+  has_one :social_medium
+  has_many :whitelists
+  has_many :user_emails
   before_create :build_default_profile
   before_create :build_default_account
   # The money movement

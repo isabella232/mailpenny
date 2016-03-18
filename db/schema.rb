@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318180940) do
+ActiveRecord::Schema.define(version: 20160318185615) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "human_id"
@@ -42,15 +42,6 @@ ActiveRecord::Schema.define(version: 20160318180940) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "credentials", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "username"
-    t.string   "password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "activated"
-  end
-
   create_table "emails", force: :cascade do |t|
     t.string   "to"
     t.string   "from"
@@ -58,8 +49,8 @@ ActiveRecord::Schema.define(version: 20160318180940) do
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user_id"
     t.string   "header"
+    t.integer  "human_id"
   end
 
   create_table "humen", force: :cascade do |t|
@@ -112,9 +103,9 @@ ActiveRecord::Schema.define(version: 20160318180940) do
   create_table "phones", force: :cascade do |t|
     t.string   "number"
     t.string   "country"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "human_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -134,49 +125,25 @@ ActiveRecord::Schema.define(version: 20160318180940) do
     t.float    "sms"
     t.float    "call"
     t.float    "email"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "human_id"
   end
 
   create_table "social_media", force: :cascade do |t|
     t.string   "facebook"
     t.string   "twitter"
     t.string   "linkedin"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "transactions", force: :cascade do |t|
-    t.float    "amount"
-    t.string   "to"
-    t.string   "btc_address"
-    t.integer  "email_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status"
-    t.string   "from"
+    t.integer  "human_id"
   end
 
   create_table "user_emails", force: :cascade do |t|
     t.string   "address"
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string   "email"
-    t.string   "coinbase_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "BTC_address"
-    t.float    "wallet_amount"
-    t.string   "phone"
-    t.integer  "verified"
-    t.integer  "verification_code"
+    t.integer  "human_id"
   end
 
   create_table "views", force: :cascade do |t|
@@ -199,9 +166,9 @@ ActiveRecord::Schema.define(version: 20160318180940) do
 
   create_table "whitelists", force: :cascade do |t|
     t.string   "email"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "human_id"
   end
 
 end
