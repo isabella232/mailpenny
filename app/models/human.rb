@@ -11,6 +11,8 @@ class Human < ActiveRecord::Base
                                     message: 'That username is unavailable'
 
   has_one :account
+  has_one :profile
+  before_create :build_default_profile
   before_create :build_default_account
   # The money movement
   def fee
@@ -64,6 +66,12 @@ class Human < ActiveRecord::Base
     build_account
     true
   end
+
+  def build_default_profile
+    build_profile
+    true
+  end
+
 
   def add_ledger_entry(args)
     entry = args.slice(
