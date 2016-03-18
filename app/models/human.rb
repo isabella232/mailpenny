@@ -1,11 +1,14 @@
 # The humans on the system
 class Human < ActiveRecord::Base
+  require 'rails_routes_recognizer'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable,
          :confirmable
   validates :username, presence: true, uniqueness: true
+  validates_exclusion_of :username, in: RouteRecognizer.new.initial_path_segments,
+                                    message: 'That username is unavailable'
 
   has_one :account
   before_create :build_default_account
