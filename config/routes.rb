@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :humen, skip: [:sessions]
+
+  ## devise controllers for humen
+  devise_for :human, controllers: {
+    confirmations: 'human/confirmations',
+    passwords: 'human/passwords',
+    registrations: 'human/registrations',
+    sessions: 'human/sessions',
+    unlocks: 'human/unlocks',
+    # commenting the below because omniauth gem isn't installed
+    # omniauth_callbacks: 'human/omniauth_callbacks'
+  }, skip: [:sessions]
+  ## custom routes for humen
   as :human do
-    get 'login' => 'devise/sessions#new', :as => :new_human_session
-    post 'login' => 'devise/sessions#create', :as => :human_session
-    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_human_session
-    get 'register' => 'devise/registrations#new'
+    get 'login' => 'human/sessions#new', :as => :new_human_session
+    post 'login' => 'human/sessions#create', :as => :human_session
+    delete 'logout' => 'human/sessions#destroy', :as => :destroy_human_session
+    get 'register' => 'human/registrations#new'
   end
 
 
