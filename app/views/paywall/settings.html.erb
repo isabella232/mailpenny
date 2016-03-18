@@ -4,7 +4,7 @@
       <div class="settings-notice">
         <p>
           Feel free to publish:
-          <strong><%=@user.credential.username%>@themailman.io</strong>
+          <strong><%=@user.username%>@themailman.io</strong>
           as your contact email everywhere!
         </p>
       </div>
@@ -15,7 +15,7 @@
       <div class="settings-profile">
         <h2 class="section-heading">Balance</h2>
         <p>
-          Balance: $<%= @current_user.balance %>
+          Balance: $<%= @user.account.balance %>
         </p>
         <div class="Add balance">
           <script src="https://checkout.stripe.com/checkout.js"></script>

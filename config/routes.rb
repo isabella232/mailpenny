@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   get 'charges/create'
 
   # static pages
-  root 'paywall#login'
+  root :to => redirect('/login')
   #get 'about'   => 'static_pages#about'
   #get 'contact' => 'static_pages#contact'
 
@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   # post 'register' => 'paywall#register'
   post 'payment_recieved' => 'paywall#payment_recieved'
   #get 'paywall/home' => 'paywall#home'
-  get 'settings' => 'paywall#settings'
+  get 'settings' => 'paywall#settings', as: :settings
   get 'transactions' => 'paywall#transactions'
   get 'qr' => 'paywall#qr'
   get 'send_complex_message' => 'paywall#send_complex_message'

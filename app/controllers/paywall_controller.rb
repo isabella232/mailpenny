@@ -1,5 +1,4 @@
 class PaywallController < ApplicationController
-  before_action :set_user_if_in_session
 
   def profile
     @current = false;
@@ -71,14 +70,9 @@ class PaywallController < ApplicationController
     end
   end
   def settings
-    @user= User.new
-    id = session[:user_id].to_i;
-    @id=id
-    if(id===0)
-      redirect_to :action => 'login'
-    else
-      @user = User.find(id);
-      @mail = @user.email
+    if human_signed_in?
+      @user = current_human
+      @mail = current_human.email
     end
   end
   def logout

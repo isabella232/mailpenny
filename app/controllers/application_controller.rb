@@ -4,8 +4,4 @@ class ApplicationController < ActionController::Base
   def render_404
     raise ActionController::RoutingError.new('Not Found')
   end
-  def set_user_if_in_session
-    id = session[:user_id]
-    @current_user = User.find_by(id: id)
-  end
 end
