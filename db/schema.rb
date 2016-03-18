@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318185615) do
+ActiveRecord::Schema.define(version: 20160318191843) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "human_id"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20160318185615) do
     t.boolean  "charitable",             default: false
     t.integer  "account_id"
     t.integer  "profile_id"
+    t.integer  "reward_id"
+    t.integer  "social_medium_id"
   end
 
   add_index "humen", ["confirmation_token"], name: "index_humen_on_confirmation_token", unique: true
