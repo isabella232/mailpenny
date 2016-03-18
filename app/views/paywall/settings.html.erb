@@ -70,7 +70,7 @@
                 <label for="reward">Reward Amount</label><br>
                 <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.sms, :required=>true, :step=>'0.0001' ,:disabled => true %><br>
                 <label for="phone">Phone Numbers</label><br>
-                <%= f.text_field :phone, :id=>"phone" , :value => @user.phone.to_s, :required=>true %><br>
+                
                 <%= f.submit "Add", class: 'btn btn-default'%>
                 <% end %>
                 <table class="table">
