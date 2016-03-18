@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :humen
+  devise_for :humen, skip: [:sessions]
+  as :human do
+    get 'login' => 'devise/sessions#new', :as => :new_human_session
+    post 'login' => 'devise/sessions#create', :as => :human_session
+    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_human_session
+    get 'register' => 'devise/registrations#new'
+  end
+
+
   get 'charges/new'
 
   get 'charges/create'
@@ -17,12 +25,9 @@ Rails.application.routes.draw do
   #post 'emails/payment_recieved' => 'emails#payment_recieved'
 
   post 'recieve' => 'paywall#recieve'
-  get 'register' => 'paywall#register'
-  post 'register' => 'paywall#register'
+  # get 'register' => 'human#register'
+  # post 'register' => 'paywall#register'
   post 'payment_recieved' => 'paywall#payment_recieved'
-  get 'login' => 'paywall#login'
-  post 'login' => 'paywall#login'
-  get 'logout' => 'paywall#logout'
   #get 'paywall/home' => 'paywall#home'
   get 'settings' => 'paywall#settings'
   get 'transactions' => 'paywall#transactions'
@@ -57,4 +62,13 @@ Rails.application.routes.draw do
   # messenger -- because the control sends messages, get it? Hahahahaha
   post '/messenger/mail' => 'messenger/mail', as: :mail_messenger
   post '/messenger/text' => 'messenger/text', as: :text_messenger
+
+  ## The Humen routes by Devise
+  # devise_for :humen, skip: [:sessions]
+  # as :humen do
+  #   # sessions
+  #   get '/login(.:format)' => 'devise/sessions#new', as: :new_human_session
+  #   post '/login(.:format)' => 'devise/sessions#create', as: :human_session
+  #   delete 'logout' => 'devise/sessions#destroy', as: :destroy_human_session
+  # end
 end

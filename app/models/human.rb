@@ -5,6 +5,7 @@ class Human < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable,
          :confirmable
+  validates :username, presence: true, uniqueness: true
 
   has_one :account
   before_create :build_default_account
