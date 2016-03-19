@@ -5,7 +5,7 @@
         <div class="user-picture" style="background: url('<%= gravatar_for @user %>')"></div>
         <div class="user-name">
           <p>
-            <%=@user.profile.first_name+" "+@user.profile.last_name%>
+            <%="#{@user.profile.first_name} #{@user.profile.last_name}"%>
           </p>
         </div>
         <div class="user-biography">
@@ -35,7 +35,7 @@
             </div>
             <%end%>
             <h2>
-              themailman.io/<%=@cred.username%>
+              themailman.io/<%=@user.username%>
             </h2>
           </div>
         </div>
@@ -210,7 +210,7 @@
           <p>
             Whoops! You're not logged in.
             <br>
-            <%= link_to "Login", login_path, class: "btn btn-primary" %>
+            <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
             <%= link_to "Register", register_path, class: "btn btn-primary" %>
           </p>
           <% end %>
@@ -248,7 +248,7 @@
         <p>
           Whoops! You're not logged in.
           <br>
-          <%= link_to "Login", login_path, class: "btn btn-primary" %>
+          <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
           <%= link_to "Register", register_path, class: "btn btn-primary" %>
         </p>
         <% end %>

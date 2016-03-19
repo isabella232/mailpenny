@@ -1,15 +1,9 @@
 class PaywallController < ApplicationController
 
   def profile
-    @current = false;
-    id = params[:username]
-    @cred = Credential.find_by_username(id);
-    render_404 if @cred.nil?
-    @user = @cred.user
-    if(@user.id === session[:user_id].to_i)
-      @current = true;
-    end
-    redirect_to action: :register if @user.nil?
+    username = params[:username]
+    @user = Human.find_by(username: username)
+    render_404 unless @user
   end
 
   def login

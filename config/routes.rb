@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get 'login' => 'human/sessions#new', :as => :new_human_session
     post 'login' => 'human/sessions#create', :as => :human_session
     delete 'logout' => 'human/sessions#destroy', :as => :destroy_human_session
-    get 'register' => 'human/registrations#new'
+    get 'register' => 'human/registrations#new', as: :register
   end
 
 
