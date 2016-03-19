@@ -3,15 +3,14 @@ class PaywallController < ApplicationController
   def profile
     @current = false;
     id = params[:username]
-    @cred = Credential.find_by_username(id);
-    render_404 if @cred.nil?
-    @user = @cred.user
-    if(@user.id === session[:user_id].to_i)
+    @user  = current_human
+    @user1  = Human.find_by_username(id)
+
+    if(@user1 === @user)
       @current = true;
     end
     redirect_to action: :register if @user.nil?
   end
-
   def login
     if(params.has_key?'email')
       user= User.find_by_email(params['email'])
@@ -26,7 +25,6 @@ class PaywallController < ApplicationController
       end
     end
   end
-
   def home
     id = session[:user_id].to_i;
     if(id===0)
@@ -396,23 +394,24 @@ class PaywallController < ApplicationController
     redirect_to action: 'settings'
   end
   def send_verify_code
-    a=SecureRandom.random(1000..5000)
+    random = Random.new
+    a=random.rand(1000..5000)
     @user = current_human
-    @user.v_code = a;
+    @user.v_code = a.to_i;
     @user.verified = false;
     @user.save
     phone = @user.phones.first;
-    send_sms(phone.number,"This is Your Mailman Verification code :"+@a);
+    send_sms(phone.number,"This is Your Mailman Verification code :"+a.to_s);
+    redirect_to action: 'verify'
   end
   def verify
-    if (request.post?) 
       if(params.include?"code")
+        user = current_human;
         code = params[:code].to_i;
-        phone = @user.phones.first;
-        if(code.eql?(phone.number.to_i))
-          @user.verified = true;
+        if(code.eql?(user.v_code.to_i))
+          user.verified = true;
+          user.save;
         end
       end
-    end
   end
 end
