@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     delete 'logout' => 'human/sessions#destroy', :as => :destroy_human_session
     get 'register' => 'human/registrations#new', as: :register
   end
-  
+  get 'send_verify_code' => 'paywall#send_verify_code'
   get 'verify'=>'paywall#verify'
   post 'verify'=>'paywall#verify'
   get 'charges/new'

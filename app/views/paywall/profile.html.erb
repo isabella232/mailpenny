@@ -5,7 +5,11 @@
         <div class="user-picture" style="background: url('<%= gravatar_for @user %>')"></div>
         <div class="user-name">
           <p>
+<<<<<<< HEAD
             <%="#{@user.profile.first_name} #{@user.profile.last_name}"%>
+=======
+            <%=@user.profile.first_name.to_s+" "+@user.profile.last_name.to_s%>
+>>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
           </p>
         </div>
         <div class="user-biography">
@@ -191,8 +195,8 @@
         <h4 class="modal-title" id="emailModalLabel">Write an Email</h4>
       </div>
       <div class="mdal-body">
-        <% if @current_user %>
-        <%= form_tag mail_messenger_path, method: :post, class: "form" do %>
+        <% if @user %>
+        <%= form_tag mail_messenger_path, method: :post,remote: 'true', class: "form" do %>
         <%= text_field_tag(
               :subject,
               params[:subject],
@@ -210,8 +214,13 @@
           <p>
             Whoops! You're not logged in.
             <br>
+<<<<<<< HEAD
             <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
             <%= link_to "Register", register_path, class: "btn btn-primary" %>
+=======
+            <%= link_to "Login", '/login', class: "btn btn-primary" %>
+            <%= link_to "Register", '/register', class: "btn btn-primary" %>
+>>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
           </p>
           <% end %>
       </div>
@@ -235,7 +244,7 @@
         <h4 class="modal-title" id="textModalLabel">Write a Text</h4>
       </div>
       <div class="modal-body">
-        <% if @current_user %>
+        <% if @user %>
         <%= form_tag text_messenger_path, method: :post, class: "form" do %>
         <%= text_area_tag(
               :message,
@@ -248,8 +257,13 @@
         <p>
           Whoops! You're not logged in.
           <br>
+<<<<<<< HEAD
           <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
           <%= link_to "Register", register_path, class: "btn btn-primary" %>
+=======
+          <%= link_to "Login", '/login', class: "btn btn-primary" %>
+          <%= link_to "Register", '/register', class: "btn btn-primary" %>
+>>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
         </p>
         <% end %>
       </div>
