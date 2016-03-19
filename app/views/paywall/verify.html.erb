@@ -1,0 +1,7 @@
+
+<div style="margin-left:40%;margin-top:15%;">
+	<%= form_tag "/verify" , method: :post,remote: true do%>
+		<%=text_field_tag "code"%><br><br>
+		<%=submit_tag "Verify" %>
+	<%end%>
+</div>

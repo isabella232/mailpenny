@@ -17,10 +17,10 @@ Rails.application.routes.draw do
     delete 'logout' => 'human/sessions#destroy', :as => :destroy_human_session
     get 'register' => 'human/registrations#new'
   end
-
-
+  
+  get 'verify'=>'paywall#verify'
+  post 'verify'=>'paywall#verify'
   get 'charges/new'
-
   get 'charges/create'
 
   # static pages

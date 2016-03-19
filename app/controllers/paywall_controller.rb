@@ -1,5 +1,5 @@
 class PaywallController < ApplicationController
-
+ require "securerandom"
   def profile
     @current = false;
     id = params[:username]
@@ -394,5 +394,25 @@ class PaywallController < ApplicationController
   def delete_phones
     Phone.destroy(params['id'].to_i)
     redirect_to action: 'settings'
+  end
+  def send_verify_code
+    a=SecureRandom.random(1000..5000)
+    @user = current_human
+    @user.v_code = a;
+    @user.verified = false;
+    @user.save
+    phone = @user.phones.first;
+    send_sms(phone.number,"This is Your Mailman Verification code :"+@a);
+  end
+  def verify
+    if (request.post?) 
+      if(params.include?"code")
+        code = params[:code].to_i;
+        phone = @user.phones.first;
+        if(code.eql?(phone.number.to_i))
+          @user.verified = true;
+        end
+      end
+    end
   end
 end
