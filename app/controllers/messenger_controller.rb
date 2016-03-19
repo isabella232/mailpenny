@@ -1,8 +1,13 @@
 class MessengerController < ApplicationController
-  def mail
-    #code
-  end
-  def text
-    #code
-  end
+	include 'messenger.rb'
+
+	def mail
+		if(params.include?'subject' && params.incluse?'message')
+			user = current_human
+			email = user.email;
+		end
+	end
+	def sms
+
+	end
 end
