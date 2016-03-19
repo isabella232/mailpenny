@@ -5,11 +5,7 @@
         <div class="user-picture" style="background: url('<%= gravatar_for @user %>')"></div>
         <div class="user-name">
           <p>
-<<<<<<< HEAD
-            <%="#{@user.profile.first_name} #{@user.profile.last_name}"%>
-=======
             <%=@user.profile.first_name.to_s+" "+@user.profile.last_name.to_s%>
->>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
           </p>
         </div>
         <div class="user-biography">
