@@ -20,7 +20,6 @@ class Human < ActiveRecord::Base
   has_many :user_emails
   before_create :build_default_profile
   before_create :build_default_account
-  before_create :build_default_account
   before_create :build_default_profile
   before_create :build_default_reward
   before_create :build_default_social_medium
