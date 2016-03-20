@@ -7,4 +7,7 @@ module PaywallHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     gravatar_url
   end
+  def profile_link(user)
+    "https://themailman.io/#{user.username}"
+  end
 end

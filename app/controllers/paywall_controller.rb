@@ -3,8 +3,8 @@ class PaywallController < ApplicationController
   def profile
     @current = false;
     id = params[:username]
-    @user  = current_human
-    @user1  = Human.find_by_username(id)
+    @user1  = current_human
+    @user  = Human.find_by_username(id)
 
     if(@user1 === @user)
       @current = true;
