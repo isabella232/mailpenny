@@ -190,7 +190,7 @@
         <p id="notif2"></p>
       </div>
       <div class="mdal-body">
-        <% if @user %>
+        <% if @user1 %>
         <%= form_tag '/send_email_profile', method: :post,remote: 'true', class: "form" do %>
         <%= text_field_tag(
               :subject,
@@ -213,8 +213,6 @@
             <br>
             <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
             <%= link_to "Register", register_path, class: "btn btn-primary" %>
-            <%= link_to "Login", '/login', class: "btn btn-primary" %>
-            <%= link_to "Register", '/register', class: "btn btn-primary" %>
           </p>
           <% end %>
       </div>
@@ -238,7 +236,8 @@
         <p id="notif3"></p>
       </div>
       <div class="modal-body">
-        <% if @user %>
+
+        <% if @user1 %>
         <%= form_tag '/send_sms_profile', method: :post,remote: 'true' , class: "form" do %>
         <%= text_area_tag(
               :message,
@@ -255,8 +254,6 @@
           <br>
           <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
           <%= link_to "Register", register_path, class: "btn btn-primary" %>
-          <%= link_to "Login", '/login', class: "btn btn-primary" %>
-          <%= link_to "Register", '/register', class: "btn btn-primary" %>
         </p>
         <% end %>
       </div>
