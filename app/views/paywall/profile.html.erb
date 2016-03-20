@@ -151,7 +151,7 @@
           <%= form_tag("/change_pass", method: 'post', remote: true, style:'margin-left:10%;' ) do %>
           <br>
           <div>
-            <label>Password:</label>
+            <label>Old Password:</label>
             <input required="true" id="old_password" class="form-control" type="password" style="width: 150px;display:inline;border-radius: 3px;" name="old_password">
           </div>
           <br>
@@ -187,6 +187,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="emailModalLabel">Write an Email</h4>
+        <p id="notif2"></p>
       </div>
       <div class="mdal-body">
         <% if @user %>
@@ -203,26 +204,24 @@
               placeholder: "Message",
               class: "form-control"
           ) %>
-        <%= hidden_field_tag :username,value: @user1.username %>
+        <%= hidden_field_tag :username,@user.username %>
+        <%=submit_tag "Send" , class:"btn btn-default" %>
         <% end %>
         <% else %>
           <p>
             Whoops! You're not logged in.
             <br>
-<<<<<<< HEAD
             <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
             <%= link_to "Register", register_path, class: "btn btn-primary" %>
-=======
             <%= link_to "Login", '/login', class: "btn btn-primary" %>
             <%= link_to "Register", '/register', class: "btn btn-primary" %>
->>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
           </p>
           <% end %>
       </div>
-      <div class="modal-footer">
+    <!--  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary">Send</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
@@ -236,35 +235,35 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <h4 class="modal-title" id="textModalLabel">Write a Text</h4>
+        <p id="notif3"></p>
       </div>
       <div class="modal-body">
         <% if @user %>
-        <%= form_tag text_messenger_path, method: :post, class: "form" do %>
+        <%= form_tag '/send_sms_profile', method: :post,remote: 'true' , class: "form" do %>
         <%= text_area_tag(
               :message,
               params[:message],
               placeholder: "Message",
               class: "form-control"
           ) %>
+        <%= hidden_field_tag :username,@user.username %>
+        <%=submit_tag "Send" , class:'btn btn-default' %>
         <% end %>
       <% else %>
         <p>
           Whoops! You're not logged in.
           <br>
-<<<<<<< HEAD
           <%= link_to "Login", new_human_session_path, class: "btn btn-primary" %>
           <%= link_to "Register", register_path, class: "btn btn-primary" %>
-=======
           <%= link_to "Login", '/login', class: "btn btn-primary" %>
           <%= link_to "Register", '/register', class: "btn btn-primary" %>
->>>>>>> 29fb93808bd9d63aae119737ee368fd5f3c0682a
         </p>
         <% end %>
       </div>
-      <div class="modal-footer">
+     <!-- <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary">Send</button>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

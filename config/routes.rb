@@ -62,6 +62,8 @@ Rails.application.routes.draw do
   post 'delete_emails' => 'paywall#delete_emails'
   post 'add_phones' => 'paywall#add_phones'
   post 'delete_phones' => 'paywall#delete_phones'
+  post 'send_email_profile' => 'paywall#send_email_profile'
+  post 'send_sms_profile' => 'paywall#send_sms_profile'
   # billing
   get 'billing' => 'payments_handler#billing', as: :billing
   # add a card

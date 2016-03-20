@@ -1,5 +1,6 @@
 class PaywallController < ApplicationController
  require "securerandom"
+
   def profile
     @current = false;
     id = params[:username]
@@ -231,7 +232,7 @@ class PaywallController < ApplicationController
     return address
   end
   def send_email(to,text,subject)
-    mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
+    mg_client = Mailgun::Client.new 'key-69d530fcc92a526320f504e0b8b963a7'
     message_params = { from: 'mailman <mailman@themailman.io>',
                        to: to,
                        subject: subject,
@@ -240,7 +241,7 @@ class PaywallController < ApplicationController
     mg_client.send_message 'themailman.io', message_params
   end
   def send_email_from_user(to,from,text,subject)
-    mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
+    mg_client = Mailgun::Client.new 'key-69d530fcc92a526320f504e0b8b963a7'
     message_params = { from: from,
                        to: to,
                        subject: subject,
@@ -390,9 +391,9 @@ class PaywallController < ApplicationController
   end
   def add_phones
       phone  = Phone.new
-      phone.number = params['user']['phone'];
+      phone.number = params['phone'];
       phone.save;
-      user = User.find(session[:user_id].to_i)
+      user = current_human;
       user.phones << phone
       user.save
       redirect_to action: 'settings'
@@ -422,15 +423,32 @@ class PaywallController < ApplicationController
         end
       end
   end
-end
-def send_email_profile
-  if(params.include?"body")
+  def send_sms_profile
+    @done = false;      
     to_send = params['username']
-    user_to_send = Human.find_by_username(to_send)
-    rew = user_to_send.reward.email
-    rew = rew.to_d;
-    if(rew == current_human.account.balance)
-        send_email_from_user(to_send+'@themailman.io',params['message'],params['subject'])
+      user_to_send = Human.find_by_username(to_send)
+      rew = user_to_send.reward.sms
+      rew = rew.to_d;
+      if(rew <= current_human.account.balance)
+          @done = true;
+            send_sms(user_to_send.phones.first.number,"This message is from "+current_human.username+"\n"+params['message']);
+      end
+    respond_to do |format|
+        format.js   { render :template => 'paywall/sms_verify.js.erb' }
+    end
+  end
+  def send_email_profile
+    @done = false;      
+    to_send = params['username']
+      user_to_send = Human.find_by_username(to_send)
+      rew = user_to_send.reward.email
+      rew = rew.to_d;
+      if(rew <= current_human.account.balance)
+          @done = true;
+          send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
+      end
+    respond_to do |format|
+        format.js   { render :template => 'paywall/email_verify.js.erb' }
     end
   end
 end
