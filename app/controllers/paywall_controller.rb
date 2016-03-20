@@ -239,6 +239,15 @@ class PaywallController < ApplicationController
     # Send your message through the client
     mg_client.send_message 'themailman.io', message_params
   end
+  def send_email_from_user(to,from,text,subject)
+    mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
+    message_params = { from: from,
+                       to: to,
+                       subject: subject,
+                       text:  text }
+    # Send your message through the client
+    mg_client.send_message 'themailman.io', message_params
+  end
   def send_email_att(from,to,text,subject,address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
     message_params = { from: from,
@@ -329,11 +338,10 @@ class PaywallController < ApplicationController
   end
   def change_prof
     pass1 = params['password'];
-    user = User.find(session[:user_id].to_i)
+    user = current_human
     @done = false;
     if(user.present?)
-      cred = user.credential;
-      if(cred.password.to_s === pass1.to_s)
+      if(user.valid_password?(pass1.to_s))
         fname  = params['fname']
         lname  = params['lname']
         loc = params['loc']
@@ -413,5 +421,16 @@ class PaywallController < ApplicationController
           user.save;
         end
       end
+  end
+end
+def send_email_profile
+  if(params.include?"body")
+    to_send = params['username']
+    user_to_send = Human.find_by_username(to_send)
+    rew = user_to_send.reward.email
+    rew = rew.to_d;
+    if(rew == current_human.account.balance)
+        send_email_from_user(to_send+'@themailman.io',params['message'],params['subject'])
+    end
   end
 end

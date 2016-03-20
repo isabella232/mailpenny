@@ -1,6 +1,7 @@
 class MessengerController < ApplicationController
-	def mail
-		
+
+  def mail
+
 	end
 	def sms
 

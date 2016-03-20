@@ -190,7 +190,7 @@
       </div>
       <div class="mdal-body">
         <% if @user %>
-        <%= form_tag mail_messenger_path, method: :post,remote: 'true', class: "form" do %>
+        <%= form_tag '/send_email_profile', method: :post,remote: 'true', class: "form" do %>
         <%= text_field_tag(
               :subject,
               params[:subject],
@@ -203,6 +203,7 @@
               placeholder: "Message",
               class: "form-control"
           ) %>
+        <%= hidden_field_tag :username,value: @user1.username %>
         <% end %>
         <% else %>
           <p>

@@ -1,4 +1,4 @@
-module mail
+module MESSENGER
   def send_mail(from,to,subject,body)
   	g_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
     message_params = { from: from,
