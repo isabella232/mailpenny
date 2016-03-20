@@ -189,7 +189,7 @@
         <h4 class="modal-title" id="emailModalLabel">Write an Email</h4>
       </div>
       <div class="mdal-body">
-        <% if @user %>
+        <% if @user1 %>
         <%= form_tag '/send_email_profile', method: :post,remote: 'true', class: "form" do %>
         <%= text_field_tag(
               :subject,
@@ -233,7 +233,7 @@
         <h4 class="modal-title" id="textModalLabel">Write a Text</h4>
       </div>
       <div class="modal-body">
-        <% if @user %>
+        <% if @user1 %>
         <%= form_tag text_messenger_path, method: :post, class: "form" do %>
         <%= text_area_tag(
               :message,
