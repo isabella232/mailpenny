@@ -26,6 +26,12 @@
             <%= amount / 100 %></button>
             <% end %>
         </div>
+        <script type="text/javascript">
+          var thisUser =  {
+            id: "<%= @user.id %>",
+            email: "<%= @user.email %>"
+        }
+        </script>
       </div>
     </div>
     <div class="col-sm-6">
