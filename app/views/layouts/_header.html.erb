@@ -27,8 +27,8 @@
               <li><a href="/whitelist">Whitelist</a></li>
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Account</li>
-              <li><%= link_to "Settings", settings_path , remote:'true'%></li>
-              <li><%= link_to 'Billing', billing_path , remote:'true'%></li>
+              <li><%= link_to "Settings", settings_path , remote:'false' %></li>
+              <li><%= link_to 'Billing', billing_path , remote:'false'%></li>
             </ul>
           </li>
           <li><%= link_to('Logout', destroy_human_session_path, :method => :delete) %></li>

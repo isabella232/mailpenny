@@ -48,6 +48,7 @@
                 <%= f.number_field :reward, :id=>"reward", :value=>@user.reward.email, :required=>true, :step=>'0.0001' ,:disabled => true %><br>
                 <label for="email">Email</label><br>
                 <%= f.email_field :email,value: '', :id=>"email",:required => true  %><br>
+                <label for="phone">Phone Numbers</label><br>
                 <%= f.submit "Add", class: 'btn btn-default'%>
                 <% end %>
                 <table class="table">
