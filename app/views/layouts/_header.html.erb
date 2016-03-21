@@ -14,7 +14,7 @@
         </a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right" >
           <li><a href="mailto:feedback@payload.tech">Feedback</a></li>
           <% unless human_signed_in? %>
           <li><a href="/login">Login</a></li>
@@ -27,8 +27,8 @@
               <li><a href="/whitelist">Whitelist</a></li>
               <li role="separator" class="divider"></li>
               <li class="dropdown-header">Account</li>
-              <li><%= link_to "Settings", settings_path %></li>
-              <li><%= link_to 'Billing', billing_path %></li>
+              <li><%= link_to "Settings", settings_path , remote:'true'%></li>
+              <li><%= link_to 'Billing', billing_path , remote:'true'%></li>
             </ul>
           </li>
           <li><%= link_to('Logout', destroy_human_session_path, :method => :delete) %></li>

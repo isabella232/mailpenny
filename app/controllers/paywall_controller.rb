@@ -1,6 +1,4 @@
 class PaywallController < ApplicationController
- require "securerandom"
-
   def profile
     @current = false;
     id = params[:username]
@@ -451,4 +449,8 @@ class PaywallController < ApplicationController
         format.js   { render :template => 'paywall/email_verify.js.erb' }
     end
   end
+  def inbox
+  
+  end
 end
+

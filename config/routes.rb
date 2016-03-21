@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   #get 'paywall/home' => 'paywall#home'
   get 'settings' => 'paywall#settings', as: :settings
   get 'transactions' => 'paywall#transactions'
+  get 'inbox' => 'paywall#inbox'
   get 'qr' => 'paywall#qr'
   get 'send_complex_message' => 'paywall#send_complex_message'
   post 'update_user' => 'paywall#update_user'
