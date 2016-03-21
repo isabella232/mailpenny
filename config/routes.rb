@@ -56,7 +56,6 @@ Rails.application.routes.draw do
   post 'activate' => 'paywall#activate'
 
   # profile
-  get ':username' => 'paywall#profile'
   post 'change_pass' => 'paywall#change_pass'
   post 'change_prof' => 'paywall#change_prof'
   post 'add_email' => 'paywall#add_email'
@@ -85,4 +84,6 @@ Rails.application.routes.draw do
   #   post '/login(.:format)' => 'devise/sessions#create', as: :human_session
   #   delete 'logout' => 'devise/sessions#destroy', as: :destroy_human_session
   # end
+  
+  get ':username' => 'paywall#profile'
 end
