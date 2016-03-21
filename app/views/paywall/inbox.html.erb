@@ -19,10 +19,10 @@
             <% @user.emails.each do |e| %>
             <tr>
               <td>
-                <a href="#collapse1" data-toggle="collapse">
+                <a href="#<%=e.subject%>" data-toggle="collapse">
                   <%=e.subject%>
                 </a>
-                <div id="collapse1" class="panel-collapse collapse">
+                <div id="<%=e.subject%>" class="panel-collapse collapse">
                   <div class="panel-body">
                     <p><%=e.from.to_s%></p><br>
                     <p><%=e.body.to_s%></p><br>
