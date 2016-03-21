@@ -185,36 +185,7 @@ class PaywallController < ApplicationController
       user.emails<< email;
       user.save
     end
-   =begin cred = Credential.find_by_username(username);
-    if(cred.present?)
-      user =  User.find(cred.user_id);
-      user.emails << email
-      user.save
-      wlist = user.whitelists.find_by_email(email.from);
-      if(wlist.present?)
-        send_email(user.email,"This emails is from "+email.from+''+email.body,email.subject);
-        render text: "It is done"
-        return
-      end
-      user.coinbase_id = '114b91b8-2ecc-5304-b49b-7a0ac970a9b7'
-      account = find_account(user.coinbase_id.to_s);
-      address = create_address(account)
-      btc_address = address['address']
-      qr(btc_address)
-      send_email_att(email.to,email.from.to_s,"Hey i am Using Mailman. Pay the"+ user.reward.email.to_s+" on the given BTC address or Scan the QR code in attachment to push your email forward otherwise it will stay in my spam folder:"+btc_address,email.subject,btc_address);
-      trans = Transaction.new;
-      trans.from = email.from;
-      trans.btc_address = btc_address;
-      trans.to = "mailman";
-      trans.amount = user.reward.email;
-      trans.status = "pending";
-      user.transactions << trans;
-      trans.email = email;
-      trans.save;
-      email.save;
-    end
-    render text: "It is Done";
-  =end
+   
   end
 
   def qr(address)
