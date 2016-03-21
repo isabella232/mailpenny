@@ -1,1 +1,91 @@
-<p>HI</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 col-sm-push-9 col-lg-2 col-lg-push-10">
+      <div>
+        <p>Balance: $<%=@user.account.balance.to_s%></p>
+        <button class="btn btn-default" data-toggle="modal" data-target="#myModal">Withdraw</button>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-9 col-sm-pull-3 col-lg-10 col-lg-pull-2">
+      <div class="message-logs">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Sender</th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @user.emails.each do |e| %>
+            <tr>
+              <td>
+                <a href="#collapse1" data-toggle="collapse">
+                  <%=e.subject%>
+                </a>
+                <div id="collapse1" class="panel-collapse collapse">
+                  <div class="panel-body">
+                    <p><%=e.from.to_s%></p><br>
+                    <p><%=e.body.to_s%></p><br>
+                  </div>
+                  <button>Reply</button>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<dialog class="mdl-dialog" role="dialog">
+  <div class="mdl-dialog__content">
+
+  <button type="button" class="mdl-button close">Cancel</button>
+  </div>
+</dialog>-->
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Small Modal</button>-->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+       
+          <%= form_tag "payment_transfer" , method: 'post',remote: true do |f|%>
+
+            <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+              <button type="submit" class="mdl-button yes">Transfer</button>
+        <% end%>
+      </div>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script>
+/*
+  var dialog = document.querySelector('dialog');
+  var showModalButton = document.querySelector('.show-modal');
+  if (! dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+  }
+  showModalButton.addEventListener('click', function() {
+    dialog.showModal();
+  });
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+  dialog.querySelector('.yes').addEventListener('click', function() {
+    dialog.close();
+  });
+  */
+</script>

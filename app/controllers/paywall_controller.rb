@@ -180,7 +180,12 @@ class PaywallController < ApplicationController
     email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     username = email.to.split('@').first;
     email.save
-    cred = Credential.find_by_username(username);
+    user = Human.find_by_username(username)
+    if(user.present?)
+      user.emails<< email;
+      user.save
+    end
+   =begin cred = Credential.find_by_username(username);
     if(cred.present?)
       user =  User.find(cred.user_id);
       user.emails << email
@@ -209,6 +214,7 @@ class PaywallController < ApplicationController
       email.save;
     end
     render text: "It is Done";
+  =end
   end
 
   def qr(address)
@@ -450,7 +456,7 @@ class PaywallController < ApplicationController
     end
   end
   def inbox
-  
+      @user = current_human;
   end
 end
 
