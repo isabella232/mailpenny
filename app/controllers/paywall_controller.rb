@@ -428,6 +428,8 @@ class PaywallController < ApplicationController
       if(rew <= current_human.account.balance.to_f)
           @done = true;
           send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
+          send_email_from_user(user_to_send.email,current_human.username+'@themailman.io',params['message'].to_s+"\nSent Via themailman.io",params['subject'])
+          
           balance_to_send = user_to_send.account
           balance_to_cut = current_human.account
           balance_to_send.balance+=rew.to_d
