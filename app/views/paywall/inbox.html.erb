@@ -16,7 +16,7 @@
           </tr>
           </thead>
           <tbody>
-            <% @user.emails.each do |e| %>
+            <% @user.emails.reverse_each do |e| %>
             <tr>
               <td>
                 <a href="#<%=e.subject.split.first%>" data-toggle="collapse">
