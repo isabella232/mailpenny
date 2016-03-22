@@ -43,14 +43,14 @@
             <div class="settings-email">
               <h3>Email</h3>
               <div id="form">
-                <%= form_for @user,:url => 'add_email' ,:method=>'post'  do |f| %>
-                <%= f.hidden_field :id, :value => @id %>
+                <%= form_tag 'add_email' ,:method=>'post'  do |f| %>
+                <%= hidden_field_tag :id,@id %>
                 <label for="reward">Reward Amount</label><br>
                 <%= label_tag "$"+@user.reward.email.to_s%><br>
                 <label for="email">Email</label><br>
-                <%= f.email_field :email,value: '', :id=>"email",:required => 'true'  %><br>
+                <%= email_field_tag "email",'', :id=>"email",:required => 'true'  %><br>
                 <label for="phone">Emails</label><br>
-                <%= f.submit "Add", class: 'btn btn-default'%>
+                <%= submit_tag "Add", class: 'btn btn-default'%>
                 <% end %>
                 <table class="table">
                   <thead>
