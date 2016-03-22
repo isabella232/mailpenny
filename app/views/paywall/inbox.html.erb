@@ -19,16 +19,16 @@
             <% @user.emails.each do |e| %>
             <tr>
               <td>
-                <a href="#<%=e.subject%>" data-toggle="collapse">
+                <a href="#<%=e.subject.split.first%>" data-toggle="collapse">
                   <%=e.subject%>
                 </a>
-                <div id="<%=e.subject%>" class="panel-collapse collapse">
+                <div id="<%=e.subject.split.first%>" class="panel-collapse collapse">
                   <div class="panel-body">
                     <p><%=e.body.to_s%></p><br>
                   </div>
-                  <button class="btn btn-default" data-toggle="collapse" data-target="#emailCompose" >Reply</button>
+                  <button class="btn btn-default" data-toggle="collapse" data-target="<%= "#emailCompose"+e.subject.split.first %>" >Reply</button>
                 </div><br>
-                <div id="emailCompose" class="collapse">
+                <div id="<%= "emailCompose"+e.subject.split.first %>" class="collapse">
                   <p id="notif_email"></p>
                   <%= form_tag "/reply_email" ,method:'post', remote: 'true' do |f|%>
                       <%= label_tag "Reply to : "+e.from.to_s %><br>
