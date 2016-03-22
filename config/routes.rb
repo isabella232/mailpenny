@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
   # get 'about'   => 'static_pages#about'
   # get 'contact' => 'static_pages#contact'
-
+  get 'tweet' =>'paywall#tweet'
   # email API
   #post 'emails/recieve'       => 'emails#recieve'
   #get 'emails/recieve'        => 'emails#recieve'

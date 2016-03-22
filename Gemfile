@@ -41,6 +41,8 @@ gem 'json', '~> 1.8', '>= 1.8.3'
 gem 'rqrcode_png', '~> 0.1.5'
 # Make authentication simple with devise!
 gem 'devise', '~> 3.5', '>= 3.5.6'
+#twitter gem for tweets
+gem 'twitter', '~> 5.11.0'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.11'
