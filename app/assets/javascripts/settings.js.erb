@@ -4,7 +4,7 @@ $('#btn-payment-<%= amount %>')
   .on('click', function (e) {
     // Open Checkout with further options
     StripeCheckout.configure({
-      key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+      key: stripeKey,
       image: '/img/logo/icon-black-transparent.png',
       locale: 'auto',
       token: function (token) {

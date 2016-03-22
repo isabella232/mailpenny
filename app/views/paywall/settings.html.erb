@@ -30,7 +30,8 @@
           var thisUser =  {
             id: "<%= @user.id %>",
             email: "<%= @user.email %>"
-        }
+        };
+          var stripeKey = "<%= Rails.configuration.stripe[:publishable_key] %>"
         </script>
       </div>
     </div>
