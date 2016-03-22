@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   # static pages
   root :to => redirect('/login')
-  get 'privacy'   => 'static_pages#privacy'
+  get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
   # get 'about'   => 'static_pages#about'
   # get 'contact' => 'static_pages#contact'
 
