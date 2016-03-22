@@ -27,13 +27,15 @@
                     <p><%=e.body.to_s%></p><br>
                   </div>
                   <button class="btn btn-default" data-toggle="collapse" data-target="#emailCompose" >Reply</button>
-                </div>
-                <div id="emailCompose">
-                  <%= form_tag "/reply_email" , remote: 'true' do%>
-                      <%= label_tag "Sender : "+e.from.to_s %>
-                      <%= text_field_tag :subject , disabled:'true'%>
-                      <%= text_area_tag :body %>
-                      <%= submite_tag "Send" %>
+                </div><br>
+                <div id="emailCompose" class="collapse">
+                  <p id="notif_email"></p>
+                  <%= form_tag "/reply_email" ,method:'post', remote: 'true' do |f|%>
+                      <%= label_tag "Reply to : "+e.from.to_s %><br>
+                      <%= hidden_field_tag "to",e.from.to_s %>
+                      <%= text_field_tag "subject" ,e.subject.to_s,:placeholder=>'Subject' , :class=>'form-control'%><br><br>
+                      <%= text_area_tag "body" ,"",:placeholder=>'Body' ,:class=>'form-control'%><br><br>
+                      <%= submit_tag "Send" , :class=>'btn btn-default' %><br>
                   <%end%>
                 </div>
               </td>

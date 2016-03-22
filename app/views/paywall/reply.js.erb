@@ -1,0 +1,12 @@
+elem = document.getElementById('notif_email');
+elem.style.borderRadius = "3px";
+elem.style.textAlign = "center";
+<%if(@done===true) %>
+elem.style.backgroundColor = "green"
+elem.style.color = "white"
+elem.innerHTML = "Sent!!";
+<%else%>
+elem.style.backgroundColor = "red"
+elem.style.color = "white"
+elem.innerHTML = "Could not send. You dont have enough balance";
+<%end %>

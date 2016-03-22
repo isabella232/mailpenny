@@ -444,5 +444,15 @@ class PaywallController < ApplicationController
   def inbox
       @user = current_human;
   end
+  def reply_email
+          @done = false;
+          send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'],params['subject'])
+          send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'].to_s+"\nSent Via themailman.io",params['subject'])
+          @done = true;
+
+          respond_to do |format|
+            format.js   { render :template => 'paywall/reply.js.erb' } 
+          end
+  end
 end
 
