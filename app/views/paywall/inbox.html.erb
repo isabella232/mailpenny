@@ -26,7 +26,15 @@
                   <div class="panel-body">
                     <p><%=e.body.to_s%></p><br>
                   </div>
-                  <button class="btn btn-default" data-toggle="modal" data-target="#emailComposeModal">Reply</button>
+                  <button class="btn btn-default" data-toggle="collapse" data-target="#emailCompose" >Reply</button>
+                </div>
+                <div id="emailCompose">
+                  <%= form_tag "/reply_email" , remote: 'true' do%>
+                      <%= label_tag "Sender : "+e.from.to_s %>
+                      <%= text_field_tag :subject , disabled:'true'%>
+                      <%= text_area_tag :body %>
+                      <%= submite_tag "Send" %>
+                  <%end%>
                 </div>
               </td>
               <td><p><%=e.from%></p></td>
