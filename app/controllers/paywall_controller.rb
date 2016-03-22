@@ -345,8 +345,8 @@ class PaywallController < ApplicationController
     end
   end
   def add_email
-    email = params['user']['email'];
-    user = User.find(session[:user_id].to_i);
+    email = params['email'];
+    user = current_human
     em = UserEmail.new
     em.address = email;
     user.user_emails << em;
