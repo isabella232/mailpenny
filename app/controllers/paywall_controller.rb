@@ -405,14 +405,14 @@ class PaywallController < ApplicationController
       user_to_send = Human.find_by_username(to_send)
       rew = user_to_send.reward.sms
       rew = rew.to_d;
-      if(rew <= current_human.account.balance)
+      if(rew <= current_human.account.balance.to_f)
             @done = true;
             send_sms(user_to_send.phones.first.number,"This message is from "+current_human.username+"\n"+params['message']);
-            balance_to_send = user_to_send.reward
-            balance_to_cut = current_human.reward
-            balance_to_send+=rew
+            balance_to_send = user_to_send.account
+            balance_to_cut = current_human.account
+            balance_to_send.balance+=rew.to_d
             balance_to_send.save
-            balance_to_cut-=rew
+            balance_to_cut.balance-=rew.to_d
             balance_to_cut.save
       end
     respond_to do |format|
@@ -428,11 +428,11 @@ class PaywallController < ApplicationController
       if(rew <= current_human.account.balance.to_f)
           @done = true;
           send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
-          balance_to_send = user_to_send.reward
-          balance_to_cut = current_human.reward
-          balance_to_send+=rew
+          balance_to_send = user_to_send.account
+          balance_to_cut = current_human.account
+          balance_to_send.balance+=rew.to_d
           balance_to_send.save
-          balance_to_cut-=rew
+          balance_to_cut.balance-=rew.to_d
           balance_to_cut.save
       end
     respond_to do |format|
