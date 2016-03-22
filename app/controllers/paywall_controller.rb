@@ -474,8 +474,6 @@ class PaywallController < ApplicationController
             user = current_human
             user.social_medium = sm
             user.save
-            logger.debug "yes it contains Bitch!!"
-
             break;
         end
       end
