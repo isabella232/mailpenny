@@ -1,6 +1,4 @@
 class PaywallController < ApplicationController
-
-  require 'Twitter'
   def profile
     @current = false;
     id = params[:username]
