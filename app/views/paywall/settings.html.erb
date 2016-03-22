@@ -119,10 +119,12 @@
                 Twitter.com
               </td>
               <td>
-                link
+                <button class="btn btn-default" data-toggle="modal" data-target="#twitter_verify">Verify</button>
               </td>
               <td>
-                No
+                <% if(@user.social_medium.present?) %>
+                <%= @user.social_medium.twitter.to_s%>
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -151,5 +153,36 @@
         </table>
       </div>
     </div>
+  </div>
+</div>
+
+<div id="twitter_verify" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Verify Twitter</h4>
+      </div>
+      <div class="modal-body">
+        <h3>First Step:</h3>
+        <p>First Tweet a mention of us!!!</p>
+                        <a href="https://twitter.com/intent/tweet?screen_name=waleedsulehria&text=I%20love%20Mailman" class="twitter-mention-button" data-related="waleedsulehria">Tweet to @waleedsulehria</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
+      <h3>Second Step:</h3>
+      <p>Enter your twitter screen name and press the verify button</p>
+      <form action="/tweet">
+        <input type="text" name="user" class="form-control" placeholder="@waleedsulehria" style="width:250px;">
+        <input type="submit" text="Verify" class="btn btn-success">
+      </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
   </div>
 </div>
