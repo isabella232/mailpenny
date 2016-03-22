@@ -5,10 +5,12 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def privacy
+  end
+
   def contact
     email = params['email'];
     subject = params['subject'];
     message = params['message'];
-
   end
 end
