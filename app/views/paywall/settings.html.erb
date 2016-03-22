@@ -45,7 +45,7 @@
                 <%= form_for @user,:url => 'add_email' ,:method=>'post'  do |f| %>
                 <%= f.hidden_field :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= label_tag @user.reward.email%>
+                <%= label_tag "$"+@user.reward.email.to_s%><br>
                 <label for="email">Email</label><br>
                 <%= f.email_field :email,value: '', :id=>"email",:required => 'true'  %><br>
                 <label for="phone">Emails</label><br>
@@ -75,7 +75,7 @@
                 <%= form_tag '/add_phones' ,:method=>'post'  do |f| %>
                 <%= hidden_field_tag :id, :value => @id %>
                 <label for="reward">Reward Amount</label><br>
-                <%= label_tag @user.reward.sms%>
+                <%= label_tag "$"+@user.reward.sms.to_s%><br>
                 <%= label_tag "Phone"%><br>
                 <input type="text" value="" name="phone">
                 <label for="phone">Phone Numbers</label><br>
