@@ -1,12 +1,10 @@
-<%
-provide(:twitter, {
-  card: 'summary',
-  site: '@mailman_hq',
-  title: "Send #{@user.first_name} a text/mail",
-  description: "Send #{@user.first_name} #{@user.last_name} an email, or sms!",
-  image: gravatar_for(@user, { size: 150 } )
-})
-%>
+<% provide(:twitter, { %>
+  <% card: 'summary', %>
+  <% site: '@mailman_hq', %>
+  <% title: "Send #{@user.first_name} a text/mail", %>
+  <% description: "Send #{@user.first_name} #{@user.last_name} an email, or sms!", %>
+  <% image: gravatar_for(@user, { size: 150 } ) %>
+<% }) %>
 <div class="container profile-container">
   <div class="row">
     <div class="col-md-4 user-profile-col">
