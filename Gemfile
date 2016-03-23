@@ -43,7 +43,6 @@ gem 'rqrcode_png', '~> 0.1.5'
 gem 'devise', '~> 3.5', '>= 3.5.6'
 #twitter gem for tweets
 gem 'twitter', '~> 5.11.0'
-
 group :development, :test do
   gem 'sqlite3',     '1.3.11'
   gem 'byebug',      '8.2.2'
