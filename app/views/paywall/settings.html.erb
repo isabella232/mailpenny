@@ -22,8 +22,8 @@
 
           <%[5,10,20,50].map{|x| x*100}.each do |amount|%>
 
-          <button id="btn-payment-<%= amount %>">Add
-            <%= amount / 100 %></button>
+          <button id="btn-payment-<%= amount %>" style="width:150px" class="btn btn-default">Add
+            <%= amount / 100 %></button><br><br>
             <% end %>
         </div>
         <script type="text/javascript">
