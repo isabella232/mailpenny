@@ -31,14 +31,17 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
   <%# The code below is horrible, but is necessary. TODO write a helper %>
+
+  <% if yield(:twitter) %>
   <% twitter_tags = String.new yield(:twitter)%>
   <% twitter_tags = eval ( CGI.unescapeHTML( twitter_tags ) ) %>
 
   <% twitter_tags.each do |key, value|%>
     <%= tag(:meta, name: "twitter:#{key}", content: (value) )%>
   <% end %>
+  <% end %>
   <%# END UGLY CHUNK OF DISGUSTING CODE %>
-  
+
   <link rel="icon" href="../../favicon.ico">
 
   <title>The Mailman | Get Paid To Read Your Mail</title>
