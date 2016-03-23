@@ -32,11 +32,14 @@
 
   <%# The code below is horrible, but is necessary. TODO write a helper %>
 
+  <% unless yield(:twitter).empty? %>
     <% twitter_tags = String.new yield(:twitter)%>
     <% twitter_tags = eval ( CGI.unescapeHTML( twitter_tags ) ) %>
-    <% twitter_tags.each unless twitter_tags.nil? do |key, value|%>
+
+    <% twitter_tags.each do |key, value|%>
       <%= tag(:meta, name: "twitter:#{key}", content: (value) )%>
-    <% end %>
+      <% end %>
+  <% end %>
   <%# END UGLY CHUNK OF DISGUSTING CODE %>
 
   <link rel="icon" href="../../favicon.ico">
