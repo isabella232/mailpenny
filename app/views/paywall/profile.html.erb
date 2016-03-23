@@ -1,9 +1,9 @@
 <%
 provide(:twitter, {
   card: 'summary',
-  site: '@twitter',
-  title: 'Lorem ipsum',
-  description: 'Non sequitar',
+  site: '@mailman_hq',
+  title: 'Send #{@user.first_name} a text/mail',
+  description: 'Send #{@user.first_name} #{@user.last_name} an email, or sms!',
   image: gravatar_for(@user, { size: 150 } )
 })
 %>
