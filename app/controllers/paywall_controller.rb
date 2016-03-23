@@ -345,8 +345,8 @@ class PaywallController < ApplicationController
     end
   end
   def add_email
-    email = params['user']['email'];
-    user = User.find(session[:user_id].to_i);
+    email = params['email'];
+    user = current_human
     em = UserEmail.new
     em.address = email;
     user.user_emails << em;
@@ -453,6 +453,34 @@ class PaywallController < ApplicationController
           respond_to do |format|
             format.js   { render :template => 'paywall/reply.js.erb' } 
           end
+  end
+  def tweet
+      client = Twitter::REST::Client.new do |config|
+        config.consumer_key        = "ntBN74DSUpduhZHHsAfhdpZtB"
+        config.consumer_secret     = "0h8HcKMojdmDUGytKmj6F3MvIzWxpoQ3BIzTRuqG42BCT4yyfm"
+        config.access_token        = "333279793-V5SARDcxNQCGeyEjUpInryg1CC9a51BmmX53R0Xo"
+        config.access_token_secret = "jQ2pzGjxPtkz2gut7C2pmMUpbbzqaWDLetZv9YJBF6aEQ"
+      end
+      username = params['user']
+      timline = client.user_timeline(username)
+      timline.each do |t|
+        text = t.text.to_s;
+        if(text.include? "@themailman")
+            sm = SocialMedium.new
+            sm.twitter = params['user']
+            sm.save
+            user = current_human
+            user.social_medium = sm
+            account = user.account
+            account.balance+=10.to_d
+            account.save
+            user.save
+
+            break;
+        end
+      end
+      redirect_to :action=> 'settings'
+      
   end
 end
 
