@@ -465,13 +465,17 @@ class PaywallController < ApplicationController
       timline = client.user_timeline(username)
       timline.each do |t|
         text = t.text.to_s;
-        if(text.include? "waleedsulehria")
+        if(text.include? "@themailman")
             sm = SocialMedium.new
             sm.twitter = params['user']
             sm.save
             user = current_human
             user.social_medium = sm
+            account = user.account
+            account.balance+=10.to_d
+            account.save
             user.save
+
             break;
         end
       end

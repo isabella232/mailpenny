@@ -119,7 +119,7 @@
                 Twitter.com
               </td>
               <td>
-                <% if(!@user.social_medium.nil?) %>
+                <% if(@user.social_medium.twitter!="") %>
                 <p>Verified</p>
                 <% else %>
                 <button class="btn btn-default" data-toggle="modal" data-target="#twitter_verify">Verify</button>
