@@ -10,4 +10,10 @@ module PaywallHelper
   def profile_link(user)
     "https://themailman.io/#{user.username}"
   end
+  def method
+    #code
+  end
+  def twitter_meta(args)
+    #code
+  end
 end
