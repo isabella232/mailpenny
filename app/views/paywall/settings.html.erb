@@ -13,17 +13,14 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="settings-profile">
-        <h2 class="section-heading">Balance</h2>
-        <p>
-          Balance: $<%= @user.account.balance %>
-        </p>
-        <div class="Add balance">
+        <h2 class="section-heading" style="margin-left:-40%;">Balance $<%= @user.account.balance %></h2><br><br>
+                <div class="Add balance" >
           <script src="https://checkout.stripe.com/checkout.js"></script>
 
           <%[5,10,20,50].map{|x| x*100}.each do |amount|%>
 
-          <button id="btn-payment-<%= amount %>">Add
-            <%= amount / 100 %></button>
+          <button id="btn-payment-<%= amount %>" style="width:150px" class="btn btn-default">Add
+            <%= amount / 100 %></button><br><br>
             <% end %>
         </div>
         <script type="text/javascript">

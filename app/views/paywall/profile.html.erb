@@ -9,13 +9,20 @@
   <div class="row">
     <div class="col-md-4 user-profile-col">
       <div class="user-profile">
+        <div style="margin-top:-25%;">
+        <button class="btn btn-default" data-toggle="modal" data-target="#pass" style="border-radius: 3px;width: 100px;background-color: #2E2F30;color: white;display: inline;">Password</button>
+              <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="border-radius: 3px;width: 100px;background-color: #2E2F30;color: white;display: inline;">Edit</button></div><br><br>
         <div class="user-picture" style="background: url('<%= gravatar_for @user %>')"></div>
+
         <div class="user-name">
           <p>
             <%=@user.profile.first_name.to_s+" "+@user.profile.last_name.to_s%>
           </p>
+
         </div>
+
         <div class="user-biography">
+
           <p>
             <%if(@user.profile.about.nil?)%>
             <%="Edit info about you."%>
@@ -37,13 +44,32 @@
           <div class="user-profile-link">
             <%if(@current === true)%>
             <div>
-              <button class="btn btn-default" data-toggle="modal" data-target="#pass" style="margin-left: 70%;border-radius: 3px;width: 12%;background-color: #2E2F30;color: white;display: inline;">Password</button>
-              <button class="btn btn-default" data-toggle="modal" data-target="#myModal" style="border-radius: 3px;width: 12%;background-color: #2E2F30;color: white;display: inline;">Edit</button>
+              
             </div>
             <%end%>
             <h2>
               themailman.io/<%=@user.username%>
             </h2>
+            <div>
+              <div class="Add balance">
+                <h3>Balance : <%=@user1.account.balance.to_f%><h3>
+          <script src="https://checkout.stripe.com/checkout.js"></script>
+
+          <%[5,10,20,50].map{|x| x*100}.each do |amount|%>
+
+          <button id="btn-payment-<%= amount %>" style="width:100px" class="btn btn-default">Add
+            <%= amount / 100 %></button>
+            <% end %>
+        </div>
+        <script type="text/javascript">
+          var thisUser =  {
+            id: "<%= @user.id %>",
+            email: "<%= @user.email %>"
+        };
+          var stripeKey = "<%= Rails.configuration.stripe[:publishable_key] %>"
+        </script>
+
+            </div>
           </div>
         </div>
         <div class="row">

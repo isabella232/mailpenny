@@ -22,7 +22,6 @@ Rails.application.routes.draw do
   post 'verify'=>'paywall#verify'
   get 'charges/new'
   get 'charges/create'
-
   # static pages
   root :to => redirect('/login')
   get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
