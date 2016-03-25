@@ -3,12 +3,19 @@ body {
   padding-top: 70px;
   padding-bottom: 70px
 }
-
-/* BEGIN FOOTER STYLES*/
-.footer {
-  background-color: #333;
+.navbar{
+ background-color:#373a70; 
 }
 
+.navbar-nav > li > .dropdown-menu { background-color: #373a70; }
+/* BEGIN FOOTER STYLES*/
+.footer {
+   background-color:#373a70; 
+}
+.dropdown a:hover{
+  backgorund-color:#fff;
+  
+}
 /* unvisited link */
 .footer-text a:link {
     color: gray;
