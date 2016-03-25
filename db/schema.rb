@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319091433) do
+ActiveRecord::Schema.define(version: 20160322080932) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "human_id"
@@ -90,18 +90,19 @@ ActiveRecord::Schema.define(version: 20160319091433) do
   add_index "humen", ["username"], name: "index_humen_on_username", unique: true
 
   create_table "ledgers", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "from_id"
     t.integer  "to_id"
     t.decimal  "amount"
     t.string   "currency"
-    t.boolean  "payment"
-    t.boolean  "deposit"
-    t.boolean  "withdrawal"
+    t.boolean  "type_transfer",    default: false
+    t.boolean  "type_deposit",     default: false
+    t.boolean  "type_withdrawal",  default: false
     t.string   "ref"
     t.string   "meta"
     t.string   "stripe_charge_id"
+    t.boolean  "type_fee",         default: false
   end
 
   create_table "phones", force: :cascade do |t|

@@ -1,8 +1,8 @@
 <% provide(:twitter, { %>
   <% card: 'summary', %>
   <% site: '@mailman_hq', %>
-  <% title: "Send #{@user.profile.first_name} a text/mail", %>
-  <% description: "Send #{@user.profile.first_name} #{@user.profile.last_name} an email, or sms!", %>
+  <% title: "#{@user.profile.first_name} #{@user.profile.last_name} | The Mailman", %>
+  <% description: "Send #{@user.profile.first_name} a 140 character SMS to their Phone or a full Email to their Inbox.", %>
   <% image: gravatar_for(@user, { size: 150 } ) %>
 <% }) %>
 <div class="container profile-container">
@@ -47,7 +47,6 @@
       <div class="row">
         <div class="user-contact-info">
           <div class="user-profile-link">
-            
             <h2>
               themailman.io/<%=@user.username%>
             </h2>
