@@ -186,8 +186,8 @@ class PaywallController < ApplicationController
       user.emails<< email;
       user.save
     end
-    render :text=> 'Email Saved!!' 
-   
+    render :text=> 'Email Saved!!'
+
   end
 
   def qr(address)
@@ -401,7 +401,7 @@ class PaywallController < ApplicationController
       end
   end
   def send_sms_profile
-    @done = false;      
+    @done = false;
     to_send = params['username']
       user_to_send = Human.find_by_username(to_send)
       rew = user_to_send.reward.sms
@@ -416,11 +416,11 @@ class PaywallController < ApplicationController
     end
   end
   def send_email_profile
-    @done = false;      
+    @done = false;
     to_send = params['username']
       user_to_send = Human.find_by_username(to_send)
       rew = user_to_send.reward.email
-      
+
       if(rew.to_f <= current_human.account.balance.to_f)
           @done = true;
           send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
@@ -443,7 +443,7 @@ class PaywallController < ApplicationController
             @done = true;
           end
           respond_to do |format|
-            format.js   { render :template => 'paywall/reply.js.erb' } 
+            format.js   { render :template => 'paywall/reply.js.erb' }
           end
   end
   def tweet
@@ -453,25 +453,25 @@ class PaywallController < ApplicationController
         config.access_token        = "333279793-V5SARDcxNQCGeyEjUpInryg1CC9a51BmmX53R0Xo"
         config.access_token_secret = "jQ2pzGjxPtkz2gut7C2pmMUpbbzqaWDLetZv9YJBF6aEQ"
       end
+      user = current_human
       username = params['user']
-      timline = client.user_timeline(username)
-      timline.each do |t|
-        text = t.text.to_s;
-        if(text.include? "@themailman")
+      timeline = client.user_timeline(username)
+      timeline.each do |t|
+        text = t.urls.each do |u|
+          if u.display_url.include? "themailman.io/#{user.username}"
+            logger.debug 'Verification tweet found'
             sm = SocialMedium.new
             sm.twitter = params['user']
             sm.save
-            user = current_human
             user.social_medium = sm
             account = user.account
-            account.balance+=10.to_d
+            account.deposit(amount: 10, meta: 'twitter_bonus')
             account.save
             user.save
-            break;
+            break
+          end
         end
       end
-      redirect_to :action=> 'settings'
-      
+      redirect_to action: 'settings'
   end
 end
-
