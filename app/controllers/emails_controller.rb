@@ -102,7 +102,7 @@ class EmailsController < ApplicationController
     return account
   end
   def create_address(account)
-    address = account.create_address(callback_url: 'https://floating-plains-7200.herokuapp.com/emails/payment_recieved')
+    address = account.create_address(callback_url: 'https://themailman.io/emails/payment_recieved')
     return address
   end
   def payment_recieved
@@ -124,13 +124,13 @@ class EmailsController < ApplicationController
     logger.level = Logger::WARN
     logger.debug("sending email");
 
-    mg_client = Mailgun::Client.new 'key-5b10854538566549aac6724aaa54dabe'
-    message_params = { from: 'user <user@sandbox050314df0b744b97beecf2742a588852.mailgun.org>',
+    mg_client = Mailgun::Client.new 'key-69d530fcc92a526320f504e0b8b963a7'
+    message_params = { from: 'CC <cc@themailman.io>',
                        to: to,
                        subject: subject,
                        text:  text }
     # Send your message through the client
-    mg_client.send_message 'sandbox050314df0b744b97beecf2742a588852.mailgun.org', message_params
+    mg_client.send_message 'themailman.io', message_params
   end
   def send_money(id,amount,to)
     require 'coinbase/wallet'
