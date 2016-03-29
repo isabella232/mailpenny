@@ -8,7 +8,7 @@ class PaywallController < ApplicationController
     if(@user1 === @user)
       @current = true;
     end
-    redirect_to action: :register if @user.nil?
+    redirect_to register_path if @user.nil?
   end
   def login
     if(params.has_key?'email')
