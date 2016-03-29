@@ -78,6 +78,7 @@
 
         </div>
         <div>
+          <% if !@user1.nil? %>
               <div class="Add balance" style="margin-left:20%;margin-top:10%;">
                 <p>Your balance : <%=@user1.account.balance.to_f%><p>
           <script src="https://checkout.stripe.com/checkout.js"></script>
@@ -88,6 +89,7 @@
             <%= amount / 100 %></button>
             <% end %>
         </div>
+         <% end %>
         <script type="text/javascript">
           var thisUser =  {
             id: "<%= @user.id %>",
