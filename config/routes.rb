@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'charges/new'
   get 'charges/create'
   # static pages
-  root :to => redirect('/login')
+  root :to => 'static_pages#home'
   get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
   # get 'about'   => 'static_pages#about'
   # get 'contact' => 'static_pages#contact'
