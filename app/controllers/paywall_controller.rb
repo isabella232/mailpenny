@@ -425,7 +425,6 @@ class PaywallController < ApplicationController
           @done = true;
           send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
           send_email_from_user(user_to_send.email,current_human.username+'@themailman.io',params['message'].to_s+"\nSent Via themailman.io",params['subject'])
-          
           current_human.account.transfer(amount: rew, to: user_to_send.account)
       end
     respond_to do |format|
@@ -437,7 +436,8 @@ class PaywallController < ApplicationController
   end
   def reply_email
           @done = false;
-          if( !Email.find_by_from(params[:to]).nil?)
+          current_human.emails.find_by_from('')
+          if( !current_human.emails.find_by_from(params[:to]).nil?)
             send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'],params['subject'])
             send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'].to_s+"\nSent Via themailman.io",params['subject'])
             @done = true;
