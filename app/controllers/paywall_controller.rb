@@ -425,17 +425,12 @@ class PaywallController < ApplicationController
       user_to_send = Human.find_by_username(to_send)
       rew = user_to_send.reward.email
       
-      if(rew <= current_human.account.balance.to_f)
+      if(rew.to_f <= current_human.account.balance.to_f)
           @done = true;
           send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
           send_email_from_user(user_to_send.email,current_human.username+'@themailman.io',params['message'].to_s+"\nSent Via themailman.io",params['subject'])
           
-          balance_to_send = user_to_send.account
-          balance_to_cut = current_human.account
-          balance_to_send.balance+=rew.to_d
-          balance_to_send.save
-          balance_to_cut.balance-=rew.to_d
-          balance_to_cut.save
+          current_human.account.transfer(amount: rew, to: user_to_send.account)
       end
     respond_to do |format|
         format.js   { render :template => 'paywall/email_verify.js.erb' }
@@ -446,8 +441,7 @@ class PaywallController < ApplicationController
   end
   def reply_email
           @done = false;
-
-          if( Email.find_by_from(params[:to]).present?)
+          if( !Email.find_by_from(params[:to]).nil?)
             send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'],params['subject'])
             send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'].to_s+"\nSent Via themailman.io",params['subject'])
             @done = true;
@@ -477,7 +471,6 @@ class PaywallController < ApplicationController
             account.balance+=10.to_d
             account.save
             user.save
-
             break;
         end
       end
