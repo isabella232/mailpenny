@@ -128,28 +128,6 @@
                 <% end %>
               </td>
             </tr>
-           <!--  <tr>
-              <td>
-                Facebook.com
-              </td>
-              <td>
-                link
-              </td>
-              <td>
-                No
-              </td>
-              <tr>
-                <td>
-                  LinkedIn.com
-                </td>
-                <td>
-                  link
-                </td>
-                <td>
-                  No
-                </td>
-              </tr>
-            </tr> -->
           </tbody>
         </table>
       </div>
@@ -168,15 +146,14 @@
       </div>
       <div class="modal-body">
         <h3>First Step:</h3>
-        <p>First Tweet a mention of us!!!</p>
-                        <a href="https://twitter.com/intent/tweet?screen_name=waleedsulehria&text=I%20love%20Mailman" class="twitter-mention-button" data-related="waleedsulehria">Tweet to @waleedsulehria</a>
+        <a href="https://twitter.com/intent/tweet?text=Got something to say? Text it to me in 140 characters at <%= profile_link @user  %> via @TheMailmanHQ #TheMailman">Tweet about your new profile</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 </script>
       <h3>Second Step:</h3>
-      <p>Enter your twitter screen name and press the verify button</p>
+      <p>Enter your twitter username</p>
       <form action="/tweet">
-        <input type="text" name="user" class="form-control" placeholder="waleedsulehria" style="width:250px;">
-        <input type="submit" text="Verify" class="btn btn-success">
+        <input type="text" name="user" class="form-control" placeholder="@username" style="width:250px;" />
+        <input type="submit" value="Verify" class="btn btn-success" />
       </form>
 
       </div>
@@ -204,7 +181,7 @@
             <input class="form-control" type="text" name="email">
             <label>SMS</label><br>
             <input class="form-control" type="text" name="sms">
-            <input class="btn btn-success" type="submit" text="Set">
+            <input class="btn btn-success" type="submit" value="Set">
         </form>
       </div>
     </div>
