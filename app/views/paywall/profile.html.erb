@@ -26,7 +26,7 @@
 
           <p>
             <%if(@user.profile.about.nil?)%>
-            <%="Edit info about you."%>
+            <%="Set up your profile. Click 'Edit'"%>
             <%else%>
             <%=@user.profile.about %>
             <%end%>
@@ -370,7 +370,7 @@
         <h3>Second Step:</h3>
         <p>Enter your twitter username</p>
         <form action="/tweet">
-          <input type="text" name="user" class="form-control" placeholder="@username" style="width:250px;" />
+          <input type="text" name="user" class="form-control" placeholder="username" style="width:250px;" />
           <input type="submit" value="Verify" class="btn btn-success" />
         </form>
 
