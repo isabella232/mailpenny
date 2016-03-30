@@ -3,10 +3,10 @@ class Reward < ActiveRecord::Base
   after_initialize :init
 
   def init
-    self.sms = 1
-    self.email = 1
+    self.sms = 0
+    self.email = 0
   end
 
-  validates :sms ,:numericality => { :greater_than => 0}
+  validates :sms ,:numericality => { :greater_than_or_equal_to => 0}
   validates :email ,:numericality => { :greater_than_or_equal_to => 0}
 end
