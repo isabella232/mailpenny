@@ -20,7 +20,7 @@ class Human::SessionsController < Devise::SessionsController
 
   # Where to redirect after a successful signup
   def after_sign_in_path_for(resource)
-    settings_path(resource)
+    '/'+current_human.username.to_s
   end
 
   # If you have extra params to permit, append them to the sanitizer.

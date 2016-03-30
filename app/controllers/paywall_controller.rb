@@ -318,8 +318,25 @@ class PaywallController < ApplicationController
     pass1 = params['password'];
     user = current_human
     @done = false;
+
     if(user.present?)
       if(user.valid_password?(pass1.to_s))
+          cc = params['cc']
+          phone = params['phone']
+
+          if(user.phones.first == nil)
+            ph = Phone.new
+            ph.number = phone
+            ph.country = cc
+            ph.save
+            user.phones<< ph
+          else
+           p = user.phones.first
+           p.number = phone
+           p.country = cc
+           p.save
+          end
+
         fname  = params['fname']
         lname  = params['lname']
         loc = params['loc']
@@ -406,9 +423,10 @@ class PaywallController < ApplicationController
       user_to_send = Human.find_by_username(to_send)
       rew = user_to_send.reward.sms
       rew = rew.to_d;
-      if(rew.to_f <= current_human.account.balance.to_f)
+
+      if((rew.to_f <= current_human.account.balance.to_f) && (params['message'].to_s.chars.count <= 150))
             @done = true;
-            send_sms(user_to_send.phones.first.number,"This message is from "+current_human.username+"\n"+params['message']);
+            send_sms(user_to_send.phones.first.country+user_to_send.phones.first.number,"This message is from "+current_human.username+"\n"+params['message']);
             current_human.account.transfer(amount: rew, to: user_to_send.account)
       end
     respond_to do |format|
