@@ -490,6 +490,6 @@ class PaywallController < ApplicationController
           end
         end
       end
-      redirect_to action: 'settings'
+      redirect_to '/'+current_human.username.to_s
   end
 end
