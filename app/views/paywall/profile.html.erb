@@ -364,7 +364,7 @@
       </div>
       <div class="modal-body">
         <h3>First Step:</h3>
-        <a href="https://twitter.com/intent/tweet?text=Got something to say? Text it to me in 140 characters at <%= profile_link @user  %> via @TheMailmanHQ #TheMailman">Tweet about your new profile</a>
+        <a href="https://twitter.com/intent/tweet?text=<%= CGI.escape "Got something to say? Text it to me in 140 characters at #{profile_link @user} via @TheMailmanHQ #TheMailmanIO" %>">Tweet about your new profile</a>
         <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
         </script>
         <h3>Second Step:</h3>
