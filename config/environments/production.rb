@@ -68,7 +68,7 @@ Rails.application.configure do
     port:                 465,
     domain:               'themailman.io',
     user_name:            'postmaster@themailman.io',
-    password:             'bc3e7f8c15c3c94331506d2e61ac03b3',
+    password:             'WR7bUxb1mNTHbFZtUA7PpR7G7EZG2aWJ',
     authentication:       :plain
   }
 

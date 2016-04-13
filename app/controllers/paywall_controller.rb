@@ -209,7 +209,7 @@ class PaywallController < ApplicationController
     return address
   end
   def send_email(to,text,subject)
-    mg_client = Mailgun::Client.new 'key-69d530fcc92a526320f504e0b8b963a7'
+    mg_client = Mailgun::Client.new 'key-52ad9f887199e8cd0ef6e603640304ad'
     message_params = { from: 'mailman <mailman@themailman.io>',
                        to: to,
                        subject: subject,
@@ -218,7 +218,7 @@ class PaywallController < ApplicationController
     mg_client.send_message 'themailman.io', message_params
   end
   def send_email_from_user(to,from,text,subject)
-    mg_client = Mailgun::Client.new 'key-69d530fcc92a526320f504e0b8b963a7'
+    mg_client = Mailgun::Client.new 'key-52ad9f887199e8cd0ef6e603640304ad'
     message_params = { from: from,
                        to: to,
                        subject: subject,
