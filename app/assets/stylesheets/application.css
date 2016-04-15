@@ -12,5 +12,8 @@
  *
  *= require_self
  *= require custom
+ *= require bootstrap/dist/css/bootstrap.min.css
+ *= require bootstrap/dist/css/bootstrap-theme.min.css
+ *= require components-font-awesome/css/font-awesome.min.css
  *= require_tree .
  */
