@@ -22,6 +22,10 @@ module Mailman
 
     # because I want the libs to load!
     config.autoload_paths += %W(#{config.root}/lib)
-
+    config.assets.paths << Rails.root.join(
+      'vendor',
+      'assets',
+      'bower_components'
+    )
   end
 end
