@@ -1,214 +1,80 @@
 class PaywallController < ApplicationController
   def profile
-    @current = false;
+    @current = false
     id = params[:username]
-    @user1  = current_human
-    @user  = Human.find_by_username(id)
+    @user1 = current_human
+    @user = Human.find_by_username(id)
 
-    if(@user1 === @user)
-      @current = true;
-    end
+    @current = true if (@user1 === @user)
     redirect_to register_path if @user.nil?
   end
-  def login
-    if(params.has_key?'email')
-      user= User.find_by_email(params['email'])
-      user= User.find_by_email(params['email'])
-      if(user.present?)
-        cred= user.credential
-        if(cred.present?)
-          if(cred.password== params['password'])
-            session[:user_id] = user.id;
-            redirect_to :action => 'settings'
-          end
-        end
-      end
-    end
-  end
-  def home
-    id = session[:user_id].to_i;
-    if(id===0)
-      redirect_to :action => 'login'
-    else
-    user = User.find(id);
-    @mail = user.email
-    end
-  end
-  def whitelist
-    @user= User.new
-    id = session[:user_id].to_i;
-    @id=id
-    if(id===0)
-      redirect_to :action => 'login'
-    else
-      @user = User.find(id);
-      @mail = @user.email
-    end
-  end
-  def whitelist_delete
-    logger.debug params.inspect
-    @id = params['whitelist']['id']
-    Whitelist.all.destroy(@id)
-    respond_to do |format|
-      format.js   { render :template => 'paywall/delete_list.js.erb' }
-    end
-  end
-  def whitelist_add
-    logger.debug params.inspect
-    email = params['whitelist']['email'];
-    @w = Whitelist.new
-    @w.email = email;
-    id = params['whitelist']['id'].to_i;
-    user = User.find(id)
-    user.whitelists << @w
-    @w.save
-    user.save
-    respond_to do |format|
-      format.js   { render :template => 'paywall/add_list.js.erb' }
-    end
-  end
+
   def settings
     if human_signed_in?
       @user = current_human
       @mail = current_human.email
     end
   end
-  def logout
-    reset_session
-    redirect_to :action => 'login'
-  end
 
-  def update_user
-    id = params['user']['id'].to_i;
-    @user = User.find(id)
-    #@user.email = params['user']['email']
-    #@user.BTC_address = params['user']['name']
-    @user.phone = params['user']['phone'].to_s;
-    @user.reward.email = params['user']['reward'].to_f;
-    @user.save
-    respond_to do |format|
-      format.js   { render :template => 'paywall/user_update' }
-    end
-  end
   def transactions
-    id = session[:user_id].to_i;
-    if(id===0)
-      redirect_to :action => 'login'
+    id = session[:user_id].to_i
+    if (id === 0)
+      redirect_to action: 'login'
     else
-      @user = User.find(id);
+      @user = User.find(id)
       @mail = @user.email
     end
   end
-  def register
-    @notif = "";
-    if(params.has_key?'email')
-      user = User.new
-      cred = Credential.new
-      user.email = params['email']
-      flt = params['reward']
-      flt = flt.to_i
-      cred.username = params['username']
-      cred.activated = 0
-      flag = cred.save
-      if(flag===true)
-        user.credential = cred;
-        flag1 = user.save;
-        if(flag1===true)
-          url = "http://themailman.io/setpassword?id="+cred.id.to_s;
-          Notifications.verify(user: user, link: url).deliver_now
-          flash[:success] = "An email has been sent to your inbox!"
-        else
-          flash[:warning] = "An account with this email already exists";
-          cred.destroy
-        end
-      else
-        @message = "Username not available"
-      end
-     else
-      @notif="";
-      render template: 'paywall/register'
-    end
-  end
-  def setpassword
-    if(params.has_key?'id')
-      id = params['id'].to_i;
-      cred = Credential.find(id)
-      if(cred.present? && cred.activated===0 )
-        @cred = cred;
-      else
-        redirect_to :action => 'login'
-      end
-    else
-      redirect_to :action => 'login'
-    end
-  end
+
   def activate
-      if(params.has_key?'password')
-          pass = params['password'];
-          id = params['id'].to_i;
-          cred = Credential.find(id)
-        if(cred.present?)
-          prof = Profile.new
-          prof.first_name = params['firstname'];
-          prof.last_name = params['lastname'];
-          prof.location = params['location'];
-          prof.save;
-          user1 = cred.user;
-          user1.profile = prof;
-          rew = Reward.new
-          rew.email=0.10;
-          rew.call=0.00;
-          rew.sms=0.00;
-          user1.reward = rew;
-          user1.save;
-          cred.activated=1;
-          cred.password=pass;
-          cred.save
-          redirect_to :action => 'login'
-          email = cred.user.email.to_s;
-          send_email(email,"Hey,"+cred.username+"@themailman.io is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman","Thanks,We love you");
-        end
+    if params.key? 'password'
+      pass = params['password']
+      id = params['id'].to_i
+      cred = Credential.find(id)
+      if cred.present?
+        prof = Profile.new
+        prof.first_name = params['firstname']
+        prof.last_name = params['lastname']
+        prof.location = params['location']
+        prof.save
+        user1 = cred.user
+        user1.profile = prof
+        rew = Reward.new
+        rew.email = 0.10
+        rew.call = 0.00
+        rew.sms = 0.00
+        user1.reward = rew
+        user1.save
+        cred.activated = 1
+        cred.password = pass
+        cred.save
+        redirect_to action: 'login'
+        email = cred.user.email.to_s
+        send_email(email, 'Hey,' + cred.username + '@themailman.io is your public email address, You can use it anywhere publicaly like your regular email i-e on Facebook , Instagram or any where. All the non spam messages will be delivered to your regular inbox. Thank you for using Mailman', 'Thanks,We love you')
       end
+    end
   end
+
   def recieve
     email = Email.new
-    email.to = params['To'].to_s;
-    email.subject = params['subject'].to_s;
-    email.from = params['from'].to_s;
-    email.body = params['body-plain'].to_s;
-    email.header = params['message-headers'].to_s;
-    #email.to = email.to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
-    #email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
-    username = email.to.split('@').first;
+    email.to = params['To'].to_s
+    email.subject = params['subject'].to_s
+    email.from = params['from'].to_s
+    email.body = params['body-plain'].to_s
+    email.header = params['message-headers'].to_s
+    # email.to = email.to[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
+    # email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
+    username = email.to.split('@').first
     email.save
     user = Human.find_by_username(username)
-    if(user.present?)
-      user.emails<< email;
+    if user.present?
+      user.emails << email
       user.save
     end
-    render :text=> 'Email Saved!!'
-
+    render text: 'Email Saved!!'
   end
 
-  def qr(address)
-    require 'rqrcode_png'
-    qr = RQRCode::QRCode.new( address, :size => 4, :level => :h )
-    png = qr.to_img                                             # returns an instance of ChunkyPNG
-    address = "tmp/"+address+".png"
-    png.resize(180, 180).save(address)
-  end
-
-  def find_account(id)
-    require 'coinbase/wallet'
-    client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
-    account = client.account(id)
-    return account
-  end
-  def create_address(account)
-    address = account.create_address(callback_url: 'https://themailman.io/payment_recieved')
-    return address
-  end
-  def send_email(to,text,subject)
+  def send_email(to, text, subject)
     mg_client = Mailgun::Client.new 'key-52ad9f887199e8cd0ef6e603640304ad'
     message_params = { from: 'mailman <mailman@themailman.io>',
                        to: to,
@@ -217,7 +83,8 @@ class PaywallController < ApplicationController
     # Send your message through the client
     mg_client.send_message 'themailman.io', message_params
   end
-  def send_email_from_user(to,from,text,subject)
+
+  def send_email_from_user(to, from, text, subject)
     mg_client = Mailgun::Client.new 'key-52ad9f887199e8cd0ef6e603640304ad'
     message_params = { from: from,
                        to: to,
@@ -226,270 +93,163 @@ class PaywallController < ApplicationController
     # Send your message through the client
     mg_client.send_message 'themailman.io', message_params
   end
-  def send_email_att(from,to,text,subject,address)
+
+  def send_email_att(from, to, text, subject, address)
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
     message_params = { from: from,
                        to: to,
                        subject: subject,
-                       text:  text ,
-                       attachment: File.new(File.join("tmp", address+'.png')),
+                       text:  text,
+                       attachment: File.new(File.join('tmp', address + '.png')),
                        multipart: true }
     # Send your message through the client
     mg_client.send_message 'themailman.io', message_params
   end
+
   def send_complex_message
     mg_client = Mailgun::Client.new 'key-bcdc4d42e9fa4892dd98272424ac29d7'
     message_params = { from: 'user <user@themailman.io>',
                        to: 'waleed@payload.tech',
                        subject: 'hey  ',
-                       text:  'Hello' ,
-                       attachment: File.new(File.join("tmp", 'really_cool_qr_image.png')),
+                       text:  'Hello',
+                       attachment: File.new(File.join('tmp', 'really_cool_qr_image.png')),
                        multipart: true }
     # Send your message through the client
     mg_client.send_message 'themailman.io', message_params
-    redirect_to :action => 'login'
+    redirect_to action: 'login'
   end
 
   def payment_recieved
-    address = params['address'];
+    address = params['address']
     transaction = Transaction.find_by_btc_address(address.to_s)
-    transaction.status = "closed"
-    transaction.save;
-    email = transaction.email;
-    user = transaction.user;
-    user.wallet_amount =user.wallet_amount.to_f + transaction.amount.to_f;
-    user.save;
-    em_addr = user.email.to_s;
-    send_email(em_addr,email.body+"Sent via TheMailman",email.subject);
-    render text: "Mail sent";
-  end
-  def payment_transfer
-    id = session[:user_id].to_i;
-    user = User.find(id)
-    if(user.present?)
-      send_money('b2411493-3d92-5c11-b6ad-aee0a0a446a7',user.wallet_amount.to_f,user.email);
-    end
-    user.wallet_amount = user.wallet_amount.to_f-user.wallet_amount.to_f;
+    transaction.status = 'closed'
+    transaction.save
+    email = transaction.email
+    user = transaction.user
+    user.wallet_amount = user.wallet_amount.to_f + transaction.amount.to_f
     user.save
-    render text: "Payment Sent"
+    em_addr = user.email.to_s
+    send_email(em_addr, email.body + 'Sent via TheMailman', email.subject)
+    render text: 'Mail sent'
   end
-  def send_money(id,amount,to)
-    require 'coinbase/wallet'
-    client = Coinbase::Wallet::Client.new(api_key: 'eNuQ5NQy3FBar2Dn', api_secret: 'wJs4iiaXFkHaFUSsnlERxkfeLlge6fHV')
-    client.send(id.to_s,{to: to.to_s, amount: amount.to_s, currency: 'BTC'})
-  end
-  def send_sms(to,body)
+
+  def send_sms(to, body)
     number_to_send_to = to
-    twilio_sid = "AC01b345fbd6d4a9bf4aeac9d39811dbd2"
-    twilio_token = "a4f4229b588bb20692cd628fc0b5ff63"
-    twilio_phone_number = "7146811075"
+    twilio_sid = 'AC01b345fbd6d4a9bf4aeac9d39811dbd2'
+    twilio_token = 'a4f4229b588bb20692cd628fc0b5ff63'
+    twilio_phone_number = '7146811075'
     @twilio_client = Twilio::REST::Client.new twilio_sid, twilio_token
     @twilio_client.account.sms.messages.create(
-        :from => "+1#{twilio_phone_number}",
-        :to => number_to_send_to,
-        :body => body
+      from: "+1#{twilio_phone_number}",
+      to: number_to_send_to,
+      body: body
     )
   end
-  def add_amount_user(user_id,amount)
-    user = User.find(user_id.to_i);
-    if(user.present?)
-      user.wallet_amount = user.wallet_amount+amount.to_f;
-    end
-  end
-  def change_pass
-    pass1 = params['password'].to_s
-    pass3 = params['old_password'].to_s
-    user = User.find(session[:user_id].to_i)
-    @done = false
-    if(user.present?)
-      cred = user.credential
-      if(cred.password.to_s===pass3)
-        cred.password = pass1
-        cred.save
-        user.save
-        @done = true
-      end
-    end
-    respond_to do |format|
-      format.js   { render :template => 'paywall/change_password.js.erb' }
-    end
-  end
-  def change_prof
-    pass1 = params['password'];
-    user = current_human
-    @done = false;
 
-    if(user.present?)
-      if(user.valid_password?(pass1.to_s))
-          cc = params['cc']
-          phone = params['phone']
+  def add_amount_user(user_id, amount)
+    user = User.find(user_id.to_i)
+    user.wallet_amount = user.wallet_amount + amount.to_f if user.present?
+  end
 
-          if(user.phones.first == nil)
-            ph = Phone.new
-            ph.number = phone
-            ph.country = cc
-            ph.save
-            user.phones<< ph
-          else
-           p = user.phones.first
-           p.number = phone
-           p.country = cc
-           p.save
-          end
-
-        fname  = params['fname']
-        lname  = params['lname']
-        loc = params['loc']
-        about = params['about']
-        remail = params['remail']
-        rsms = params['rsms']
-
-        reward = user.reward;
-        reward.email = remail.to_f;
-        reward.sms = rsms.to_f;
-        reward.save
-
-        profile = user.profile;
-        profile.location = loc;
-        profile.about = about;
-        profile.first_name = fname;
-        profile.last_name = lname;
-        profile.save
-        @done = true
-      end
-    end
-    respond_to do |format|
-      format.js {render template: 'paywall/change_prof'}
-    end
-  end
-  def add_email
-    email = params['email'];
-    user = current_human
-    em = UserEmail.new
-    em.address = email;
-    user.user_emails << em;
-    em.save
-    user.save;
-    @ema = em;
-    respond_to do |format|
-      format.js { render template: 'paywall/add_emails'}
-      format.html {redirect_to action: 'settings'}
-    end
-  end
-  def delete_emails
-    UserEmail.destroy(params['id'].to_i)
-    respond_to do |format|
-      format.js { render template: ''}
-      format.html {redirect_to action: "settings"}
-    end
-  end
-  def add_phones
-      phone  = Phone.new
-      phone.number = params['phone'];
-      phone.save;
-      user = current_human;
-      user.phones << phone
-      user.save
-      redirect_to action: 'settings'
-  end
-  def delete_phones
-    Phone.destroy(params['id'].to_i)
-    redirect_to action: 'settings'
-  end
   def send_verify_code
     random = Random.new
-    a=random.rand(1000..5000)
+    a = random.rand(1000..5000)
     @user = current_human
-    @user.v_code = a.to_i;
-    @user.verified = false;
+    @user.v_code = a.to_i
+    @user.verified = false
     @user.save
-    phone = @user.phones.first;
-    send_sms(phone.number,"This is Your Mailman Verification code :"+a.to_s);
+    phone = @user.phones.first
+    send_sms(phone.number, 'This is Your Mailman Verification code :' + a.to_s)
     redirect_to action: 'verify'
   end
+
   def verify
-      if(params.include?"code")
-        user = current_human;
-        code = params[:code].to_i;
-        if(code.eql?(user.v_code.to_i))
-          user.verified = true;
-          user.save;
-        end
-      end
-  end
-  def send_sms_profile
-    @done = false;
-    to_send = params['username']
-      user_to_send = Human.find_by_username(to_send)
-      rew = user_to_send.reward.sms
-      rew = rew.to_d;
-
-      if((rew.to_f <= current_human.account.balance.to_f) && (params['message'].to_s.chars.count <= 150))
-            @done = true;
-            send_sms(user_to_send.phones.first.country+user_to_send.phones.first.number,"This message is from "+current_human.username+"\n"+params['message']);
-            current_human.account.transfer(amount: rew, to: user_to_send.account)
-      end
-    respond_to do |format|
-        format.js   { render :template => 'paywall/sms_verify.js.erb' }
-    end
-  end
-  def send_email_profile
-    @done = false;
-    to_send = params['username']
-      user_to_send = Human.find_by_username(to_send)
-      rew = user_to_send.reward.email
-
-      if(rew.to_f <= current_human.account.balance.to_f)
-          @done = true;
-          send_email_from_user(to_send+'@themailman.io',current_human.username+'@themailman.io',params['message'],params['subject'])
-          send_email_from_user(user_to_send.email,current_human.username+'@themailman.io',params['message'].to_s+"\nSent Via themailman.io",params['subject'])
-          current_human.account.transfer(amount: rew, to: user_to_send.account)
-      end
-    respond_to do |format|
-        format.js   { render :template => 'paywall/email_verify.js.erb' }
-    end
-  end
-  def inbox
-      @user = current_human;
-  end
-  def reply_email
-          @done = false;
-          current_human.emails.find_by_from('')
-          if( !current_human.emails.find_by_from(params[:to]).nil?)
-            send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'],params['subject'])
-            send_email_from_user(params[:to],current_human.username+'@themailman.io',params['body'].to_s+"\nSent Via themailman.io",params['subject'])
-            @done = true;
-          end
-          respond_to do |format|
-            format.js   { render :template => 'paywall/reply.js.erb' }
-          end
-  end
-  def tweet
-      client = Twitter::REST::Client.new do |config|
-        config.consumer_key        = "ntBN74DSUpduhZHHsAfhdpZtB"
-        config.consumer_secret     = "0h8HcKMojdmDUGytKmj6F3MvIzWxpoQ3BIzTRuqG42BCT4yyfm"
-        config.access_token        = "333279793-V5SARDcxNQCGeyEjUpInryg1CC9a51BmmX53R0Xo"
-        config.access_token_secret = "jQ2pzGjxPtkz2gut7C2pmMUpbbzqaWDLetZv9YJBF6aEQ"
-      end
+    if params.include? 'code'
       user = current_human
-      username = params['user']
-      timeline = client.user_timeline(username)
-      timeline.each do |t|
-        text = t.urls.each do |u|
-          if u.display_url.include? "themailman.io/#{user.username}"
-            logger.debug 'Verification tweet found'
-            sm = SocialMedium.new
-            sm.twitter = params['user']
-            sm.save
-            user.social_medium = sm
-            account = user.account
-            account.deposit(amount: 10, meta: 'twitter_bonus')
-            account.save
-            user.save
-            break
-          end
-        end
+      code = params[:code].to_i
+      if code.eql?(user.v_code.to_i)
+        user.verified = true
+        user.save
       end
-      redirect_to '/'+current_human.username.to_s
+    end
+  end
+
+  def send_sms_profile
+    @done = false
+    to_send = params['username']
+    user_to_send = Human.find_by_username(to_send)
+    rew = user_to_send.reward.sms
+    rew = rew.to_d
+
+    if (rew.to_f <= current_human.account.balance.to_f) && (params['message'].to_s.chars.count <= 150)
+      @done = true
+      send_sms(user_to_send.phones.first.country + user_to_send.phones.first.number, 'This message is from ' + current_human.username + "\n" + params['message'])
+      current_human.account.transfer(amount: rew, to: user_to_send.account)
+    end
+    respond_to do |format|
+      format.js { render template: 'paywall/sms_verify.js.erb' }
+    end
+  end
+
+  def send_email_profile
+    @done = false
+    to_send = params['username']
+    user_to_send = Human.find_by_username(to_send)
+    rew = user_to_send.reward.email
+
+    if (rew.to_f <= current_human.account.balance.to_f)
+      @done = true
+      send_email_from_user(to_send + '@themailman.io', current_human.username + '@themailman.io', params['message'], params['subject'])
+      send_email_from_user(user_to_send.email, current_human.username + '@themailman.io', params['message'].to_s + "\nSent Via themailman.io", params['subject'])
+      current_human.account.transfer(amount: rew, to: user_to_send.account)
+    end
+    respond_to do |format|
+      format.js { render template: 'paywall/email_verify.js.erb' }
+    end
+  end
+
+  def inbox
+    @user = current_human
+  end
+
+  def reply_email
+    @done = false
+    current_human.emails.find_by_from('')
+    unless current_human.emails.find_by_from(params[:to]).nil?
+      send_email_from_user(params[:to], current_human.username + '@themailman.io', params['body'], params['subject'])
+      send_email_from_user(params[:to], current_human.username + '@themailman.io', params['body'].to_s + "\nSent Via themailman.io", params['subject'])
+      @done = true
+    end
+    respond_to do |format|
+      format.js   { render template: 'paywall/reply.js.erb' }
+    end
+  end
+
+  def tweet
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key        = 'ntBN74DSUpduhZHHsAfhdpZtB'
+      config.consumer_secret     = '0h8HcKMojdmDUGytKmj6F3MvIzWxpoQ3BIzTRuqG42BCT4yyfm'
+      config.access_token        = '333279793-V5SARDcxNQCGeyEjUpInryg1CC9a51BmmX53R0Xo'
+      config.access_token_secret = 'jQ2pzGjxPtkz2gut7C2pmMUpbbzqaWDLetZv9YJBF6aEQ'
+    end
+    user = current_human
+    username = params['user']
+    timeline = client.user_timeline(username)
+    timeline.each do |t|
+      text = t.urls.each do |u|
+        next unless u.display_url.include? "themailman.io/#{user.username}"
+        logger.debug 'Verification tweet found'
+        sm = SocialMedium.new
+        sm.twitter = params['user']
+        sm.save
+        user.social_medium = sm
+        account = user.account
+        account.deposit(amount: 10, meta: 'twitter_bonus')
+        account.save
+        user.save
+        break
+      end
+    end
+    redirect_to '/' + current_human.username.to_s
   end
 end
