@@ -79,19 +79,19 @@ ActiveRecord::Schema.define(version: 20160418180142) do
   add_index "humen", ["username"], name: "index_humen_on_username", unique: true
 
   create_table "ledgers", force: :cascade do |t|
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
     t.integer  "from_id"
     t.integer  "to_id"
     t.decimal  "amount"
     t.string   "currency"
     t.boolean  "type_transfer",    default: false
     t.boolean  "type_deposit",     default: false
+    t.boolean  "type_fee",         default: false
     t.boolean  "type_withdrawal",  default: false
     t.string   "ref"
     t.string   "meta"
     t.string   "stripe_charge_id"
-    t.boolean  "type_fee",         default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
   end
 
   create_table "profiles", force: :cascade do |t|
