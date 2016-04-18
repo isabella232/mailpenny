@@ -13,6 +13,5 @@
 //= require jquery/dist/jquery.min.js
 //= require bootstrap/dist/js/bootstrap.min.js
 //= require d3/d3.min.js
-//= require timeknots/src/timeknots-min.js
 //= require turbolinks
 //= require_tree
