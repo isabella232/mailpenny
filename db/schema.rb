@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322080932) do
+ActiveRecord::Schema.define(version: 20160418175015) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "human_id"
@@ -40,17 +40,6 @@ ActiveRecord::Schema.define(version: 20160322080932) do
     t.integer  "user_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
-  end
-
-  create_table "emails", force: :cascade do |t|
-    t.string   "to"
-    t.string   "from"
-    t.string   "subject"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "header"
-    t.integer  "human_id"
   end
 
   create_table "humen", force: :cascade do |t|
@@ -105,14 +94,6 @@ ActiveRecord::Schema.define(version: 20160322080932) do
     t.boolean  "type_fee",         default: false
   end
 
-  create_table "phones", force: :cascade do |t|
-    t.string   "number"
-    t.string   "country"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "human_id"
-  end
-
   create_table "profiles", force: :cascade do |t|
     t.string   "about"
     t.string   "city"
@@ -126,57 +107,12 @@ ActiveRecord::Schema.define(version: 20160322080932) do
     t.integer  "human_id"
   end
 
-  create_table "rewards", force: :cascade do |t|
-    t.float    "sms"
-    t.float    "call"
-    t.float    "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "human_id"
-  end
-
   create_table "social_media", force: :cascade do |t|
     t.string   "facebook"
     t.string   "twitter"
     t.string   "linkedin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "human_id"
-  end
-
-  create_table "temp", force: :cascade do |t|
-    t.integer "bla"
-  end
-
-  create_table "user_emails", force: :cascade do |t|
-    t.string   "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "human_id"
-  end
-
-  create_table "views", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "views", ["email"], name: "index_views_on_email", unique: true
-  add_index "views", ["reset_password_token"], name: "index_views_on_reset_password_token", unique: true
-
-  create_table "whitelists", force: :cascade do |t|
-    t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "human_id"
   end
 
