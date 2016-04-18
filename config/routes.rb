@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-
-  get 'dashboard/profile'
-  get 'dashboard/account'
-  get 'dashboard/billing'
-  get 'dashboard/messages'
-  get 'dashboard/overview'
+  # routes for the dashboard
+  get '/profile'  => 'dashboard#profile'
+  get '/account'  => 'dashboard#account'
+  get '/billing'  => 'dashboard#billing'
+  get '/messages' => 'dashboard#messages'
+  get '/overview' => 'dashboard#overview'
 
   ## devise controllers for humen
   devise_for :human, controllers: {
@@ -31,34 +31,18 @@ Rails.application.routes.draw do
   post 'verify'=>'paywall#verify'
   get 'charges/new'
   get 'charges/create'
+
   # static pages
   root :to => 'static_pages#home'
   get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
   # get 'about'   => 'static_pages#about'
   # get 'contact' => 'static_pages#contact'
+
   get 'tweet' =>'paywall#tweet'
-  # email API
-  #post 'emails/recieve'       => 'emails#recieve'
-  #get 'emails/recieve'        => 'emails#recieve'
-  #get 'emails/welcome'        => 'emails#welcome'
-  #get 'emails/create_address' => 'emails#create_address'
-  #post 'emails/payment_recieved' => 'emails#payment_recieved'
   post 'reply_email' => 'paywall#reply_email'
   post 'recieve' => 'paywall#recieve'
-  # get 'register' => 'human#register'
-  # post 'register' => 'paywall#register'
   post 'payment_recieved' => 'paywall#payment_recieved'
-  #get 'paywall/home' => 'paywall#home'
-  #get 'settings' => 'paywall#settings', as: :settings
   get 'transactions' => 'paywall#transactions'
-  get 'inbox' => 'paywall#inbox'
-  get 'qr' => 'paywall#qr'
-  get 'send_complex_message' => 'paywall#send_complex_message'
-  post 'update_user' => 'paywall#update_user'
-  post 'whitelist_delete' => 'paywall#whitelist_delete'
-  get 'whitelist' => 'paywall#whitelist'
-  post 'whitelist_add' => 'paywall#whitelist_add'
-  post 'update_user' => 'paywall#update_user'
   post 'payment_transfer' => 'paywall#payment_transfer'
   get 'setpassword' => 'paywall#setpassword'
   post 'setpassword' => 'paywall#setpassword'
@@ -74,8 +58,6 @@ Rails.application.routes.draw do
   post 'delete_phones' => 'paywall#delete_phones'
   post 'send_email_profile' => 'paywall#send_email_profile'
   post 'send_sms_profile' => 'paywall#send_sms_profile'
-  # billing
-  get 'billing' => 'payments_handler#billing', as: :billing
   # add a card
   post 'add-card' => 'payment_handler#add_card'
 
@@ -85,13 +67,4 @@ Rails.application.routes.draw do
   # messenger -- because the control sends messages, get it? Hahahahaha
   post '/messenger/mail' => 'messenger/mail', as: :mail_messenger
   post '/messenger/text' => 'messenger/text', as: :text_messenger
-
-  ## The Humen routes by Devise
-  # devise_for :humen, skip: [:sessions]
-  # as :humen do
-  #   # sessions
-  #   get '/login(.:format)' => 'devise/sessions#new', as: :new_human_session
-  #   post '/login(.:format)' => 'devise/sessions#create', as: :human_session
-  #   delete 'logout' => 'devise/sessions#destroy', as: :destroy_human_session
-  # end
 end
