@@ -1,13 +1,9 @@
 Rails.application.routes.draw do
 
   get 'dashboard/profile'
-
   get 'dashboard/account'
-
   get 'dashboard/billing'
-
   get 'dashboard/messages'
-
   get 'dashboard/overview'
 
   ## devise controllers for humen
