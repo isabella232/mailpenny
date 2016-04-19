@@ -1,5 +1,5 @@
 class Account < ActiveRecord::Base
-  belongs_to :human
+  belongs_to :user
   has_many :ledgers
 
   def deposit(args)

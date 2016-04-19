@@ -1,4 +1,4 @@
 # User phone numbers
 class PhoneNumber < ActiveRecord::Base
-  belongs_to :human
+  belongs_to :user
 end

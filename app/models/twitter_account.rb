@@ -1,4 +1,4 @@
 # Users' Twitter account information
 class TwitterAccount < ActiveRecord::Base
-  belongs_to :human
+  belongs_to :user
 end
