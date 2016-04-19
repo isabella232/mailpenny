@@ -1,4 +1,4 @@
-class Human::RegistrationsController < Devise::RegistrationsController
+class User::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_sign_up_params, only: [:create]
   # before_filter :configure_account_update_params, only: [:update]
 
@@ -50,7 +50,7 @@ class Human::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
    def after_sign_up_path_for(resource)
-     '/'+current_human.username.to_s
+     '/'+current_user.username.to_s
    end
 
   # The path used after sign up for inactive accounts.

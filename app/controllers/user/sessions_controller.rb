@@ -1,4 +1,4 @@
-class Human::SessionsController < Devise::SessionsController
+class Users::SessionsController < Devise::SessionsController
   before_filter :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -20,7 +20,7 @@ class Human::SessionsController < Devise::SessionsController
 
   # Where to redirect after a successful signup
   def after_sign_in_path_for(resource)
-    '/'+current_human.username.to_s
+    '/'+current_user.username.to_s
   end
 
   # If you have extra params to permit, append them to the sanitizer.
