@@ -2,17 +2,17 @@ class PaywallController < ApplicationController
   def profile
     @current = false
     id = params[:username]
-    @user1 = current_human
-    @user = Human.find_by_username(id)
+    @user1 = current_user
+    @user = User.find_by_username(id)
 
     @current = true if (@user1 === @user)
     redirect_to register_path if @user.nil?
   end
 
   def settings
-    if human_signed_in?
-      @user = current_human
-      @mail = current_human.email
+    if user_signed_in?
+      @user = current_user
+      @mail = current_user.email
     end
   end
 
@@ -66,7 +66,7 @@ class PaywallController < ApplicationController
     # email.from = email.from[/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/i];
     username = email.to.split('@').first
     email.save
-    user = Human.find_by_username(username)
+    user = User.find_by_username(username)
     if user.present?
       user.emails << email
       user.save
@@ -154,7 +154,7 @@ class PaywallController < ApplicationController
   def send_verify_code
     random = Random.new
     a = random.rand(1000..5000)
-    @user = current_human
+    @user = current_user
     @user.v_code = a.to_i
     @user.verified = false
     @user.save
@@ -165,7 +165,7 @@ class PaywallController < ApplicationController
 
   def verify
     if params.include? 'code'
-      user = current_human
+      user = current_user
       code = params[:code].to_i
       if code.eql?(user.v_code.to_i)
         user.verified = true
@@ -177,14 +177,14 @@ class PaywallController < ApplicationController
   def send_sms_profile
     @done = false
     to_send = params['username']
-    user_to_send = Human.find_by_username(to_send)
+    user_to_send = User.find_by_username(to_send)
     rew = user_to_send.reward.sms
     rew = rew.to_d
 
-    if (rew.to_f <= current_human.account.balance.to_f) && (params['message'].to_s.chars.count <= 150)
+    if (rew.to_f <= current_user.account.balance.to_f) && (params['message'].to_s.chars.count <= 150)
       @done = true
-      send_sms(user_to_send.phones.first.country + user_to_send.phones.first.number, 'This message is from ' + current_human.username + "\n" + params['message'])
-      current_human.account.transfer(amount: rew, to: user_to_send.account)
+      send_sms(user_to_send.phones.first.country + user_to_send.phones.first.number, 'This message is from ' + current_user.username + "\n" + params['message'])
+      current_user.account.transfer(amount: rew, to: user_to_send.account)
     end
     respond_to do |format|
       format.js { render template: 'paywall/sms_verify.js.erb' }
@@ -194,14 +194,14 @@ class PaywallController < ApplicationController
   def send_email_profile
     @done = false
     to_send = params['username']
-    user_to_send = Human.find_by_username(to_send)
+    user_to_send = User.find_by_username(to_send)
     rew = user_to_send.reward.email
 
-    if (rew.to_f <= current_human.account.balance.to_f)
+    if (rew.to_f <= current_user.account.balance.to_f)
       @done = true
-      send_email_from_user(to_send + '@themailman.io', current_human.username + '@themailman.io', params['message'], params['subject'])
-      send_email_from_user(user_to_send.email, current_human.username + '@themailman.io', params['message'].to_s + "\nSent Via themailman.io", params['subject'])
-      current_human.account.transfer(amount: rew, to: user_to_send.account)
+      send_email_from_user(to_send + '@themailman.io', current_user.username + '@themailman.io', params['message'], params['subject'])
+      send_email_from_user(user_to_send.email, current_user.username + '@themailman.io', params['message'].to_s + "\nSent Via themailman.io", params['subject'])
+      current_user.account.transfer(amount: rew, to: user_to_send.account)
     end
     respond_to do |format|
       format.js { render template: 'paywall/email_verify.js.erb' }
@@ -209,15 +209,15 @@ class PaywallController < ApplicationController
   end
 
   def inbox
-    @user = current_human
+    @user = current_user
   end
 
   def reply_email
     @done = false
-    current_human.emails.find_by_from('')
-    unless current_human.emails.find_by_from(params[:to]).nil?
-      send_email_from_user(params[:to], current_human.username + '@themailman.io', params['body'], params['subject'])
-      send_email_from_user(params[:to], current_human.username + '@themailman.io', params['body'].to_s + "\nSent Via themailman.io", params['subject'])
+    current_user.emails.find_by_from('')
+    unless current_user.emails.find_by_from(params[:to]).nil?
+      send_email_from_user(params[:to], current_user.username + '@themailman.io', params['body'], params['subject'])
+      send_email_from_user(params[:to], current_user.username + '@themailman.io', params['body'].to_s + "\nSent Via themailman.io", params['subject'])
       @done = true
     end
     respond_to do |format|
@@ -232,7 +232,7 @@ class PaywallController < ApplicationController
       config.access_token        = '333279793-V5SARDcxNQCGeyEjUpInryg1CC9a51BmmX53R0Xo'
       config.access_token_secret = 'jQ2pzGjxPtkz2gut7C2pmMUpbbzqaWDLetZv9YJBF6aEQ'
     end
-    user = current_human
+    user = current_user
     username = params['user']
     timeline = client.user_timeline(username)
     timeline.each do |t|
@@ -250,6 +250,6 @@ class PaywallController < ApplicationController
         break
       end
     end
-    redirect_to '/' + current_human.username.to_s
+    redirect_to '/' + current_user.username.to_s
   end
 end

@@ -1,6 +1,6 @@
 # The stripe charges controller
 class ChargesController < ApplicationController
-  before_action :authenticate_human!
+  before_action :authenticate_user!
 
   def new
     amount = params[:amount].to_i
@@ -27,7 +27,7 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
-    current_human.account.deposit amount: @amount, stripe_charge_id: charge.id
+    current_user.account.deposit amount: @amount, stripe_charge_id: charge.id
 
   rescue Stripe::CardError => e
     flash[:error] = e.message

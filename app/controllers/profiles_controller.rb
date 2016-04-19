@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_human!
+  before_action :authenticate_user!
   before_action :set_profile_if_owned_by_user, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -66,9 +66,9 @@ class ProfilesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_profile_if_owned_by_user
-      @profile = current_human.profile unless params[:id]
+      @profile = current_user.profile unless params[:id]
       @profile = Profile.find(params[:id]) if params[:id]
-      fail 'You can only edit your own profile' if @profile.human_id != current_human.id
+      fail 'You can only edit your own profile' if @profile.user_id != current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
