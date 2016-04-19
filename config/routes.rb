@@ -7,22 +7,22 @@ Rails.application.routes.draw do
   get '/dashboard/messages' => 'dashboard#messages'
   get '/dashboard/overview' => 'dashboard#overview'
 
-  ## devise controllers for humen
-  devise_for :human, controllers: {
-    confirmations: 'human/confirmations',
-    passwords: 'human/passwords',
-    registrations: 'human/registrations',
-    sessions: 'human/sessions',
-    unlocks: 'human/unlocks',
+  ## devise controllers for users
+  devise_for :user, controllers: {
+    confirmations: 'user/confirmations',
+    passwords: 'user/passwords',
+    registrations: 'user/registrations',
+    sessions: 'user/sessions',
+    unlocks: 'user/unlocks',
     # commenting the below because omniauth gem isn't installed
-    # omniauth_callbacks: 'human/omniauth_callbacks'
+    # omniauth_callbacks: 'user/omniauth_callbacks'
   }, skip: [:sessions]
-  ## custom routes for humen
-  as :human do
-    get 'login' => 'human/sessions#new', :as => :new_human_session
-    post 'login' => 'human/sessions#create', :as => :human_session
-    delete 'logout' => 'human/sessions#destroy', :as => :destroy_human_session
-    get 'register' => 'human/registrations#new', as: :register
+  ## custom routes for users
+  as :user do
+    get 'login' => 'user/sessions#new', :as => :new_user_session
+    post 'login' => 'user/sessions#create', :as => :user_session
+    delete 'logout' => 'user/sessions#destroy', :as => :destroy_user_session
+    get 'register' => 'user/registrations#new', as: :register
   end
 
   post 'emails/recieve' =>'emails/recieve'
