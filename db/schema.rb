@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418180142) do
+ActiveRecord::Schema.define(version: 20160419101629) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "human_id"
@@ -79,33 +79,49 @@ ActiveRecord::Schema.define(version: 20160418180142) do
   add_index "humen", ["username"], name: "index_humen_on_username", unique: true
 
   create_table "ledgers", force: :cascade do |t|
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "from_id"
     t.integer  "to_id"
     t.decimal  "amount"
     t.string   "currency"
     t.boolean  "type_transfer",    default: false
     t.boolean  "type_deposit",     default: false
-    t.boolean  "type_fee",         default: false
     t.boolean  "type_withdrawal",  default: false
     t.string   "ref"
     t.string   "meta"
     t.string   "stripe_charge_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.boolean  "type_fee",         default: false
+  end
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string  "country_code"
+    t.string  "phone_number"
+    t.boolean "verified",     default: false
+    t.integer "human_id"
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "about"
-    t.string   "location"
-    t.string   "twitter"
     t.string   "profile_picture"
-    t.integer  "human_id"
-    t.string   "facebook"
-    t.string   "linkedin"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "location"
+    t.integer  "human_id"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "linkedin"
   end
+
+  create_table "twitter_accounts", force: :cascade do |t|
+    t.string  "username"
+    t.boolean "verified", default: false
+    t.string  "proof"
+    t.integer "human_id"
+  end
+
+  add_index "twitter_accounts", ["username"], name: "index_twitter_accounts_on_username", unique: true
 
 end
