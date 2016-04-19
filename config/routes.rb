@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   # routes for the dashboard
-  get '/profile'  => 'dashboard#profile'
-  get '/account'  => 'dashboard#account'
-  get '/billing'  => 'dashboard#billing'
-  get '/messages' => 'dashboard#messages'
-  get '/overview' => 'dashboard#overview'
+  get '/dashboard/profile'  => 'profiles#edit'
+  get '/dashboard/account'  => 'dashboard#account'
+  get '/dashboard/billing'  => 'dashboard#billing'
+  get '/dashboard/messages' => 'dashboard#messages'
+  get '/dashboard/overview' => 'dashboard#overview'
 
   ## devise controllers for humen
   devise_for :human, controllers: {
@@ -63,6 +63,9 @@ Rails.application.routes.draw do
 
   # charges
   resources :charges
+
+  # profiles
+  resources :profiles
 
   # messenger -- because the control sends messages, get it? Hahahahaha
   post '/messenger/mail' => 'messenger/mail', as: :mail_messenger
