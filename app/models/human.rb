@@ -11,12 +11,11 @@ class Human < ActiveRecord::Base
                                     message: 'That username is unavailable'
   has_one :account
   has_one :profile
-  has_one :reward
-  has_one :social_medium
+  has_one :twitter_account
+  has_one :phone_number
   has_many :ccards
   before_create :build_default_profile
   before_create :build_default_account
-  before_create :build_default_profile
 
   # The money movement
   def fee
