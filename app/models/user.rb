@@ -1,5 +1,5 @@
 # The humans on the system
-class Human < ActiveRecord::Base
+class User < ActiveRecord::Base
   require 'rails_restricted_usernames'
   # Include default devise modules. Others available are:
   # :timeoutable and :omniauthable

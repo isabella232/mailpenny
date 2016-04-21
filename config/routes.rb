@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :users
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
   get '/dashboard/account'  => 'dashboard#account'
