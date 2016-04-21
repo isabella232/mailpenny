@@ -1,5 +1,6 @@
 class User::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_sign_up_params, only: [:create]
+  layout 'dashboard'
   # before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -50,7 +51,7 @@ class User::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
    def after_sign_up_path_for(resource)
-     dashboard_account
+     dashboard_account_path
    end
 
   # The path used after sign up for inactive accounts.
