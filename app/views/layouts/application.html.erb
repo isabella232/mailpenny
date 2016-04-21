@@ -38,7 +38,7 @@
   <!-- END HEADER -->
 
   <!-- BEGIN BODY -->
-      <%= yield ? yield : yield(:body) %>
+      <%= yield(:body) ? yield(:body) : yield %>
   <!-- END BODY -->
 
   <!-- BEGIN FOOTER -->

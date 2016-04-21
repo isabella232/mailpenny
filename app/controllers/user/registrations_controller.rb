@@ -1,6 +1,6 @@
 class User::RegistrationsController < Devise::RegistrationsController
+  layout 'dashboard', only: [:edit]
   before_filter :configure_sign_up_params, only: [:create]
-  layout 'dashboard'
   # before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
