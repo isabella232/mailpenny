@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
-  get '/dashboard/account'  => 'dashboard#account'
   get '/dashboard/billing'  => 'dashboard#billing'
   get '/dashboard/messages' => 'dashboard#messages'
   get '/dashboard/overview' => 'dashboard#overview'
+  ## get '/dashboard/account' is in the user devise routes below
 
   ## devise controllers for users
   devise_for :user, controllers: {
@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     post 'login' => 'user/sessions#create', :as => :user_session
     delete 'logout' => 'user/sessions#destroy', :as => :destroy_user_session
     get 'register' => 'user/registrations#new', as: :register
+    get '/dashboard/account'  => 'user/registrations#edit'
   end
 
   post 'emails/recieve' =>'emails/recieve'
@@ -66,8 +67,4 @@ Rails.application.routes.draw do
 
   # profiles
   resources :profiles
-
-  # messenger -- because the control sends messages, get it? Hahahahaha
-  post '/messenger/mail' => 'messenger/mail', as: :mail_messenger
-  post '/messenger/text' => 'messenger/text', as: :text_messenger
 end
