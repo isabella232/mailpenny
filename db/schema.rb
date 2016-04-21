@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419154100) do
+ActiveRecord::Schema.define(version: 20160421121555) do
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "human_id"
+    t.integer  "user_id"
     t.decimal  "balance",    default: 0.0
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "header"
-    t.integer  "human_id"
+    t.integer  "user_id"
   end
 
   create_table "ledgers", force: :cascade do |t|
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.string   "country_code"
     t.string   "phone_number"
     t.boolean  "verified",     default: false
-    t.integer  "human_id"
+    t.integer  "user_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
   end
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "location"
-    t.integer  "human_id"
+    t.integer  "user_id"
     t.string   "facebook"
     t.string   "twitter"
     t.string   "linkedin"
@@ -98,7 +98,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.float    "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "human_id"
+    t.integer  "user_id"
   end
 
   create_table "social_media", force: :cascade do |t|
@@ -107,14 +107,14 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.string   "linkedin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "human_id"
+    t.integer  "user_id"
   end
 
   create_table "twitter_accounts", force: :cascade do |t|
     t.string   "username"
     t.boolean  "verified",   default: false
     t.string   "proof"
-    t.integer  "human_id"
+    t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.string   "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "human_id"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -186,7 +186,7 @@ ActiveRecord::Schema.define(version: 20160419154100) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "human_id"
+    t.integer  "user_id"
   end
 
 end
