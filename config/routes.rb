@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
+  get '/dashboard/phone' => 'phone_numbers#dashboard'
   get '/dashboard/billing'  => 'dashboard#billing'
   get '/dashboard/messages' => 'dashboard#messages'
   get '/dashboard/overview' => 'dashboard#overview'
@@ -63,8 +64,5 @@ Rails.application.routes.draw do
   post 'add-card' => 'payment_handler#add_card'
 
   # charges
-  resources :charges
-
-  # profiles
-  resources :profiles
+  resources :charges, :profiles, :phone_numbers
 end

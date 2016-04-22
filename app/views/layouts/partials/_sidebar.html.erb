@@ -10,6 +10,9 @@
     <li role="presentation" class="<%= 'active' if params[:controller] == 'dashboard' && params[:action] == 'messages' %>">
       <%= link_to 'Messages', dashboard_messages_path %>
     </li>
+    <li role="presentation" class="<%= 'active' if params[:controller] == 'phone_numbers' && params[:action] == 'dashboard' %>">
+      <%= link_to 'Phone', dashboard_phone_path %>
+    </li>
     <li role="presentation" class="<%= 'active' if params[:controller] == 'dashboard' && params[:action] == 'billing' %>">
       <%= link_to 'Billing', dashboard_billing_path %>
     </li>
