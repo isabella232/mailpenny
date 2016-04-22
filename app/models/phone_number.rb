@@ -4,35 +4,28 @@ class PhoneNumber < ActiveRecord::Base
   after_create :send_verification_code
 
   def verify_token(code)
-    token = Authy::API.verify(id: authy_id, token: token.to_s)
-    if token.ok?
+    response = Authy::PhoneVerification.check(
+      verification_code: code,
+      country_code: country_code,
+      phone_number: phone_number
+    )
+    if response.ok?
       self.verified = true
       save
-      true
     else
-      fail 'Invalid token'
+      fail 'Invalid code'
     end
   end
 
   private
 
   def send_verification_code
-    # create a user on Authy
-    authy = Authy::API.register_user(
-      email: user.email,
-      cellphone: phone_number,
-      country_code: country_code
+    response = Authy::PhoneVerification.start(
+      via: verification_method,
+      country_code: country_code,
+      phone_number: phone_number,
+      custom_message: 'Your Mailman verification code is {{ code }}'
     )
-    # add the id to the phone number
-    update(authy_id: authy.id)
-    # Send a verification sms
-    send_sms = Authy::API.request_sms(id: authy_id)
-
-    if send_sms.success?
-      true
-    else
-      Rails.logger send_sms
-      fail 'Could not send verification SMS'
-    end
+    fail 'Could not send verification code' unless response.ok?
   end
 end
