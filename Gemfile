@@ -42,9 +42,6 @@ group :development, :test do
   gem 'byebug',      '8.2.2'
   gem 'spring',      '1.6.3'
   gem 'guard',       '~> 2.13'
-end
-
-group :test do
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'factory_girl_rails', '~> 4.7'
   gem 'capybara', '~> 2.7'
