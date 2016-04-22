@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421160214) do
+ActiveRecord::Schema.define(version: 20160422112206) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160421160214) do
   create_table "phone_numbers", force: :cascade do |t|
     t.string   "country_code"
     t.string   "phone_number"
+    t.integer  "authy_id"
     t.boolean  "verified",     default: false
     t.integer  "user_id"
     t.datetime "created_at",                   null: false
