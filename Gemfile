@@ -22,6 +22,8 @@ gem 'mailgun-ruby', '~>1.0.3', require: 'mailgun'
 gem 'mail', '2.6.3'
 # The Twilio client
 gem 'twilio-ruby', '~> 4.11', '>= 4.11.1'
+# The Authy client
+gem 'authy', '~> 2.6', '>= 2.6.2'
 # The Stripe client
 gem 'stripe', '~> 1.36', '>= 1.36.1'
 # JSON library
