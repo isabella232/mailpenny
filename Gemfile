@@ -50,7 +50,7 @@ group :test do
   gem 'capybara', '~> 2.7'
   gem 'database_cleaner', '~> 1.5', '>= 1.5.2'
   gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
-  gem 'ffaker', '~> 2.2'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
 end
 
 group :production do
