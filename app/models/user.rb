@@ -45,6 +45,6 @@ class User < ActiveRecord::Base
       description: "Username: #{username}",
       email: email
     )
-    self.stripe_id = stripe.id
+    self.stripe_customer_id = stripe.id
   end
 end
