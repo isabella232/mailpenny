@@ -45,9 +45,12 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'factory_girl_rails', '~> 4.7'
   gem 'capybara', '~> 2.7'
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.2'
   gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
   gem 'faker', '~> 1.6', '>= 1.6.3'
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.2'
 end
 
 group :production do
