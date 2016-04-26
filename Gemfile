@@ -53,7 +53,7 @@ group :test do
   gem 'database_cleaner', '~> 1.5', '>= 1.5.2'
 end
 
-group :production do
+group :production, :staging do
   gem 'unicorn', '~> 5.1'
   gem 'pg',             '0.18.4'
   gem 'puma',           '2.16.0'
