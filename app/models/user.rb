@@ -6,9 +6,14 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :lockable,
          :confirmable
-  validates :username, presence: true, uniqueness: true
-  validates_exclusion_of :username, in: RestricedUsernamesIdentifier.new.initial_path_segments,
-                                    message: 'That username is unavailable'
+  validates :username,
+            presence: true,
+            uniqueness: { case_sensitive: false },
+            format: { with: /\A[a-zA-Z0-9]+\Z/ },
+            exclusion: {
+              in: RestricedUsernamesIdentifier.new.initial_path_segments,
+              message: 'That username is unavailable'
+            }
   validates :fee_email, numericality: { less_than_or_equal_to: 0 }
   validates :fee_sms, numericality: { less_than_or_equal_to: 0 }
 

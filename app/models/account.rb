@@ -111,10 +111,10 @@ class Account < ActiveRecord::Base
 
   def create_fee_entry(args)
     fee_entry = args.slice(:amount,
-                            :from,
-                            :to,
-                            :currency,
-                            )
+                           :from,
+                           :to,
+                           :currency,
+                          )
     fee_entry[:amount] = args[:to].human.fee * BigDecimal(args[:amount])
     fee_entry[:from] = args[:to]
     fee_entry[:to] = Account.find_by(meta_name: 'revenue')
