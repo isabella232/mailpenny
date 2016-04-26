@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates_exclusion_of :username, in: RestricedUsernamesIdentifier.new.initial_path_segments,
                                     message: 'That username is unavailable'
+  validats :fee_email, numericality: { less_than_or_equal_to: 0 }
+  validats :fee_sms, numericality: { less_than_or_equal_to: 0 }
+
   has_one :account
   has_one :profile
   has_one :twitter_account
