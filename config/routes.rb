@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
-  get '/dashboard/phone' => 'phone_number#dashboard'
+  get '/dashboard/phone' => 'phone_numbers#dashboard'
   get '/dashboard/billing'  => 'dashboard#billing'
   get '/dashboard/messages' => 'dashboard#messages'
   get '/dashboard/overview' => 'dashboard#overview'

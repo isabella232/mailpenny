@@ -1,4 +1,4 @@
-class PhoneNumberController < ApplicationController
+class PhoneNumbersController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
