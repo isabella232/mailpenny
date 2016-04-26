@@ -20,7 +20,7 @@ It's a good idea to run four consoles:
 
 ## Tests
 
-Run `guard` in a console to run minitests everytime you modify tested files. Make sure everything is tested.
+Run `guard` in a console to run rspec everytime you modify tested files. Make sure everything is tested.
 
 ## Production
 
@@ -28,4 +28,20 @@ Test with `bundle exec rake test` before deploying!
 
 Mailman uses postgres as production DB, automatically loaded from the `DATABASE_URL` config var.
 
-If using heroku, remember to run `heroku run rake db:create && heroku run rake db:migrate`
+If using heroku, remember to run `heroku run rake db:setup`
+
+## Dummy User
+
+Unless you're in production, the following user is setup you:
+
+```
+username: dummy
+password: password
+```
+
+## App files
+
+### Models
+
+1. `User`: a devise model for users
+2. `Account`: a model for accounting purposes containing User balances
