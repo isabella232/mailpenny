@@ -64,11 +64,11 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     tls:                  true,
-    address:              'smtp.mailgun.org',
-    port:                 465,
-    domain:               'themailman.io',
-    user_name:            'postmaster@themailman.io',
-    password:             'WR7bUxb1mNTHbFZtUA7PpR7G7EZG2aWJ',
+    address:              Figaro.env.smtp_address,
+    port:                 Figaro.env.smtp_address || 465,
+    domain:               Figaro.env.domain,
+    user_name:            Figaro.env.smtp_username,
+    password:             Figaro.env.smtp_password,
     authentication:       :plain
   }
 
@@ -89,5 +89,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Because in production, we're themailman.io, duhhhh
-  config.action_mailer.default_url_options = { host: 'themailman.io' }
+  config.action_mailer.default_url_options = { host: Figaro.env.domain }
 end
