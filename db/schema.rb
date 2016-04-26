@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160422155731) do
+ActiveRecord::Schema.define(version: 20160426145014) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "user_id"
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(version: 20160422155731) do
     t.integer  "v_code"
     t.boolean  "verified"
     t.integer  "social_medium_id"
+    t.decimal  "fee_email",              default: 0.0
+    t.decimal  "fee_sms",                default: 0.0
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
