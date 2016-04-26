@@ -2,6 +2,7 @@ class PhoneNumberController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
+    @phone_number = current_user.phone_number || PhoneNumber.new
     render layout: 'dashboard'
   end
 
