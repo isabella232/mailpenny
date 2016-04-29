@@ -56,7 +56,7 @@ class Account < ActiveRecord::Base
     args[:from] = self
     # raise an error if it's not being sent to anyone valid
     fail 'You must transfer to a valid user' if
-    args[:to].nil? || args[:to].valid?
+    args[:to].nil? || !Account.exists?(args[:to])
     # process the transaction
     process_transaction args
   end
@@ -86,15 +86,15 @@ class Account < ActiveRecord::Base
 
   def create_transaction(entry, fee_entry = nil)
     Account.transaction do
+      fail 'Insufficient funds' if
+      entry[:from].balance < 0 && entry[:from].meta? == false
+
       # create the entry
       entry_made = Ledger.create(entry)
       # increase the recepient's balance
       entry[:to].increment!('balance', entry[:amount])
       # decrease the sender's balance
       entry[:from].decrement!('balance', entry[:amount])
-
-      fail 'Insufficient funds' if
-      entry[:from].balance < 0 && entry[:from].meta? == false
 
       if fee_entry
         # add the ref id
@@ -113,9 +113,9 @@ class Account < ActiveRecord::Base
     fee_entry = args.slice(:amount,
                            :from,
                            :to,
-                           :currency,
+                           :currency
                           )
-    fee_entry[:amount] = args[:to].human.fee * BigDecimal(args[:amount])
+    fee_entry[:amount] = args[:to].user.fee * BigDecimal(args[:amount])
     fee_entry[:from] = args[:to]
     fee_entry[:to] = Account.find_by(meta_name: 'revenue')
     fee_entry[:type_fee] = true
