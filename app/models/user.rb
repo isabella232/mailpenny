@@ -56,4 +56,8 @@ class User < ActiveRecord::Base
     build_profile
     true
   end
+
+  def stripe_customer_id=(new_customer_id)
+    write_attribute(:stripe_customer_id, new_customer_id)
+  end
 end
