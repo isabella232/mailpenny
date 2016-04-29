@@ -51,6 +51,7 @@ end
 
 group :test do
   gem 'database_cleaner', '~> 1.5', '>= 1.5.2'
+  gem 'simplecov', '~> 0.11.2'
 end
 
 group :production, :staging do
