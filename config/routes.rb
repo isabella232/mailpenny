@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   get 'charges/create'
 
   # static pages
-  root :to => 'static_pages#home'
+  root to: redirect('/login')
   get 'privacy-policy'   => 'static_pages#privacy', as: :privacy_policy
   # get 'about'   => 'static_pages#about'
   # get 'contact' => 'static_pages#contact'
