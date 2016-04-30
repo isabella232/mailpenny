@@ -5,7 +5,7 @@ describe Account do
   before(:each) do
     @alice = create(:user)
     @bob = create(:user)
-    @eve = create(:user, charitable)
+    @eve = create(:user, :charitable)
   end
 
   context 'should be built whenever' do
@@ -20,6 +20,10 @@ describe Account do
     it "Eve's user is created" do
       expect(@eve.account).to_not be_nil
     end
+  end
+
+  it 'balance should not be writable' do
+    expect { @alice.account.balance += 500 }.to raise_error NoMethodError
   end
 
   it 'balance should increase upon deposit' do

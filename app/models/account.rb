@@ -56,12 +56,16 @@ class Account < ActiveRecord::Base
     args[:from] = self
     # raise an error if it's not being sent to anyone valid
     fail 'You must transfer to a valid user' if
-    args[:to].nil? || !Account.exists?(args[:to])
+    args[:to].nil? || !Account.exists?(args[:to].id)
     # process the transaction
     process_transaction args
   end
 
   private
+
+  def balance=(new_balance)
+    write_attribute(:balance, new_balance)
+  end
 
   def process_transaction(args)
     entry = args.slice(

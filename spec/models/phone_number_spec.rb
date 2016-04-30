@@ -6,20 +6,16 @@ describe PhoneNumber do
     @user = build(:user)
   end
 
-  it 'has a valid factory' do
-    expect(@user).to be_valid
-  end
-
-  it 'sends a verification code when saved' do
+  it 'can be created for a user' do
     @user.save
     @user.phone_number = build(:phone_number)
-    expect(@user.phone_number).to be_valid
+    expect(PhoneNumber.exists? @user.phone_number.id).to be true
   end
 
-  it 'should not be verified by default' do
-    @user.save
+  it 'should send verification code on save' do
     @user.phone_number = build(:phone_number)
-    expect(@user.phone_number.verified?).to_not be true
+    @user.save
+    expect(@user.phone_number).to receive(:send_verification_code).with(true)
   end
 
   ## disabled because I'm currently not faking web requests

@@ -32,20 +32,20 @@ class User < ActiveRecord::Base
     fee
   end
 
-  def generate_stripe_id
-    if stripe_customer_id.blank?
-      stripe = Stripe::Customer.create(
-        description: "Username: #{username}",
-        email: email
-      )
-      self.stripe_customer_id = stripe.id
-      save!
-    else
-      fail 'This user already has a Stripe ID'
-    end
+  def stripe_customer_id
+    self[:stripe_customer_id] ||
+      write_attribute(:stripe_customer_id, new_stripe_id)
   end
 
   private
+
+  def new_stripe_id
+    stripe = Stripe::Customer.create(
+      description: "Username: #{username}",
+      email: email
+    )
+    stripe.id
+  end
 
   def build_default_account
     build_account

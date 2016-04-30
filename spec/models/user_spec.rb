@@ -4,6 +4,7 @@ require 'rails_helper'
 describe User do
   before(:each) do
     @user = build(:user)
+    @charitable_user = build(:user, :charitable)
   end
 
   it 'should have an account associated' do
@@ -77,22 +78,32 @@ describe User do
     end
   end
 
-  context 'Stripe IDs' do
+  context 'Stripe ID' do
     it 'should not be writable' do
-      expect { @user.stripe_customer_id << 'random_id_123123' }
+      expect { @user.stripe_customer_id = 'random_id_123123' }
         .to raise_error(NoMethodError)
     end
 
     it 'should be generated if it does not exist' do
       @user.save
-      @user.generate_stripe_id
       expect(@user.stripe_customer_id).to include('cus')
     end
-    it 'should not be generated if it exists' do
+
+    it 'should not be regenerated upon every call' do
       @user.save
-      @user.generate_stripe_id
-      expect { @user.generate_stripe_id }
-        .to raise_error 'This user already has a Stripe ID'
+      id = @user.stripe_customer_id
+      expect(@user.stripe_customer_id).to eq(id)
+    end
+  end
+
+  context 'fees' do
+    it 'should be fifty percent for regular users' do
+      @user.save
+      expect(@user.fee).to eq(BigDecimal('0.5'))
+    end
+    it 'should be twenty percent for charitable users' do
+      @charitable_user.save
+      expect(@charitable_user.fee).to eq(BigDecimal('0.2'))
     end
   end
 end

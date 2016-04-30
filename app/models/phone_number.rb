@@ -1,7 +1,7 @@
 # User phone numbers
 class PhoneNumber < ActiveRecord::Base
   belongs_to :user
-  after_create :send_verification_code
+  after_save :send_verification_code
 
   def verify_token(code)
     response = Authy::PhoneVerification.check(
@@ -27,5 +27,6 @@ class PhoneNumber < ActiveRecord::Base
       custom_message: 'Your Mailman verification code is {{ code }}'
     )
     fail 'Could not send verification code' unless response.ok?
+    true
   end
 end
