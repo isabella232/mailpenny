@@ -205,7 +205,6 @@ class RestricedUsernamesIdentifier
       new
       news
       newsletter
-      nick
       nickname
       notes
       noticias
