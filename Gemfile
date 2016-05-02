@@ -42,11 +42,12 @@ group :development, :test do
   gem 'byebug',      '8.2.2'
   gem 'spring',      '1.6.3'
   gem 'guard',       '~> 2.13'
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'factory_girl_rails', '~> 4.7'
   gem 'capybara', '~> 2.7'
   gem 'guard-rspec', '~> 4.6', '>= 4.6.5'
-  gem 'faker', '~> 1.6', '>= 1.6.3'
 end
 
 group :test do
