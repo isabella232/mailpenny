@@ -14,8 +14,8 @@ class User < ActiveRecord::Base
               in: RestricedUsernamesIdentifier.new.initial_path_segments,
               message: 'That username is unavailable'
             }
-  validates :fee_email, numericality: { less_than_or_equal_to: 0 }
-  validates :fee_sms, numericality: { less_than_or_equal_to: 0 }
+  validates :fee_email, numericality: { greater_than_or_equal_to: 0 }
+  validates :fee_sms, numericality: { greater_than_or_equal_to: 0 }
 
   has_one :account
   has_one :profile
