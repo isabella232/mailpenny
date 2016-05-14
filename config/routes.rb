@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :messages
   resources :conversations
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
