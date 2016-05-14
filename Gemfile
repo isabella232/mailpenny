@@ -36,6 +36,8 @@ gem 'devise', '~> 3.5', '>= 3.5.6'
 gem 'twitter', '~> 5.11.0'
 # Figaro for configuration secrets
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+# Annotate your models
+gem 'annotate', '~> 2.7'
 
 group :development, :test do
   gem 'sqlite3',     '1.3.11'

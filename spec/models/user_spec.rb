@@ -105,15 +105,31 @@ describe User do
       @charitable_user.save
       expect(@charitable_user.fee).to eq(BigDecimal('0.2'))
     end
-    it 'should be positive for sms' do
+    it 'should not be negative for sms' do
       @user.fee_sms = -1
       expect { @user.validate! }.to raise_error 'Validation failed: ' \
       'Fee sms must be greater than or equal to 0'
     end
-    it 'should be positive for email' do
+    it 'should not be negative for email' do
       @user.fee_email = -1
       expect { @user.validate! }.to raise_error 'Validation failed: ' \
       'Fee email must be greater than or equal to 0'
+    end
+    it 'can be zero for sms' do
+      @user.fee_sms = 0
+      expect { @user.validate! }.to_not raise_error
+    end
+    it 'can be zero for email' do
+      @user.fee_email = 0
+      expect { @user.validate! }.to_not raise_error
+    end
+    it 'can be greater than zero for sms' do
+      @user.fee_sms = 9
+      expect { @user.validate! }.to_not raise_error
+    end
+    it 'can be greater than zero for email' do
+      @user.fee_email = 9
+      expect { @user.validate! }.to_not raise_error
     end
   end
 end
