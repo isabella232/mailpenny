@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :conversations
   # routes for the dashboard
   get '/dashboard/profile'  => 'profiles#edit'
   get '/dashboard/phone' => 'phone_numbers#dashboard'
