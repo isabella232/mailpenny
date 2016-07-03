@@ -1,9 +1,0 @@
-<div class="col-sm-4 col-sm-offset-4">
-  <script src="https://checkout.stripe.com/checkout.js"></script>
-
-  <%[5,10,20,50].map{|x| x*100}.each do |amount|%>
-
-  <button id="btn-payment-<%= amount %>">Add
-    <%= amount / 100 %></button>
-    <% end %>
-</div>
