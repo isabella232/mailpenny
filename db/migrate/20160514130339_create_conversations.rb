@@ -4,5 +4,12 @@ class CreateConversations < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    create_table :conversations_users do |t|
+      t.reference :conversations
+      t.reference :users
+      t.timestamps null: false
+    end
+
   end
 end
