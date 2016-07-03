@@ -14,6 +14,20 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+# Make authentication simple with devise!
+gem 'devise', '~> 3.5', '>= 3.5.6'
+# Twitter gem for tweets
+gem 'twitter', '~> 5.11.0'
+# Figaro for configuration secrets
+gem 'figaro', '~> 1.1', '>= 1.1.1'
+# The Stripe client
+gem 'stripe', '~> 1.36', '>= 1.36.1'
+# JSON library
+gem 'json', '~> 1.8', '>= 1.8.3'
+# Mail gem
+gem 'mail', '2.6.3'
+# The Twilio client
+gem 'twilio-ruby', '~> 4.11', '>= 4.11.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
