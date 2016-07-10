@@ -40,6 +40,7 @@ end
 group :development do
   # Style guide to make developer lives hell
   gem 'rubocop', require: false
+  gem 'guard-rubocop'
   # Access an IRB console on exception pages or by using <%= console %> anywhere
   # in the code.
   gem 'web-console'
