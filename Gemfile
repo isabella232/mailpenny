@@ -33,7 +33,7 @@ group :development, :test do
   # factories make for better testing models
   gem 'factory_girl_rails'
   # automtically generated fake data
-  gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'faker', '~> 1.6', '>= 1.6.5'
 end
 
 group :development do

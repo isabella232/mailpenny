@@ -230,7 +230,7 @@ DEPENDENCIES
   byebug
   capybara
   factory_girl_rails
-  faker (~> 1.6, >= 1.6.3)
+  faker (~> 1.6, >= 1.6.5)
   guard
   guard-livereload
   guard-rspec
