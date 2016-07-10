@@ -20,6 +20,20 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # rspec for testing
+  gem 'rspec-rails'
+  # guard is nice, with all the extras
+  gem 'guard'
+  gem 'guard-livereload'
+  gem 'guard-rspec', require: false
+  # blackbox testing by faking user interaction
+  gem 'capybara'
+  # poltergeist is a capybara driver to interface with phantomjs
+  gem 'poltergeist'
+  # factories make for better testing models
+  gem 'factory_girl_rails'
+  # automtically generated fake data
+  gem 'faker', '~> 1.6', '>= 1.6.3'
 end
 
 group :development do
