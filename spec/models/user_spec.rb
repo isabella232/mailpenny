@@ -16,12 +16,6 @@ RSpec.describe User, type: :model do
   end
 
   context 'usernames' do
-    it 'should strip whitespace at the ends' do
-      @user.username = ' hello '
-      @user.save
-      expect(@user.username).to eq('hello')
-    end
-
     describe 'cannot' do
       it 'have whitespace' do
         @user.username = 'hello world'
