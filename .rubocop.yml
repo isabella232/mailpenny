@@ -9,6 +9,17 @@ AllCops:
     - config/initializers/**
     - db/migrate/**
 
+Rails:
+  Enabled: true
+
 Style/ClassAndModuleChildren:
   Exclude:
     - app/controllers/users/* # devise generated code
+
+Metrics/MethodLength:
+  Max: 50 # controller methods are sometimes longer
+  Exclude:
+    - lib/restricted_usernames.rb
+
+Metrics/ClassLength:
+  Enabled: false # rails controllers can get very long
