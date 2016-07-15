@@ -42,6 +42,7 @@ GEM
     arel (7.0.0)
     ast (2.3.0)
     bcrypt (3.1.11)
+    bower-rails (0.10.0)
     builder (3.2.2)
     byebug (9.0.5)
     capybara (2.7.1)
@@ -269,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bower-rails
   byebug
   capybara
   devise

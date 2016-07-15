@@ -18,6 +18,8 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.5'
 # devise for user auth
 gem 'devise'
+# bower is awesome
+gem 'bower-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
