@@ -37,6 +37,8 @@ group :development, :test do
   gem 'factory_girl_rails', require: false
   # automtically generated fake data
   gem 'faker'
+  # messages capabilities
+  gem 'mailboxer'
 end
 
 group :development do
