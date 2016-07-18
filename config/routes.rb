@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  get 'dashboard/overview'
+
+  get 'dashboard/profile'
+
+  get 'dashboard/account'
+
+  get 'dashboard/billing'
+
+  get 'dashboard/messages'
+
   # static pages are public pages
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home'
