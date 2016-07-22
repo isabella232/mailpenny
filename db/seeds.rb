@@ -1,7 +1,18 @@
-# The data can then be loaded with the rails db:seed command (or created
-# alongside the database with db:setup).
-#
-# Examples:
-#
-#  movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#  Character.create(name: 'Luke', movie: movies.first)
+# The data can then be loaded with rake db:seed
+# (or created alongside the db with db:setup).
+
+# The meta accounts to track money and stuff
+# Account.create(meta: true, meta_name: 'withdrawal')
+# Account.create(meta: true, meta_name: 'deposit')
+# Account.create(meta: true, meta_name: 'revenue')
+
+# To make developer lives easier, create a dummy user for development:
+unless Rails.env == 'production'
+  User.create(
+    username: 'dummy',
+    email: 'email@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    confirmed_at: Time.zone.today
+  )
+end
