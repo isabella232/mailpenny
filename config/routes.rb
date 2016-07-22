@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  get 'dashboard/overview'
-
-  get 'dashboard/profile'
-
-  get 'dashboard/account'
-
-  get 'dashboard/billing'
-
-  get 'dashboard/messages'
-
   # static pages are public pages
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home'
@@ -16,6 +6,14 @@ Rails.application.routes.draw do
   get 'terms'   => 'static_pages#terms'
   get 'privacy' => 'static_pages#privacy'
   get 'help'    => 'static_pages#help'
+
+  # everything in the dashboard
+  get 'dashboard', to: redirect('/dashboard/overview'), status: 302
+  get 'dashboard/overview'
+  get 'dashboard/profile'
+  get 'dashboard/account'
+  get 'dashboard/billing'
+  get 'dashboard/messages'
 
   # user signups and registration
   devise_for :users
