@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe DashboardController, type: :controller do
+  before do
+    sign_in create(:user)
+  end
+
   describe 'GET #overview' do
     it 'returns http success' do
       get :overview
