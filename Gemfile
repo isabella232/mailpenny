@@ -57,6 +57,8 @@ group :development do
   # ground. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  # notifications for guard. OSX. run `brew install terminal-notifer`
+  gem 'terminal-notifier-guard'
 end
 
 group :production do
