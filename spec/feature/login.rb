@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-feature 'Signing in' do
+feature 'Login' do
   background do
     @user = create(:user)
   end
 
-  given(:sign_in) do
+  given(:login) do
     visit '/login'
     within('#new_user') do
       fill_in 'Email', with: @user.email
@@ -15,7 +15,7 @@ feature 'Signing in' do
   end
 
   scenario 'succeeds with correct credentials' do
-    sign_in
+    login
     expect(page).to have_content 'Signed in successfully'
   end
 
@@ -29,8 +29,8 @@ feature 'Signing in' do
     expect(page).to have_content 'Invalid Email or password'
   end
 
-  scenario 'Sign in redirects to dashboard overview' do
-    sign_in
+  scenario 'redirects to dashboard overview' do
+    login
     expect(page).to have_current_path(dashboard_overview_path)
   end
 end
