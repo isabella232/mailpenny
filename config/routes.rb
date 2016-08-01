@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get 'dashboard/messages' => 'dashboard#messages'
 
   # user signups and registration
-  devise_for :users, controllers: { registrations: 'users/registrations' } 
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   as :user do
     get    'login'    => 'users/sessions#new', as: :login_page
     post   'login'    => 'users/sessions#create'
