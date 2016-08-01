@@ -5,16 +5,16 @@ feature 'Login & Logout:' do
     @user = create(:user)
   end
 
-  context 'upon login' do
-    given(:login) do
-      visit '/login'
-      within('#new_user') do
-        fill_in 'Email', with: @user.email
-        fill_in 'Password', with: @user.password
-      end
-      click_button 'Log in'
+  given(:login) do
+    visit '/login'
+    within('#new_user') do
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: @user.password
     end
+    click_button 'Log in'
+  end
 
+  context 'upon login' do
     scenario 'succeed with correct credentials' do
       login
       expect(page).to have_content 'Signed in successfully'
