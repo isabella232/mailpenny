@@ -1,3 +1,4 @@
+<%= content_for :body do %>
 <p>Dashboard Links</p>
 <ul>
   <li><a href="/dashboard/overview">overview</a></li>
@@ -8,3 +9,5 @@
 </ul>
 <%= yield %>
 <%= render 'login_logout' %>
+<% end %>
+<%= render template: 'layouts/application' %>
