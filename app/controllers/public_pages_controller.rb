@@ -4,5 +4,7 @@ class PublicPagesController < ApplicationController
   end
 
   def profile
+    profile_username = params[:username]
+    @profile_user = User.find_by(username: profile_username)
   end
 end

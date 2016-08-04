@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  get 'public_pages/search'
-
-  get 'public_pages/profile'
-
   # static pages are public pages
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home', as: :home_page
@@ -27,4 +23,8 @@ Rails.application.routes.draw do
     delete 'logout'   => 'users/sessions#destroy', as: :logout
     get    'register' => 'users/registrations#new', as: :register_page
   end
+
+  # public pages
+  get 'search' => 'public_pages#search'
+  get ':username' => 'public_pages#profile'
 end
