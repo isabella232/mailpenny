@@ -9,7 +9,7 @@ box: ruby
 services:
     - id: postgres
       env:
-        DATABASE_ENV: WERCKER_POSTGRESQL_URL
+        DATABASE_URL: WERCKER_POSTGRESQL_URL
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
     # - mongo
