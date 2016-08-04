@@ -56,6 +56,8 @@ class User < ApplicationRecord
 
   before_create :build_default_account
 
+  private
+
   def build_default_account
     build_account account_type: :user
     true

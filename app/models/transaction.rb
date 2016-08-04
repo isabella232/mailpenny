@@ -13,6 +13,13 @@
 
 # A record of the transactions our users do
 class Transaction < ApplicationRecord
-  belongs_to :user, foreign_key: :from_id
-  belongs_to :user, foreign_key: :to_id
+  belongs_to :account, foreign_key: :from_id
+  belongs_to :account, foreign_key: :to_id
+
+  enum tranasaction_type: {
+    transfer: 1,
+    deposit: 2,
+    withdrawal: 3,
+    fees: 4
+  }
 end
