@@ -22,6 +22,8 @@ gem 'devise'
 gem 'bower-rails'
 # annotate all the models
 gem 'annotate'
+# runtime for JavaScript
+gem 'therubyracer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
