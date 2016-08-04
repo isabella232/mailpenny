@@ -9,7 +9,7 @@ box: ruby
 # services:
     - postgres
       env:
-        DATABASE_ENV postgres://mailman:ourlittlesecret
+        DATABASE_ENV: postgres://mailman:ourlittlesecret
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
     # - mongo
