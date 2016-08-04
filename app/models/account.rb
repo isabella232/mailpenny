@@ -14,4 +14,11 @@
 class Account < ApplicationRecord
   belongs_to :user, required: false
   has_many :transactions
+
+  enum account_type: {
+    user: 1,
+    deposit: 2,
+    withdrawal: 3,
+    fees: 4
+  }
 end

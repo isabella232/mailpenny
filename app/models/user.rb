@@ -53,4 +53,11 @@ class User < ApplicationRecord
             }
 
   has_one :account
+
+  before_create :build_default_account
+
+  def build_default_account
+    build_account account_type: :user
+    true
+  end
 end
