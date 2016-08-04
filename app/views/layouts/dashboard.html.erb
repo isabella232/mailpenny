@@ -1,12 +1,5 @@
 <%= content_for :body do %>
-<p>Dashboard Links</p>
-<ul>
-  <li><a href="/dashboard/overview">overview</a></li>
-  <li><a href="/dashboard/profile">profile</a></li>
-  <li><a href="/dashboard/account">account</a></li>
-  <li><a href="/dashboard/billing">billing</a></li>
-  <li><a href="/dashboard/messages">messages</a></li>
-</ul>
+<%= render 'dashboard_links' %>
 <%= yield %>
 <%= render 'login_logout' %>
 <% end %>

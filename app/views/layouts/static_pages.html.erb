@@ -1,13 +1,5 @@
 <%= content_for :body do %>
-
-<p>Links</p>
-<ul>
-  <li><a href="/home">home</a></li>
-  <li><a href="/about"></a>about</li>
-  <li><a href="/terms">terms</a></li>
-  <li><a href="/privacy"></a>privacy</li>
-  <li><a href="/help">help</a></li>
-</ul>
+  <%= render 'static_pages_links' %>
 <%= yield %>
 <%= render 'login_logout' %>
 <% end %>
