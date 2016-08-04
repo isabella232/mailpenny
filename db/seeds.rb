@@ -2,9 +2,9 @@
 # (or created alongside the db with db:setup).
 
 # The meta accounts to track money and stuff
-# Account.create(meta: true, meta_name: 'withdrawal')
-# Account.create(meta: true, meta_name: 'deposit')
-# Account.create(meta: true, meta_name: 'revenue')
+Account.create(account_type: 'withdrawal')
+Account.create(account_type: 'deposit')
+Account.create(account_type: 'fees')
 
 # To make developer lives easier, create a dummy user for development:
 unless Rails.env == 'production'
