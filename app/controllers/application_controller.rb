@@ -2,6 +2,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  # render 404 pages
+  def not_found
+    raise ActionController::RoutingError, 'Not Found'
+  end
+
   # redirect users after login
   def after_sign_in_path_for(_resource)
     dashboard_overview_path
