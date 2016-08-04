@@ -51,4 +51,6 @@ class User < ApplicationRecord
               in: RestricedUsernamesIdentifier.new.initial_path_segments,
               message: 'Username unavailable'
             }
+
+  has_one :account
 end
