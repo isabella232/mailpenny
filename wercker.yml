@@ -25,8 +25,5 @@ build:
     steps:
         - bundle-install
         - script:
-            name: db-setup
-            code: bundle exec rails db:setup
-        - script:
             name: rspec
             code: bundle exec rspec
