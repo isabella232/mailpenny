@@ -19,7 +19,7 @@ class Account < ApplicationRecord
     user: 1,
     deposit: 2,
     withdrawal: 3,
-    fees: 4
+    fee: 4
   }
 
   def deposit(amount)
@@ -38,8 +38,8 @@ class Account < ApplicationRecord
     raise 'No withdrawal account, has the db been seeded?' if
     withdrawal_account.nil?
 
-    create_transaction from: id,
-                       to: withdrawal_account,
+    create_transaction from_id: id,
+                       to_id: withdrawal_account,
                        amount: amount,
                        transaction_type: :withdrawal
   end
@@ -47,9 +47,9 @@ class Account < ApplicationRecord
   private
 
   def create_transaction(tx)
-    tx.slice! :transaction_type, :amount, :from, :to
+    tx.slice! :transaction_type, :amount, :from_id, :to_id
     Transaction.create tx
-    self.balance += tx.amount
+    self.balance += tx[:amount]
     save
   end
 end
