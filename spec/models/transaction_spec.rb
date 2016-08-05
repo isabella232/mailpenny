@@ -48,6 +48,7 @@ RSpec.describe Transaction, type: :model do
     context "after depositing to alice's account" do
       before :context do
         @alice.account.deposit(@deposit_amount)
+        @transaction = @alice.account.deposits.last
       end
       it 'alice must have one deposit' do
         deposit_transactions = @alice.account.deposits
@@ -55,19 +56,16 @@ RSpec.describe Transaction, type: :model do
       end
 
       it "alice's deposit transaction amount must be correct" do
-        transaction = @alice.account.deposits.last
-        expect(transaction.amount).to eq(@deposit_amount)
+        expect(@transaction.amount).to eq(@deposit_amount)
       end
 
       it "alice's deposit transaction must be to alice" do
-        transaction = @alice.account.deposits.last
-        expect(transaction.to_id).to eq(@alice.account.id)
+        expect(@transaction.to_id).to eq(@alice.account.id)
       end
 
       it "alice's deposit transaction must be from the deposit account" do
-        transaction = @alice.account.deposits.last
         deposit_account = Account.find_by(account_type: 'deposit')
-        expect(transaction.from_id).to eq(deposit_account.id)
+        expect(@transaction.from_id).to eq(deposit_account.id)
       end
     end
 
