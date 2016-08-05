@@ -16,6 +16,15 @@ class Transaction < ApplicationRecord
   belongs_to :account, foreign_key: :from_id
   belongs_to :account, foreign_key: :to_id
 
+  validates :from_id,
+            presence: true
+
+  validates :to_id,
+            presence: true
+
+  validates :transaction_type,
+            presence: true
+
   enum tranasaction_type: {
     transfer: 1,
     deposit: 2,
