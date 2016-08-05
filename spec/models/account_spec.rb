@@ -99,4 +99,8 @@ RSpec.describe Account, type: :model do
       expect(@bob.account.balance).to eq(@transfer_amount - @withdraw_amount)
     end
   end
+
+  it 'tests for transfers_to, transfers_from, withdrawals, and deposits' do
+    pending 'Make these asap'
+  end
 end
