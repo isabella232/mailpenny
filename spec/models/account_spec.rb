@@ -100,7 +100,5 @@ RSpec.describe Account, type: :model do
     end
   end
 
-  it 'tests for transfers_to, transfers_from, withdrawals, and deposits' do
-    pending 'Make these asap'
-  end
+  pending 'tests for transfers_to, transfers_from, withdrawals, and deposits'
 end
