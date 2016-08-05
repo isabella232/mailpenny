@@ -33,7 +33,8 @@ RSpec.describe Transaction, type: :model do
   end
   context 'user transactions:', order: :defined do
     before :context do
-      @alice = create(:user)
+      @alice = build(:user)
+      @alice.save
       @bob = create(:user)
       @deposit_amount = rand(25_000) # random num upto 25000
       @transfer_amount = rand(@deposit_amount) # random num upto the deposit
@@ -44,18 +45,30 @@ RSpec.describe Transaction, type: :model do
       expect(@alice.account.deposits.empty?).to be true
     end
 
-    it "after depositing alice's deposit transaction must be properly made" do
-      @alice.account.deposit(@deposit_amount)
-      deposit_transaction = @alice.account.deposits
+    context "after depositing to alice's account" do
+      before :context do
+        @alice.account.deposit(@deposit_amount)
+      end
+      it 'alice must have one deposit' do
+        deposit_transactions = @alice.account.deposits
+        expect(deposit_transactions.count).to eq(1)
+      end
 
-      expect(deposit_transaction.count).to eq(1)
-      expect(
-        deposit_transaction.amount == @deposit_amount &&
-        deposit_transaction.to_id == @alice.account.id &&
-        deposit_transaction.from_id == Account.find_by(
-          account_type: 'deposit'
-        ).id
-      ).to be true
+      it "alice's deposit transaction amount must be correct" do
+        transaction = @alice.account.deposits.last
+        expect(transaction.amount).to eq(@deposit_amount)
+      end
+
+      it "alice's deposit transaction must be to alice" do
+        transaction = @alice.account.deposits.last
+        expect(transaction.to_id).to eq(@alice.account.id)
+      end
+
+      it "alice's deposit transaction must be from the deposit account" do
+        transaction = @alice.account.deposits.last
+        deposit_account = Account.find_by(account_type: 'deposit')
+        expect(transaction.from_id).to eq(deposit_account.id)
+      end
     end
 
     it 'alice must have no transfers form her' do
@@ -66,11 +79,53 @@ RSpec.describe Transaction, type: :model do
       expect(@bob.account.transfers_to.empty?).to be true
     end
 
-    it 'a transaction from alice to bob must exist when transfer is made' do
-      @alice.account.transfer(@transfer_amount, @bob.account)
-      from_transaction = @alice.account.transfers_from.last.id
-      to_transaction = @bob.account.transfers_to.last.id
-      expect(from_transaction).to eq(to_transaction)
+    context 'after transfering money from alice to bob' do
+      before :context do
+        @alice.account.transfer(@transfer_amount, @bob.account)
+        @transaction = @alice.account.transfers_from.last
+      end
+      it 'a transaction from alice to bob must exist' do
+        from_transaction = @alice.account.transfers_from.last.id
+        to_transaction = @bob.account.transfers_to.last.id
+        expect(from_transaction).to eq(to_transaction)
+      end
+
+      it 'the transaction amount must be correct' do
+        expect(@transaction.amount).to eq(@transfer_amount)
+      end
+
+      it 'the transaction must be to bob' do
+        expect(@transaction.to_id).to eq(@bob.account.id)
+      end
+
+      it 'the transaction must be from alice' do
+        expect(@transaction.from_id).to eq(@alice.account.id)
+      end
+    end
+
+    it 'bob must have no withdrawals' do
+      expect(@bob.account.withdrawals.count).to eq(0)
+    end
+    context "after withdrawing money from bob's account" do
+      before :context do
+        @bob.account.withdraw @withdraw_amount
+        @transaction = @bob.account.withdrawals.last
+      end
+      it 'a withdrawal transaction must exist' do
+        expect(@bob.account.withdrawals.count).to eq(1)
+      end
+      it "bob's withdrawal transaction amount must be correct" do
+        expect(@transaction.amount).to eq(@withdraw_amount)
+      end
+
+      it "bob's withdrawal transaction must be from bob" do
+        expect(@transaction.from_id).to eq(@bob.account.id)
+      end
+
+      it "bob's withdrawal transaction must be to the withdrawal account" do
+        deposit_account = Account.find_by(account_type: 'withdrawal')
+        expect(@transaction.to_id).to eq(deposit_account.id)
+      end
     end
   end
 end
