@@ -27,7 +27,7 @@ development:
 
 test:
   <<: *default
-  database: <%= ENV['DATABASE_URL'] || 'mailman_test' %>
+  database: <%= ENV['WERCKER'] ? "myuser:ourlittlesecret@#{ENV['POSTGRES_PORT_5432_TCP_ADDR']}:5432" : 'mailman_test' %>
 
 production:
   <<: *default
