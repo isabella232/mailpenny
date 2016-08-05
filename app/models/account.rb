@@ -24,9 +24,11 @@ class Account < ApplicationRecord
 
   validates :account_type,
             presence: true
-
   validates :account_type, uniqueness: true, unless: 'account_type == "user"'
 
+  # Transacting money in the system
+
+  # depositing new money into the account, i.e cashing in
   def deposit(amount)
     deposit_account = Account.find_by(account_type: :deposit).id
     raise 'No deposit account, has the db been seeded?' if
@@ -39,6 +41,7 @@ class Account < ApplicationRecord
     increase_balance amount
   end
 
+  # withdrawing money out of the account and to user's hands, i.e cashing out
   def withdraw(amount)
     withdrawal_account = Account.find_by(account_type: 'withdrawal').id
     raise 'No withdrawal account, has the db been seeded?' if
@@ -51,10 +54,12 @@ class Account < ApplicationRecord
     decrease_balance amount
   end
 
+  # transfering money to another account
   def transfer(amount, to)
+    to_id = to.id
     tx = {
       from_id: id,
-      to_id: to.id,
+      to_id: to_id,
       amount: amount,
       transaction_type: 'transfer'
     }
@@ -63,11 +68,49 @@ class Account < ApplicationRecord
     decrease_balance amount
   end
 
+  ## Transactions associated with the Account
+
+  # all the deposits to Account
+  def deposits
+    Transaction.where(
+      to_id: id,
+      transaction_type: 'deposit'
+    )
+  end
+
+  # all the withdrawals from Account
+  def withdrawals
+    Transaction.where(
+      from_id: id,
+      transaction_type: 'withdrawal'
+    )
+  end
+
+  # all the transfers from Account
+  def transfers_from
+    Transaction.where(
+      from_id: id,
+      transaction_type: 'transfer'
+    )
+  end
+
+  # all the transfers from Account
+  def transfers_to
+    Transaction.where(
+      to_id: id,
+      transaction_type: 'transfer'
+    )
+  end
+
+  ## increments and decrements to the balance
+
+  # increase balance by
   def increase_balance(amount)
     self.balance += amount
     save
   end
 
+  # decrease balance by
   def decrease_balance(amount)
     self.balance -= amount
     save
