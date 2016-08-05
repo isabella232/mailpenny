@@ -32,19 +32,30 @@ RSpec.describe Transaction, type: :model do
     end
   end
   context 'user transactions:', order: :defined do
-    before do
+    before :context do
       @alice = create(:user)
       @bob = create(:user)
+      @deposit_amount = rand(25_000) # random num upto 25000
+      @transfer_amount = rand(@deposit_amount) # random num upto the deposit
+      @withdraw_amount = rand(@transfer_amount) # random num upto the transfer
     end
 
     it 'alice must have no deposits' do
       expect(@alice.account.deposits.empty?).to be true
     end
 
-    it 'after depositing alice must have one deposit transaction' do
-      amount = 3000
-      @alice.account.deposit(amount)
-      expect(@alice.account.deposits.last.amount).to eq(amount)
+    it "after depositing alice's deposit transaction must be properly made" do
+      @alice.account.deposit(@deposit_amount)
+      deposit_transaction = @alice.account.deposits
+
+      expect(deposit_transaction.count).to eq(1)
+      expect(
+        deposit_transaction.amount == @deposit_amount &&
+        deposit_transaction.to_id == @alice.account.id &&
+        deposit_transaction.from_id == Account.find_by(
+          account_type: 'deposit'
+        ).id
+      ).to be true
     end
 
     it 'alice must have no transfers form her' do
@@ -56,7 +67,7 @@ RSpec.describe Transaction, type: :model do
     end
 
     it 'a transaction from alice to bob must exist when transfer is made' do
-      @alice.account.transfer(2000, @bob.account)
+      @alice.account.transfer(@transfer_amount, @bob.account)
       from_transaction = @alice.account.transfers_from.last.id
       to_transaction = @bob.account.transfers_to.last.id
       expect(from_transaction).to eq(to_transaction)
