@@ -4,7 +4,7 @@
 # The meta accounts to track money and stuff
 Account.create(account_type: 'withdrawal')
 Account.create(account_type: 'deposit')
-Account.create(account_type: 'fees')
+Account.create(account_type: 'fee')
 
 # To make developer lives easier, create a dummy user for development:
 unless Rails.env == 'production'
