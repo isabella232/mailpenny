@@ -7,12 +7,7 @@ box: ruby
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 services:
-    - id: postgres
-      env:
-       POSTGRES_PASSWORD: $APP_POSTGRES_PASSWORD
-       POSTGRES_USER: $APP_POSTGRES_USER
-       POSTGRES_DB: $APP_POSTGRES_DB
-       DATABASE_URL: postgres://$POSTGRES_ENV_POSTGRES_USER:$POSTGRES_ENV_POSTGRES_PASSWORD@$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT/$POSTGRES_ENV_POSTGRES_DB
+    - wercker/postgresql
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
     # - mongo
