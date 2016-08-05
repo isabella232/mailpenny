@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def build_default_account
-    build_account account_type: :user
+    build_account account_type: 'user'
     true
   end
 end
