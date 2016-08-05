@@ -18,16 +18,21 @@ RSpec.describe Account, type: :model do
     @bob = create(:user)
   end
 
-  scenario 'user must have a default account' do
+  it 'must exist for new users' do
     expect(@alice.account).not_to be_nil
   end
 
-  scenario 'user balance must not be nil' do
+  it 'balance must not be nil' do
     expect(@alice.account.balance).not_to be_nil
   end
 
-  scenario 'deposits must increase balance' do
+  it 'deposits must increase balance' do
     @alice.account.deposit 500
     expect(@alice.account.balance).to eq(500)
+  end
+
+  it 'must not be valid without an account_type' do
+    account = Account.new
+    expect(account.valid?).to be false
   end
 end

@@ -22,6 +22,9 @@ class Account < ApplicationRecord
     fee: 4
   }
 
+  validates :account_type,
+            presence: true
+
   def deposit(amount)
     deposit_account = Account.find_by(account_type: :deposit).id
     raise 'No deposit account, has the db been seeded?' if
