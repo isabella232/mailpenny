@@ -13,7 +13,7 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  before :each do
+  before :context do
     @alice = create(:user)
     @bob = create(:user)
   end
@@ -73,34 +73,30 @@ RSpec.describe Account, type: :model do
     end
   end
 
-  context 'when moving money' do
-    it 'deposits must increase balance' do
-      @alice.account.deposit 500
-      expect(@alice.account.balance).to eq(500)
+  context 'when moving money', order: :defined do
+    before(:context) do
+      @deposit_amount = rand(25_000) # random num upto 25000
+      @transfer_amount = rand(@deposit_amount) # random num upto the deposit
+      @withdraw_amount = rand(@transfer_amount) # random num upto the transfer
     end
 
-    it 'withdrawals must decrease balance' do
-      deposit_amount = 500
-      withdrawal_amount = 300
-      @alice.account.deposit deposit_amount
-      @alice.account.withdraw withdrawal_amount
-      expect(@alice.account.balance).to eq(deposit_amount - withdrawal_amount)
+    it 'deposits must increase balance' do
+      @alice.account.deposit @deposit_amount
+      expect(@alice.account.balance).to eq(@deposit_amount)
     end
 
     it 'transfers must decrease sender balance' do
-      deposit_amount = 500
-      transfer_amount = 300
-      @alice.account.deposit deposit_amount
-      @alice.account.transfer transfer_amount, @bob.account
-      expect(@alice.account.balance).to eq(deposit_amount - transfer_amount)
+      @alice.account.transfer @transfer_amount, @bob.account
+      expect(@alice.account.balance).to eq(@deposit_amount - @transfer_amount)
     end
 
     it 'transfers must increase reciever balance' do
-      deposit_amount = 500
-      transfer_amount = 300
-      @alice.account.deposit deposit_amount
-      @alice.account.transfer transfer_amount, @bob.account
-      expect(@bob.account.balance).to eq(transfer_amount)
+      expect(@bob.account.balance).to eq(@transfer_amount)
+    end
+
+    it 'withdrawals must decrease balance' do
+      @bob.account.withdraw @withdraw_amount
+      expect(@bob.account.balance).to eq(@transfer_amount - @withdraw_amount)
     end
   end
 end
