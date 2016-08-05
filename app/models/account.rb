@@ -30,10 +30,11 @@ class Account < ApplicationRecord
     raise 'No deposit account, has the db been seeded?' if
     deposit_account.nil?
 
-    create_transaction from: deposit_account,
-                       to: id,
+    create_transaction from_id: deposit_account,
+                       to_id: id,
                        amount: amount,
-                       transaction_type: :deposit
+                       transaction_type: 'deposit'
+    increase_balance amount
   end
 
   def withdraw
@@ -45,14 +46,29 @@ class Account < ApplicationRecord
                        to_id: withdrawal_account,
                        amount: amount,
                        transaction_type: :withdrawal
+    decrease_balance amount
   end
 
   private
 
+  def increase_balance(amount)
+    self.balance += amount
+    save
+  end
+
+  def decrease_balance(amount)
+    self.balance -= amount
+    save
+  end
+
   def create_transaction(tx)
     tx.slice! :transaction_type, :amount, :from_id, :to_id
-    Transaction.create tx
-    self.balance += tx[:amount]
-    save
+    transaction = Transaction.new tx
+    transaction.save
+  end
+
+  # hide the setter for balance from the public
+  def balance=(amount)
+    self[:balance] = amount
   end
 end
