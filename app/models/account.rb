@@ -25,6 +25,9 @@ class Account < ApplicationRecord
   validates :account_type,
             presence: true
   validates :account_type, uniqueness: true, unless: 'account_type == "user"'
+  validates :balance,
+            numericality: { greater_than_or_equal_to: 0 },
+            unless: 'account_type == "deposit"'
 
   # Transacting money in the system
 
