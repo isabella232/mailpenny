@@ -31,4 +31,35 @@ RSpec.describe Transaction, type: :model do
       ).to be true
     end
   end
+  context 'user transactions:', order: :defined do
+    before do
+      @alice = create(:user)
+      @bob = create(:user)
+    end
+
+    it 'alice must have no deposits' do
+      expect(@alice.account.deposits.empty?).to be true
+    end
+
+    it 'after depositing alice must have one deposit transaction' do
+      amount = 3000
+      @alice.account.deposit(amount)
+      expect(@alice.account.deposits.last.amount).to eq(amount)
+    end
+
+    it 'alice must have no transfers form her' do
+      expect(@alice.account.transfers_from.empty?).to be true
+    end
+
+    it 'bob must have no transfers to him' do
+      expect(@bob.account.transfers_to.empty?).to be true
+    end
+
+    it 'a transaction from alice to bob must exist when transfer is made' do
+      @alice.account.transfer(2000, @bob.account)
+      from_transaction = @alice.account.transfers_from.last.id
+      to_transaction = @bob.account.transfers_to.last.id
+      expect(from_transaction).to eq(to_transaction)
+    end
+  end
 end
