@@ -25,6 +25,8 @@ class Account < ApplicationRecord
   validates :account_type,
             presence: true
 
+  validates :account_type, uniqueness: true, unless: 'account_type == "user"'
+
   def deposit(amount)
     deposit_account = Account.find_by(account_type: :deposit).id
     raise 'No deposit account, has the db been seeded?' if
