@@ -26,13 +26,37 @@ RSpec.describe Account, type: :model do
     expect(@alice.account.balance).not_to be_nil
   end
 
+  it 'must not be valid without an account_type' do
+    account = Account.new
+    expect(account.valid?).to be false
+  end
+
   it 'deposits must increase balance' do
     @alice.account.deposit 500
     expect(@alice.account.balance).to eq(500)
   end
 
-  it 'must not be valid without an account_type' do
-    account = Account.new
-    expect(account.valid?).to be false
+  it 'withdrawals must decrease balance' do
+    deposit_amount = 500
+    withdrawal_amount = 300
+    @alice.account.deposit deposit_amount
+    @alice.account.withdraw withdrawal_amount
+    expect(@alice.account.balance).to eq(deposit_amount - withdrawal_amount)
+  end
+
+  it 'transfers must decrease sender balance' do
+    deposit_amount = 500
+    transfer_amount = 300
+    @alice.account.deposit deposit_amount
+    @alice.account.transfer transfer_amount, @bob.account
+    expect(@alice.account.balance).to eq(deposit_amount - transfer_amount)
+  end
+
+  it 'transfers must increase reciever balance' do
+    deposit_amount = 500
+    transfer_amount = 300
+    @alice.account.deposit deposit_amount
+    @alice.account.transfer transfer_amount, @bob.account
+    expect(@bob.account.balance).to eq(transfer_amount)
   end
 end

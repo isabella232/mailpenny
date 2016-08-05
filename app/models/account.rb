@@ -37,19 +37,29 @@ class Account < ApplicationRecord
     increase_balance amount
   end
 
-  def withdraw
-    withdrawal_account = Account.find_by(account_type: :withdrawal).id
+  def withdraw(amount)
+    withdrawal_account = Account.find_by(account_type: 'withdrawal').id
     raise 'No withdrawal account, has the db been seeded?' if
     withdrawal_account.nil?
 
     create_transaction from_id: id,
                        to_id: withdrawal_account,
                        amount: amount,
-                       transaction_type: :withdrawal
+                       transaction_type: 'withdrawal'
     decrease_balance amount
   end
 
-  private
+  def transfer(amount, to)
+    tx = {
+      from_id: id,
+      to_id: to.id,
+      amount: amount,
+      transaction_type: 'transfer'
+    }
+    create_transaction tx
+    to.increase_balance amount
+    decrease_balance amount
+  end
 
   def increase_balance(amount)
     self.balance += amount
@@ -61,10 +71,11 @@ class Account < ApplicationRecord
     save
   end
 
+  private
+
   def create_transaction(tx)
     tx.slice! :transaction_type, :amount, :from_id, :to_id
-    transaction = Transaction.new tx
-    transaction.save
+    _transaction = Transaction.create tx
   end
 
   # hide the setter for balance from the public
