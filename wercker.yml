@@ -9,7 +9,7 @@ box: ruby
 services:
     - id: postgres
       env:
-    #  DATABASE_URL: WERCKER_POSTGRESQL_URL
+        DATABASE_URL: postgres://$POSTGRES_ENV_POSTGRES_USER:$POSTGRES_ENV_POSTGRES_PASSWORD@$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT/$POSTGRES_ENV_POSTGRES_DB
     # http://devcenter.wercker.com/docs/services/postgresql.html
 
     # - mongo
@@ -24,6 +24,9 @@ build:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
         - bundle-install
+        - script:
+            name: db setup
+            code: bundle exec rails db:setup RAILS_ENV=test
         - script:
             name: rspec
             code: bundle exec rspec
