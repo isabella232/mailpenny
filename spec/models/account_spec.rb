@@ -31,32 +31,76 @@ RSpec.describe Account, type: :model do
     expect(account.valid?).to be false
   end
 
-  it 'deposits must increase balance' do
-    @alice.account.deposit 500
-    expect(@alice.account.balance).to eq(500)
+  context 'when db has been seeded' do
+    it 'only one withdrawal account must exist' do
+      withdrawal_accounts = Account.where(account_type: 'withdrawal')
+      expect(withdrawal_accounts.count).to eq(1)
+    end
+    it 'only one deposit account must exist' do
+      deposit_accounts = Account.where(account_type: 'deposit')
+      expect(deposit_accounts.count).to eq(1)
+    end
+    it 'only one fee account must exist' do
+      fee_accounts = Account.where(account_type: 'fee')
+      expect(fee_accounts.count).to eq(1)
+    end
+
+    it 'must not be able to create another withdrawal account' do
+      new_withdrawal_account = Account.new(account_type: 'withdrawal')
+      expect(
+        new_withdrawal_account.invalid? &&
+        new_withdrawal_account.errors.messages[:account_type] ==
+        ['has already been taken']
+      ).to be true
+    end
+
+    it 'must not be able to create another deposit account' do
+      new_deposit_account = Account.new(account_type: 'deposit')
+      expect(
+        new_deposit_account.invalid? &&
+        new_deposit_account.errors.messages[:account_type] ==
+        ['has already been taken']
+      ).to be true
+    end
+
+    it 'must not be able to create another fee account' do
+      new_fee_account = Account.new(account_type: 'fee')
+      expect(
+        new_fee_account.invalid? &&
+        new_fee_account.errors.messages[:account_type] ==
+        ['has already been taken']
+      ).to be true
+    end
   end
 
-  it 'withdrawals must decrease balance' do
-    deposit_amount = 500
-    withdrawal_amount = 300
-    @alice.account.deposit deposit_amount
-    @alice.account.withdraw withdrawal_amount
-    expect(@alice.account.balance).to eq(deposit_amount - withdrawal_amount)
-  end
+  context 'when moving money' do
+    it 'deposits must increase balance' do
+      @alice.account.deposit 500
+      expect(@alice.account.balance).to eq(500)
+    end
 
-  it 'transfers must decrease sender balance' do
-    deposit_amount = 500
-    transfer_amount = 300
-    @alice.account.deposit deposit_amount
-    @alice.account.transfer transfer_amount, @bob.account
-    expect(@alice.account.balance).to eq(deposit_amount - transfer_amount)
-  end
+    it 'withdrawals must decrease balance' do
+      deposit_amount = 500
+      withdrawal_amount = 300
+      @alice.account.deposit deposit_amount
+      @alice.account.withdraw withdrawal_amount
+      expect(@alice.account.balance).to eq(deposit_amount - withdrawal_amount)
+    end
 
-  it 'transfers must increase reciever balance' do
-    deposit_amount = 500
-    transfer_amount = 300
-    @alice.account.deposit deposit_amount
-    @alice.account.transfer transfer_amount, @bob.account
-    expect(@bob.account.balance).to eq(transfer_amount)
+    it 'transfers must decrease sender balance' do
+      deposit_amount = 500
+      transfer_amount = 300
+      @alice.account.deposit deposit_amount
+      @alice.account.transfer transfer_amount, @bob.account
+      expect(@alice.account.balance).to eq(deposit_amount - transfer_amount)
+    end
+
+    it 'transfers must increase reciever balance' do
+      deposit_amount = 500
+      transfer_amount = 300
+      @alice.account.deposit deposit_amount
+      @alice.account.transfer transfer_amount, @bob.account
+      expect(@bob.account.balance).to eq(transfer_amount)
+    end
   end
 end
