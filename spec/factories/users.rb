@@ -34,16 +34,5 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     confirmed_at Time.zone.today
-
-    # profile settings
-    name { Faker::Name.name }
-    bio { Faker::Lorem.sentence 3, true, 12 }
-    work_company { Faker::Company.name }
-    work_title { Faker::Name.title }
-    location { Faker::Address.city }
-
-    trait :charitable do
-      charitable true
-    end
   end
 end
