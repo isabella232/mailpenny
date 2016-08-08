@@ -44,23 +44,11 @@ class User < ApplicationRecord
               message: 'Username unavailable'
             }
 
-  validates :rate_email,
-            numericality: { greater_than_or_equal_to: 0 }
-
-  validates :rate_sms,
-            numericality: { greater_than_or_equal_to: 0 }
-
   has_one :account
 
-  before_validation :set_defaults
   before_create :build_default_account
 
   private
-
-  def set_defaults
-    self.rate_email ||= 0
-    self.rate_sms ||= 0
-  end
 
   def build_default_account
     build_account account_type: 'user'
