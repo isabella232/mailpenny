@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :profiles
   # static pages are public pages
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home', as: :home_page
