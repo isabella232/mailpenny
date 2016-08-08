@@ -1,2 +1,33 @@
 <h1>Dashboard#profile</h1>
-<p>Find me in app/views/dashboard/profile.html.erb</p>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= devise_error_messages! %>
+
+<div class="field">
+    <%= f.label :name %><br/>
+    <%= f.text_field :name %>
+</div>
+<div class="field">
+    <%= f.label :bio %><br/>
+    <%= f.text_field :bio %>
+</div>
+<div class="field">
+    <%= f.label :work_company %><br/>
+    <%= f.text_field :work_company %>
+</div>
+<div class="field">
+    <%= f.label :work_title %><br/>
+    <%= f.text_field :work_title %>
+</div>
+<div class="field">
+    <%= f.label :location %><br/>
+    <%= f.text_field :location %>
+</div>
+<div class="field">
+    <%= f.label :twitter_username %><br/>
+    <%= f.text_field :twitter_username %>
+</div>
+
+<div class="actions">
+    <%= f.submit "Update" %>
+</div>
+<% end %>
