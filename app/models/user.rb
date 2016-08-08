@@ -3,16 +3,8 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  name                   :string
 #  username               :string
-#  bio                    :text
-#  work_company           :string
-#  work_title             :string
-#  location               :string
-#  twitter_username       :string
 #  cellphone_number       :string
-#  rate_email             :decimal(, )
-#  rate_sms               :decimal(, )
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
