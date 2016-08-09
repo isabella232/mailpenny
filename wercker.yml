@@ -1,4 +1,4 @@
-# This references the default Ruby container from
+  # This references the default Ruby container from
 # the Docker Hub.
 # https://registry.hub.docker.com/_/ruby/
 # If you want to use a specific version you would use a tag:
@@ -22,6 +22,17 @@ build:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
         - bundle-install
+        - script:
+            name: echo ruby information
+            code: |
+                echo "ruby version $(ruby --version) running!"
+                echo "from location $(which ruby)"
+                echo "Database name $POSTGRES_NAME"
+                echo "Databse host $POSTGRES_PORT_5432_TCP_ADDR"
+                echo "Database post: $POSTGRES_PORT_5432_TCP_PORT"
+                echo "Database password: $POSTGRES_PASSWORD"
+                echo -p "gem list: $(gem list)"
+
         - script:
             name: db setup
             code: bundle exec rails db:setup RAILS_ENV=test
