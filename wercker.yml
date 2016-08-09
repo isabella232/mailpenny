@@ -30,7 +30,7 @@ build:
                 echo "Database name $POSTGRES_NAME"
                 echo "Databse host $POSTGRES_PORT_5432_TCP_ADDR"
                 echo "Database post: $POSTGRES_PORT_5432_TCP_PORT"
-                echo "Database password: $POSTGRES_PASSWORD"
+                ruby -e 'puts "DATABASE_URL: myuser:ourlittlesecret@#{ENV['POSTGRES_PORT_5432_TCP_ADDR']}:#{ENV['POSTGRES_PORT_5432_TCP_PORT']}/#{ENV['POSTGRES_NAME']}"'
                 echo -p "gem list: $(gem list)"
 
         - script:
