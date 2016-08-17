@@ -24,6 +24,8 @@ gem 'bower-rails'
 gem 'annotate'
 # runtime for JavaScript
 gem 'therubyracer'
+# for messaging
+gem 'mailboxer'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
@@ -43,8 +45,6 @@ group :development, :test do
   gem 'factory_girl_rails', require: false
   # automtically generated fake data
   gem 'faker'
-  # messages capabilities
-  gem 'mailboxer'
 end
 
 group :development do
