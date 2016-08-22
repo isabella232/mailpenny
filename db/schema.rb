@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822083954) do
+ActiveRecord::Schema.define(version: 20160822113043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20160822083954) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
   end
 
+  create_table "phone_numbers", force: :cascade do |t|
+    t.integer  "user_id",                      null: false
+    t.string   "country_code",                 null: false
+    t.string   "phone_number",                 null: false
+    t.string   "authy_id",                     null: false
+    t.boolean  "confirmed",    default: false, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["user_id"], name: "index_phone_numbers_on_user_id", using: :btree
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
     t.text     "bio"
@@ -137,6 +148,7 @@ ActiveRecord::Schema.define(version: 20160822083954) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "phone_numbers", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "transactions", "accounts", column: "from_id"
   add_foreign_key "transactions", "accounts", column: "to_id"
