@@ -45,6 +45,8 @@ group :development, :test do
   gem 'factory_girl_rails', require: false
   # automtically generated fake data
   gem 'faker'
+  # load environment variables from .env
+  gem 'dotenv-rails'
 end
 
 group :development do
