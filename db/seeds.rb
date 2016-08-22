@@ -8,11 +8,22 @@ Account.create(account_type: 'fee')
 
 # To make developer lives easier, create a dummy user for development:
 unless Rails.env == 'production'
-  User.create(
+  dummy = User.create(
     username: 'dummy',
     email: 'email@example.com',
     password: 'password',
     password_confirmation: 'password',
     confirmed_at: Time.zone.today
+  )
+
+  dummy.profile = Profile.new(
+    name: 'Dummy User',
+    bio: 'Dummies do what dummies can',
+    work_company: 'Dummy Corp',
+    work_title: 'Chief Dummy Officer',
+    location: 'Dummisvilee',
+    twitter_username: 'dumdumdumdu',
+    rate_email: 1,
+    rate_sms: 1
   )
 end
