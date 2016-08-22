@@ -15,6 +15,7 @@
 #  updated_at       :datetime         not null
 #
 class Profile < ApplicationRecord
+  belongs_to :user
   validates :rate_email,
             numericality: { greater_than_or_equal_to: 0 }
 
