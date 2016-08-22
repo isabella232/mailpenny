@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
   end
 
   def profile
+    @profile = current_user.profile
   end
 
   def account

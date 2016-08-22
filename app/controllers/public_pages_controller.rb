@@ -6,6 +6,7 @@ class PublicPagesController < ApplicationController
   def profile
     profile_username = params[:username]
     @profile_user = User.find_by(username: profile_username)
+    @profile = @profile_user.profile
     not_found if @profile_user.nil?
   end
 end
