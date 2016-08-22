@@ -13,6 +13,7 @@
 #  rate_sms         :decimal(, )      default(0.0), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  user_id          :integer
 #
 
 require 'rails_helper'
