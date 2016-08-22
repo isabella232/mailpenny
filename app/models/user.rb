@@ -46,6 +46,7 @@ class User < ApplicationRecord
 
   has_one :account
   has_one :profile
+  has_one :phone_number
 
   before_create :build_default_account
 
