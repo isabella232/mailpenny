@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817083259) do
+ActiveRecord::Schema.define(version: 20160822083954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,7 +88,9 @@ ActiveRecord::Schema.define(version: 20160817083259) do
     t.decimal  "rate_sms",         default: "0.0", null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "user_id"
     t.index ["twitter_username"], name: "index_profiles_on_twitter_username", using: :btree
+    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -135,6 +137,7 @@ ActiveRecord::Schema.define(version: 20160817083259) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "profiles", "users"
   add_foreign_key "transactions", "accounts", column: "from_id"
   add_foreign_key "transactions", "accounts", column: "to_id"
 end
