@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  username               :string
-#  cellphone_number       :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
@@ -47,6 +46,7 @@ class User < ApplicationRecord
   has_one :account
   has_one :profile
   has_one :phone_number
+  has_many :social_media_accounts
 
   before_create :build_default_account
 
