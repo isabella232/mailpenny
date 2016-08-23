@@ -4,7 +4,6 @@
 #
 #  id                     :integer          not null, primary key
 #  username               :string
-#  cellphone_number       :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
