@@ -55,10 +55,8 @@ class PhoneNumber < ApplicationRecord
     )
     if authy.ok?
       self.authy_id = authy.id
-      puts "HERE HERE HERE HERE HERE HERE HERE #{authy.id}"
     else
-      authy.errors # this will return an error hash
-      puts "HERE HERE HERE HERE HERE HERE HERE #{authy.errors}"
+      authy.errors
     end
   end
 end
