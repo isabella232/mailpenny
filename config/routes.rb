@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :social_media_accounts
   resources :phone_numbers
   resources :profiles
   # static pages are public pages
