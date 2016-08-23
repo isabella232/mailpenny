@@ -4,7 +4,7 @@ class CreateSocialMediaAccounts < ActiveRecord::Migration[5.0]
       t.references :user, foreign_key: true
       t.integer :platform, null: false
       t.string :username, null: false
-      t.string :url null: false
+      t.string :url, null: false
       t.string :proof
       t.boolean :confirmed, null: false, default: false
 
