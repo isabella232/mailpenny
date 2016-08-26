@@ -2,6 +2,7 @@
   "lib": {
     "name": "bower-rails generated lib assets",
     "dependencies": {
+      "fontawesome": "https://github.com/FortAwesome/Font-Awesome.git"
     }
   },
   "vendor": {
