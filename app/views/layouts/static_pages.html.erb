@@ -1,6 +1,22 @@
-<%= content_for :body do %>
-  <%= render 'static_pages_links' %>
+<%# render 'static_pages_links' %>
+<%# render 'login_logout' %>
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<meta charset="utf-8">
+
+<title>Mailman</title>
+<%= favicon_link_tag %>
+<%= csrf_meta_tags %>
+<%= yield :meta_data %>
+<%= stylesheet_link_tag 'application', media: 'all' %>
+
+<!-- <link rel="icon" href="/mailman-frontend/images/favicon.png" /> -->
+<link rel="stylesheet" href="/mailman-frontend/css/global.css" class="" type="text/css" />
+</head>
+<body>
 <%= yield %>
-<%= render 'login_logout' %>
-<% end %>
-<%= render template: 'layouts/application' %>
+</body>
+</html>
