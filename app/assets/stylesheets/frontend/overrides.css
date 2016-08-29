@@ -358,7 +358,7 @@ ul.zg-ul-select.active:after {
 .getstarted-box label {
 	text-align: left;
 }
-.getstarted-box input[type="email"], .getstarted-box input[type="password"] {
+.getstarted-box input[type="text"], .getstarted-box input[type="email"], .getstarted-box input[type="password"] {
 	height: 45px;
 	margin: 0 0 10px;
 }
