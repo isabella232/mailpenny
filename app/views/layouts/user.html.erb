@@ -1,13 +1,16 @@
-<%= content_for :body do %>
-<p>Links</p>
-<ul>
-  <li><a href="/home">home</a></li>
-  <li><a href="/about"></a>about</li>
-  <li><a href="/terms">terms</a></li>
-  <li><a href="/privacy"></a>privacy</li>
-  <li><a href="/help">help</a></li>
-</ul>
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Mailman</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+<meta charset="utf-8">
+<%= favicon_link_tag %>
+<%= csrf_meta_tags %>
+<%= yield :meta_data %>
+<%= stylesheet_link_tag 'application', media: 'all' %></head>
+
+<body class="blue-bg">
 <%= yield %>
-<%= render 'login_logout' %>
-<% end %>
-<%= render template: 'layouts/application' %>
+<%= javascript_include_tag "application" %>
+</body>
+</html>
