@@ -33,6 +33,8 @@ gem 'mailboxer'
 gem 'authy'
 # twitter gem
 gem 'twitter'
+# secure headers
+gem 'secure_headers'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
