@@ -20,12 +20,6 @@ Rails.application.routes.draw do
 
   # user signups and registration
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  as :user do
-    get    'login'    => 'users/sessions#new', as: :login_page
-    post   'login'    => 'users/sessions#create'
-    delete 'logout'   => 'users/sessions#destroy', as: :logout
-    get    'register' => 'users/registrations#new', as: :register_page
-  end
 
   # public pages
   get 'search' => 'public_pages#search'
