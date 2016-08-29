@@ -10,6 +10,6 @@ SecureHeaders::Configuration.default do |config|
     connect_src: %w('self'),
     img_src: %w('self'),
     style_src: %w('unsafe-inline' 'self' fonts.googleapis.com,),
-    report_uri: ["/csp_report?report_only=#{Rails.env.production?}"]
+    report_uri: ["https://payload.report-uri.io/r/default/csp/reportOnly"]
   }
 end
