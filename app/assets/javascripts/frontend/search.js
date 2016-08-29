@@ -4,6 +4,8 @@
 	var searchEl = document.querySelector("#input");
 	var labelEl = document.querySelector("#label");
 
+	// stop if nothing is found
+	if (labelEl === null) return;
 	// register clicks and toggle classes
 	labelEl.addEventListener("click",function(){
 		if (classie.has(searchEl,"focus")) {
