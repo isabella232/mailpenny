@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 # Bundle the approriate ruby
 ruby '2.3.1'
+
+# bundler should be atleast 1.8.4
+gem 'bundler', '>= 1.8.4'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
 # Use Puma as the app server
@@ -76,3 +79,9 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# bower components needed
+source 'https://rails-assets.org' do
+  gem 'rails-assets-bootstrap'
+  gem 'rails-assets-fontawesome'
+end
