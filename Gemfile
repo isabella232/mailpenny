@@ -85,8 +85,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # bower components needed
+
+gem 'font-awesome-rails' # the asset pipeline wasn't working properly
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
-  gem 'rails-assets-fontawesome'
   gem 'rails-assets-classie'
 end
