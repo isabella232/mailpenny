@@ -15,7 +15,7 @@
 #  updated_at       :datetime         not null
 #  user_id          :integer
 #
-
+# User's personal information, including fees
 class Profile < ApplicationRecord
   belongs_to :user
   validates :rate_email,

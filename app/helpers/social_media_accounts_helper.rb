@@ -1,2 +1,3 @@
+# Helper for SocialMediaAccountsController
 module SocialMediaAccountsHelper
 end
