@@ -1,1 +1,1 @@
---markup markdown --protected --private --exclude /db/migrate/ lib/ config/ app/ db/*
+--markup markdown --markup-provider kramdown --protected --private --exclude /db/migrate/ lib/ config/ app/ db/*
