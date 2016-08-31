@@ -13,10 +13,11 @@ bundle exec rake db:setup
 ```
 
 It's a good idea to run four consoles:
-  1. Server with `bundle exec rails server`
-  2. Guard with `bundle exec guard`
-  3. Rails console with `bundle exec rails console`
-  4. A regular terminal for git and file manipulation
+
+1. Server with `bundle exec rails server`
+2. Guard with `bundle exec guard`
+3. Rails console with `bundle exec rails console`
+4. A regular terminal for git and file manipulation
 
 ## Docs
 
