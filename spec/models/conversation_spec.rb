@@ -10,6 +10,7 @@
 #  escrow_transaction_id :integer
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
+#  medium                :integer
 #
 
 require 'rails_helper'
