@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831010545) do
+ActiveRecord::Schema.define(version: 20160831014200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20160831010545) do
   create_table "escrow_transactions", force: :cascade do |t|
     t.integer  "from_id"
     t.integer  "to_id"
-    t.boolean  "is_open"
     t.integer  "state"
     t.integer  "opening_transaction_id"
     t.integer  "closing_transaction_id"
