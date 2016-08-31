@@ -5,7 +5,6 @@
 #  id                     :integer          not null, primary key
 #  from_id                :integer
 #  to_id                  :integer
-#  is_open                :boolean
 #  state                  :integer
 #  opening_transaction_id :integer
 #  closing_transaction_id :integer
