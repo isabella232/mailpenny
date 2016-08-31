@@ -1,24 +1,37 @@
-# README
+Mailpenny
+=========
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the entire codebase for the Mailpenny app. Mailpenny uses [Mailgun](http://mailgun.com) to send/recieve email, and [Coinbase](http://coinbase.com) to store bitcoin.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+Clone the repository, and then run:  
 
-* System dependencies
+```
+bundle install --without production
+bundle exec rake db:setup
+```
 
-* Configuration
+It's a good idea to run four consoles:
+  1. Server with `bundle exec rails server`
+  2. Guard with `bundle exec guard`
+  3. Rails console with `bundle exec rails console`
+  4. A regular terminal for git and file manipulation
 
-* Database creation
+## Docs
 
-* Database initialization
+Documentation is generated using the `yard` command, and is saved in `doc/`
 
-* How to run the test suite
+## Tests
 
-* Services (job queues, cache servers, search engines, etc.)
+Run `guard` in a console to continuously test the app on every save.
 
-* Deployment instructions
+## Production
 
-* ...
+Test with `bundle exec rake test` before deploying!
+
+Mailpenny uses postgresql as the DB, and in production automatically loads from
+the `DATABASE_URL` config var.
+
+If using heroku, remember to run
+`heroku run rake db:create && heroku run rake db:setup`
