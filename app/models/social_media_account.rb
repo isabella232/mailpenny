@@ -11,7 +11,7 @@
 #  confirmed  :boolean          default(FALSE), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
+
 # Social media accounts for the users
 class SocialMediaAccount < ApplicationRecord
   after_initialize :set_defaults
