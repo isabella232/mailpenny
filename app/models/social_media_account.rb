@@ -1,16 +1,31 @@
-# == Schema Information
+# ## Schema Information
 #
-# Table name: social_media_accounts
+# Table name: `social_media_accounts`
 #
-#  id         :integer          not null, primary key
-#  user_id    :integer
-#  platform   :integer          not null
-#  username   :string           not null
-#  url        :string           not null
-#  proof      :string
-#  confirmed  :boolean          default(FALSE), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+# ### Columns
+#
+# Name              | Type               | Attributes
+# ----------------- | ------------------ | ---------------------------
+# **`id`**          | `integer`          | `not null, primary key`
+# **`user_id`**     | `integer`          |
+# **`platform`**    | `integer`          | `not null`
+# **`username`**    | `string`           | `not null`
+# **`url`**         | `string`           | `not null`
+# **`proof`**       | `string`           |
+# **`confirmed`**   | `boolean`          | `default(FALSE), not null`
+# **`created_at`**  | `datetime`         | `not null`
+# **`updated_at`**  | `datetime`         | `not null`
+#
+# ### Indexes
+#
+# * `index_social_media_accounts_on_user_id`:
+#     * **`user_id`**
+#
+# ### Foreign Keys
+#
+# * `fk_rails_19f1549559`:
+#     * **`user_id => users.id`**
+#
 
 # Social media accounts for the users
 class SocialMediaAccount < ApplicationRecord
