@@ -5,7 +5,7 @@ class CreateMessages < ActiveRecord::Migration[5.0]
       t.references :conversation, index: true, foreign_key: true
       t.references :sender, index: true
       t.references :recipient, index: true
-      t.enum :type
+      t.integer :type
 
       t.timestamps
     end
