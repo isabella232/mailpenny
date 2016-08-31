@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831141628) do
+ActiveRecord::Schema.define(version: 20160831142032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,9 @@ ActiveRecord::Schema.define(version: 20160831141628) do
     t.integer  "initiator_id"
     t.integer  "recipient_id"
     t.integer  "status"
-    t.integer  "escrow_transaction_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "medium"
-    t.index ["escrow_transaction_id"], name: "index_conversations_on_escrow_transaction_id", using: :btree
     t.index ["initiator_id"], name: "index_conversations_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
   end
@@ -47,7 +45,9 @@ ActiveRecord::Schema.define(version: 20160831141628) do
     t.decimal  "amount"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "conversation_id"
     t.index ["closing_transaction_id"], name: "index_escrow_transactions_on_closing_transaction_id", using: :btree
+    t.index ["conversation_id"], name: "index_escrow_transactions_on_conversation_id", using: :btree
     t.index ["from_id"], name: "index_escrow_transactions_on_from_id", using: :btree
     t.index ["opening_transaction_id"], name: "index_escrow_transactions_on_opening_transaction_id", using: :btree
     t.index ["to_id"], name: "index_escrow_transactions_on_to_id", using: :btree
@@ -198,7 +198,6 @@ ActiveRecord::Schema.define(version: 20160831141628) do
   end
 
   add_foreign_key "accounts", "users"
-  add_foreign_key "conversations", "escrow_transactions"
   add_foreign_key "conversations", "users", column: "initiator_id"
   add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "escrow_transactions", "accounts", column: "from_id"
