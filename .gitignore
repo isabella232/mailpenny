@@ -21,3 +21,6 @@
 
 # ignore the .env file for dotenv
 .env
+
+# Ignore all the docs, they should always be build from scratch
+doc/
