@@ -1,0 +1,1 @@
+--markup markdown --protected --private --exclude /db/migrate/ lib/ config/ app/ db/*
