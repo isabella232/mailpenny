@@ -13,7 +13,7 @@
 #  updated_at             :datetime         not null
 #
 
-# A record of funds help and/or paid in escrow
+# A record of funds held, paid or reversed escrow
 class EscrowTransaction < ApplicationRecord
   belongs_to :account, foreign_key: :from_id
   belongs_to :account, foreign_key: :to_id
@@ -21,8 +21,8 @@ class EscrowTransaction < ApplicationRecord
   belongs_to :transactions, foreign_key: :closing_transaction_id
 
   enum state: {
-    pending: 1,
-    completed: 2,
-    reversed: 3
+    pending: 1, # money is in escrow
+    completed: 2, # money was delivered to original recepient
+    reversed: 3 # money was reversed and delivered to original sender
   }
 end
