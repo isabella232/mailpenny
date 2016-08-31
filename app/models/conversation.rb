@@ -2,15 +2,14 @@
 #
 # Table name: conversations
 #
-#  id                    :integer          not null, primary key
-#  subject               :string
-#  initiator_id          :integer
-#  recipient_id          :integer
-#  status                :integer
-#  escrow_transaction_id :integer
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  medium                :integer
+#  id           :integer          not null, primary key
+#  subject      :string
+#  initiator_id :integer
+#  recipient_id :integer
+#  status       :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  medium       :integer
 #
 
 class Conversation < ApplicationRecord

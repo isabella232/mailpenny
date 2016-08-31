@@ -11,6 +11,7 @@
 #  amount                 :decimal(, )
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  conversation_id        :integer
 #
 
 # A record of funds held, paid or reversed escrow
