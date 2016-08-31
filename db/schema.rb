@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823065500) do
+ActiveRecord::Schema.define(version: 20160831010545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20160823065500) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
+  end
+
+  create_table "escrow_transactions", force: :cascade do |t|
+    t.integer  "from_id"
+    t.integer  "to_id"
+    t.boolean  "is_open"
+    t.integer  "state"
+    t.integer  "opening_transaction_id"
+    t.integer  "closing_transaction_id"
+    t.decimal  "amount"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["closing_transaction_id"], name: "index_escrow_transactions_on_closing_transaction_id", using: :btree
+    t.index ["from_id"], name: "index_escrow_transactions_on_from_id", using: :btree
+    t.index ["opening_transaction_id"], name: "index_escrow_transactions_on_opening_transaction_id", using: :btree
+    t.index ["to_id"], name: "index_escrow_transactions_on_to_id", using: :btree
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
@@ -156,6 +172,10 @@ ActiveRecord::Schema.define(version: 20160823065500) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "escrow_transactions", "accounts", column: "from_id"
+  add_foreign_key "escrow_transactions", "accounts", column: "to_id"
+  add_foreign_key "escrow_transactions", "transactions", column: "closing_transaction_id"
+  add_foreign_key "escrow_transactions", "transactions", column: "opening_transaction_id"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
