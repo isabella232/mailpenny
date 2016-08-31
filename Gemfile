@@ -75,6 +75,7 @@ group :development do
   # notifications for guard. OSX. run `brew install terminal-notifer`
   gem 'terminal-notifier-guard'
   gem 'yard'
+  gem 'kramdown'
 end
 
 group :production do
