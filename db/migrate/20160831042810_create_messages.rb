@@ -2,12 +2,14 @@ class CreateMessages < ActiveRecord::Migration[5.0]
   def change
     create_table :messages do |t|
       t.text :body
-      t.references :conversation, foreign_key: true
-      t.references :sender, foreign_key: true
-      t.references :recipient, foreign_key: true
+      t.references :conversation, index: true, foreign_key: true
+      t.references :sender, index: true
+      t.references :recipient, index: true
       t.enum :type
 
       t.timestamps
     end
+    add_foreign_key :messages, :users, column: :sender_id
+    add_foreign_key :messages, :users, column: :recipient_id
   end
 end
