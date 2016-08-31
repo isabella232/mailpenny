@@ -32,6 +32,7 @@ class PhoneNumber < ApplicationRecord
 
   before_save :register_authy_user
 
+  # Send the a confirmation token via sms
   def request_verification_sms
     response = Authy::API.request_sms id: authy_id
     if response.ok?
@@ -41,6 +42,7 @@ class PhoneNumber < ApplicationRecord
     end
   end
 
+  # Send the a confirmation token via phone call
   def request_verification_call
     response = Authy::API.request_phone_call id: authy_id
     if response.ok?
@@ -50,6 +52,8 @@ class PhoneNumber < ApplicationRecord
     end
   end
 
+  # Verify a confirmation token
+  # @param token [String] a six digit authy confirmation token
   def verify(token)
     response = Authy::API.verify(id: authy_id, token: token)
     if response.ok?
@@ -62,6 +66,8 @@ class PhoneNumber < ApplicationRecord
 
   private
 
+  # Register a User on Authy and save the result to the `authy_id` attribute
+  # @return [String] A unique Authy id for the phone number
   def register_authy_user
     authy = Authy::API.register_user(
       email: user.email,
