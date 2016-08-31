@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831022434) do
+ActiveRecord::Schema.define(version: 20160831042810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,19 @@ ActiveRecord::Schema.define(version: 20160831022434) do
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
+    t.integer  "type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
+    t.index ["recipient_id"], name: "index_messages_on_recipient_id", using: :btree
+    t.index ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  end
+
   create_table "phone_numbers", force: :cascade do |t|
     t.integer  "user_id",                      null: false
     t.string   "country_code",                 null: false
@@ -194,6 +207,9 @@ ActiveRecord::Schema.define(version: 20160831022434) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users", column: "recipient_id"
+  add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "social_media_accounts", "users"
