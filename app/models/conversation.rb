@@ -14,6 +14,7 @@
 # **`created_at`**    | `datetime`         | `not null`
 # **`updated_at`**    | `datetime`         | `not null`
 # **`medium`**        | `integer`          |
+# **`fee_amount`**    | `decimal(, )`      |
 #
 # ### Indexes
 #
@@ -29,19 +30,36 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
+
 class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :initiator_id
   belongs_to :user, foreign_key: :recipient_id
   has_one :escrow_transaction
 
-  enum status: [
+  validates :subject,
+            presence: true
+
+  validates :initiator,
+            presence: true
+
+  validates :recipient,
+            presence: true
+
+  enum status: {
     open: 1, # the initiator has sent the message
     completed: 2, # the recipient has replied and escrow is closed
     closed: 3 # the conversation is closed and new messages cannot be added
-  ]
+  }
 
-  enum medium: [
+  enum medium: {
     email: 1, # the messages are delivered via email
     sms: 2 # the messages are delivered via sms
-  ]
+  }
+
+  private
+
+  # Initiate the escrow transaction by transfering money into the escrow account
+  def create_escrow_transaction
+    #code
+  end
 end
