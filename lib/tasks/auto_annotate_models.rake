@@ -39,8 +39,8 @@ if Rails.env.development?
       'sort'                    => 'false',
       'force'                   => 'false',
       'trace'                   => 'false',
-      'wrapper_open'            => nil,
-      'wrapper_close'           => nil
+      'wrapper_open'            => '<!-- BEGIN GENERATED ANNOTATION -->',
+      'wrapper_close'           => '<!-- END GENERATED ANNOTATION -->'
     )
   end
 
