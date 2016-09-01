@@ -36,6 +36,9 @@ class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :recipient_id
   has_one :escrow_transaction
 
+  before_create :determine_fee_amount
+  before_create :create_escrow_transaction
+
   validates :subject,
             presence: true
 
@@ -44,6 +47,10 @@ class Conversation < ApplicationRecord
 
   validates :recipient,
             presence: true
+
+  validates :fee_amount,
+            presence: true,
+            numericality: { greater_than_or_equal_to: 0 }
 
   enum status: {
     open: 1, # the initiator has sent the message
