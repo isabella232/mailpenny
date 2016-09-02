@@ -27,8 +27,6 @@ gem 'bower-rails'
 gem 'annotate'
 # runtime for JavaScript
 gem 'therubyracer'
-# for messaging
-gem 'mailboxer'
 # authy for phone verification
 gem 'authy'
 # twitter gem
