@@ -43,6 +43,7 @@ class Profile < ApplicationRecord
 
   private
 
+  # set the default attributes
   def set_defaults
     self.rate ||= 0
   end
