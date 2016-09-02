@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `accounts`
@@ -23,6 +24,7 @@
 # * `fk_rails_b1e30bebc8`:
 #     * **`user_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # accounts and their associated balances
 class Account < ApplicationRecord

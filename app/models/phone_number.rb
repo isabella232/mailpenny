@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `phone_numbers`
@@ -25,6 +26,7 @@
 # * `fk_rails_af796b956a`:
 #     * **`user_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # phone numbers
 class PhoneNumber < ApplicationRecord

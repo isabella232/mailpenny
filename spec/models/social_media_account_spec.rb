@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `social_media_accounts`
@@ -26,6 +27,7 @@
 # * `fk_rails_19f1549559`:
 #     * **`user_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 require 'rails_helper'
 RSpec.describe SocialMediaAccount, type: :model do

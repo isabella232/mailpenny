@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
@@ -29,6 +30,7 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :initiator_id

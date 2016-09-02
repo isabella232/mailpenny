@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `escrow_transactions`
@@ -41,6 +42,7 @@
 # * `fk_rails_abcc2686a1`:
 #     * **`from_id => accounts.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 require 'rails_helper'
 

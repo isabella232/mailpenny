@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
@@ -13,7 +14,6 @@
 # **`status`**        | `integer`          |
 # **`created_at`**    | `datetime`         | `not null`
 # **`updated_at`**    | `datetime`         | `not null`
-# **`medium`**        | `integer`          |
 # **`fee_amount`**    | `decimal(, )`      |
 #
 # ### Indexes
@@ -30,6 +30,7 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 require 'rails_helper'
 

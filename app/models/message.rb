@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `messages`
@@ -33,6 +34,7 @@
 # * `fk_rails_b8f26a382d`:
 #     * **`sender_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 class Message < ApplicationRecord
   belongs_to :conversation

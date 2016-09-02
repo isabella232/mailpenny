@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `users`
@@ -41,6 +42,7 @@
 # * `index_users_on_username` (_unique_):
 #     * **`username`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 require 'restricted_usernames'
 

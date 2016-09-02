@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `transactions`
@@ -28,6 +29,7 @@
 # * `fk_rails_16a782f6da`:
 #     * **`to_id => accounts.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # A record of the transactions our users do
 class Transaction < ApplicationRecord
