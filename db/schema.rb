@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901000917) do
+ActiveRecord::Schema.define(version: 20160902220322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(version: 20160901000917) do
     t.integer  "status"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "medium"
     t.decimal  "fee_amount"
     t.index ["initiator_id"], name: "index_conversations_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
@@ -138,8 +137,7 @@ ActiveRecord::Schema.define(version: 20160901000917) do
     t.string   "work_title"
     t.string   "location"
     t.string   "twitter_username"
-    t.decimal  "rate_email",       default: "0.0", null: false
-    t.decimal  "rate_sms",         default: "0.0", null: false
+    t.decimal  "rate",             default: "0.0", null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "user_id"
