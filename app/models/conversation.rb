@@ -67,6 +67,11 @@ class Conversation < ApplicationRecord
 
   # Initiate the escrow transaction by transfering money into the escrow account
   def create_escrow_transaction
-    #code
+    fee = recipient.rate_email
+    self.escrow_transaction = EscrowTransaction.new(
+      from: initiator,
+      to: recipient,
+      amount: fee
+    )
   end
 end
