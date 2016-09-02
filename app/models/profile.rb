@@ -32,19 +32,16 @@
 #
 
 class Profile < ApplicationRecord
-  belongs_to :user
-  validates :rate_email,
-            numericality: { greater_than_or_equal_to: 0 }
-
-  validates :rate_sms,
-            numericality: { greater_than_or_equal_to: 0 }
-
   before_validation :set_defaults
+
+  belongs_to :user
+
+  validates :rate,
+            numericality: { greater_than_or_equal_to: 0 }
 
   private
 
   def set_defaults
-    self.rate_email ||= 0
-    self.rate_sms ||= 0
+    self.rate ||= 0
   end
 end
