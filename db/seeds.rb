@@ -23,7 +23,6 @@ unless Rails.env == 'production'
     work_title: 'Chief Dummy Officer',
     location: 'Dummisvilee',
     twitter_username: 'dumdumdumdu',
-    rate_email: 1,
-    rate_sms: 1
+    rate: 1
   )
 end

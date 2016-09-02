@@ -67,8 +67,6 @@ class User < ApplicationRecord
 
   before_create :build_default_account
 
-  acts_as_messageable # helper for the mailboxer gem
-
   private
 
   def build_default_account
