@@ -48,10 +48,6 @@ class Conversation < ApplicationRecord
   validates :recipient,
             presence: true
 
-  validates :fee_amount,
-            presence: true,
-            numericality: { greater_than_or_equal_to: 0 }
-
   enum status: {
     open: 1, # the initiator has sent the message
     completed: 2, # the recipient has replied and escrow is closed
