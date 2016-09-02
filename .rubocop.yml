@@ -12,14 +12,25 @@ AllCops:
 Rails:
   Enabled: true
 
+# devise generated code needs to be excluded
 Style/ClassAndModuleChildren:
   Exclude:
-    - app/controllers/users/* # devise generated code
+    - app/controllers/users/*
 
+# controller methods are sometimes longer
 Metrics/MethodLength:
-  Max: 50 # controller methods are sometimes longer
+  Max: 50
   Exclude:
     - lib/restricted_usernames.rb
 
+# rails controllers can get very long
 Metrics/ClassLength:
-  Enabled: false # rails controllers can get very long
+  Enabled: false
+
+# Screens can handle longer lines than 80 chars
+Metrics/LineLength:
+  Max: 120
+
+# Check with yard instead.
+Style/Documentation:
+  Enabled: false
