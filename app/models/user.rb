@@ -69,6 +69,19 @@ class User < ApplicationRecord
 
   before_create :build_default_account
 
+  # Send a new message to a person
+  # @param to [User] Person to send the message to.
+  # @param subject [String] Subject line limited to 250 characters
+  # @param body [Text]
+  def send_message(to, subject, body)
+    conversation = Converstion.create(
+      initiator: id,
+      recipient: to,
+      subject: subject
+    )
+    conversation.add_message(id, body)
+  end
+
   private
 
   def build_default_account

@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
@@ -29,6 +30,7 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :initiator_id
@@ -88,6 +90,13 @@ class Conversation < ApplicationRecord
   # @return [Array(User, User)] The Initiator and Recipient in array form
   def participants
     [initiator, recipient]
+  end
+
+  # add a new message to the conversation
+  # @param from [User.id] person sending the message
+  # @param body [Text] message text being sent
+  def add_message(from, body)
+    # TODO
   end
 
   private
