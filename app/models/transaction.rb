@@ -49,11 +49,12 @@ class Transaction < ApplicationRecord
   validates :transaction_type,
             presence: true
 
-  enum tranasaction_type: {
+  enum transaction_type: {
     escrow: 1,
     payment: 2,
-    deposit: 3,
-    withdrawal: 4,
-    fees: 5
+    reversal: 3,
+    deposit: 4,
+    withdrawal: 5,
+    fees: 6
   }
 end
