@@ -1,33 +1,26 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `escrow_transactions`
 #
 # ### Columns
 #
-# Name                          | Type               | Attributes
-# ----------------------------- | ------------------ | ---------------------------
-# **`id`**                      | `integer`          | `not null, primary key`
-# **`from_id`**                 | `integer`          |
-# **`to_id`**                   | `integer`          |
-# **`state`**                   | `integer`          |
-# **`opening_transaction_id`**  | `integer`          |
-# **`closing_transaction_id`**  | `integer`          |
-# **`amount`**                  | `decimal(, )`      |
-# **`created_at`**              | `datetime`         | `not null`
-# **`updated_at`**              | `datetime`         | `not null`
-# **`conversation_id`**         | `integer`          |
+# Name                   | Type               | Attributes
+# ---------------------- | ------------------ | ---------------------------
+# **`id`**               | `integer`          | `not null, primary key`
+# **`from_id`**          | `integer`          |
+# **`to_id`**            | `integer`          |
+# **`state`**            | `integer`          |
+# **`amount`**           | `decimal(, )`      |
+# **`created_at`**       | `datetime`         | `not null`
+# **`updated_at`**       | `datetime`         | `not null`
+# **`conversation_id`**  | `integer`          |
 #
 # ### Indexes
 #
-# * `index_escrow_transactions_on_closing_transaction_id`:
-#     * **`closing_transaction_id`**
 # * `index_escrow_transactions_on_conversation_id`:
 #     * **`conversation_id`**
 # * `index_escrow_transactions_on_from_id`:
 #     * **`from_id`**
-# * `index_escrow_transactions_on_opening_transaction_id`:
-#     * **`opening_transaction_id`**
 # * `index_escrow_transactions_on_to_id`:
 #     * **`to_id`**
 #
@@ -35,14 +28,9 @@
 #
 # * `fk_rails_0c4e4a285d`:
 #     * **`to_id => accounts.id`**
-# * `fk_rails_0f05cdcec9`:
-#     * **`opening_transaction_id => transactions.id`**
-# * `fk_rails_26cf516315`:
-#     * **`closing_transaction_id => transactions.id`**
 # * `fk_rails_abcc2686a1`:
 #     * **`from_id => accounts.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 # A record of funds held, paid or reversed escrow
 class EscrowTransaction < ApplicationRecord
@@ -64,6 +52,29 @@ class EscrowTransaction < ApplicationRecord
     completed: 2, # money was delivered to original recepient
     reversed: 3 # money was reversed and delivered to original sender
   }
+
+  # mark the transaction as completed and pay out the rate
+  def complete
+    EscrowTransaction.transaction do
+      self.state = "completed"
+      Account.find_by(account_type: 'escrow').transfer(
+        amount,
+        to_id,
+        'payment'
+      )
+    end
+  end
+
+  def reverse
+    EscrowTransaction.transaction do
+      self.state = "reversed"
+      Account.find_by(account_type: 'escrow').transfer(
+        amount,
+        from_id,
+        'reversal'
+      )
+    end
+  end
 
   private
 
