@@ -51,9 +51,39 @@ class EscrowTransaction < ApplicationRecord
   belongs_to :transactions, foreign_key: :opening_transaction_id
   belongs_to :transactions, foreign_key: :closing_transaction_id
 
+  before_validation :determine_amount
+  before_create :set_defaults
+  before_create :create_escrow_transaction
+
+  validates :amount,
+            presence: true,
+            numericality: { greater_than_or_equal_to: 0 }
+
   enum state: {
     pending: 1, # money is in escrow
     completed: 2, # money was delivered to original recepient
     reversed: 3 # money was reversed and delivered to original sender
   }
+
+  private
+
+  # set default values
+  def set_defaults
+    self.state = 'pending'
+  end
+
+  # determine the recipient's fee and set that as the amount
+  def determine_amount
+    self.amount = User.find(to_id).profile.rate
+  end
+
+  # create the escrow transaction
+  def create_escrow_transaction
+    User.find(from_id).account.transfer(
+      amount,
+      to_id,
+      'escrow',
+      id
+    )
+  end
 end
