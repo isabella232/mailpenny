@@ -12,16 +12,21 @@ bundle install --without production
 bundle exec rake db:setup
 ```
 
-It's a good idea to run four consoles:
+It's a good idea to run five consoles:
 
 1. Server with `bundle exec rails server`
 2. Guard with `bundle exec guard`
 3. Rails console with `bundle exec rails console`
-4. A regular terminal for git and file manipulation
+4. Yard server with `bundle exec yard server --reload`
+5. A regular terminal for git and file manipulation
 
 ## Docs
 
-Documentation is generated using the `yard` command, and is saved in `doc/`
+Generate docs using the `yard` command, and they will be saved in `doc/`.
+
+Run `yard server
+--reload` which generates a fresh docs from your code on refresh, to keep an
+eye on your method docs.
 
 ## Tests
 
