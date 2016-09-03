@@ -32,6 +32,7 @@
 #
 # <!-- END GENERATED ANNOTATION -->
 
+# A conversation groups several messages together
 class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :initiator_id
   belongs_to :user, foreign_key: :recipient_id

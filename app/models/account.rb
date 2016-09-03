@@ -26,7 +26,7 @@
 #
 # <!-- END GENERATED ANNOTATION -->
 
-# accounts and their associated balances
+# Accounts that keep records of money and their associated balances
 class Account < ApplicationRecord
   belongs_to :user, required: false
   has_many :transactions
@@ -45,9 +45,10 @@ class Account < ApplicationRecord
             numericality: { greater_than_or_equal_to: 0 },
             unless: 'account_type == "deposit"'
 
-  # Transacting money in the system
+  ## Transacting money in the system
 
-  # depositing new money into the account, i.e cashing in
+  # Depositing new money into the account, i.e cashing in
+  # @param amount [Decimal]
   def deposit(amount)
     deposit_account = Account.find_by(account_type: :deposit).id
     raise 'No deposit account, has the db been seeded?' if
@@ -60,7 +61,8 @@ class Account < ApplicationRecord
     increase_balance amount
   end
 
-  # withdrawing money out of the account and to user's hands, i.e cashing out
+  # Withdrawing money out of the account and to user's hands, i.e cashing out
+  # @param amount [Decimal]
   def withdraw(amount)
     withdrawal_account = Account.find_by(account_type: 'withdrawal').id
     raise 'No withdrawal account, has the db been seeded?' if
@@ -73,14 +75,16 @@ class Account < ApplicationRecord
     decrease_balance amount
   end
 
-  # transfering money to another account
-  def transfer(amount, to)
+  # Transfering money to another account
+  # @param amount [Decimal] the amount being transfered
+  # @param to [Account] the account being transfered to
+  def transfer(amount, to, type = 'escrow')
     to_id = to.id
     tx = {
       from_id: id,
       to_id: to_id,
       amount: amount,
-      transaction_type: 'transfer'
+      transaction_type: type
     }
     create_transaction tx
     to.increase_balance amount
@@ -89,7 +93,8 @@ class Account < ApplicationRecord
 
   ## Transactions associated with the Account
 
-  # all the deposits to Account
+  # All the deposits to Account
+  # @return [Array<Transaction>] a list of transactions
   def deposits
     Transaction.where(
       to_id: id,
@@ -97,7 +102,8 @@ class Account < ApplicationRecord
     )
   end
 
-  # all the withdrawals from Account
+  # All the withdrawals from Account
+  # @return [Array<Transaction>] a list of transactions
   def withdrawals
     Transaction.where(
       from_id: id,
@@ -105,7 +111,8 @@ class Account < ApplicationRecord
     )
   end
 
-  # all the transfers from Account
+  # All the transfers from Account
+  # @return [Array<Transaction>] a list of transactions
   def transfers_from
     Transaction.where(
       from_id: id,
@@ -113,7 +120,8 @@ class Account < ApplicationRecord
     )
   end
 
-  # all the transfers from Account
+  # All the transfers to Account
+  # @return [Array<Transaction>] a list of transactions
   def transfers_to
     Transaction.where(
       to_id: id,
@@ -123,13 +131,15 @@ class Account < ApplicationRecord
 
   ## increments and decrements to the balance
 
-  # increase balance by
+  # Increase balance by
+  # @param amount [Decimal] amount to increase balance by
   def increase_balance(amount)
     self.balance += amount
     save
   end
 
-  # decrease balance by
+  # Decrease balance by
+  # @param amount [Decimal] amount to decrease balance by
   def decrease_balance(amount)
     self.balance -= amount
     save
@@ -137,12 +147,15 @@ class Account < ApplicationRecord
 
   private
 
+  # Create a transaction with the following arguments
+  # @param tx [Hash] Contains transaction_type, amount, from_id, and to_id
   def create_transaction(tx)
     tx.slice! :transaction_type, :amount, :from_id, :to_id
     _transaction = Transaction.create tx
   end
 
-  # hide the setter for balance from the public
+  # The setter for balance, hidden from the public
+  # @param amount [Decimal]
   def balance=(amount)
     self[:balance] = amount
   end
