@@ -38,6 +38,25 @@
 
 class Message < ApplicationRecord
   belongs_to :conversation
-  belongs_to :sender
-  belongs_to :recipient
+  belongs_to :user, foreign_key: :sender_id
+  belongs_to :user, foreign_key: :recipient_id
+
+  before_create :proceed_if_conversation_is_open
+  before_create :update_conversation_status
+
+  private
+
+  # check if the conversation is open and can accept new messages
+  def proceed_if_conversation_is_open
+    raise 'Conversation is closed' if conversation.open? == false
+  end
+
+  # updates the conversation status depending on the current message
+  def update_conversation_status
+    if conversation.recipient == sender && # original recipient was the sender
+       conversation.messages_by_recipient == 0 && # this is his first message
+       conversation.status != 'expired' # the conversation is not expired
+      conversation.complete
+    end
+  end
 end
