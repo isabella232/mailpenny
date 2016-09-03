@@ -1,4 +1,3 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
@@ -14,7 +13,7 @@
 # **`status`**        | `integer`          |
 # **`created_at`**    | `datetime`         | `not null`
 # **`updated_at`**    | `datetime`         | `not null`
-# **`closed`**        | `boolean`          |
+# **`open`**          | `boolean`          |
 #
 # ### Indexes
 #
@@ -30,7 +29,6 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 class Conversation < ApplicationRecord
   belongs_to :user, foreign_key: :initiator_id
@@ -53,8 +51,7 @@ class Conversation < ApplicationRecord
   enum status: {
     pending: 1, # the initiator has sent the message
     completed: 2, # the recipient has replied and escrow is closed
-    expired: 3, # the recipient did not reply in time and escrow was reversed
-    closed: 4 # the conversation is closed and new messages cannot be added
+    expired: 3 # the recipient did not reply in time and escrow was reversed
   }
 
   # mark the conversation as expired and reverse the escrow
@@ -73,8 +70,24 @@ class Conversation < ApplicationRecord
 
   # mark the conversation as closed and create no more new messages
   def close
-    self.closed = true
+    self.open = false
     save
+  end
+
+  # messages send by the initiator in this conversation
+  def messages_by_initiator
+    messages.where(sender: initiator)
+  end
+
+  # messages send by the initiator in this conversation
+  def messages_by_recipient
+    messages.where(sender: recipient)
+  end
+
+  # Who's participating in this conversation
+  # @return [Array(User, User)] The Initiator and Recipient in array form
+  def participants
+    [initiator, recipient]
   end
 
   private
@@ -82,7 +95,7 @@ class Conversation < ApplicationRecord
   # set the defaults for the migration
   def set_defaults
     self.status = 'pending'
-    self.closed = false
+    self.open = true
     save
   end
 
