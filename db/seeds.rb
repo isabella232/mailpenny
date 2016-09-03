@@ -5,6 +5,7 @@
 Account.create(account_type: 'withdrawal')
 Account.create(account_type: 'deposit')
 Account.create(account_type: 'fee')
+Account.create(account_type: 'escrow')
 
 # To make developer lives easier, create a dummy user for development:
 unless Rails.env == 'production'
