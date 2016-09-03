@@ -1,22 +1,24 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `transactions`
 #
 # ### Columns
 #
-# Name                    | Type               | Attributes
-# ----------------------- | ------------------ | ---------------------------
-# **`id`**                | `integer`          | `not null, primary key`
-# **`from_id`**           | `integer`          |
-# **`to_id`**             | `integer`          |
-# **`amount`**            | `decimal(, )`      | `default(0.0)`
-# **`transaction_type`**  | `integer`          | `not null`
-# **`created_at`**        | `datetime`         | `not null`
-# **`updated_at`**        | `datetime`         | `not null`
+# Name                         | Type               | Attributes
+# ---------------------------- | ------------------ | ---------------------------
+# **`id`**                     | `integer`          | `not null, primary key`
+# **`from_id`**                | `integer`          |
+# **`to_id`**                  | `integer`          |
+# **`amount`**                 | `decimal(, )`      | `default(0.0)`
+# **`transaction_type`**       | `integer`          | `not null`
+# **`created_at`**             | `datetime`         | `not null`
+# **`updated_at`**             | `datetime`         | `not null`
+# **`escrow_transaction_id`**  | `integer`          |
 #
 # ### Indexes
 #
+# * `index_transactions_on_escrow_transaction_id`:
+#     * **`escrow_transaction_id`**
 # * `index_transactions_on_from_id`:
 #     * **`from_id`**
 # * `index_transactions_on_to_id`:
@@ -28,13 +30,15 @@
 #     * **`from_id => accounts.id`**
 # * `fk_rails_16a782f6da`:
 #     * **`to_id => accounts.id`**
+# * `fk_rails_c072c6d4b6`:
+#     * **`escrow_transaction_id => escrow_transactions.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
-# A record of the transactions our users do
+# A record of the transactions between accounts
 class Transaction < ApplicationRecord
   belongs_to :account, foreign_key: :from_id
   belongs_to :account, foreign_key: :to_id
+  belongs_to :escrow_transaction, required: false
 
   validates :from_id,
             presence: true
@@ -46,9 +50,10 @@ class Transaction < ApplicationRecord
             presence: true
 
   enum tranasaction_type: {
-    transfer: 1,
-    deposit: 2,
-    withdrawal: 3,
-    fees: 4
+    escrow: 1,
+    payment: 2,
+    deposit: 3,
+    withdrawal: 4,
+    fees: 5
   }
 end
