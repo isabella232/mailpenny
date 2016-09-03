@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903053118) do
+ActiveRecord::Schema.define(version: 20160903061006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,16 +40,12 @@ ActiveRecord::Schema.define(version: 20160903053118) do
     t.integer  "from_id"
     t.integer  "to_id"
     t.integer  "state"
-    t.integer  "opening_transaction_id"
-    t.integer  "closing_transaction_id"
     t.decimal  "amount"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "conversation_id"
-    t.index ["closing_transaction_id"], name: "index_escrow_transactions_on_closing_transaction_id", using: :btree
     t.index ["conversation_id"], name: "index_escrow_transactions_on_conversation_id", using: :btree
     t.index ["from_id"], name: "index_escrow_transactions_on_from_id", using: :btree
-    t.index ["opening_transaction_id"], name: "index_escrow_transactions_on_opening_transaction_id", using: :btree
     t.index ["to_id"], name: "index_escrow_transactions_on_to_id", using: :btree
   end
 
@@ -150,8 +146,6 @@ ActiveRecord::Schema.define(version: 20160903053118) do
   add_foreign_key "conversations", "users", column: "recipient_id"
   add_foreign_key "escrow_transactions", "accounts", column: "from_id"
   add_foreign_key "escrow_transactions", "accounts", column: "to_id"
-  add_foreign_key "escrow_transactions", "transactions", column: "closing_transaction_id"
-  add_foreign_key "escrow_transactions", "transactions", column: "opening_transaction_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
