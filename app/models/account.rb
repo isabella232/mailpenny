@@ -26,7 +26,7 @@
 #
 # <!-- END GENERATED ANNOTATION -->
 
-# Accounts that keep records of money and their associated balances
+# Accounting entities that can make transactions and hold balances
 class Account < ApplicationRecord
   belongs_to :user, required: false
   has_many :transactions
@@ -35,7 +35,8 @@ class Account < ApplicationRecord
     user: 1,
     deposit: 2,
     withdrawal: 3,
-    fee: 4
+    fee: 4,
+    escrow: 5
   }
 
   validates :account_type,
@@ -54,11 +55,13 @@ class Account < ApplicationRecord
     raise 'No deposit account, has the db been seeded?' if
     deposit_account.nil?
 
-    create_transaction from_id: deposit_account,
-                       to_id: id,
-                       amount: amount,
-                       transaction_type: 'deposit'
-    increase_balance amount
+    Account.transaction do
+      create_transaction from_id: deposit_account,
+                         to_id: id,
+                         amount: amount,
+                         transaction_type: 'deposit'
+      increase_balance amount
+    end
   end
 
   # Withdrawing money out of the account and to user's hands, i.e cashing out
@@ -68,17 +71,21 @@ class Account < ApplicationRecord
     raise 'No withdrawal account, has the db been seeded?' if
     withdrawal_account.nil?
 
-    create_transaction from_id: id,
-                       to_id: withdrawal_account,
-                       amount: amount,
-                       transaction_type: 'withdrawal'
-    decrease_balance amount
+    Account.transaction do
+      create_transaction from_id: id,
+                         to_id: withdrawal_account,
+                         amount: amount,
+                         transaction_type: 'withdrawal'
+      decrease_balance amount
+    end
   end
 
   # Transfering money to another account
   # @param amount [Decimal] the amount being transfered
   # @param to [Account] the account being transfered to
-  def transfer(amount, to, type = 'escrow')
+  # @param type [String] the type of transaction being made, i.e. escrow,
+  #   'payment', 'deposit', 'withdrawal', or 'fees'
+  def transfer(amount, to, type)
     to_id = to.id
     tx = {
       from_id: id,
@@ -86,9 +93,12 @@ class Account < ApplicationRecord
       amount: amount,
       transaction_type: type
     }
-    create_transaction tx
-    to.increase_balance amount
-    decrease_balance amount
+
+    Account.transaction do
+      create_transaction tx
+      to.increase_balance amount
+      decrease_balance amount
+    end
   end
 
   ## Transactions associated with the Account
@@ -148,13 +158,16 @@ class Account < ApplicationRecord
   private
 
   # Create a transaction with the following arguments
-  # @param tx [Hash] Contains transaction_type, amount, from_id, and to_id
+  # @param tx [Hash] Contains `:transaction_type`, `:amount`, `:from_id`, and `:to_id`
   def create_transaction(tx)
-    tx.slice! :transaction_type, :amount, :from_id, :to_id
-    _transaction = Transaction.create tx
+    Transaction.transaction do
+      tx.slice! :transaction_type, :amount, :from_id, :to_id
+      _transaction = Transaction.create tx
+    end
   end
 
-  # The setter for balance, hidden from the public
+  # The setter for balance, moved to private because it should never be directly
+  #   set.
   # @param amount [Decimal]
   def balance=(amount)
     self[:balance] = amount
