@@ -53,7 +53,7 @@ class Message < ApplicationRecord
 
   # updates the conversation status depending on the current message
   def update_conversation_status
-    if conversation.recipient == sender && # original recipient was the sender
+    if conversation.recipient_id == sender_id && # original recipient was the sender
        conversation.messages_by_recipient.zero? && # this is his first message
        conversation.status != 'expired' # the conversation is not expired
       conversation.complete

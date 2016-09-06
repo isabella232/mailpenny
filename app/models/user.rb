@@ -74,9 +74,9 @@ class User < ApplicationRecord
   # @param subject [String] Subject line limited to 250 characters
   # @param body [Text]
   def send_message(to, subject, body)
-    conversation = Converstion.create(
-      initiator: id,
-      recipient: to,
+    conversation = Conversation.create(
+      initiator_id: id,
+      recipient_id: to.id,
       subject: subject
     )
     conversation.add_message(id, body)

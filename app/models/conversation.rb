@@ -45,10 +45,10 @@ class Conversation < ApplicationRecord
   validates :subject,
             presence: true
 
-  validates :initiator,
+  validates :initiator_id,
             presence: true
 
-  validates :recipient,
+  validates :recipient_id,
             presence: true
 
   enum status: {
@@ -79,18 +79,18 @@ class Conversation < ApplicationRecord
 
   # Messages send by the initiator in this conversation
   def messages_by_initiator
-    messages.where(sender: initiator)
+    Message.where(sender_id: initiator_id)
   end
 
   # Messages send by the initiator in this conversation
   def messages_by_recipient
-    messages.where(sender: recipient)
+    Message.where(sender_id: recipient_id)
   end
 
   # Who's participating in this conversation
   # @return [Array(User, User)] The Initiator and Recipient in array form
   def participants
-    [initiator, recipient]
+    [initiator_id, recipient_id]
   end
 
   # Add a new message to the conversation
@@ -98,8 +98,8 @@ class Conversation < ApplicationRecord
   # @param body [Text] message text being sent
   def add_message(from, body)
     message = Message.new(
-      sender: from,
-      recipient: participants.delete(from),
+      sender_id: from,
+      recipient_id: participants.delete(from),
       body: body
     )
     messages << message
@@ -111,15 +111,14 @@ class Conversation < ApplicationRecord
   def set_defaults
     self.status = 'pending'
     self.open = true
-    save
   end
 
   # Initiate the escrow transaction by transfering money into the escrow account
   def create_escrow_transaction
-    fee = recipient.rate_email
+    fee = User.find(recipient_id).profile.rate
     self.escrow_transaction = EscrowTransaction.new(
-      from: initiator,
-      to: recipient,
+      from_id: initiator_id,
+      to_id: recipient_id,
       amount: fee
     )
   end
