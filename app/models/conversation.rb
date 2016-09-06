@@ -57,32 +57,32 @@ class Conversation < ApplicationRecord
     expired: 3 # the recipient did not reply in time and escrow was reversed
   }
 
-  # mark the conversation as expired and reverse the escrow
+  # Mark the conversation as expired and reverse the escrow
   def expire
     self.status = 'expire'
     escrow_transaction.reverse
     save
   end
 
-  # mark the conversation as completed and transfer the escrow
+  # Mark the conversation as completed and transfer the escrow
   def complete
     self.status = 'complete'
     escrow_transaction.complete
     save
   end
 
-  # mark the conversation as closed and create no more new messages
+  # Mark the conversation as closed and create no more new messages
   def close
     self.open = false
     save
   end
 
-  # messages send by the initiator in this conversation
+  # Messages send by the initiator in this conversation
   def messages_by_initiator
     messages.where(sender: initiator)
   end
 
-  # messages send by the initiator in this conversation
+  # Messages send by the initiator in this conversation
   def messages_by_recipient
     messages.where(sender: recipient)
   end
@@ -93,11 +93,16 @@ class Conversation < ApplicationRecord
     [initiator, recipient]
   end
 
-  # add a new message to the conversation
+  # Add a new message to the conversation
   # @param from [User.id] person sending the message
   # @param body [Text] message text being sent
   def add_message(from, body)
-    # TODO
+    message = Message.new(
+      sender: from,
+      recipient: participants.delete(from),
+      body: body
+    )
+    messages << message
   end
 
   private
