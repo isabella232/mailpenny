@@ -827,7 +827,7 @@ ul.zg-ul-select.active:after {
 	height: 6px;
 	content: '';
 	position: absolute;
-	background: url(../images/dots.png) no-repeat;
+	background: image-url("dots.png") no-repeat;
 }
 .client-details .contact-info2 figure:after {
 	display: none;
@@ -1271,6 +1271,7 @@ ul.zg-ul-select.active:after {
     padding:0 2%;
     position:relative;
 }
+
 #select_menu li:hover{
-    background:#fafafa;
-}​
+	background: #fafafa;
+}
