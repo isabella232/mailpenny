@@ -11,19 +11,38 @@ Account.create(account_type: 'escrow')
 unless Rails.env == 'production'
   dummy = User.create(
     username: 'dummy',
-    email: 'email@example.com',
+    email: 'dummy1@example.com',
     password: 'password',
     password_confirmation: 'password',
     confirmed_at: Time.zone.today
   )
 
   dummy.profile = Profile.new(
-    name: 'Dummy User',
+    name: 'Dummy First',
     bio: 'Dummies do what dummies can',
     work_company: 'Dummy Corp',
     work_title: 'Chief Dummy Officer',
     location: 'Dummisvilee',
-    twitter_username: 'dumdumdumdu',
+    twitter_username: 'dumdum1',
     rate: 1
   )
+
+  dummy2 = User.create(
+    username: 'dummy2',
+    email: 'dummy2@example.com',
+    password: 'password',
+    password_confirmation: 'password',
+    confirmed_at: Time.zone.today
+  )
+
+  dummy2.profile = Profile.new(
+    name: 'Dummy First',
+    bio: 'Dummies do what dummies can',
+    work_company: 'Dummy Corp',
+    work_title: 'Chief Dummy Officer',
+    location: 'Dummisvilee',
+    twitter_username: 'dumdum2',
+    rate: 1
+  )
+
 end
