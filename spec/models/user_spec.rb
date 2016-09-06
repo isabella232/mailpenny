@@ -116,6 +116,22 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'messaging' do
+    before do
+      # meet alice
+      @alice = create :user
+      @alice.profile = build :profile
+
+      # meet bob
+      @bob = create :user
+      @bob.profile = build :profile
+    end
+
+    it "can send a message to another user" do
+      expect{@alice.send_message(@bob, "subject", "body"*30)}.to_not raise_error
+    end
+  end
+
   # context 'Stripe ID' do
   #   it 'should not be writable' do
   #     expect { @user.stripe_customer_id = 'random_id_123123' }
