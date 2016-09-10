@@ -127,8 +127,8 @@ RSpec.describe User, type: :model do
       @bob.profile = build :profile
     end
 
-    it "can send a message to another user" do
-      expect{@alice.send_message(@bob, "subject", "body"*30)}.to_not raise_error
+    it 'can send a message to another user' do
+      expect { @alice.send_message(@bob, 'subject', 'body ' * 30) }.to_not raise_error
     end
   end
 

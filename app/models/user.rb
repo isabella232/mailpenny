@@ -66,6 +66,7 @@ class User < ApplicationRecord
   has_one :profile
   has_one :phone_number
   has_many :social_media_accounts
+  has_many :conversations
 
   before_create :build_default_account
 
@@ -73,6 +74,8 @@ class User < ApplicationRecord
   # @param to [User] Person to send the message to.
   # @param subject [String] Subject line limited to 250 characters
   # @param body [Text]
+  #
+  # @return conversation [Conversation]
   def send_message(to, subject, body)
     conversation = Conversation.create(
       initiator_id: id,
@@ -80,6 +83,7 @@ class User < ApplicationRecord
       subject: subject
     )
     conversation.add_message(id, body)
+    conversation
   end
 
   private

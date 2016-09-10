@@ -34,8 +34,8 @@
 
 # A conversation groups several messages together
 class Conversation < ApplicationRecord
-  belongs_to :user, foreign_key: :initiator_id
-  belongs_to :user, foreign_key: :recipient_id
+  belongs_to :initiator, foreign_key: :initiator_id, class_name: 'User'
+  belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
   has_one :escrow_transaction
   has_many :messages
 
@@ -89,8 +89,8 @@ class Conversation < ApplicationRecord
 
   # Who's participating in this conversation
   # @return [Array(User, User)] The Initiator and Recipient in array form
-  def participants
-    [initiator_id, recipient_id]
+  def users
+    [initiator, recipient]
   end
 
   # Add a new message to the conversation
@@ -115,11 +115,14 @@ class Conversation < ApplicationRecord
 
   # Initiate the escrow transaction by transfering money into the escrow account
   def create_escrow_transaction
-    fee = User.find(recipient_id).profile.rate
-    self.escrow_transaction = EscrowTransaction.new(
-      from_id: initiator_id,
-      to_id: recipient_id,
-      amount: fee
-    )
+    # TODO: uncomment this after conversations work
+    # fee = User.find(recipient_id).profile.rate
+    # self.escrow_transaction = EscrowTransaction.new(
+    #   from_id: initiator,
+    #   to_id: recipient,
+    #   amount: fee
+    # )
+    Rails.logger.debug { 'created escrow tranasction' }
+    true
   end
 end

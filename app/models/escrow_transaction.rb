@@ -34,10 +34,10 @@
 
 # A record of funds held, paid or reversed escrow
 class EscrowTransaction < ApplicationRecord
-  belongs_to :account, foreign_key: :from_id
-  belongs_to :account, foreign_key: :to_id
-  belongs_to :transactions, foreign_key: :opening_transaction_id
-  belongs_to :transactions, foreign_key: :closing_transaction_id
+  belongs_to :from, foreign_key: :from_id, class_name: 'Account'
+  belongs_to :to, foreign_key: :to_id, class_name: 'Account'
+  belongs_to :opening_transaction, foreign_key: :opening_transaction_id, class_name: 'Transaction'
+  belongs_to :closing_transaction, foreign_key: :closing_transaction_id, class_name: 'Transaction'
 
   before_validation :determine_amount
   before_create :set_defaults
@@ -59,7 +59,7 @@ class EscrowTransaction < ApplicationRecord
       self.state = "completed"
       Account.find_by(account_type: 'escrow').transfer(
         amount,
-        to_id,
+        to,
         'payment'
       )
     end
@@ -67,10 +67,10 @@ class EscrowTransaction < ApplicationRecord
 
   def reverse
     EscrowTransaction.transaction do
-      self.state = "reversed"
+      self.state = 'reversed'
       Account.find_by(account_type: 'escrow').transfer(
         amount,
-        from_id,
+        from,
         'reversal'
       )
     end
@@ -85,12 +85,12 @@ class EscrowTransaction < ApplicationRecord
 
   # determine the recipient's fee and set that as the amount
   def determine_amount
-    self.amount = User.find(to_id).profile.rate
+    self.amount = to.user.profile.rate
   end
 
   # create the escrow transaction
   def create_escrow_transaction
-    User.find(from_id).account.transfer(
+    to.transfer(
       amount,
       to_id,
       'escrow',

@@ -35,5 +35,13 @@
 require 'rails_helper'
 
 RSpec.describe Conversation, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @alice = create :user
+    @bob = create :user
+  end
+
+  it 'starts a new conversation' do
+    conversation = @alice.send_message(@bob, 'Very Important Subject', 'Hello Bob ' * 30)
+    expect(conversation).to_not be_nil
+  end
 end
