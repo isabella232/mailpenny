@@ -78,12 +78,30 @@ class User < ApplicationRecord
   # @return conversation [Conversation]
   def send_message(to, subject, body)
     conversation = Conversation.create(
-      initiator_id: id,
-      recipient_id: to.id,
+      initiator: self,
+      recipient: to,
       subject: subject
     )
     conversation.add_message(id, body)
     conversation
+  end
+
+  # Conversations initiated by this user
+  # @return Array<Conversation>
+  def conversations_from
+    Conversation.where(initiator: self)
+  end
+
+  # Conversations recieved by this user
+  # @return Array<Conversation>
+  def conversations_to
+    Conversation.where(recipient: self)
+  end
+
+  # Conversations involving this user
+  # @return Array<Conversation>
+  def conversations
+    [conversations_from, conversations_to].flatten
   end
 
   private

@@ -55,6 +55,8 @@ class Transaction < ApplicationRecord
     reversal: 3,
     deposit: 4,
     withdrawal: 5,
-    fees: 6
+    fees: 6,
+    coupon: 7,
+    referal: 8
   }
 end

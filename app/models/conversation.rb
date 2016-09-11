@@ -99,7 +99,7 @@ class Conversation < ApplicationRecord
   def add_message(from, body)
     message = Message.new(
       sender_id: from,
-      recipient_id: participants.delete(from),
+      recipient_id: users.delete(from),
       body: body
     )
     messages << message
