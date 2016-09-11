@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Mailpenny</title>
-    <%= csrf_meta_tags %>
-    <%= yield :meta_data %>
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-  </head>
+    <head>
+        <title>Mailpenny</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+        <%= csrf_meta_tags %>
+        <%= yield :meta_data %>
+        <%= stylesheet_link_tag    'application', media: 'all' %>
+        <%= render 'favicon' %>
 
-  <body>
-    <%= render 'flash_messages'%>
-    <%= yield :body %>
-    <%= javascript_include_tag 'application' %>
-  </body>
+    </head>
+
+    <body>
+        <%= render 'flash_messages'%>
+        <%= yield :body %>
+        <%= javascript_include_tag 'application' %>
+    </body>
 </html>

@@ -7,6 +7,7 @@ class DashboardController < ApplicationController
 
   def profile
     @profile = current_user.profile
+    render layout: 'public_pages'
   end
 
   def account
