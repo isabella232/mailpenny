@@ -6,14 +6,14 @@ feature 'Registering' do
   end
 
   given(:register) do
-    visit '/register'
+    visit '/users/sign_up'
     within('#new_user') do
       fill_in 'Username', with: @user.username
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
       fill_in 'Password confirmation', with: @user.password
     end
-    click_button 'Sign up'
+    click_button 'Sign Up'
   end
 
   scenario 'succeeds' do
