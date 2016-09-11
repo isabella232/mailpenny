@@ -75,6 +75,7 @@ group :development do
   # documentation support
   gem 'yard'
   gem 'kramdown'
+  gem 'rails_real_favicon'
 end
 
 group :production do
