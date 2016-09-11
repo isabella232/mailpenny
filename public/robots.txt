@@ -1,5 +1,18 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# ___ ___   ____  ____  _      ____   ___  ____   ____   __ __
+# |   |   | /    ||    || |    |    \ /  _]|    \ |    \ |  |  |
+# | _   _ ||  o  | |  | | |    |  o  )  [_ |  _  ||  _  ||  |  |
+# |  \_/  ||     | |  | | |___ |   _/    _]|  |  ||  |  ||  ~  |
+# |   |   ||  _  | |  | |     ||  | |   [_ |  |  ||  |  ||___, |
+# |   |   ||  |  | |  | |     ||  | |     ||  |  ||  |  ||     |
+# |___|___||__|__||____||_____||__| |_____||__|__||__|__||____/
 #
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-agent: *
-# Disallow: /
+# Sir James: Ah, this is where you come in Moneypenny.
+#   I want you to go through all the Auxiliary Files.
+# Miss Moneypenny: The lot, sir? It'll take all night.
+# Sir James: Your mother did some of her best work at night.
+#
+# careers@payload.tech
+#
+#
+User-Agent: *
+Disallow: /dashboard/
