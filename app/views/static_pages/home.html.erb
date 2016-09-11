@@ -4,7 +4,7 @@
 <div class="container">
 		<div class="row">
 				<header class="header col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="logo pull-left"><a href="index.html"><%= image_tag 'logo-black.png' %></a></div>
+						<div class="logo pull-left"><a href="/"><%= image_tag 'logo-black.png' %></a></div>
 						<div class="input-group search-box pull-left col-xs-offset-1 col-lg-3 col-md-3 col-sm-5 col-xs-5">
 								<input type="text" class="  search-query form-control" placeholder="Search" />
 								<span class="input-group-btn">
@@ -22,7 +22,7 @@
 														<li><a href="#">How it works</a></li>
 														<li><a href="#">Security</a></li>
 														<li><a href="#">Questions</a></li>
-														<li class="login"><a href="#">Login</a></li>
+														<li class="login"><%= link_to "Login", new_user_session_path %></li>
 												</ul>
 										</div>
 								</div>
