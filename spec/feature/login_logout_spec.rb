@@ -6,7 +6,7 @@ feature 'Login & Logout:' do
   end
 
   given(:login) do
-    visit '/login'
+    visit 'users/sign_in'
     within('#new_user') do
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: @user.password
@@ -21,7 +21,7 @@ feature 'Login & Logout:' do
     end
 
     scenario 'fail with incorrect credentials' do
-      visit '/login'
+      visit 'users/sign_in'
       within('#new_user') do
         fill_in 'Email', with: @user.email
         fill_in 'Password', with: "incorrect_#{@user.password}"

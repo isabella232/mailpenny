@@ -19,7 +19,10 @@ Rails.application.routes.draw do
   get 'dashboard/messages' => 'dashboard#messages'
 
   # user signups and registration
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   # public pages
   get 'search' => 'public_pages#search'
