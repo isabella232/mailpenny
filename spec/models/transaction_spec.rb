@@ -53,8 +53,7 @@ RSpec.describe Transaction, type: :model do
   end
   context 'user transactions:', order: :defined do
     before :context do
-      @alice = build(:user)
-      @alice.save
+      @alice = create(:user)
       @bob = create(:user)
       @deposit_amount = rand(25_000) # random num upto 25000
       @transfer_amount = rand(@deposit_amount) # random num upto the deposit
@@ -89,37 +88,37 @@ RSpec.describe Transaction, type: :model do
       end
     end
 
-    it 'alice must have no transfers form her' do
-      expect(@alice.account.transfers_from.empty?).to be true
-    end
-
-    it 'bob must have no transfers to him' do
-      expect(@bob.account.transfers_to.empty?).to be true
-    end
-
-    context 'after transfering money from alice to bob' do
-      before :context do
-        @alice.account.transfer(@transfer_amount, @bob.account)
-        @transaction = @alice.account.transfers_from.last
-      end
-      it 'a transaction from alice to bob must exist' do
-        from_transaction = @alice.account.transfers_from.last.id
-        to_transaction = @bob.account.transfers_to.last.id
-        expect(from_transaction).to eq(to_transaction)
-      end
-
-      it 'the transaction amount must be correct' do
-        expect(@transaction.amount).to eq(@transfer_amount)
-      end
-
-      it 'the transaction must be to bob' do
-        expect(@transaction.to_id).to eq(@bob.account.id)
-      end
-
-      it 'the transaction must be from alice' do
-        expect(@transaction.from_id).to eq(@alice.account.id)
-      end
-    end
+    # it 'alice must have no transfers form her' do
+    #   expect(@alice.account.transfers_from.empty?).to be true
+    # end
+    #
+    # it 'bob must have no transfers to him' do
+    #   expect(@bob.account.transfers_to.empty?).to be true
+    # end
+    #
+    # context 'after transfering money from alice to bob' do
+    #   before :context do
+    #     @alice.account.transfer(@transfer_amount, @bob.account)
+    #     @transaction = @alice.account.transfers_from.last
+    #   end
+    #   it 'a transaction from alice to bob must exist' do
+    #     from_transaction = @alice.account.transfers_from.last.id
+    #     to_transaction = @bob.account.transfers_to.last.id
+    #     expect(from_transaction).to eq(to_transaction)
+    #   end
+    #
+    #   it 'the transaction amount must be correct' do
+    #     expect(@transaction.amount).to eq(@transfer_amount)
+    #   end
+    #
+    #   it 'the transaction must be to bob' do
+    #     expect(@transaction.to_id).to eq(@bob.account.id)
+    #   end
+    #
+    #   it 'the transaction must be from alice' do
+    #     expect(@transaction.from_id).to eq(@alice.account.id)
+    #   end
+    # end
 
     it 'bob must have no withdrawals' do
       expect(@bob.account.withdrawals.count).to eq(0)
