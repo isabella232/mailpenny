@@ -56,7 +56,7 @@ class EscrowTransaction < ApplicationRecord
   # mark the transaction as completed and pay out the rate
   def complete
     EscrowTransaction.transaction do
-      self.state = "completed"
+      self.state = 'completed'
       Account.find_by(account_type: 'escrow').transfer(
         amount,
         to,
