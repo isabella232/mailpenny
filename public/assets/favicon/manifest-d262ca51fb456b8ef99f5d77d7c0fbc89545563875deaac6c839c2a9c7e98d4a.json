@@ -1,0 +1,12 @@
+{
+	"name": "Mailpenny",
+	"icons": [
+		{
+			"src": "/assets/favicon/android-chrome-192x192-77bdb203e932ca1cae6b56ad24b076a72af0a52f45b64f5e178c4fd028ddf219.png",
+			"sizes": "192x192",
+			"type": "image\/png"
+		}
+	],
+	"theme_color": "#ffffff",
+	"display": "standalone"
+}
