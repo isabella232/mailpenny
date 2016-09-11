@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Dashboard' do
   background do
-    @user = create :user  # create a new user
-    @user_changed = build :user  # build an alternative user
+    @user = create :user # create a new user
+    @user_changed = build :user # build an alternative user
 
     # login as @user
     visit '/users/sign_in'
