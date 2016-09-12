@@ -224,6 +224,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    rdiscount (2.2.0.1)
     redis (3.3.1)
     ref (2.0.0)
     responders (2.3.0)
@@ -355,6 +356,7 @@ DEPENDENCIES
   rails-assets-bootstrap!
   rails-assets-classie!
   rails_real_favicon
+  rdiscount
   redis (~> 3.0)
   rspec-rails
   rubocop
