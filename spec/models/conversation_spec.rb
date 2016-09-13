@@ -34,5 +34,40 @@
 
 require 'rails_helper'
 
-RSpec.describe Conversation, type: :model do
+RSpec.describe Conversation, type: :model, order: :defined do
+  self.use_transactional_tests = false
+
+  before :context do
+    @alice = create :user
+    @bob = create :user
+    @subject = 'subject'
+    @body = 'body'
+    @conversation = @alice.send_message(@bob, @subject, @body)
+  end
+
+  context 'by default' do
+    it 'should have a default status of pending' do
+      expect(@conversation.status).to eq 'pending'
+    end
+
+    it 'should be open by default' do
+      expect(@conversation.open?).to be true
+    end
+
+    it 'should have the subject it was opened with' do
+      expect(@conversation.subject).to eq @subject
+    end
+
+    it 'should have one message upon opening' do
+      expect(@conversation.messages.count).to eq 1
+    end
+
+    it 'should be initiated by @alice' do
+      expect(@conversation.initiator).to eq @alice
+    end
+
+    it 'should be recieved by @bob' do
+      expect(@conversation.recipient).to eq @bob
+    end
+  end
 end
