@@ -7,11 +7,11 @@ Rails.application.routes.draw do
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home', as: :home_page
   get 'about'   => 'static_pages#about', as: :about_page
-  get 'privacy' => 'static_pages#privacy', as: :privacy_page
 
   # pages containing text only
   get 'help'    => 'text_pages#help', as: :help_page
   get 'terms'   => 'text_pages#terms', as: :terms_page
+  get 'privacy' => 'text_pages#privacy', as: :privacy_page
 
   # everything in the dashboard
   get 'dashboard', to: redirect('/dashboard/overview'), status: 302
