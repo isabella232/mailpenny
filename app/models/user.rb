@@ -82,7 +82,7 @@ class User < ApplicationRecord
       recipient: to,
       subject: subject
     )
-    conversation.add_message(id, body)
+    conversation.add_message(self, body)
     conversation
   end
 
