@@ -80,13 +80,13 @@ BY REGISTERING AND/OR LOGGING IN, YOU (A) ACKNOWLEDGE THAT YOU HAVE READ AND UND
 11. Copyright Policy.  
     The Company respects the intellectual property rights of others. In accordance with the Digital Millennium Copyright Act (“DMCA”) and other applicable laws, we strive to expeditiously remove any infringing material from our Website. If the Company becomes aware that one of its users is a repeat copyright infringer, it is our policy to take reasonable steps within our power to terminate the user’s Account. All users should be aware of and comply with applicable copyright laws. If you believe that anything on the Website infringes any copyright that you own or control, you may file a notice of such infringement by mail or email with our designated agent:  
 
-    > Payload Technologies Inc.
-    > Attn: Copyright Agent  
-    > 59-A PCSIR Housing Society Phase 1, Canal Bank Road  
-    > Lahore, Punjab 54000, Pakistan  
-    > copyright@payload.tech
+        Payload Technologies Inc.  
+        Attn: Copyright Agent  
+        548 Market St #65723  
+        San Francisco, CA 94104-5401  
+        copyright@payload.tech
 
-    To be effective, any takedown notice submitted to our Copyright Agent must comply with the requirements set forth at 17 U.S.C. § 512(c)(3). That means that the notice must include substantially the following:
+    To be effective, any takedown notice submitted to our Copyright Agent must comply with the requirements set forth at 17 U.S.C. &#167; 512(c)(3). That means that the notice must include substantially the following:
 
     1.  A physical or electronic signature of a person authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.
 
