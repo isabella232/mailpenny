@@ -98,16 +98,17 @@ class Conversation < ApplicationRecord
   # @param body [Text] message text being sent
   def add_message(from, body)
     message = Message.new(
-      sender_id: from,
-      recipient_id: users.delete(from),
+      sender: from,
+      recipient: users.delete(from),
       body: body
     )
     messages << message
+    save
   end
 
   private
 
-  # set the defaults for the migration
+  # set the defaults for the conversation
   def set_defaults
     self.status = 'pending'
     self.open = true
