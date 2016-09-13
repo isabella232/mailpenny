@@ -14,6 +14,6 @@ Mailpenny is a project by [Payload](http://payload.tech), a Delaware Corporation
 
 #### Investors
 
-- Boost VC
+- [Boost VC](https://www.boost.vc)
 
-Find us on [Angel List](https://angel.co/mailpenny). If you'd like to chat, send us an [email](founders@mailpenny.com) 
+Find us on [Angel List](https://angel.co/mailpenny). If you'd like to chat, send us an [email](founders@mailpenny.com)
