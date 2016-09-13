@@ -1,11 +1,19 @@
-### Help
+### About
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+#### Mission
 
-#### Sed ut perspiciatis unde omnis?
+Give every human the chance to strike up a conversation with anyone, anywhere.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+#### Our Goal
 
-#### Sed ut perspiciatis unde omnis?
+To become the authoritative platform on connecting people. The first platform that comes to mind when a human wants to initiate immediate, and guaranteed contact with another human regardless of geographical or social boundaries.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+#### Who We Are
+
+Mailpenny is a project by [Payload](http://payload.tech), a Delaware Corporation backed by [Boost VC](https://www.boost.vc), California and [Plan9](http://plan9.pitb.gov.pk), Pakistan. Founded in 2015, we're a technology company focused on making human interactions easier with technology
+
+#### Investors
+
+- Boost VC
+
+If you'd like to chat, send us an [email](founders@mailpenny.com) 
