@@ -6,10 +6,9 @@ Rails.application.routes.draw do
   # static pages are public pages
   root to: redirect('/home') # redirect root to /home
   get 'home'    => 'static_pages#home', as: :home_page
-  get 'about'   => 'static_pages#about', as: :about_page
 
   # pages containing text only
-  get 'about'    => 'text_pages#about', as: :help_page
+  get 'about'   => 'text_pages#about', as: :about_page
   get 'tos'     => 'text_pages#tos', as: :terms_page
   get 'privacy' => 'text_pages#privacy', as: :privacy_page
 
