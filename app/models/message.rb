@@ -38,8 +38,8 @@
 
 class Message < ApplicationRecord
   belongs_to :conversation
-  belongs_to :user, foreign_key: :sender_id
-  belongs_to :user, foreign_key: :recipient_id
+  belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
+  belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
 
   before_create :proceed_if_conversation_is_open
   before_create :update_conversation_status
