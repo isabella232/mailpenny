@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   # pages containing text only
   get 'help'    => 'text_pages#help', as: :help_page
-  get 'tos'   => 'text_pages#tos', as: :terms_page
+  get 'tos'     => 'text_pages#tos', as: :terms_page
   get 'privacy' => 'text_pages#privacy', as: :privacy_page
 
   # everything in the dashboard
