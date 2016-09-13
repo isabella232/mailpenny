@@ -2,7 +2,7 @@ class TextPagesController < ApplicationController
   def tos
   end
 
-  def help
+  def about
   end
 
   def privacy
