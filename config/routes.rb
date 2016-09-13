@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'about'   => 'static_pages#about', as: :about_page
 
   # pages containing text only
-  get 'help'    => 'text_pages#help', as: :help_page
+  get 'about'    => 'text_pages#about', as: :help_page
   get 'tos'     => 'text_pages#tos', as: :terms_page
   get 'privacy' => 'text_pages#privacy', as: :privacy_page
 
