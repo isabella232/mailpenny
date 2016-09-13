@@ -47,72 +47,73 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  before(:each) do
-    @user = build(:user)
-  end
+  context 'validation' do
+    before do
+      @user = build(:user)
+    end
 
-  # it 'should have an account associated' do
-  #   @user.save
-  #   expect(@user.account).to_not be_nil
-  # end
+    it 'has a valid factory' do
+      expect(@user).to be_valid
+    end
 
-  it 'has a valid factory' do
-    @user.save
-    expect(@user).to be_valid
-  end
+    it 'should have an account associated' do
+      @user.save
+      expect(@user.account).to_not be_nil
+    end
 
-  context 'usernames' do
-    describe 'cannot' do
-      it 'have whitespace' do
-        @user.username = 'hello world'
+    context 'usernames' do
+      describe 'cannot' do
+        it 'have whitespace' do
+          @user.username = 'hello world'
+          expect(@user).to_not be_valid
+        end
+      end
+
+      describe 'can' do
+        it 'can have underscores' do
+          @user.username = 'hello_world'
+          expect(@user).to be_valid
+        end
+
+        it 'can have dots' do
+          @user.username = 'hello.world'
+          expect(@user).to be_valid
+        end
+
+        it 'can have dashes' do
+          @user.username = 'hello-world'
+          expect(@user).to be_valid
+        end
+      end
+    end
+
+    context 'emails' do
+      it 'should not be empty' do
+        @user.email = ''
+        expect(@user).to_not be_valid
+      end
+
+      it 'should not have two @s ' do
+        @user.email = 'hello@world@lollolol.com'
         expect(@user).to_not be_valid
       end
     end
 
-    describe 'can' do
-      it 'can have underscores' do
-        @user.username = 'hello_world'
-        expect(@user).to be_valid
+    context 'passwords' do
+      it 'should not be empty' do
+        @user.password = ''
+        expect(@user).to_not be_valid
       end
 
-      it 'can have dots' do
-        @user.username = 'hello.world'
-        expect(@user).to be_valid
+      it 'should not be less than 8 characters' do
+        @user.password = @user.password_confirmation = 'a' * 7
+        expect(@user).to_not be_valid
       end
 
-      it 'can have dashes' do
-        @user.username = 'hello-world'
+      it 'can be upto atleast 128 characters' do
+        @user.password = @user.password_confirmation = 'a' * 128
         expect(@user).to be_valid
       end
-    end
-  end
-
-  context 'emails' do
-    it 'should not be empty' do
-      @user.email = ''
-      expect(@user).to_not be_valid
-    end
-
-    it 'should not have two @s ' do
-      @user.email = 'hello@world@lollolol.com'
-      expect(@user).to_not be_valid
-    end
-  end
-
-  context 'passwords' do
-    it 'should not be empty' do
-      @user.password = ''
-      expect(@user).to_not be_valid
-    end
-
-    it 'should not be less than 8 characters' do
-      @user.password = @user.password_confirmation = 'a' * 7
-      expect(@user).to_not be_valid
-    end
-
-    it 'can be upto atleast 128 characters' do
-      @user.password = @user.password_confirmation = 'a' * 128
-      expect(@user).to be_valid
     end
   end
 
@@ -133,6 +134,8 @@ RSpec.describe User, type: :model do
   end
 
   context 'conversations', order: :defined do
+    self.use_transactional_tests = false
+
     before :context do
       @alice = create :user
       @bob = create :user
