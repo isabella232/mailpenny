@@ -132,6 +132,38 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'conversations', order: :defined do
+    before :context do
+      @alice = create :user
+      @bob = create :user
+    end
+
+    it 'alice has no conversations associated with her' do
+      expect(@alice.conversations.count).to eq 0
+    end
+
+    it 'bob has no conversations associated with him' do
+      expect(@bob.conversations.count).to eq 0
+    end
+
+    it 'starts a new conversation' do
+      conversation = @alice.send_message(@bob, 'Very Important Subject', 'Hello Bob ' * 30)
+      expect(conversation).to_not be_nil
+    end
+
+    it 'alice should have one conversation sent from her' do
+      expect(@alice.conversations_from.count).to eq 1
+    end
+
+    it 'bob should have one conversation sent to him' do
+      expect(@bob.conversations_to.count).to eq 1
+    end
+
+    it 'the conversation from alice to be the one sent to bob' do
+      expect(@alice.conversations.first.id).to eq @bob.conversations.first.id
+    end
+  end
+
   # context 'Stripe ID' do
   #   it 'should not be writable' do
   #     expect { @user.stripe_customer_id = 'random_id_123123' }
