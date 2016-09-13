@@ -35,17 +35,17 @@
 require 'rails_helper'
 
 RSpec.describe Conversation, type: :model, order: :defined do
-  self.use_transactional_tests = false
-
-  before :context do
-    @alice = create :user
-    @bob = create :user
-    @subject = 'subject'
-    @body = 'body'
-    @conversation = @alice.send_message(@bob, @subject, @body)
-  end
-
   context 'by default' do
+    self.use_transactional_tests = false
+
+    before :context do
+      @alice = create :user
+      @bob = create :user
+      @subject = 'subject'
+      @body = 'body'
+      @conversation = @alice.send_message(@bob, @subject, @body)
+    end
+
     it 'should have a default status of pending' do
       expect(@conversation.status).to eq 'pending'
     end
@@ -60,6 +60,10 @@ RSpec.describe Conversation, type: :model, order: :defined do
 
     it 'should have one message upon opening' do
       expect(@conversation.messages.count).to eq 1
+    end
+
+    it 'should have one message upon opening with the right body' do
+      expect(@conversation.messages.first.body).to eq @body
     end
 
     it 'should be initiated by @alice' do
