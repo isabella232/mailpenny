@@ -14,7 +14,6 @@ Rails.application.routes.draw do
 
   # everything in the dashboard
   get 'dashboard', to: redirect('/dashboard/overview'), status: 302
-  get 'dashboard/overview' => 'dashboard#overview'
   get 'dashboard/profile'  => 'dashboard#profile'
   get 'dashboard/account'  => 'dashboard#account'
   get 'dashboard/billing'  => 'dashboard#billing'

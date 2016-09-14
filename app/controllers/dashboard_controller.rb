@@ -2,9 +2,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
 
-  def overview
-  end
-
   def profile
     @profile = current_user.profile
     render layout: 'public_pages'
