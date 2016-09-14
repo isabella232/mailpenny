@@ -1,6 +1,6 @@
 ### Terms and Conditions of Service
 
-Last updated: April 7, 2016.
+Last updated: September 14, 2016.
 
 This Terms and Conditions of Service Agreement (“Agreement”) is a binding agreement between you (“End User” or “you”) and Payload Technologies, Inc. (“Company”, “we” or “us”). This Agreement governs your use of this website, [mailpenny.com](https://mailpenny.com) (the “Website”).
 
