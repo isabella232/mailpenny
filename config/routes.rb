@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   resources :phone_numbers
   resources :profiles
 
-  # static pages are public pages
-  root to: redirect('/home') # redirect root to /home
-  get 'home'    => 'static_pages#home', as: :home_page
+  # the root path
+  root 'public_pages#home'
 
   # pages containing text only
   get 'about'   => 'text_pages#about', as: :about_page
@@ -26,5 +25,5 @@ Rails.application.routes.draw do
 
   # public pages
   get 'search' => 'public_pages#search'
-  get ':username' => 'public_pages#profile'
+  get ':username' => 'public_pages#profile' # KEEP THIS ROUTE LAST
 end
