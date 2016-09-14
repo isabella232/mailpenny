@@ -6,14 +6,7 @@
 				<div class="row">
 						<div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 nopadding text-center">
 								<div class="mailbox col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<div class="user-links pull-left" id="side-links">
-												<ul>
-														<li><a href="#" class="fa fa-user"></a></li>
-														<li><a href="#" class="fa fa-envelope-o"><span>2</span></a></li>
-														<li><a href="#" class="fa fa-building-o"></a></li>
-												</ul>
-												<!--user-links-->
-										</div>
+										<%= render 'sidebar' %>
 										<!--mailbox-->
 								</div>
 								<!--col-->
@@ -134,29 +127,3 @@
 		</div>
 		<!--col-->
 </div>
-<script src="/mailman-frontend/lib/jquery/jquery-1.12.3.min.js" type="text/javascript"></script>
-<script src="/mailman-frontend/lib/bootstrap/js/bootstrap.js" type="text/javascript"></script>
-<script src="/mailman-frontend/js/classie.js" type="text/javascript"></script>
-<script src="/mailman-frontend/js/modalEffects.js" type="text/javascript"></script>
-<script src="/mailman-frontend/js/search.js" type="text/javascript"></script>
-<script src="/mailman-frontend/js/select-fields.js" type="text/javascript"></script>
-<script>
-$(document).ready(function(){
-function jqUpdateSize(){
-    // Fixed height
-		if($(window).width()>991){
-			var height = $(window).height();
-			alert
-			$('#side-links').css('height',(height-$('header.header').height()-29));
-			$('#emails').css('height',(height-($('#emails').offset().top)-20));
-		}
-		else{
-		$('#side-links').css('height','auto');
-		}
-};
-jqUpdateSize()
-$(window).resize(function(e) {
-    jqUpdateSize()
-});
-});
-</script>
