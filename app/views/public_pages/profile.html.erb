@@ -10,7 +10,7 @@
 		  <ul class="list1">
 			 <li><%= @profile.name %></li>
 			 <li><a href="#"><i class="fa fa-twitter"></i>&nbsp;<%= @profile.twitter_username %></a> </li>
-			 <li><a href="/<%= @profile_user.username %>">mailman.com/<%= @profile_user.username %></a></li>
+			 <li><strong><%= link_to "mailpenny.com/#{@profile_user.username}", "/#{@profile_user.username}" %></strong></li>
 			</ul>
 			<button class="md-trigger btn-primary" data-modal="modal-1"><i class="fa fa-envelope-o"></i> Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
 			<div class="md-modal md-effect-1" id="modal-1">
@@ -38,7 +38,7 @@
 	 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 	  <div class="row">
 	  <div class="user-talkTo col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		 <span class="heading pull-left">Alice talked to:</span>
+		 <span class="heading pull-left">Browse others</span>
 		 <div class="clearfix"></div>
 		 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
   	  <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
