@@ -12,7 +12,7 @@
 			 <li><a href="#"><i class="fa fa-twitter"></i>&nbsp;<%= @profile.twitter_username %></a> </li>
 			 <li><a href="/<%= @profile_user.username %>">mailman.com/<%= @profile_user.username %></a></li>
 			</ul>
-			<button class="md-trigger btn-primary" data-modal="modal-1"><i class="fa fa-envelope-o"></i> Start a conversation</button>
+			<button class="md-trigger btn-primary" data-modal="modal-1"><i class="fa fa-envelope-o"></i> Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
 			<div class="md-modal md-effect-1" id="modal-1">
   <div class="popup-box">
 	 <input name="email" type="email" placeholder="To: alice_alice" />
@@ -153,34 +153,4 @@
  <!--container-->
  </div>
 <!--col-->
-</div>
-<!-- =========== -->
-<!-- Footer Area -->
-<!-- =========== -->
-<div class="footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="container">
- <div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 sitemap">
-		<ul>
-		 <li><a href="#">About</a></li>
-		 <li><a href="#">Security</a></li>
-		 <li><a href="#">How it works</a></li>
-		 <li><a href="#">Privacy Policy</a></li>
-		 <li><a href="#">Questions</a></li>
-		 <li><a href="#">Terms &amp; Services</a></li>
-		</ul>
-   <!--sitemap-->
-   </div>
-	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 sitemap2">
-		<ul>
-		 <li><a href="#">Fresh Updates</a></li>
-		 <li><a href="#"><i class="fa fa-twitter"></i> Follow@mailman</a></li>
-		</ul>
-   <!--sitemap-->
-   </div>
-  <!--row-->
-  </div>
- <!--container-->
- </div>
-<!--footer-->
 </div>
