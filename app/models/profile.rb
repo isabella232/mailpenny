@@ -1,23 +1,26 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `profiles`
 #
 # ### Columns
 #
-# Name                    | Type               | Attributes
-# ----------------------- | ------------------ | ---------------------------
-# **`id`**                | `integer`          | `not null, primary key`
-# **`name`**              | `string`           |
-# **`bio`**               | `text`             |
-# **`work_company`**      | `string`           |
-# **`work_title`**        | `string`           |
-# **`location`**          | `string`           |
-# **`twitter_username`**  | `string`           |
-# **`rate`**              | `decimal(, )`      | `default(0.0), not null`
-# **`created_at`**        | `datetime`         | `not null`
-# **`updated_at`**        | `datetime`         | `not null`
-# **`user_id`**           | `integer`          |
+# Name                       | Type               | Attributes
+# -------------------------- | ------------------ | ---------------------------
+# **`id`**                   | `integer`          | `not null, primary key`
+# **`name`**                 | `string`           |
+# **`bio`**                  | `text`             |
+# **`work_company`**         | `string`           |
+# **`work_title`**           | `string`           |
+# **`location`**             | `string`           |
+# **`twitter_username`**     | `string`           |
+# **`rate`**                 | `decimal(, )`      | `default(0.0), not null`
+# **`created_at`**           | `datetime`         | `not null`
+# **`updated_at`**           | `datetime`         | `not null`
+# **`user_id`**              | `integer`          |
+# **`avatar_file_name`**     | `string`           |
+# **`avatar_content_type`**  | `string`           |
+# **`avatar_file_size`**     | `integer`          |
+# **`avatar_updated_at`**    | `datetime`         |
 #
 # ### Indexes
 #
@@ -31,12 +34,17 @@
 # * `fk_rails_e424190865`:
 #     * **`user_id => users.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 class Profile < ApplicationRecord
   before_validation :set_defaults
 
   belongs_to :user
+
+  has_attached_file :avatar, styles: { medium: '300x300>',
+                                       thumb: '100x100>' },
+                             default_url: '/images/:style/missing.png'
+
+  validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\z}
 
   validates :rate,
             numericality: { greater_than_or_equal_to: 0 }
