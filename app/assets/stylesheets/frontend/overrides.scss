@@ -610,7 +610,19 @@ ul.zg-ul-select.active:after {
 #search {
 	display: none;
 }
-/***************SCREEN #26******************/
+/***************PROFILE******************/
+
+.hover-icon {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	display: block;
+}
+
+.profile-avatar {
+	position: relative;
+}
+
 .user-details2, .user-talkTo2 {
 	display: inline-block;
 	vertical-align: top;
