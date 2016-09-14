@@ -34,16 +34,16 @@ feature 'Login & Logout:' do
   context 'upon logout' do
     scenario 'be successful' do
       login
-      visit dashboard_overview_path
+      visit dashboard_account_path
       click_link 'Logout'
       expect(page).to have_content 'Signed out successfully.'
     end
 
     scenario 'redirect to dashboard overview' do
       login
-      visit dashboard_overview_path
+      visit dashboard_account_path
       click_link 'Logout'
-      expect(page).to have_current_path(home_page_path)
+      expect(page).to have_current_path(root_path)
     end
   end
 end
