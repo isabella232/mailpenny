@@ -18,12 +18,9 @@
                                 <i class="fa fa-twitter"></i>&nbsp;<%= @profile.twitter_username %></a>
                         </li>
                         <li>
-                            <strong><%= link_to "mailpenny.com/#{@profile_user.username}", "/#{@profile_user.username}" %></strong>
+                          <p><%= @profile.bio %></p>
                         </li>
                     </ul>
-                    <button class="md-trigger btn-primary" data-modal="modal-1">
-                        <i class="fa fa-envelope-o"></i>
-                        Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
                     <div class="md-modal md-effect-1" id="modal-1">
                         <div class="popup-box">
                             <input name="email" type="email" placeholder="To: alice_alice"/>
@@ -36,7 +33,6 @@
                             <a class="md-close fa fa-close"></a>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
                     <ul class="list2">
                         <li>
                             <i class="fa fa-map-marker"></i><%= @profile.location %></li>
@@ -45,7 +41,13 @@
                         <li>
                             <i class="fa fa-building-o"></i><%= @profile.work_company %></li>
                     </ul>
-                    <p><%= @profile.bio %></p>
+
+                    <div class="clearfix"></div>
+                                                <strong><%= link_to "mailpenny.com/#{@profile_user.username}", "/#{@profile_user.username}" %></strong>
+                                                <button class="md-trigger btn-primary" data-modal="modal-1">
+                                                    <i class="fa fa-envelope-o"></i>
+                                                    Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
+
                     <div class="md-overlay"></div>
                     <!--user-details-->
                 </div>
