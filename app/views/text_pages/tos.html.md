@@ -2,7 +2,7 @@
 
 Last updated: April 7, 2016.
 
-This Terms and Conditions of Service Agreement (“Agreement”) is a binding agreement between you (“End User” or “you”) and Payload Technologies, Inc. (“Company”, “we” or “us”). This Agreement governs your use of this website, themailman.io (the “Website”).
+This Terms and Conditions of Service Agreement (“Agreement”) is a binding agreement between you (“End User” or “you”) and Payload Technologies, Inc. (“Company”, “we” or “us”). This Agreement governs your use of this website, [mailpenny.com](https://mailpenny.com) (the “Website”).
 
 BY REGISTERING AND/OR LOGGING IN, YOU (A) ACKNOWLEDGE THAT YOU HAVE READ AND UNDERSTAND THIS AGREEMENT; (B) REPRESENT THAT YOU ARE OF LEGAL AGE TO ENTER INTO A BINDING AGREEMENT; AND (C) ACCEPT THIS AGREEMENT AND AGREE THAT YOU ARE LEGALLY BOUND BY ITS TERMS. IF YOU DO NOT AGREE TO THESE TERMS, DO NOT REGISTER, LOG-IN, AND/OR USE THE WEBSITE.
 
