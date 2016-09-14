@@ -1,2 +1,160 @@
-<h1>Dashboard#billing</h1>
-<p>Find me in app/views/dashboard/billing.html.erb</p>
+<!-- =========== -->
+<!--  Body Area  -->
+<!-- =========== -->
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 light-grey-bg">
+    <div class="container nopadding-lt">
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 nopadding text-center">
+                <div class="mailbox col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="user-links pull-left" id="side-links">
+                        <ul>
+                            <li>
+                                <a href="#" class="fa fa-user"></a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa fa-envelope-o">
+                                    <span>2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="fa fa-building-o"></a>
+                            </li>
+                        </ul>
+                        <!--user-links-->
+                    </div>
+                    <!--mailbox-->
+                </div>
+                <!--col-->
+            </div>
+            <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 padding20">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                    <div class="blackwhite-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>Card Details</h4>
+                        <div class="box-inner card-details col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="col-lg-9 col-md-9 col-sm-10 col-xs-10">
+                                <li>
+                                    <div class="btn-group click_dropdown">
+                                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <span class="fa fa-angle-down"></span>
+                                            <span class="valueOfButton">India</span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>India</li>
+                                            <li>Ukrain</li>
+                                            <li>India</li>
+                                            <li>Ukrain</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <label>Card Number</label>
+                                    <input name="text" type="text" placeholder="*****"/>
+                                    <i class="fa fa-edit"></i>
+                                </li>
+                                <li>
+                                    <label>Valid Until</label>
+                                    <input name="text" type="text" placeholder="27/7/2016"/>
+                                    <i class="fa fa-edit"></i>
+                                </li>
+                            </ul>
+                            <!--box-inner-->
+                        </div>
+                        <!--blackwhite-box-->
+                    </div>
+                    <!--col-->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+                    <div class="blackwhite-box Balance col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>Balance</h4>
+                        <div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <ul class="col-lg-9 col-md-9 col-sm-10 col-xs-10">
+                                <li>
+                                    <label class="balance-icon">
+                                        <i class="fa fa-trophy"></i>
+                                        Curent Balance</label>
+                                    <input name="text" type="text" placeholder="$50.00"/>
+                                </li>
+                                <li>
+                                    <label class="balance-icon">
+                                        <i class="fa fa-refresh"></i>
+                                        Referral Bonus</label>
+                                    <input name="text" type="text" placeholder="$10.00"/>
+                                </li>
+                            </ul>
+                            <div class="btn-primary red-bg btn1">
+                                <a href="#">Deposit</a>
+                            </div>
+                            <div class="btn-primary btn1">
+                                <a href="#">Withdraw</a>
+                            </div>
+                            <!--box-inner-->
+                        </div>
+                        <!--blackwhite-box-->
+                    </div>
+                    <!--col-->
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                    <div class="blackwhite-box Transactions col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <h4>Transactions</h4>
+                        <div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Transactions</th>
+                                        <th>Tipe</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                        <td>&nbsp;</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--box-inner-->
+                        </div>
+                        <!--blackwhite-box-->
+                    </div>
+                    <!--col-->
+                </div>
+                <!--col-->
+            </div>
+            <!--row-->
+        </div>
+        <!--container-->
+    </div>
+    <!--col-->
+</div>
+<script>
+    $(document).ready(function () {
+        function jqUpdateSize() {
+            // Fixed height
+            if ($(window).width() > 991) {
+                var height = $(window).height();
+                alert
+                $('#side-links').css('height', (height - $('header.header').height() - 29));
+                $('#emails').css('height', (height - ($('#emails').offset().top) - 20));
+            } else {
+                $('#side-links').css('height', 'auto');
+            }
+        };
+        jqUpdateSize()
+        $(window).resize(function (e) {
+            jqUpdateSize()
+        });
+    });
+</script>
