@@ -77,6 +77,23 @@
 																 <input type="email" placeholder="bob@bobinc.com" name="email">
 
 																</li>
+																<%= form_for @profile do |f| %>
+
+																<div class="field">
+																    <%= f.label :phone_number %><br/>
+																    <%= f.text_field :bio %>
+																</div>
+
+																<div class="field">
+																    <%= f.label :twitter_username %><br/>
+																    <%= f.telephone_field :twitter_username %>
+																</div>
+
+																<div class="actions">
+																    <%= f.submit "Update" %>
+																</div>
+																<% end %>
+
 																<li>
 																<i class="fa fa-phone"></i>
 																 <input type="tel" placeholder="+ 123 456 78 91" name="tel">
@@ -143,22 +160,3 @@ $(window).resize(function(e) {
 });
 });
 </script>
-
-<h1>Dashboard#profile</h1>
-<%= form_for @profile do |f| %>
-<%= devise_error_messages! %>
-
-<div class="field">
-    <%= f.label :bio %><br/>
-    <%= f.text_field :bio %>
-</div>
-
-<div class="field">
-    <%= f.label :twitter_username %><br/>
-    <%= f.text_field :twitter_username %>
-</div>
-
-<div class="actions">
-    <%= f.submit "Update" %>
-</div>
-<% end %>
