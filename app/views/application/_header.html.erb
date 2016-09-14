@@ -19,16 +19,16 @@
             <div class="menu-outer">
                 <ul class="nav navbar-nav pull-right header-right-box">
                     <li class="invite">
-                        <a href="#">How to Invite Friends?</a>
+                        <a href="#">Referals</a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="msg">2</span>
-                            <i class="fa fa-envelope-o"></i>
-                        </a>
+                      <%= link_to(dashboard_messages_path) do %>
+                        <span class="msg">2</span>
+                        <i class="fa fa-envelope-o"></i>
+                      <% end %>
                     </li>
                     <li>
-                        <a href="#">$50.00</a>
+                        <%= link_to "$#{number_with_precision(current_user.account.balance, precision: 2)}", dashboard_billing_path %></a>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -38,19 +38,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">About</a>
-                            </li>
-                            <li>
-                                <a href="#">How it works</a>
-                            </li>
-                            <li>
-                                <a href="#">Security</a>
-                            </li>
-                            <li>
-                                <a href="#">Questuions</a>
-                            </li>
-                            <li>
-                                <a href="#">Change password</a>
+                                <a href="#">Account</a>
                             </li>
                             <li>
                                 <a href="#">Logout</a>
