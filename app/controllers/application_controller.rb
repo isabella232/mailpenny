@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
 
   # redirect users after login
   def after_sign_in_path_for(_resource)
-    dashboard_profile_path
+    dashboard_messages_path
   end
 
   # redirect users after logout
   def after_sign_out_path_for(_resource)
-    home_page_path
+    root_path
   end
 end
