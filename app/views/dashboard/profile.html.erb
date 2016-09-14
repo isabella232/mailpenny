@@ -13,110 +13,61 @@
 						</div>
 						<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 padding20">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-										<div class="blackwhite-box personal-info contact-information col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<h4>Personal Information</h4>
-												<%= form_for @profile do |f| %>
+										<div class="blackwhite-box col-lg-7 col-md-7 col-sm-7 col-xs-9 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+											<h4>Change Password</h4>
+	                    <div class="white-box col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	                        <h1>Account Settings</h1>
 
-												<div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
-											 <div class="profile-pic col-lg-5 col-md-5 col-sm-5 col-xs-12">
-											  <div class="row">
-											   <figure><%= image_tag 'big-avatar.jpg' %></figure>
-												 <!--row-->
-												 </div>
-											 <!--col-->
-											 </div>
-											 <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
-											  <ul class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
-												<li class="full-width-field">
-													<%= f.label :name %><br/>
-													<%= f.text_field :name %>
-																</li>
-																<li>
-																	<%= f.label :location %><br/>
-																	<i class="fa fa-map-marker"></i>
-																	<%= f.text_field :location %>
-																</li>
-																<li>    <%= f.label :work_title %><br/>
-																	<i class="fa fa-briefcase"></i>
-																    <%= f.text_field :work_title %>
-																</li>
-																	<li>
-																 <i class="fa fa-building-o"></i>
-																 <%= f.label :work_company %><br/>
-														     <%= f.text_field :work_company %>
-																</li>
-											  </ul>
-											 <!--col-->
-											 </div>
-											<!--box-inner-->
-										 </div>
-										 <!--blackwhite-box-->
-										 <div class="actions">
-										     <%= f.submit "Update" %>
-										 </div>
+	                        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+	                        <%= devise_error_messages! %>
 
-										 <% end %>
+	                        <div class="field">
+	                            <%= f.label :username %><br/>
+	                            <%= f.text_field :username, autofocus: true %>
+	                        </div>
 
+	                        <div class="field">
+	                            <%= f.label :email %><br/>
+	                            <%= f.email_field :email, autofocus: true %>
+	                        </div>
+
+	                        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+	                        <div>Currently waiting confirmation for:
+	                            <%= resource.unconfirmed_email %></div>
+	                        <% end %>
+
+	                        <div class="field">
+	                            <%= f.label :password %>
+	                            <i>(leave blank if you don't want to change it)</i><br/>
+	                            <%= f.password_field :password, autocomplete: "off" %>
+	                            <% if @minimum_password_length %>
+	                            <br/>
+	                            <em><%= @minimum_password_length %>
+	                                characters minimum</em>
+	                            <% end %>
+	                        </div>
+
+	                        <div class="field">
+	                            <%= f.label :password_confirmation %><br/>
+	                            <%= f.password_field :password_confirmation, autocomplete: "off" %>
+	                        </div>
+
+	                        <div class="field">
+	                            <%= f.label :current_password %>
+	                            <i>(we need your current password to confirm your changes)</i><br/>
+	                            <%= f.password_field :current_password, autocomplete: "off" %>
+	                        </div>
+
+	                        <div class="actions">
+	                            <%= f.submit "Update", class: 'btn-primary' %>
+	                        </div>
+	                        <% end %>
+	                        <!--white-box-->
+	                    </div>
 										</div>
 										<!--col-->
 								</div>
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-										<div class="blackwhite-box personal-info bio col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<h4>Contact Information</h4>
-												<div class="box-inner contact-information col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<ul class="col-lg-9 col-md-9 col-sm-10 col-xs-10">
-																	<li>
-																	<i class="fa fa-envelope"></i>
-																 <input type="email" placeholder="bob@bobinc.com" name="email">
-
-																</li>
-																<%= form_for @profile do |f| %>
-
-																<div class="field">
-																    <%= f.label :phone_number %><br/>
-																    <%= f.text_field :bio %>
-																</div>
-
-																<div class="field">
-																    <%= f.label :twitter_username %><br/>
-																    <%= f.telephone_field :twitter_username %>
-																</div>
-
-																<div class="actions">
-																    <%= f.submit "Update" %>
-																</div>
-																<% end %>
-
-																<li>
-																<i class="fa fa-phone"></i>
-																 <input type="tel" placeholder="+ 123 456 78 91" name="tel">
-
-																</li>
-																<li>
-																<i class="fa fa-twitter"></i>
-																 <input class="twitter-icon" type="text" placeholder="@bobtwitter" name="text">
-
-																</li>
-														</ul>
-														<!--box-inner-->
-												</div>
-										 <!--blackwhite-box-->
-										</div>
-										<!--col-->
-								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-										<div class="blackwhite-box personal-info bio contact-information col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<h4>BIO</h4>
-												<div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														<ul class="col-lg-9 col-md-9 col-sm-10 col-xs-10">
-																	<li>
-																 <input type="email" placeholder="I do things Bob does" name="email">
-																</li>
-														</ul>
-														<!--box-inner-->
-												</div>
-										 <!--blackwhite-box-->
-										</div>
 										<!--col-->
 								</div>
 								<!--col-->
