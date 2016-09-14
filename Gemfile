@@ -37,6 +37,8 @@ gem 'secure_headers'
 gem 'sprockets-rails', require: 'sprockets/railtie'
 # markdown parser
 gem 'rdiscount'
+# for profile pictures
+gem 'paperclip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
