@@ -2,10 +2,6 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
 
-  def profile
-    @profile = current_user.profile
-  end
-
   def account
   end
 
