@@ -27,3 +27,6 @@
 /_yardoc/
 /doc/
 /rdoc/
+
+# Avatars uploaded in development
+/public/tmp
