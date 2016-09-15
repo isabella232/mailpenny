@@ -40,7 +40,8 @@ class Profile < ApplicationRecord
 
   belongs_to :user
 
-  has_attached_file :avatar, styles: { medium: '300x300>',
+  has_attached_file :avatar, styles: { large: '500x500>',
+                                       medium: '250x250>',
                                        thumb: '100x100>' }
 
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\z}
