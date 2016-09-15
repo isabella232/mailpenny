@@ -9,9 +9,7 @@
 <%= yield :meta_data %>
 <%= stylesheet_link_tag 'application', media: 'all' %></head>
 
-<body class="blue-bg">
-<%= render "flash_messages" %>
+<div class="blue-bg">
 <%= yield %>
-<%= javascript_include_tag "application" %>
-</body>
+</div>
 </html>

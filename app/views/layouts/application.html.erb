@@ -12,8 +12,10 @@
     </head>
 
     <body>
+        <%= render 'header' %>
         <%= render 'flash_messages'%>
         <%= yield :body %>
+        <%= render 'footer' %>
         <%= javascript_include_tag 'application' %>
     </body>
 </html>

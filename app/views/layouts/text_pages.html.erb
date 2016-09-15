@@ -1,36 +1,23 @@
-<!DOCTYPE HTML>
-<html lang="en">
-    <head>
-        <title>Mailpenny</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-        <meta charset="utf-8">
-        <%= render 'favicon' %>
-        <%= csrf_meta_tags %>
-        <%= yield :meta_data %>
-        <%= stylesheet_link_tag 'application', media: 'all' %>
-    </head>
-    <body>
-<%= render 'header' %>
-        <div class="container">
-            <div class="row">
+<%= content_for :body do %>
+<div class="container">
+    <div class="row">
 
-                <!-- =========== -->
-                <!--  Body Area  -->
-                <!-- =========== -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                    <div class="col-lg-7 col-md-7 col-sm-10 col-xs-12 textbox">
-                        <%= render 'flash_messages' %>
-                        <div class="text-left">
-                            <%= yield %>
-                        </div>
-                        <!--col-->
-                    </div>
-                    <!--col-->
+        <!-- =========== -->
+        <!--  Body Area  -->
+        <!-- =========== -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <div class="col-lg-7 col-md-7 col-sm-10 col-xs-12 textbox">
+                <%= render 'flash_messages' %>
+                <div class="text-left">
+                    <%= yield %>
                 </div>
-                <!--row-->
+                <!--col-->
             </div>
-            <!--container-->
+            <!--col-->
         </div>
-        <%= javascript_include_tag "application" %>
-    </body>
-</html>
+        <!--row-->
+    </div>
+    <!--container-->
+</div>
+<% end %>
+<%= render template: 'layouts/application' %>
