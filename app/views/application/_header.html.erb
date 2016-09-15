@@ -33,7 +33,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <figure class="pull-left">
-                        <%= image_tag "avatar.svg", size: '37x37' %>
+                      <%= image_tag current_user.profile.avatar.url(:thumb), size: '37x37', class: 'img-circle' %>
                     </figure>
                     <span class="fa fa-angle-down"></span>
                 </a>
