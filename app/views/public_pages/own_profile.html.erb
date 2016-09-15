@@ -34,7 +34,8 @@
                                     </div>
                                 </div>
 
-                                <figure class="profile-img edit"><%= image_tag 'avatar.svg', size: '150x150', class: 'img-circle' %></figure>
+                                <figure class="profile-img edit">
+                                  <%= image_tag @profile.avatar.url(:medium), size: '150x150', class: 'img-circle' %></figure>
                             </div>
 
                             <ul class="list1">
