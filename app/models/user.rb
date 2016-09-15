@@ -69,6 +69,7 @@ class User < ApplicationRecord
   has_many :conversations
 
   before_create :build_default_account
+  before_create :build_default_profile
 
   # Send a new message to a person
   # @param to [User] Person to send the message to.
@@ -110,4 +111,10 @@ class User < ApplicationRecord
     build_account account_type: 'user'
     true
   end
+
+  def build_default_profile
+    build_profile
+    true
+  end
+
 end
