@@ -39,6 +39,8 @@ gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'rdiscount'
 # for profile pictures
 gem 'paperclip'
+# to save files to aws
+gem 'aws-sdk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
