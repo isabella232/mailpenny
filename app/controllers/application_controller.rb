@@ -2,6 +2,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  include MailpennyHelper
+
   # render 404 pages
   def not_found
     raise ActionController::RoutingError, 'Not Found'
@@ -15,14 +17,5 @@ class ApplicationController < ActionController::Base
   # redirect users after logout
   def after_sign_out_path_for(_resource)
     root_path
-  end
-
-  private
-
-  # Returns the profile for the specified user
-  # @param [user] the user whose profile path is required
-  # @return [String] absolute path to the user's profile page
-  def user_profile_path(user)
-    "/#{user.username}"
   end
 end
