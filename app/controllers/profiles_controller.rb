@@ -8,7 +8,7 @@ class ProfilesController < ApplicationController
   def update
     respond_to do |format|
       if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to user_profile_path(@profile.user), notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
       else
         format.html { render :edit }
@@ -24,7 +24,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:user).permit(:avatar)
+    params.require(:profile).permit(:avatar)
   end
-
 end
