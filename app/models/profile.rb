@@ -42,7 +42,8 @@ class Profile < ApplicationRecord
 
   has_attached_file :avatar, styles: { large: '500x500>',
                                        medium: '250x250>',
-                                       thumb: '100x100>' }
+                                       thumb: '100x100>' },
+                             default_url: '/assets/avatar.svg'
 
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\z}
 
