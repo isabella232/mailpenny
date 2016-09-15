@@ -56,5 +56,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  Paperclip.options[:command_path] = Rails.root.join('tmp', 'profile', 'avatars')
+  Paperclip::Attachment.default_options[:storage] = :filesystem
+  Paperclip::Attachment.default_options[:path] = ':rails_root/public:url'
+  Paperclip::Attachment.default_options[:url] = '/tmp/paperclip/:class/:attachment/:id_partition/:style/:filename'
 end
