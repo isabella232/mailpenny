@@ -28,6 +28,7 @@ class ProfilesController < ApplicationController
       .require(:profile)
       .permit(
         :avatar,
+        :name,
         :bio,
         :rate,
         :work_company,
