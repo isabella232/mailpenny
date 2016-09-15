@@ -20,16 +20,16 @@
                                                 </button>
                                                 <h4 class="modal-title" id="uploadPhoto">Upload Photo</h4>
                                             </div>
+                                            <%= form_for @profile do |f| %>
                                             <div class="modal-body">
-                                              <%= form_for @profile do |form| %>
-                                                <%= form.file_field :avatar, as: :file %>
-                                                <%= form.button :submit %>
-                                              <% end %>
+                                                <%= f.file_field :avatar, as: :file %>
+                                                <%= f.text_field :bio %>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <%= f.button 'Save Changes', class: 'btn btn-primary' %>
                                             </div>
+                                            <% end %>
                                         </div>
                                     </div>
                                 </div>
