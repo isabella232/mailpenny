@@ -8,24 +8,27 @@
 				<%= render 'sidebar' %>
 				<!--col-->
 			</div>
-			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 text-center">
+			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 
-				<div class="blackwhite-box">
+				<div class="">
 					<h4>Change Password</h4>
-					<div class="white-box">
-						<h1>Account Settings</h1>
+					<div class="">
 
-						<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+						<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class:'form-horizontal', method: :put }) do |f| %>
 						<%= devise_error_messages! %>
 
-						<div class="field">
-							<%= f.label :username %><br/>
-							<%= f.text_field :username, autofocus: true %>
+						<div class="form-group">
+							<%= f.label :username, class: 'col-sm-2 control-label' %>
+							<div class="col-sm-10">
+								<%= f.text_field :username, class: 'form-control', autofocus: true %>
+							</div>
 						</div>
 
-						<div class="field">
-							<%= f.label :email %><br/>
-							<%= f.email_field :email, autofocus: true %>
+						<div class="form-group">
+							<%= f.label :email, class: 'col-sm-2 control-label' %>
+							<div class="col-sm-10">
+								<%= f.email_field :email, class: 'form-control' %>
+							</div>
 						</div>
 
 						<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -33,26 +36,32 @@
 							<%= resource.unconfirmed_email %></div>
 						<% end %>
 
-						<div class="field">
-							<%= f.label :password %>
-							<i>(leave blank if you don't want to change it)</i><br/>
-							<%= f.password_field :password, autocomplete: "off" %>
+						<div class="form-group">
+							<%= f.label :new_pass, class: 'col-sm-2 control-label' %>
+							<i>(leave blank if you don't want to change it)</i>
+							<div class="col-sm-10">
+								<%= f.password_field :password, class: 'form-control', autocomplete: "off" %>
+							</div>
 							<% if @minimum_password_length %>
-							<br/>
+
 							<em><%= @minimum_password_length %>
 								characters minimum</em>
 							<% end %>
 						</div>
 
-						<div class="field">
-							<%= f.label :password_confirmation %><br/>
-							<%= f.password_field :password_confirmation, autocomplete: "off" %>
+						<div class="form-group">
+							<%= f.label :confirm_pass, class: 'col-sm-2 control-label' %>
+							<div class="col-sm-10">
+								<%= f.password_field :password_confirmation, class: 'form-control', autocomplete: "off" %>
+							</div>
 						</div>
 
-						<div class="field">
-							<%= f.label :current_password %>
-							<i>(we need your current password to confirm your changes)</i><br/>
-							<%= f.password_field :current_password, autocomplete: "off" %>
+						<div class="form-group">
+							<%= f.label :old_pass, class: 'col-sm-2 control-label' %>
+							<i>(we need your current password to confirm your changes)</i>
+							<div class="col-sm-10">
+								<%= f.password_field :current_password, class: 'form-control', autocomplete: "off" %>
+							</div>
 						</div>
 
 						<div class="actions">
