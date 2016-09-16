@@ -27,6 +27,7 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.conversation = Conversation.find(conversation_id_param[:id])
     @message.sender = current_user
+    authorize @message
     if @message.save
       redirect_to :back, notice: 'Message was successfully created.'
     else
