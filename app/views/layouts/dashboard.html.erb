@@ -1,4 +1,26 @@
 <%= content_for :body do %>
-<%= yield %>
+<!-- =========== -->
+<!--  Body Area  -->
+<!-- =========== -->
+<div class="container light-grey-bg">
+	<div class="dashboard-content">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center">
+				<%= render 'sidebar' %>
+				<!--col-->
+			</div>
+			<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+
+        <%= yield %>
+
+				<!--col-->
+			</div>
+			<!--row-->
+		</div>
+		<!--container-->
+	</div>
+	<!--col-->
+</div>
+
 <% end %>
 <%= render template: 'layouts/application' %>
