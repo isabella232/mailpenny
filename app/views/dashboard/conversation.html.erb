@@ -1,1 +1,21 @@
-<%= @conversation %>
+<div class="chat-box">
+     <div class="header">
+         Narayan Prusty
+     </div>
+
+     <div id="messages" class="messages">
+         <ul>
+           <% @conversation.messages.each do |message| %>
+             <li>
+                 <span class="<%= message.sender == current_user ? 'right' : 'left' %>"><%= message.body %></span>
+                 <div class="clear"></div>
+             </li>
+             <% end %>
+         </ul>
+         <div class="clear"></div>
+     </div>
+
+     <div class="input-box">
+         <textarea placeholder="Enter message"></textarea>
+     </div>
+ </div>
