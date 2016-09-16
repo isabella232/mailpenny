@@ -30,7 +30,7 @@
         <ul>
             <% @conversations.each do |conversation| %>
             <li>
-                <a href="#">
+                <%= link_to conversation_path(conversation.id) do %>
                     <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>
                     <span class="conversation-name"><%= conversation.users_except(current_user).username %></span><br>
                       <div class="pull-right">
@@ -42,6 +42,7 @@
                     <div class="conversation-subject"><%= (conversation.subject.length > 8) ? "#{conversation.subject[0,8]}..." : conversation.subject %></div>
                 </a>
             </li>
+            <% end %>
             <% end %>
         </ul>
     </div>

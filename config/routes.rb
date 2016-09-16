@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'dashboard/account'  => 'dashboard#account'
   get 'dashboard/billing'  => 'dashboard#billing'
   get 'dashboard/inbox' => 'dashboard#inbox'
+  get 'dashboard/conversation/:id' => 'dashboard#conversation', as: 'conversation'
 
   # user signups and registration
   devise_for :users, controllers: {
