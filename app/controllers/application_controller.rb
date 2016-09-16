@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   # redirect users after login
   def after_sign_in_path_for(_resource)
-    dashboard_messages_path
+    dashboard_inbox_path
   end
 
   # redirect users after logout
