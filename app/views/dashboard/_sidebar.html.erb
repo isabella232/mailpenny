@@ -1,8 +1,16 @@
-<div class="user-links pull-left" id="side-links">
-    <ul>
-        <li><%= link_to '', dashboard_account_path,  class: 'fa fa-user'%></li>
-        <li><%= link_to '', dashboard_messages_path, class: 'fa fa-envelope-o'%><span>2</span></a></li>
-        <li><%= link_to '', dashboard_billing_path,  class: 'fa fa-building-o'%></a></li>
+<div class="dashboard-nav white-bg">
+    <ul class="nav nav-pills nav-stacked">
+        <li role="presentation" class="active"><%= link_to dashboard_account_path do %>
+          <i class="fa fa-user"></i>&nbsp;Account
+          <% end %>
+        </li>
+        <li role="presentation"><%= link_to dashboard_messages_path do %>
+          <i class="fa fa-envelope-o"></i>&nbsp;Messages&nbsp;<span>(2)</span>
+          <% end %>
+        </li>
+        <li role="presentation"><%= link_to dashboard_billing_path do %>
+          <i class="fa fa-building-o"></i>&nbsp;Billing
+          <% end %>
+        </li>
     </ul>
 </div>
-<!--user-links-->
