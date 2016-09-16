@@ -160,24 +160,6 @@ h1 span {
 	font-size: 26px;
 	margin: 0 auto 15px;
 }
-.footer {
-	padding: 40px 0 22px;
-	background-color: #3e413e;
-}
-.footer .sitemap li {
-	float: left;
-	width: 50%;
-	margin: 0 0 20px;
-}
-.footer .sitemap li a, .footer .sitemap2 li a {
-	color: #ccc;
-}
-.footer .sitemap2 li {
-	margin: 0 0 20px;
-}
-.footer .sitemap2 li i {
-	color: #0089b5;
-}
 /**************WRITE SMS VERIFICATION**************/
 .back-to-mailman {
 	margin: 7px 0 0;
@@ -199,28 +181,7 @@ h1 span {
 .sms-verification h1 {
 	margin: 0 0 54px;
 }
-.white-box {
-	padding: 60px;
-	border-radius: 5px;
-	background-color: #fff;
-}
-.white-box input[type="text"], .white-box input[type="tel"], .white-box input[type="email"], .white-box input[type="password"],.click_dropdown label {
-	width: 100%;
-	padding: 0 2%;
-	height: 50px;
-	color: #aaa;
-	margin: 0 0 40px;
-	border-radius: 3px;
-	border-color:#e3e3e3;
-    border-image: none;
-    border-style:solid;
-    border-width:2px;
-}
-.white-box button {
-	padding: 0;
-	border: none;
-	background: none;
-}
+
 /**************ADD PHONE**************/
 .white-box label {
 	width: 100%;
