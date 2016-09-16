@@ -43,6 +43,7 @@ class Message < ApplicationRecord
 
   before_create :proceed_if_conversation_is_open
   before_create :update_conversation_status
+  before_validation :set_defaults
 
   private
 
@@ -58,5 +59,10 @@ class Message < ApplicationRecord
        conversation.status != 'expired' # the conversation is not expired
       conversation.complete
     end
+  end
+
+  # set the defaults of the message based on the conversation
+  def set_defaults
+    self.recipient = conversation.users_except(sender)
   end
 end
