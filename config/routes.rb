@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :social_media_accounts
   resources :phone_numbers
   resources :profiles
+  resources :messages
 
   # the root path
   root 'public_pages#home'
