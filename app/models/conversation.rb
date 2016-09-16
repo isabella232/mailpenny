@@ -79,12 +79,12 @@ class Conversation < ApplicationRecord
 
   # Messages send by the initiator in this conversation
   def messages_by_initiator
-    self.messages.where(sender_id: initiator_id)
+    messages.where(sender_id: initiator_id)
   end
 
   # Messages send by the initiator in this conversation
   def messages_by_recipient
-    self.messages.where(sender_id: recipient_id)
+    messages.where(sender_id: recipient_id)
   end
 
   # Who's participating in this conversation
