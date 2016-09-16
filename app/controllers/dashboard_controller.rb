@@ -15,5 +15,8 @@ class DashboardController < ApplicationController
   def conversation
     conversation_id = params[:id]
     @conversation = Conversation.find(conversation_id)
+    @message = Message.new(
+      conversation: @conversation
+    )
   end
 end
