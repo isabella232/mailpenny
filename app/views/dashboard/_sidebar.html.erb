@@ -1,16 +1,19 @@
 <div class="dashboard-nav white-bg">
     <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><%= link_to dashboard_account_path do %>
-          <i class="fa fa-user"></i>&nbsp;Account
-          <% end %>
+        <li role="presentation" class="<%= 'active' if action_name == 'account' %>">
+            <%= link_to dashboard_account_path do %>
+            <i class="fa fa-user"></i>&nbsp;Account
+            <% end %>
         </li>
-        <li role="presentation"><%= link_to dashboard_inbox_path do %>
-          <i class="fa fa-envelope-o"></i>&nbsp;Inbox&nbsp;<span>(2)</span>
-          <% end %>
+        <li role="presentation" class="<%= 'active' if action_name == 'inbox' %>">
+            <%= link_to dashboard_inbox_path do %>
+            <i class="fa fa-envelope-o"></i>&nbsp;Inbox&nbsp;<span>(2)</span>
+            <% end %>
         </li>
-        <li role="presentation"><%= link_to dashboard_billing_path do %>
-          <i class="fa fa-building-o"></i>&nbsp;Billing
-          <% end %>
+        <li role="presentation" class="<%= 'active' if action_name == 'billing' %>">
+            <%= link_to dashboard_billing_path do %>
+            <i class="fa fa-building-o"></i>&nbsp;Billing
+            <% end %>
         </li>
     </ul>
 </div>
