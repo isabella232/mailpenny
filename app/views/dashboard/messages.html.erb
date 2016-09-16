@@ -1,61 +1,49 @@
-
-    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-        <span class="">Messages</span>
-        <ul class="pagination pagination-box pull-right">
+<span class="">Messages</span>
+<ul class="pagination pagination-box pull-right">
+    <li>
+        <a href="#" aria-label="Previous">
+            <span aria-hidden="true" class="fa fa-angle-double-left"></span>
+        </a>
+    </li>
+    <li>
+        <a href="#" class="fa fa-angle-left"></a>
+    </li>
+    <li>
+        <a href="#" class="fa fa-angle-right"></a>
+    </li>
+    <li>
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true" class="fa fa-angle-double-right"></span>
+        </a>
+    </li>
+</ul>
+<div class="input-group search-box search-box2 pull-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
+    <input type="text" placeholder="Search" class="  search-query form-control">
+    <span class="input-group-btn">
+        <button type="button" class="btn">
+            <span class=" glyphicon glyphicon-search"></span>
+        </button>
+    </span>
+</div>
+<div class="emails col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="emails">
+    <div class="conversations-list">
+        <ul>
+            <% @conversations.each do |conversation| %>
             <li>
-                <a href="#" aria-label="Previous">
-                    <span aria-hidden="true" class="fa fa-angle-double-left"></span>
+                <a href="#">
+                    <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>
+                    <span class="conversation-name"><%= conversation.users_except(current_user).username %></span-><br>
+                      <div class="pull-right">
+                          <span class="green-envelope">
+                              <i class="fa fa-envelope"></i>
+                          </span>
+                          <%= conversation.messages.last.created_at %>
+                      </div>
+                    <div class="conversation-subject"><%= (conversation.subject.length > 8) ? "#{conversation.subject[0,8]}..." : conversation.subject%></div>
                 </a>
             </li>
-            <li>
-                <a href="#" class="fa fa-angle-left"></a>
-            </li>
-            <li>
-                <a href="#" class="fa fa-angle-right"></a>
-            </li>
-            <li>
-                <a href="#" aria-label="Next">
-                    <span aria-hidden="true" class="fa fa-angle-double-right"></span>
-                </a>
-            </li>
+            <% end %>
         </ul>
-        <div class="input-group search-box search-box2 pull-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
-            <input type="text" placeholder="Search" class="  search-query form-control">
-            <span class="input-group-btn">
-                <button type="button" class="btn">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-        <div class="emails col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="emails">
-            <ul>
-                <li>
-                    <a href="#">
-                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
-                        Aldus PageMaker including versions ...<div class="pull-right">
-                            <span class="green-envelope"><i class="fa fa-envelope"></i></span>
-                            9:24 am
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
-                        Aldus PageMaker including versions ...<div class="pull-right">
-                            9:24 am
-                        </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
-                        Aldus PageMaker including versions ...<div class="pull-right">
-                            9:24 am
-                        </div>
-                    </a>
-                </li>
-            </ul>
-            <!--emails-->
-        </div>
-        <!--col-->
     </div>
+    <!--emails-->
+</div>
