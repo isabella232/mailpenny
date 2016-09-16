@@ -59,15 +59,15 @@ class Conversation < ApplicationRecord
 
   # Mark the conversation as expired and reverse the escrow
   def expire
-    self.status = 'expire'
+    self.status = 'expired'
     escrow_transaction.reverse
     save
   end
 
   # Mark the conversation as completed and transfer the escrow
   def complete
-    self.status = 'complete'
-    escrow_transaction.complete
+    self.status = 'completed'
+    # escrow_transaction.complete
     save
   end
 
@@ -79,12 +79,12 @@ class Conversation < ApplicationRecord
 
   # Messages send by the initiator in this conversation
   def messages_by_initiator
-    Message.where(sender_id: initiator_id)
+    self.messages.where(sender_id: initiator_id)
   end
 
   # Messages send by the initiator in this conversation
   def messages_by_recipient
-    Message.where(sender_id: recipient_id)
+    self.messages.where(sender_id: recipient_id)
   end
 
   # Who's participating in this conversation
