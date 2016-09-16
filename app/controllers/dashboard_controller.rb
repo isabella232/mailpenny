@@ -9,5 +9,6 @@ class DashboardController < ApplicationController
   end
 
   def messages
+    @conversations = current_user.conversations
   end
 end
