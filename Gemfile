@@ -41,6 +41,8 @@ gem 'rdiscount'
 gem 'paperclip'
 # to save files to aws
 gem 'aws-sdk'
+# for authorization
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
