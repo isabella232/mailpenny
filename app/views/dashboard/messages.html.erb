@@ -1,84 +1,61 @@
-<!-- =========== -->
-<!--  Body Area  -->
-<!-- =========== -->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 light-grey-bg">
- <div class="container nopadding-lt">
-	<div class="row">
-	 <div class="col-lg-1 col-md-1 col-sm-12 col-xs-12 nopadding text-center">
-	  <div class="mailbox col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <%= render 'sidebar' %>
-		<!--mailbox-->
-		</div>
-	 <!--col-->
-	 </div>
-	 <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 padding20">
-	 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 pull-left padding20 nopadding-lt mailing-links">
-		  <div class="btn-primary red-bg"><a href="#">Compose Email</a></div>
-			<ul>
-			 <li><a href="#"><i class="fa fa-download"></i> Inbox <span>3</span></a></li>
-			 <li><a href="#"><i class="fa fa-upload"></i> Send <span>24</span></a></li>
-			 <li><a href="#"><i class="fa fa-edit"></i> Drafts <span>2</span></a></li>
-			 <li><a href="#"><i class="fa fa-trash"></i> Trash <span>10</span></a></li>
-			 <li><a href="#"><i class="fa fa-envelope-o"></i> All mail <span>7</span></a></li>
-			</ul>
-   	 <!--col-->
-		 </div>
-	 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
-	  <span class="pull-left">Inbox 3</span>
-		<ul class="pagination pagination-box pull-right">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true" class="fa fa-angle-double-left"></span>
-      </a>
-    </li>
-    <li><a href="#" class="fa fa-angle-left"></a></li>
-    <li><a href="#" class="fa fa-angle-right"></a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true" class="fa fa-angle-double-right"></span>
-      </a>
-    </li>
-  </ul>
-	  <div class="input-group search-box search-box2 pull-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
-								<input type="text" placeholder="Search" class="  search-query form-control">
-								<span class="input-group-btn">
-								<button type="button" class="btn"> <span class=" glyphicon glyphicon-search"></span> </button>
-								</span> </div>
-		<div class="emails pull-left col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="emails">
-		 <ul>
-		  <li><a href="#"><figure class="pull-left mail-icon"><img src="/mailman-frontend/images/mail-icon2.png" alt="" /></figure>Jack Nowak<br> Aldus PageMaker including versions ...<div class="pull-right"><i class="fa fa-envelope"></i> 9:24 am <i class="fa fa-ellipsis-v"></i></div></a></li>
-			<li><a href="#"><figure class="pull-left mail-icon"><img src="/mailman-frontend/images/mail-icon2.png" alt="" /></figure>Jack Nowak<br> Aldus PageMaker including versions ...<div class="pull-right"><i class="fa fa-envelope"></i> 9:24 am <i class="fa fa-ellipsis-v"></i></div></a></li>
-			<li><a href="#"><figure class="pull-left mail-icon"><img src="/mailman-frontend/images/mail-icon2.png" alt="" /></figure>Jack Nowak<br> Aldus PageMaker including versions ...<div class="pull-right"><i class="fa fa-envelope"></i> 9:24 am <i class="fa fa-ellipsis-v"></i></div></a></li>
-		 </ul>
-		<!--emails-->
-		</div>
-	 <!--col-->
-	 </div>
-	 <!--col-->
-	 </div>
-	<!--row-->
-	</div>
- <!--container-->
- </div>
-<!--col-->
-</div>
-<script>
-$(document).ready(function(){
-function jqUpdateSize(){
-    // Fixed height
-		if($(window).width()>991){
-			var height = $(window).height();
-			alert
-			$('#side-links').css('height',(height-$('header.header').height()-29));
-			$('#emails').css('height',(height-($('#emails').offset().top)-20));
-		}
-		else{
-		$('#side-links').css('height','auto');
-		}
-};
-jqUpdateSize()
-$(window).resize(function(e) {
-    jqUpdateSize()
-});
-});
-</script>
+
+    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+        <span class="">Messages</span>
+        <ul class="pagination pagination-box pull-right">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true" class="fa fa-angle-double-left"></span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="fa fa-angle-left"></a>
+            </li>
+            <li>
+                <a href="#" class="fa fa-angle-right"></a>
+            </li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true" class="fa fa-angle-double-right"></span>
+                </a>
+            </li>
+        </ul>
+        <div class="input-group search-box search-box2 pull-right col-lg-4 col-md-4 col-sm-4 col-xs-12">
+            <input type="text" placeholder="Search" class="  search-query form-control">
+            <span class="input-group-btn">
+                <button type="button" class="btn">
+                    <span class=" glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+        <div class="emails col-lg-12 col-md-12 col-sm-12 col-xs-12 nopadding" id="emails">
+            <ul>
+                <li>
+                    <a href="#">
+                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
+                        Aldus PageMaker including versions ...<div class="pull-right">
+                            <span class="green-envelope"><i class="fa fa-envelope"></i></span>
+                            9:24 am
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
+                        Aldus PageMaker including versions ...<div class="pull-right">
+                            9:24 am
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>Jack Nowak<br>
+                        Aldus PageMaker including versions ...<div class="pull-right">
+                            9:24 am
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <!--emails-->
+        </div>
+        <!--col-->
+    </div>
