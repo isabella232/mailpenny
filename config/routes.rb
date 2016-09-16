@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: redirect('/dashboard/overview'), status: 302
   get 'dashboard/account'  => 'dashboard#account'
   get 'dashboard/billing'  => 'dashboard#billing'
-  get 'dashboard/messages' => 'dashboard#messages'
+  get 'dashboard/inbox' => 'dashboard#inbox'
 
   # user signups and registration
   devise_for :users, controllers: {

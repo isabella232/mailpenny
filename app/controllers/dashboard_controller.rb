@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
   def billing
   end
 
-  def messages
+  def inbox
     @conversations = current_user.conversations
   end
 end
