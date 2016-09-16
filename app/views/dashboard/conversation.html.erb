@@ -18,4 +18,11 @@
      <div class="input-box">
          <textarea placeholder="Enter message"></textarea>
      </div>
+     <%= form_for @message do |f| %>
+     <%= fields_for :conversation do |ff| %>
+        <%= ff.hidden_field :id %>
+     <% end %>
+       <%= f.text_field :body, class: "form-control" %>
+       <%= f.button 'Submit' %>
+     <% end %>
  </div>
