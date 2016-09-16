@@ -93,13 +93,19 @@ class Conversation < ApplicationRecord
     [initiator, recipient]
   end
 
+  def users_except(this_one)
+    that_one = users
+    that_one.delete(this_one)
+    that_one.first
+  end
+
   # Add a new message to the conversation
   # @param from [User.id] person sending the message
   # @param body [Text] message text being sent
   def add_message(from, body)
     message = Message.new(
       sender: from,
-      recipient: users.delete(from),
+      recipient: users_except(from),
       body: body
     )
     messages << message
