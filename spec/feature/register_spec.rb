@@ -21,9 +21,9 @@ feature 'Registering' do
     expect(page).to have_content 'Welcome! You have signed up successfully.'
   end
 
-  scenario 'redirects to dashboard overview' do
+  scenario 'redirects to dashboard inbox' do
     register
-    expect(page).to have_current_path(dashboard_overview_path)
+    expect(page).to have_current_path(dashboard_inbox_path)
   end
 
   # # TODO figure out why the test below doesn't work, because

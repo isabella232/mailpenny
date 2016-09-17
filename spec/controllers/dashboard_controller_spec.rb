@@ -5,20 +5,6 @@ RSpec.describe DashboardController, type: :controller do
     sign_in create(:user)
   end
 
-  describe 'GET #overview' do
-    it 'returns http success' do
-      get :overview
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'GET #profile' do
-    it 'returns http success' do
-      get :profile
-      expect(response).to have_http_status(:success)
-    end
-  end
-
   describe 'GET #account' do
     it 'returns http success' do
       get :account
@@ -33,9 +19,9 @@ RSpec.describe DashboardController, type: :controller do
     end
   end
 
-  describe 'GET #messages' do
+  describe 'GET #inbox' do
     it 'returns http success' do
-      get :messages
+      get :inbox
       expect(response).to have_http_status(:success)
     end
   end
