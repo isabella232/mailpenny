@@ -108,5 +108,18 @@ RSpec.describe Conversation, type: :model, order: :defined do
       @conversation.opened_by_initiator
       expect(@conversation.read_by?(@alice)).to be true
     end
+
+    it 'should turn the status as closed when the conversation is closed' do
+      @conversation.close
+      expect(@conversation.open?).to be false
+    end
+
+    it 'should not accept new messages when the conversation is closed' do
+      expect { @conversation.add_message(@alice, 'this should not work') }.to raise_error 'Conversation is closed'
+    end
+
+    it 'should have two messages after adding a new message to a closed conversation fails' do
+      expect(@conversation.messages.count).to eq 2
+    end
   end
 end
