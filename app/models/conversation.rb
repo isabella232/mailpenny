@@ -106,20 +106,11 @@ class Conversation < ApplicationRecord
   # @param user [User] the user you want to check for
   # @return [Boolean] yes, or no
   def read_by?(user)
-    last_message_sent_at = messages.last.created_at
-    last_message_sent_by = messages.last.sender
-    # if the last message was sent by the other guy
-    unless last_message_sent_by == user
-      # is this guy the initiator?
-      if initiator == user
-        return false if last_opened_by_initiator_at.nil?
-        return false if last_opened_by_initiator_at < last_message_sent_at
-      else
-        return false if last_opened_by_recipient_at.nil?
-        return false if last_opened_by_recipient_at < last_message_sent_at
-      end
-
-    end
+    return true if messages.last.sender == user
+    return false if initiator == user &&
+                    initiator_opened_conversation_since_last_message_was_sent? ||
+                    recipient == user &&
+                    recipient_opened_conversation_since_last_message_was_sent?
     true
   end
 
@@ -129,7 +120,7 @@ class Conversation < ApplicationRecord
     save
   end
 
-  # this conversation has been opened by the receipient
+  # this conversation has been opened by the recipient
   def opened_by_recipient
     self.last_opened_by_recipient_at = Time.zone.now
     save
@@ -154,6 +145,20 @@ class Conversation < ApplicationRecord
   def set_defaults
     self.status = 'pending'
     self.open = true
+  end
+
+  # The method name is descriptive enough
+  # @return [Boolean]
+  def initiator_opened_conversation_since_last_message_was_sent?
+    last_opened_by_initiator_at.nil? ||
+      last_opened_by_initiator_at < messages.last.created_at
+  end
+
+  # The method name is descriptive enough
+  # @return [Boolean]
+  def recipient_opened_conversation_since_last_message_was_sent?
+    last_opened_by_recipient_at.nil? ||
+      last_opened_by_recipient_at < messages.last.created_at
   end
 
   # Initiate the escrow transaction by transfering money into the escrow account
