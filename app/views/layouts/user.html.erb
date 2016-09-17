@@ -1,15 +1,6 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-<title>Mailpenny</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-<meta charset="utf-8">
-<%= render 'favicon' %>
-<%= csrf_meta_tags %>
-<%= yield :meta_data %>
-<%= stylesheet_link_tag 'application', media: 'all' %></head>
-
+<%= content_for :body do %>
 <div class="blue-bg">
-<%= yield %>
+    <%= yield %>
 </div>
-</html>
+<% end %>
+<%= render template: 'layouts/application' %>
