@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ConversationsPolicy do
+RSpec.describe ConversationPolicy do
 
   let(:user) { User.new }
 
