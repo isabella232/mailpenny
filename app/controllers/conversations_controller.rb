@@ -1,4 +1,5 @@
 class ConversationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_conversation, only: [:show, :edit, :update, :destroy]
   layout 'dashboard'
 
@@ -11,6 +12,8 @@ class ConversationsController < ApplicationController
   # GET /conversations/1
   # GET /conversations/1.json
   def show
+    # make sure the user is authorized to view this conversation
+    authorize @conversation
     # Build a new message for this conversation
     @message = Message.new
     @message.conversation = @conversation
