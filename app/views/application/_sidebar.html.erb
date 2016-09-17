@@ -7,7 +7,7 @@
         </li>
         <li role="presentation" class="<%= 'active' if action_name == 'inbox' %>">
             <%= link_to dashboard_inbox_path do %>
-            <i class="fa fa-envelope-o"></i>&nbsp;Inbox&nbsp;<span>(2)</span>
+            <i class="fa fa-envelope-o"></i>&nbsp;Inbox<span><%= " (#{unread_count_for(current_user)})" unless unread_count_for(current_user).zero? %></span>
             <% end %>
         </li>
         <li role="presentation" class="<%= 'active' if action_name == 'billing' %>">
