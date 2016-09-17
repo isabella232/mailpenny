@@ -1,20 +1,21 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
 #
 # ### Columns
 #
-# Name                | Type               | Attributes
-# ------------------- | ------------------ | ---------------------------
-# **`id`**            | `integer`          | `not null, primary key`
-# **`subject`**       | `string`           |
-# **`initiator_id`**  | `integer`          |
-# **`recipient_id`**  | `integer`          |
-# **`status`**        | `integer`          |
-# **`created_at`**    | `datetime`         | `not null`
-# **`updated_at`**    | `datetime`         | `not null`
-# **`open`**          | `boolean`          |
+# Name                               | Type               | Attributes
+# ---------------------------------- | ------------------ | ---------------------------
+# **`id`**                           | `integer`          | `not null, primary key`
+# **`subject`**                      | `string`           |
+# **`initiator_id`**                 | `integer`          |
+# **`recipient_id`**                 | `integer`          |
+# **`status`**                       | `integer`          |
+# **`created_at`**                   | `datetime`         | `not null`
+# **`updated_at`**                   | `datetime`         | `not null`
+# **`open`**                         | `boolean`          |
+# **`last_opened_by_initiator_at`**  | `datetime`         |
+# **`last_opened_by_recipient_at`**  | `datetime`         |
 #
 # ### Indexes
 #
@@ -30,7 +31,6 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 # A conversation groups several messages together
 class Conversation < ApplicationRecord

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914111240) do
+ActiveRecord::Schema.define(version: 20160917053355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 20160914111240) do
     t.integer  "initiator_id"
     t.integer  "recipient_id"
     t.integer  "status"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "open"
+    t.datetime "last_opened_by_initiator_at"
+    t.datetime "last_opened_by_recipient_at"
     t.index ["initiator_id"], name: "index_conversations_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
   end
