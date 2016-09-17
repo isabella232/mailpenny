@@ -116,5 +116,4 @@ class User < ApplicationRecord
     build_profile
     true
   end
-
 end
