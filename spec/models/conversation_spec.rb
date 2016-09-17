@@ -73,5 +73,36 @@ RSpec.describe Conversation, type: :model, order: :defined do
     it 'should be recieved by @bob' do
       expect(@conversation.recipient).to eq @bob
     end
+
+    it 'should be read by @alice' do
+      expect(@conversation.read_by?(@alice)).to be true
+    end
+
+    it 'should not be read by @bob' do
+      expect(@conversation.read_by?(@bob)).to be false
+    end
+
+    it 'should be read by @bob when bob reads it' do
+      @conversation.opened_by_recipient
+      expect(@conversation.read_by?(@bob)).to be true
+    end
+
+    it 'should have two messages when bob sends a new message' do
+      @conversation.add_message(@bob, 'This is my second message')
+      expect(@conversation.messages.count).to eq 2
+    end
+
+    it 'should be read by bob after he sends a message' do
+      expect(@conversation.read_by?(@bob)).to be true
+    end
+
+    it 'should not be read by @alice after @bob sends the second message' do
+      expect(@conversation.read_by?(@alice)).to be false
+    end
+
+    it 'should be read by @alice after she opens the second message @bob sent' do
+      @conversation.opened_by_initiator
+      expect(@conversation.read_by?(@alice)).to be true
+    end
   end
 end
