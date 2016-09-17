@@ -9,6 +9,7 @@ class DashboardController < ApplicationController
   end
 
   def inbox
-    @conversations = current_user.conversations.sort{ |c| c.messages.last.created_at }.reverse
+    # conversations for this user latest first
+    @conversations = current_user.conversations.sort_by { |c| c.messages.last.created_at }.reverse
   end
 end
