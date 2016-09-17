@@ -84,6 +84,7 @@ group :development do
   gem 'yard'
   gem 'kramdown'
   gem 'rails_real_favicon'
+  gem 'web-console'
 end
 
 group :production do
