@@ -1,13 +1,13 @@
-<div class="chat-box">
+<div class="conversation">
      <div class="header">
-         Narayan Prusty
+         <%= @conversation.users_except(current_user).username %>
      </div>
 
-     <div id="messages" class="messages">
+     <div class="messages">
          <ul>
            <% @conversation.messages.each do |message| %>
              <li>
-                 <span class="<%= message.sender == current_user ? 'right' : 'left' %>"><%= message.body %></span>
+                 <span class="message <%= message.sender == current_user ? 'right' : 'left' %>"><%= message.body %></span>
                  <div class="clear"></div>
              </li>
              <% end %>
@@ -16,13 +16,12 @@
      </div>
 
      <div class="input-box">
-         <textarea placeholder="Enter message"></textarea>
-     </div>
      <%= form_for @message do |f| %>
      <%= fields_for :conversation do |ff| %>
         <%= ff.hidden_field :id %>
      <% end %>
        <%= f.text_field :body, class: "form-control" %>
-       <%= f.button 'Submit' %>
+       <%= f.button 'Send' %>
      <% end %>
+   </div>
  </div>
