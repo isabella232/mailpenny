@@ -31,20 +31,27 @@
             <% @conversations.each do |conversation| %>
             <li>
                 <%= link_to conversation_path(conversation.id) do %>
-                    <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>
-                    <span class="conversation-name"><%= conversation.users_except(current_user).username %></span><br>
-                      <div class="pull-right">
-                          <span class="green-envelope">
-                              <i class="fa fa-envelope"></i>
-                          </span>
-                          <%= conversation.messages.last.created_at %>
-                      </div>
-                    <div class="conversation-subject"><%= (conversation.subject.length > 8) ? "#{conversation.subject[0,8]}..." : conversation.subject %></div>
-                </a>
-            </li>
-            <% end %>
-            <% end %>
-        </ul>
-    </div>
-    <!--emails-->
+                <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>
+                <span class="conversation-name"><%= conversation.users_except(current_user).username %></span><br>
+                <div class="pull-right">
+                    <% unless conversation.read_by? current_user %>
+                    <span class="green-envelope">
+                        <i class="fa fa-envelope"></i>
+                    </span>
+                    <% end %>
+                    <%= conversation.messages.last.created_at %>
+                </div>
+                <div class="conversation-subject">
+                    <%= (conversation.subject.length > 8) ? "#{conversation.subject[0,8]}..." : conversation.subject %>
+                </div>
+                <div class="conversation-prewivew">
+                    <%= (conversation.messages.last.body.length > 30) ? "#{conversation.messages.last.body[0,30]}..." : conversation.messages.last.body %>
+                </div>
+            </a>
+        </li>
+        <% end %>
+        <% end %>
+    </ul>
+</div>
+<!--emails-->
 </div>
