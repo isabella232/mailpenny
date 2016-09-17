@@ -14,6 +14,10 @@ class ConversationsController < ApplicationController
   def show
     # make sure the user is authorized to view this conversation
     authorize @conversation
+
+    # update the last accessed times
+    @conversation.initiator == current_user ? @conversation.opened_by_initiator : @conversation.opened_by_recipient
+
     # Build a new message for this conversation
     @message = Message.new
     @message.conversation = @conversation
