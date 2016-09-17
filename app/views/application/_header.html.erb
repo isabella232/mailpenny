@@ -23,7 +23,9 @@
                 </li>
                 <li>
                     <%= link_to(dashboard_inbox_path) do %>
-                    <span class="msg">2</span>
+                    <% unless unread_count_for(current_user).zero? %>
+                    <span class="msg"><%= unread_count_for(current_user) %></span>
+                    <% end %>
                     <i class="fa fa-envelope-o"></i>
                     <% end %>
                 </li>
@@ -45,7 +47,9 @@
                         <%= link_to 'Account', dashboard_account_path %>
                     </li>
                     <li>
-                        <%= link_to 'Inbox', dashboard_inbox_path %>
+                        <%= link_to dashboard_inbox_path do %>
+                        Inbox<%= " (#{unread_count_for(current_user)})" unless unread_count_for(current_user).zero? %>
+                        <% end %>
                     </li>
                     <li>
                         <%= link_to 'Billing', dashboard_billing_path %>
