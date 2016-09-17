@@ -11,12 +11,4 @@ class DashboardController < ApplicationController
   def inbox
     @conversations = current_user.conversations
   end
-
-  def conversation
-    conversation_id = params[:id]
-    @conversation = Conversation.find(conversation_id)
-    @message = Message.new(
-      conversation: @conversation
-    )
-  end
 end
