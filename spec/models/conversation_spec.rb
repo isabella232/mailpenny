@@ -92,6 +92,10 @@ RSpec.describe Conversation, type: :model, order: :defined do
       expect(@conversation.messages.count).to eq 2
     end
 
+    it 'should have a status of completed when bob sends the first reply' do
+      expect(@conversation.status).to eq 'completed'
+    end
+
     it 'should be read by bob after he sends a message' do
       expect(@conversation.read_by?(@bob)).to be true
     end
