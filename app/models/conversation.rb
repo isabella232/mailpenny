@@ -93,14 +93,50 @@ class Conversation < ApplicationRecord
     [initiator, recipient]
   end
 
+  # Returns the other user in this conversations
+  # @param this_one [User] the user you don't want to see
+  # @return [User] the other user
   def users_except(this_one)
     that_one = users
     that_one.delete(this_one)
     that_one.first
   end
 
+  # Has this conversation been read by this user?
+  # @param user [User] the user you want to check for
+  # @return [Boolean] yes, or no
+  def read_by?(user)
+    last_message_sent_at = messages.last.created_at
+    last_message_sent_by = messages.last.sender
+    # if the last message was sent by the other guy
+    unless last_message_sent_by == user
+      # is this guy the initiator?
+      if initiator == user
+        return false if last_opened_by_initiator_at.nil?
+        return false if last_opened_by_initiator_at < last_message_sent_at
+      else
+        return false if last_opened_by_recipient_at.nil?
+        return false if last_opened_by_recipient_at < last_message_sent_at
+      end
+
+    end
+    true
+  end
+
+  # this conversation has been opened by the intiator
+  def opened_by_initiator
+    self.last_opened_by_initiator_at = Time.zone.now
+    save
+  end
+
+  # this conversation has been opened by the receipient
+  def opened_by_recipient
+    self.last_opened_by_recipient_at = Time.zone.now
+    save
+  end
+
   # Add a new message to the conversation
-  # @param from [User.id] person sending the message
+  # @param from [User] person sending the message
   # @param body [Text] message text being sent
   def add_message(from, body)
     message = Message.new(
