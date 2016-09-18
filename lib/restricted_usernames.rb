@@ -116,6 +116,7 @@ class RestricedUsernamesIdentifier
       ecommerce
       forum
       forums
+      founder
       founders
       faq
       favorite
