@@ -1,90 +1,39 @@
-<!-- =========== -->
-<!-- Header Area -->
-<!-- =========== -->
-<div class="container">
-		<div class="row">
-				<header class="header col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="logo pull-left"><a href="index.html"><%= image_tag 'logo-white.png' %></a></div>
-				<div class="back-to-mailman pull-right"><a href="#"><span>Back to mailman.com</span> <i class="fa fa-long-arrow-right"></i></a></div>
-						<!--header-->
-				</header>
-<!-- =========== -->
-<!--  Body Area  -->
-<!-- =========== -->
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddingbox">
-				<div class="sms-verification col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				 <div class="row">
-				 <h1>Get Started Absolutely FREE<span>NO CREDIT CARD NEEDED</span></h1>
-				 <div class="white-box getstarted-box">
-				 <div class="loginbox pull-left col-xs-12">
-				  <a href="#" class="pull-left">Login</a>
-				  <a href="#" class="pull-right">Create <br>your Account</a>
-					</div>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<h1>Get Started Absolutely FREE<span>NO CREDIT CARD NEEDED</span>
+</h1>
+<div class="white-box getstarted-box">
+	<div class="loginbox pull-left col-xs-12">
+		<a href="#" class="pull-left">Login</a>
+		<a href="#" class="pull-right">Create
+			<br>your Account</a>
+	</div>
+	<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-            <%= f.label :username %>
-            <%= f.text_field :username, autofocus: true %>
+	<%= f.label :username %>
+	<%= f.text_field :username, autofocus: true %>
 
-          <div class="field">
-            <%= f.label :email %>
-            <%= f.email_field :email %>
-          </div>
+	<div class="field">
+		<%= f.label :email %>
+		<%= f.email_field :email %>
+	</div>
 
-          <div class="field">
-            <%= f.label :password %>
-            <%= f.password_field :password, autocomplete: "off" %>
-            <!-- <%  if @minimum_password_length %>
+	<div class="field">
+		<%= f.label :password %>
+		<%= f.password_field :password, autocomplete: "off" %>
+		<!-- <%  if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br /> -->
-          </div>
+	</div>
 
-          <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
-          <%= f.submit "Sign Up", class: 'red-bg btn btn-primary btn1' %>
-          <% end %>
-					<p>By signing up you agree to our<br> <%= link_to "Terms of Service", "#"%> and <%= link_to "Privacy Policy", "#" %></p>
-          <%= render "users/shared/links" %>
-				 <!--white-box-->
-				 </div>
-				 <!--row-->
-				 </div>
-				<!--sms-verification-->
-				</div>
-				<!--col-->
-				</div>
-				<!--row-->
-		</div>
-		<!--container-->
-</div>
-<!-- =========== -->
-<!-- Footer Area -->
-<!-- =========== -->
-<div class="footer col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="container">
- <div class="row">
-  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 sitemap">
-		<ul>
-		 <li><a href="#">About</a></li>
-		 <li><a href="#">Security</a></li>
-		 <li><a href="#">How it works</a></li>
-		 <li><a href="#">Privacy Policy</a></li>
-		 <li><a href="#">Questions</a></li>
-		 <li><a href="#">Terms &amp; Services</a></li>
-		</ul>
-   <!--sitemap-->
-   </div>
-	<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 sitemap2">
-		<ul>
-		 <li><a href="#">Fresh updates & News:</a></li>
-		 <li><a href="#"><i class="fa fa-twitter"></i> Follow@mailman</a></li>
-		</ul>
-   <!--sitemap-->
-   </div>
-  <!--row-->
-  </div>
- <!--container-->
- </div>
-<!--footer-->
+	<div class="field">
+		<%= f.label :password_confirmation %>
+		<%= f.password_field :password_confirmation, autocomplete: "off" %>
+	</div>
+	<%= f.submit "Sign Up", class: 'red-bg btn btn-primary btn1' %>
+	<% end %>
+	<p>By signing up you agree to our<br>
+		<%= link_to "Terms of Service", "#"%>
+		and
+		<%= link_to "Privacy Policy", "#" %></p>
+	<%= render "users/shared/links" %>
+	<!--white-box-->
 </div>
