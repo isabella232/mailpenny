@@ -170,6 +170,8 @@ class RestricedUsernamesIdentifier
       list
       lists
       mail
+      mailpenny
+      mailman
       mail1
       mail2
       mail3
