@@ -1,3 +1,4 @@
+
 (function(i, s, o, g, r, a, m) {
     i['GoogleAnalyticsObject'] = r;
     i[r] = i[r] || function() {
@@ -12,3 +13,8 @@
 
 ga('create', 'UA-74822546-3', 'auto');
 ga('send', 'pageview');
+
+var userId = $('div.hidden-user-information').data('user-id');
+if (userId) {
+  ga('set', 'userId', userId);
+}
