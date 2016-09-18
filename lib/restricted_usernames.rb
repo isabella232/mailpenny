@@ -332,6 +332,7 @@ class RestricedUsernamesIdentifier
       win
       ww
       www
+      www0
       www1
       www2
       www3
@@ -339,6 +340,8 @@ class RestricedUsernamesIdentifier
       www5
       www6
       www7
+      www8
+      www9
       wwww
       wws
       wwws
