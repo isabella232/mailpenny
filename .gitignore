@@ -30,3 +30,6 @@
 
 # Avatars uploaded in development
 /public/tmp
+
+# Coverage information
+/coverage
