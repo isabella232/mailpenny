@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919100348) do
+ActiveRecord::Schema.define(version: 20160919100946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,19 +36,6 @@ ActiveRecord::Schema.define(version: 20160919100348) do
     t.datetime "last_opened_by_recipient_at"
     t.index ["initiator_id"], name: "index_conversations_on_initiator_id", using: :btree
     t.index ["recipient_id"], name: "index_conversations_on_recipient_id", using: :btree
-  end
-
-  create_table "escrow_transactions", force: :cascade do |t|
-    t.integer  "from_id"
-    t.integer  "to_id"
-    t.integer  "state"
-    t.decimal  "amount"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "conversation_id"
-    t.index ["conversation_id"], name: "index_escrow_transactions_on_conversation_id", using: :btree
-    t.index ["from_id"], name: "index_escrow_transactions_on_from_id", using: :btree
-    t.index ["to_id"], name: "index_escrow_transactions_on_to_id", using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -106,19 +93,6 @@ ActiveRecord::Schema.define(version: 20160919100348) do
     t.index ["user_id"], name: "index_social_media_accounts_on_user_id", using: :btree
   end
 
-  create_table "transactions", force: :cascade do |t|
-    t.integer  "from_id"
-    t.integer  "to_id"
-    t.decimal  "amount",                default: "0.0"
-    t.integer  "transaction_type",                      null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "escrow_transaction_id"
-    t.index ["escrow_transaction_id"], name: "index_transactions_on_escrow_transaction_id", using: :btree
-    t.index ["from_id"], name: "index_transactions_on_from_id", using: :btree
-    t.index ["to_id"], name: "index_transactions_on_to_id", using: :btree
-  end
-
   create_table "transfers", force: :cascade do |t|
     t.integer  "from_id"
     t.integer  "to_id"
@@ -161,15 +135,10 @@ ActiveRecord::Schema.define(version: 20160919100348) do
   add_foreign_key "accounts", "users"
   add_foreign_key "conversations", "users", column: "initiator_id"
   add_foreign_key "conversations", "users", column: "recipient_id"
-  add_foreign_key "escrow_transactions", "accounts", column: "from_id"
-  add_foreign_key "escrow_transactions", "accounts", column: "to_id"
   add_foreign_key "messages", "conversations"
   add_foreign_key "messages", "users", column: "recipient_id"
   add_foreign_key "messages", "users", column: "sender_id"
   add_foreign_key "phone_numbers", "users"
   add_foreign_key "profiles", "users"
   add_foreign_key "social_media_accounts", "users"
-  add_foreign_key "transactions", "accounts", column: "from_id"
-  add_foreign_key "transactions", "accounts", column: "to_id"
-  add_foreign_key "transactions", "escrow_transactions"
 end
