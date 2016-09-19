@@ -47,7 +47,7 @@ RSpec.describe Account, type: :model do
     expect(account.valid?).to be false
   end
 
-  context 'when db has been seeded' do
+  context 'DB must be seeded and' do
     it 'only one withdrawal account must exist' do
       withdrawal_accounts = Account.where(account_type: 'withdrawal')
       expect(withdrawal_accounts.count).to eq(1)
