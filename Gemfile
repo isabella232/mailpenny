@@ -50,10 +50,13 @@ group :development, :test do
   gem 'byebug', platform: :mri
   # rspec for testing
   gem 'rspec-rails'
+  # Style guide to make developer lives hell
+  gem 'rubocop', require: false
   # guard is nice, with all the extras
   gem 'guard'
   gem 'guard-livereload'
   gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
   # blackbox testing by faking user interaction
   gem 'capybara'
   # poltergeist is a capybara driver to interface with phantomjs
@@ -64,12 +67,11 @@ group :development, :test do
   gem 'faker'
   # load environment variables from .env
   gem 'dotenv-rails'
+  # code coverage
+  gem 'simplecov', require: false
 end
 
 group :development do
-  # Style guide to make developer lives hell
-  gem 'rubocop', require: false
-  gem 'guard-rubocop'
   # Access an IRB console on exception pages or by using <%= console %> anywhere
   # in the code.
   gem 'web-console'
@@ -84,7 +86,6 @@ group :development do
   gem 'yard'
   gem 'kramdown'
   gem 'rails_real_favicon'
-  gem 'web-console'
 end
 
 group :production do
@@ -96,7 +97,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # bower components needed
-
 gem 'font-awesome-rails' # the asset pipeline wasn't working properly
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
