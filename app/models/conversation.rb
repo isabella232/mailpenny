@@ -163,10 +163,9 @@ class Conversation < ApplicationRecord
 
     # Initiate the escrow transaction by transfering money into the escrow account
     def create_escrow_account
-      self.account = Account.new(
+      self.account = Account.create(
         account_type: 'escrow'
       )
-      Rails.logger.debug { 'created escrow tranasction' }
       true
     end
 end

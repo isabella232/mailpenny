@@ -34,6 +34,7 @@ class Account < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :conversation, required: false
   has_many :transfers
+  after_create :check_if_escrow_and_set_defaults
 
   enum account_type: {
     user: 1,
@@ -111,6 +112,11 @@ class Account < ApplicationRecord
     )
   end
 
+  def transfers
+    t = Transfer.arel_table
+    Transfer.where(t[:from_id].eq(id).or(t[:to_id].eq(id)))
+  end
+
   ## increments and decrements to the balance
 
   # Increase balance by
@@ -147,6 +153,16 @@ class Account < ApplicationRecord
           from.decrease_balance(amount)
           to.increase_balance(amount)
         end
+      end
+    end
+
+    # Checks if this is an escrow account and sets up the escrow
+    def check_if_escrow_and_set_defaults
+      # just return true if it isn't an escrow
+      if account_type == 'escrow'
+        rate = conversation.recipient.profile.rate
+        initiator_account = conversation.initiator.account
+        create_transfer 'escrow', rate, initiator_account, self
       end
     end
 

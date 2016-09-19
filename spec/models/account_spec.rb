@@ -68,8 +68,10 @@ RSpec.describe Account, type: :model do
     context 'when a conversation will be completed it', order: :defined do
       before do
         @alice = create :user
+        @alice.account.deposit(500)
         @alice_opening_balance = @alice.account.balance
         @bob = create :user
+        @bob.profile = build :profile
         @bob_opening_balance = @alice.account.balance
         @conversation = @alice.send_message(@bob, 'subject', 'message body')
         @escrow_account = @conversation.account
@@ -81,11 +83,7 @@ RSpec.describe Account, type: :model do
       end
 
       it 'should have an opening transfer from the get go' do
-        expect(@escrow_account.transfers).to eq 1
-      end
-
-      it 'should have an opening transfer from the get go' do
-        expect(@escrow_account.transfers).to eq 1
+        expect(@escrow_account.transfers.count).to eq 1
       end
 
       it 'should have a balance equal to the rate of the recipient' do
