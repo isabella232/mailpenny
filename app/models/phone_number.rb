@@ -68,18 +68,18 @@ class PhoneNumber < ApplicationRecord
 
   private
 
-  # Register a User on Authy and save the result to the `authy_id` attribute
-  # @return [String] A unique Authy id for the phone number
-  def register_authy_user
-    authy = Authy::API.register_user(
-      email: user.email,
-      cellphone: phone_number,
-      country_code: country_code
-    )
-    if authy.ok?
-      self.authy_id = authy.id
-    else
-      authy.errors
+    # Register a User on Authy and save the result to the `authy_id` attribute
+    # @return [String] A unique Authy id for the phone number
+    def register_authy_user
+      authy = Authy::API.register_user(
+        email: user.email,
+        cellphone: phone_number,
+        country_code: country_code
+      )
+      if authy.ok?
+        self.authy_id = authy.id
+      else
+        authy.errors
+      end
     end
-  end
 end

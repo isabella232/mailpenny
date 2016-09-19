@@ -78,23 +78,23 @@ class EscrowTransaction < ApplicationRecord
 
   private
 
-  # set default values
-  def set_defaults
-    self.state = 'pending'
-  end
+    # set default values
+    def set_defaults
+      self.state = 'pending'
+    end
 
-  # determine the recipient's fee and set that as the amount
-  def determine_amount
-    self.amount = to.user.profile.rate
-  end
+    # determine the recipient's fee and set that as the amount
+    def determine_amount
+      self.amount = to.user.profile.rate
+    end
 
-  # create the escrow transaction
-  def create_escrow_transaction
-    to.transfer(
-      amount,
-      to_id,
-      'escrow',
-      id
-    )
-  end
+    # create the escrow transaction
+    def create_escrow_transaction
+      to.transfer(
+        amount,
+        to_id,
+        'escrow',
+        id
+      )
+    end
 end

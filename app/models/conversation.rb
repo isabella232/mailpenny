@@ -141,36 +141,36 @@ class Conversation < ApplicationRecord
 
   private
 
-  # set the defaults for the conversation
-  def set_defaults
-    self.status = 'pending'
-    self.open = true
-  end
+    # set the defaults for the conversation
+    def set_defaults
+      self.status = 'pending'
+      self.open = true
+    end
 
-  # The method name is descriptive enough
-  # @return [Boolean]
-  def initiator_opened_conversation_since_last_message_was_sent?
-    last_opened_by_initiator_at.nil? ||
-      last_opened_by_initiator_at < messages.last.created_at
-  end
+    # The method name is descriptive enough
+    # @return [Boolean]
+    def initiator_opened_conversation_since_last_message_was_sent?
+      last_opened_by_initiator_at.nil? ||
+        last_opened_by_initiator_at < messages.last.created_at
+    end
 
-  # The method name is descriptive enough
-  # @return [Boolean]
-  def recipient_opened_conversation_since_last_message_was_sent?
-    last_opened_by_recipient_at.nil? ||
-      last_opened_by_recipient_at < messages.last.created_at
-  end
+    # The method name is descriptive enough
+    # @return [Boolean]
+    def recipient_opened_conversation_since_last_message_was_sent?
+      last_opened_by_recipient_at.nil? ||
+        last_opened_by_recipient_at < messages.last.created_at
+    end
 
-  # Initiate the escrow transaction by transfering money into the escrow account
-  def create_escrow_transaction
-    # TODO: uncomment this after conversations work
-    # fee = User.find(recipient_id).profile.rate
-    # self.escrow_transaction = EscrowTransaction.new(
-    #   from_id: initiator,
-    #   to_id: recipient,
-    #   amount: fee
-    # )
-    Rails.logger.debug { 'created escrow tranasction' }
-    true
-  end
+    # Initiate the escrow transaction by transfering money into the escrow account
+    def create_escrow_transaction
+      # TODO: uncomment this after conversations work
+      # fee = User.find(recipient_id).profile.rate
+      # self.escrow_transaction = EscrowTransaction.new(
+      #   from_id: initiator,
+      #   to_id: recipient,
+      #   amount: fee
+      # )
+      Rails.logger.debug { 'created escrow tranasction' }
+      true
+    end
 end

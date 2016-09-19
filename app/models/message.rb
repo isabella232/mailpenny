@@ -47,22 +47,22 @@ class Message < ApplicationRecord
 
   private
 
-  # check if the conversation is open and can accept new messages
-  def proceed_if_conversation_is_open
-    raise 'Conversation is closed' if conversation.open? == false
-  end
-
-  # updates the conversation status depending on the current message
-  def update_conversation_status
-    if conversation.recipient_id == sender_id && # original recipient was the sender
-       conversation.messages_by_recipient.count.zero? && # this is his first message
-       conversation.status != 'expired' # the conversation is not expired
-      conversation.complete
+    # check if the conversation is open and can accept new messages
+    def proceed_if_conversation_is_open
+      raise 'Conversation is closed' if conversation.open? == false
     end
-  end
 
-  # set the defaults of the message based on the conversation
-  def set_defaults
-    self.recipient = conversation.users_except(sender)
-  end
+    # updates the conversation status depending on the current message
+    def update_conversation_status
+      if conversation.recipient_id == sender_id && # original recipient was the sender
+         conversation.messages_by_recipient.count.zero? && # this is his first message
+         conversation.status != 'expired' # the conversation is not expired
+        conversation.complete
+      end
+    end
+
+    # set the defaults of the message based on the conversation
+    def set_defaults
+      self.recipient = conversation.users_except(sender)
+    end
 end

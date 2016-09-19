@@ -54,20 +54,20 @@ class SocialMediaAccount < ApplicationRecord
 
   private
 
-  def set_defaults
-    # sanitize the username
-    self.username = username.strip
+    def set_defaults
+      # sanitize the username
+      self.username = username.strip
 
-    case platform
-    when 'twitter'
-      self.url = "https://twitter.com/#{username}"
-    when 'facebook'
-      self.url = "https://facebook.com/#{username}"
+      case platform
+      when 'twitter'
+        self.url = "https://twitter.com/#{username}"
+      when 'facebook'
+        self.url = "https://facebook.com/#{username}"
+      end
     end
-  end
 
-  # hide the setter for confirmed
-  def confirmed=(value)
-    self[:confirmed] = value
-  end
+    # hide the setter for confirmed
+    def confirmed=(value)
+      self[:confirmed] = value
+    end
 end

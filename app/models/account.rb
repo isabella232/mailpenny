@@ -157,19 +157,19 @@ class Account < ApplicationRecord
 
   private
 
-  # Create a transaction with the following arguments
-  # @param tx [Hash] Contains `:transaction_type`, `:amount`, `:from_id`, and `:to_id`
-  def create_transaction(tx)
-    Transaction.transaction do
-      tx.slice! :transaction_type, :amount, :from_id, :to_id
-      _transaction = Transaction.create tx
+    # Create a transaction with the following arguments
+    # @param tx [Hash] Contains `:transaction_type`, `:amount`, `:from_id`, and `:to_id`
+    def create_transaction(tx)
+      Transaction.transaction do
+        tx.slice! :transaction_type, :amount, :from_id, :to_id
+        _transaction = Transaction.create tx
+      end
     end
-  end
 
-  # The setter for balance, moved to private because it should never be directly
-  #   set.
-  # @param amount [Decimal]
-  def balance=(amount)
-    self[:balance] = amount
-  end
+    # The setter for balance, moved to private because it should never be directly
+    #   set.
+    # @param amount [Decimal]
+    def balance=(amount)
+      self[:balance] = amount
+    end
 end

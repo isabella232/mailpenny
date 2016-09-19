@@ -19,22 +19,22 @@ class ProfilesController < ApplicationController
 
   private
 
-  def set_profile
-    @profile = Profile.find(params[:id])
-  end
+    def set_profile
+      @profile = Profile.find(params[:id])
+    end
 
-  def profile_params
-    params
-      .require(:profile)
-      .permit(
-        :avatar,
-        :name,
-        :bio,
-        :rate,
-        :work_company,
-        :work_title,
-        :location,
-        :twitter_username
-      )
-  end
+    def profile_params
+      params
+        .require(:profile)
+        .permit(
+          :avatar,
+          :name,
+          :bio,
+          :rate,
+          :work_company,
+          :work_title,
+          :location,
+          :twitter_username
+        )
+    end
 end

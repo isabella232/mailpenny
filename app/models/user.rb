@@ -107,13 +107,13 @@ class User < ApplicationRecord
 
   private
 
-  def build_default_account
-    build_account account_type: 'user'
-    true
-  end
+    def build_default_account
+      build_account account_type: 'user'
+      true
+    end
 
-  def build_default_profile
-    build_profile
-    true
-  end
+    def build_default_profile
+      build_profile
+      true
+    end
 end
