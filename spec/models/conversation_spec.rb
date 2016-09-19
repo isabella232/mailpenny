@@ -44,6 +44,10 @@ RSpec.describe Conversation, type: :model, order: :defined do
       @conversation = @alice.send_message(@bob, @subject, @body)
     end
 
+    it 'should automatically create an escrow account' do
+      expect(@conversation.account).to_not be nil
+    end
+
     it 'should have a default status of pending' do
       expect(@conversation.status).to eq 'pending'
     end
