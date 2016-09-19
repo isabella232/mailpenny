@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919100946) do
+ActiveRecord::Schema.define(version: 20160919102739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.decimal  "balance",      default: "0.0"
-    t.integer  "account_type",                 null: false
+    t.decimal  "balance",         default: "0.0"
+    t.integer  "account_type",                    null: false
     t.integer  "user_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "conversation_id"
+    t.index ["conversation_id"], name: "index_accounts_on_conversation_id", using: :btree
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
   end
 
@@ -132,6 +134,7 @@ ActiveRecord::Schema.define(version: 20160919100946) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  add_foreign_key "accounts", "conversations"
   add_foreign_key "accounts", "users"
   add_foreign_key "conversations", "users", column: "initiator_id"
   add_foreign_key "conversations", "users", column: "recipient_id"
