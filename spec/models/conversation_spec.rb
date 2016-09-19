@@ -36,8 +36,6 @@ require 'rails_helper'
 
 RSpec.describe Conversation, type: :model, order: :defined do
   context 'by default' do
-    self.use_transactional_tests = false
-
     before :context do
       @alice = create :user
       @bob = create :user
