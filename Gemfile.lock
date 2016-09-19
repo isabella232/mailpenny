@@ -54,7 +54,6 @@ GEM
     aws-sdk-resources (2.6.0)
       aws-sdk-core (= 2.6.0)
     bcrypt (3.1.11)
-    bower-rails (0.10.0)
     buftok (0.2.0)
     builder (3.2.2)
     byebug (9.0.5)
@@ -359,7 +358,6 @@ DEPENDENCIES
   annotate
   authy
   aws-sdk
-  bower-rails
   bundler (>= 1.8.4)
   byebug
   capybara
@@ -407,4 +405,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
