@@ -36,11 +36,11 @@
 class Conversation < ApplicationRecord
   belongs_to :initiator, foreign_key: :initiator_id, class_name: 'User'
   belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
-  has_one :escrow_transaction
+  has_one :account
   has_many :messages
 
   before_create :set_defaults
-  before_create :create_escrow_transaction
+  before_create :create_escrow_account
 
   validates :subject,
             presence: true
@@ -162,7 +162,7 @@ class Conversation < ApplicationRecord
     end
 
     # Initiate the escrow transaction by transfering money into the escrow account
-    def create_escrow_transaction
+    def create_escrow_account
       # TODO: uncomment this after conversations work
       # fee = User.find(recipient_id).profile.rate
       # self.escrow_transaction = EscrowTransaction.new(
