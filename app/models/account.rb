@@ -26,11 +26,11 @@
 #
 # <!-- END GENERATED ANNOTATION -->
 
-# Accounting entities that can make transactions and hold balances
+# Accounting entities that can make transfers and hold balances
 class Account < ApplicationRecord
   belongs_to :user, required: false
   belongs_to :conversation, required: false
-  has_many :transactions
+  has_many :transfers
 
   enum account_type: {
     user: 1,
@@ -76,10 +76,10 @@ class Account < ApplicationRecord
     deposit_account.nil?
 
     Account.transaction do
-      create_transaction from_id: deposit_account,
-                         to_id: id,
-                         amount: amount,
-                         transaction_type: 'deposit'
+      create_transfer from_id: deposit_account,
+                      to_id: id,
+                      amount: amount,
+                      transfer_type: 'deposit'
       increase_balance amount
     end
   end
@@ -92,10 +92,10 @@ class Account < ApplicationRecord
     withdrawal_account.nil?
 
     Account.transaction do
-      create_transaction from_id: id,
-                         to_id: withdrawal_account,
-                         amount: amount,
-                         transaction_type: 'withdrawal'
+      create_transfer from_id: id,
+                      to_id: withdrawal_account,
+                      amount: amount,
+                      transfer_type: 'withdrawal'
       decrease_balance amount
     end
   end
@@ -103,7 +103,7 @@ class Account < ApplicationRecord
   # Transfering money to another account
   # @param amount [Decimal] the amount being transfered
   # @param to [Account] the account being transfered to
-  # @param type [String] the type of transaction being made, i.e. escrow,
+  # @param type [String] the type of transfer being made, i.e. escrow,
   #   'payment', 'deposit', 'withdrawal', or 'fees'
   def transfer(amount, to, type)
     to_id = to.id
@@ -111,51 +111,51 @@ class Account < ApplicationRecord
       from_id: id,
       to_id: to_id,
       amount: amount,
-      transaction_type: type
+      transfer_type: type
     }
 
     Account.transaction do
-      create_transaction tx
+      create_transfer tx
       to.increase_balance amount
       decrease_balance amount
     end
   end
 
-  ## Transactions associated with the Account
+  ## Transfers associated with the Account
 
   # All the deposits to Account
-  # @return [Array<Transaction>] a list of transactions
+  # @return [Array<Transfer>] a list of transfers
   def deposits
-    Transaction.where(
+    Transfer.where(
       to_id: id,
-      transaction_type: 'deposit'
+      transfer_type: 'deposit'
     )
   end
 
   # All the withdrawals from Account
-  # @return [Array<Transaction>] a list of transactions
+  # @return [Array<Transfer>] a list of transfers
   def withdrawals
-    Transaction.where(
+    Transfer.where(
       from_id: id,
-      transaction_type: 'withdrawal'
+      transfer_type: 'withdrawal'
     )
   end
 
   # All the transfers from Account
-  # @return [Array<Transaction>] a list of transactions
+  # @return [Array<Transfer>] a list of transfers
   def transfers_from
-    Transaction.where(
+    Transfer.where(
       from_id: id,
-      transaction_type: 'transfer'
+      transfer_type: 'transfer'
     )
   end
 
   # All the transfers to Account
-  # @return [Array<Transaction>] a list of transactions
+  # @return [Array<Transfer>] a list of transfers
   def transfers_to
-    Transaction.where(
+    Transfer.where(
       to_id: id,
-      transaction_type: 'transfer'
+      transfer_type: 'transfer'
     )
   end
 
@@ -177,12 +177,12 @@ class Account < ApplicationRecord
 
   private
 
-    # Create a transaction with the following arguments
-    # @param tx [Hash] Contains `:transaction_type`, `:amount`, `:from_id`, and `:to_id`
-    def create_transaction(tx)
-      Transaction.transaction do
-        tx.slice! :transaction_type, :amount, :from_id, :to_id
-        _transaction = Transaction.create tx
+    # Create a transfer with the following arguments
+    # @param tx [Hash] Contains `:transfer_type`, `:amount`, `:from_id`, and `:to_id`
+    def create_transfer(tx)
+      Transfer.transaction do
+        tx.slice! :transfer_type, :amount, :from_id, :to_id
+        _transfer = Transfer.create tx
       end
     end
 
