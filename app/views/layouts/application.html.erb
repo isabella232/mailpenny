@@ -29,5 +29,10 @@
         <!-- end user information -->
         <% end %>
         <%= javascript_include_tag 'application' %>
+
+        <% if Rails.env.development? %>
+          <%= link_to 'Console', '?console=1' %>
+          <%= console if params[:console] == '1'%>
+        <% end %>
     </body>
 </html>
