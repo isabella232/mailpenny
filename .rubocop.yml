@@ -1,3 +1,13 @@
+Style/IndentationConsistency:
+  # The difference between `rails` and `normal` is that the `rails` style
+  # prescribes that in classes and modules the `protected` and `private`
+  # modifier keywords shall be indented the same as public methods and that
+  # protected and private members shall be indented one step more than the
+  # modifiers. Other than that, both styles mean that entities on the same
+  # logical depth shall have the same indentation.
+  EnforcedStyle: rails
+
+
 AllCops:
   Include:
     - Rakefile
@@ -8,9 +18,6 @@ AllCops:
     - bin/*
     - config/initializers/**
     - db/migrate/**
-
-Rails:
-  Enabled: true
 
 # devise generated code needs to be excluded
 Style/ClassAndModuleChildren:
@@ -34,3 +41,87 @@ Metrics/LineLength:
 # Check with yard instead.
 Style/Documentation:
   Enabled: false
+
+##################### Rails ##################################
+
+Rails:
+  Enabled: true
+
+Rails/ActionFilter:
+  EnforcedStyle: action
+  SupportedStyles:
+    - action
+    - filter
+  Include:
+    - app/controllers/**/*.rb
+
+Rails/Date:
+  # The value `strict` disallows usage of `Date.today`, `Date.current`,
+  # `Date#to_time` etc.
+  # The value `flexible` allows usage of `Date.current`, `Date.yesterday`, etc
+  # (but not `Date.today`) which are overridden by ActiveSupport to handle current
+  # time zone.
+  EnforcedStyle: flexible
+  SupportedStyles:
+    - strict
+    - flexible
+
+Rails/Exit:
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - lib/**/*.rb
+  Exclude:
+    - lib/**/*.rake
+
+Rails/FindBy:
+  Include:
+    - app/models/**/*.rb
+
+Rails/FindEach:
+  Include:
+    - app/models/**/*.rb
+
+Rails/HasAndBelongsToMany:
+  Include:
+    - app/models/**/*.rb
+
+Rails/Output:
+  Include:
+    - app/**/*.rb
+    - config/**/*.rb
+    - db/**/*.rb
+    - lib/**/*.rb
+
+Rails/ReadWriteAttribute:
+  Include:
+    - app/models/**/*.rb
+
+Rails/RequestReferer:
+  EnforcedStyle: referer
+  SupportedStyles:
+    - referer
+    - referrer
+
+Rails/ScopeArgs:
+  Include:
+    - app/models/**/*.rb
+
+Rails/TimeZone:
+  # The value `strict` means that `Time` should be used with `zone`.
+  # The value `flexible` allows usage of `in_time_zone` instead of `zone`.
+  EnforcedStyle: flexible
+  SupportedStyles:
+    - strict
+    - flexible
+
+Rails/UniqBeforePluck:
+  EnforcedMode: conservative
+  SupportedModes:
+    - conservative
+    - aggressive
+  AutoCorrect: false
+
+Rails/Validation:
+  Include:
+    - app/models/**/*.rb
