@@ -60,14 +60,14 @@ class Conversation < ApplicationRecord
   # Mark the conversation as expired and reverse the escrow
   def expire
     self.status = 'expired'
-    escrow_transaction.reverse
+    account.escrow_reverse
     save
   end
 
   # Mark the conversation as completed and transfer the escrow
   def complete
     self.status = 'completed'
-    # escrow_transaction.complete
+    account.escrow_complete
     save
   end
 

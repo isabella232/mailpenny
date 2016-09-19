@@ -112,9 +112,25 @@ class Account < ApplicationRecord
     )
   end
 
+  # All the transfers related to this Account
+  # @return [Array<Transfer>] a list of transfers
   def transfers
     t = Transfer.arel_table
     Transfer.where(t[:from_id].eq(id).or(t[:to_id].eq(id)))
+  end
+
+  def escrow_complete
+    if account_type == 'escrow'
+      recipient_account = conversation.recipient.account
+      create_transfer 'escrow', balance, self, recipient_account
+    end
+  end
+
+  def escrow_reverse
+    if account_type == 'escrow'
+      initiator_account = conversation.initiator.account
+      create_transfer 'escrow', balance, self, initiator_account
+    end
   end
 
   ## increments and decrements to the balance

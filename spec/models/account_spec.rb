@@ -121,9 +121,9 @@ RSpec.describe Account, type: :model do
         expect(@conversation.account.balance).to eq 0
       end
 
-      it 'should have a refunded the balance of the sender account' do
+      it 'should have refunded the balance of the sender account' do
         @conversation.complete
-        expect(@bob_opening_balance - @bob.account.balance).to be > 0
+        expect(@bob_opening_balance - @bob.account.balance).to eq 0
       end
     end
   end
