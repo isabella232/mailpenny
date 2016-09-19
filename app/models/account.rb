@@ -29,6 +29,7 @@
 # Accounting entities that can make transactions and hold balances
 class Account < ApplicationRecord
   belongs_to :user, required: false
+  belongs_to :conversation, required: false
   has_many :transactions
 
   enum account_type: {
@@ -39,9 +40,28 @@ class Account < ApplicationRecord
     escrow: 5
   }
 
+  # the account_type attribute must exist
   validates :account_type,
             presence: true
-  validates :account_type, uniqueness: true, unless: 'account_type == "user"'
+
+  # account_type must be unique unless this one of many user or escrow accounts
+  validates :account_type,
+            uniqueness: true,
+            unless: 'account_type == "user" || account_type == "escrow"'
+
+  # a unique user must exist if this is a user account
+  validates :user,
+            presence: true,
+            uniqueness: true,
+            if: 'account_type == "user"'
+
+  # a unique conversation must exist if this is an escrow account
+  validates :conversation,
+            presence: true,
+            uniqueness: true,
+            if: 'account_type == "escrow"'
+
+  # only the deposit account has a normal balance of negative
   validates :balance,
             numericality: { greater_than_or_equal_to: 0 },
             unless: 'account_type == "deposit"'
