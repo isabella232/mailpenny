@@ -29,48 +29,117 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
-  before :context do
-    @alice = create(:user)
-    @bob = create(:user)
+  context 'User accounts' do
+    before do
+      @alice = create(:user)
+      @bob = create(:user)
+    end
+
+    it 'must exist for new users' do
+      expect(@alice.account).not_to be_nil
+    end
+
+    it 'balance must not be nil' do
+      expect(@alice.account.balance).not_to be_nil
+    end
+
+    it 'must not be valid without an account_type' do
+      account = Account.new
+      account.valid?
+      expect(account.errors.keys.include?(:account_type)).to be true
+    end
+
+    it 'user accounts must not be valid without a user' do
+      account = Account.new
+      account.account_type = 'user'
+      account.valid?
+      expect(account.errors.keys.include?(:user)).to be true
+    end
+
+    it 'escrow accounts must not be valid without a conversation' do
+      account = Account.new
+      account.account_type = 'escrow'
+      account.valid?
+      expect(account.errors.keys.include?(:conversation)).to be true
+    end
   end
 
-  it 'must exist for new users' do
-    expect(@alice.account).not_to be_nil
-  end
+  context 'Escrow accounts' do
+    context 'when a conversation will be completed it', order: :defined do
+      before do
+        @alice = create :user
+        @alice_opening_balance = @alice.account.balance
+        @bob = create :user
+        @bob_opening_balance = @alice.account.balance
+        @conversation = @alice.send_message(@bob, 'subject', 'message body')
+        @escrow_account = @conversation.account
+        @rate = @conversation.recipient.profile.rate
+      end
 
-  it 'balance must not be nil' do
-    expect(@alice.account.balance).not_to be_nil
-  end
+      it 'should exist for a new conversation' do
+        expect(@escrow_account).to_not be nil
+      end
 
-  it 'must not be valid without an account_type' do
-    account = Account.new
-    account.valid?
-    expect(account.errors.keys.include?(:account_type)).to be true
-  end
+      it 'should have an opening transfer from the get go' do
+        expect(@escrow_account.transfers).to eq 1
+      end
 
-  it 'user accounts must not be valid without a user' do
-    account = Account.new
-    account.account_type = 'user'
-    account.valid?
-    expect(account.errors.keys.include?(:user)).to be true
-  end
+      it 'should have an opening transfer from the get go' do
+        expect(@escrow_account.transfers).to eq 1
+      end
 
-  it 'escrow accounts must not be valid without a conversation' do
-    account = Account.new
-    account.account_type = 'escrow'
-    account.valid?
-    expect(account.errors.keys.include?(:conversation)).to be true
-  end
+      it 'should have a balance equal to the rate of the recipient' do
+        expect(@escrow_account.balance).to eq @rate
+      end
 
-  context 'DB must be seeded and' do
+      it 'should have decreased the balance of the sender account by the rate' do
+        expect(@alice_opening_balance - @alice.account.balance).to eq @rate
+      end
+
+      it 'should have a balance of zero when the conversation is completed' do
+        @conversation.complete
+        expect(@escrow_account.balance).to eq 0
+      end
+
+      it 'should have a increased the balance of the recipient account' do
+        @conversation.complete
+        expect(@bob_opening_balance - @bob.account.balance).to be > 0
+      end
+    end
+
+    context 'when a conversation will expire it', order: :defined do
+      before do
+        @alice = create :user
+        @alice_opening_balance = @alice.account.balance
+        @bob = create :user
+        @bob_opening_balance = @alice.account.balance
+        @conversation = @alice.send_message(@bob, 'subject', 'message body')
+        @escrow_account = @conversation.account
+        @rate = @conversation.recipient.profile.rate
+      end
+
+      it 'should have a balance of zero when the conversation is expired' do
+        @conversation.expire
+        expect(@conversation.account.balance).to eq 0
+      end
+
+      it 'should have a refunded the balance of the sender account' do
+        @conversation.complete
+        expect(@bob_opening_balance - @bob.account.balance).to be > 0
+      end
+    end
+  end
+  context 'Meta accounts' do
     it 'only one withdrawal account must exist' do
       withdrawal_accounts = Account.where(account_type: 'withdrawal')
       expect(withdrawal_accounts.count).to eq(1)
     end
+
     it 'only one deposit account must exist' do
       deposit_accounts = Account.where(account_type: 'deposit')
       expect(deposit_accounts.count).to eq(1)
     end
+
     it 'only one fee account must exist' do
       fee_accounts = Account.where(account_type: 'fee')
       expect(fee_accounts.count).to eq(1)
