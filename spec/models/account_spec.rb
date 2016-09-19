@@ -44,7 +44,22 @@ RSpec.describe Account, type: :model do
 
   it 'must not be valid without an account_type' do
     account = Account.new
-    expect(account.valid?).to be false
+    account.valid?
+    expect(account.errors.keys.include?(:account_type)).to be true
+  end
+
+  it 'user accounts must not be valid without a user' do
+    account = Account.new
+    account.account_type = 'user'
+    account.valid?
+    expect(account.errors.keys.include?(:user)).to be true
+  end
+
+  it 'escrow accounts must not be valid without a conversation' do
+    account = Account.new
+    account.account_type = 'escrow'
+    account.valid?
+    expect(account.errors.keys.include?(:conversation)).to be true
   end
 
   context 'DB must be seeded and' do
