@@ -71,6 +71,7 @@ GEM
       climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
+    database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -361,6 +362,7 @@ DEPENDENCIES
   bundler (>= 1.8.4)
   byebug
   capybara
+  database_cleaner
   devise
   dotenv-rails
   factory_girl_rails

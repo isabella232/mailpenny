@@ -42,6 +42,10 @@ gem 'aws-sdk'
 # for authorization
 gem 'pundit'
 
+group :test do
+  gem 'database_cleaner'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger
   # console
