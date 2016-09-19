@@ -44,10 +44,8 @@ RSpec.describe Transfer, type: :model do
       tx = Transfer.new
       tx.valid?
       expect(
-        tx.errors.keys.include?(:account) &&
-        tx.errors.keys.include?(:from_id) &&
-        tx.errors.keys.include?(:to_id) &&
-        tx.errors.messages[:account].count == 2
+        tx.errors.keys.include?(:from) &&
+        tx.errors.keys.include?(:to)
       ).to be true
     end
   end

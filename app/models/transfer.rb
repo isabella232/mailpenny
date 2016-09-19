@@ -24,8 +24,8 @@
 
 # A record of the transfers between accounts
 class Transfer < ApplicationRecord
-  belongs_to :account, foreign_key: :from_id
-  belongs_to :account, foreign_key: :to_id
+  belongs_to :from, foreign_key: :from_id, class_name: 'Account'
+  belongs_to :to, foreign_key: :to_id, class_name: 'Account'
   belongs_to :escrow_transfer, required: false
 
   validates :from_id,
