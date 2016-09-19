@@ -1,21 +1,23 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `accounts`
 #
 # ### Columns
 #
-# Name                | Type               | Attributes
-# ------------------- | ------------------ | ---------------------------
-# **`id`**            | `integer`          | `not null, primary key`
-# **`balance`**       | `decimal(, )`      | `default(0.0)`
-# **`account_type`**  | `integer`          | `not null`
-# **`user_id`**       | `integer`          |
-# **`created_at`**    | `datetime`         | `not null`
-# **`updated_at`**    | `datetime`         | `not null`
+# Name                   | Type               | Attributes
+# ---------------------- | ------------------ | ---------------------------
+# **`id`**               | `integer`          | `not null, primary key`
+# **`balance`**          | `decimal(, )`      | `default(0.0)`
+# **`account_type`**     | `integer`          | `not null`
+# **`user_id`**          | `integer`          |
+# **`created_at`**       | `datetime`         | `not null`
+# **`updated_at`**       | `datetime`         | `not null`
+# **`conversation_id`**  | `integer`          |
 #
 # ### Indexes
 #
+# * `index_accounts_on_conversation_id`:
+#     * **`conversation_id`**
 # * `index_accounts_on_user_id`:
 #     * **`user_id`**
 #
@@ -23,8 +25,9 @@
 #
 # * `fk_rails_b1e30bebc8`:
 #     * **`user_id => users.id`**
+# * `fk_rails_de2588dd91`:
+#     * **`conversation_id => conversations.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 # Accounting entities that can make transfers and hold balances
 class Account < ApplicationRecord
