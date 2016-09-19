@@ -101,7 +101,7 @@ RSpec.describe Account, type: :model do
         expect(@escrow_account.balance).to eq 0
       end
 
-      it 'should have a increased the balance of the recipient account' do
+      it 'should have increased the balance of the recipient account' do
         @conversation.complete
         expect(@bob_opening_balance - @bob.account.balance).to be > 0
       end
