@@ -1,3 +1,20 @@
 // Place all the styles related to the TextPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/**************PRIVACY****************/
+.static-text h3,.static-text h4{
+	font-weight:bold;
+}
+.static-text ul li{
+	padding:0 0 0 20px;
+	position:relative
+}
+.static-text ul li:before{
+	left:0;
+	top:1px;
+	color:#1da1f2;
+	font-size:9px;
+	content:'';
+	position:absolute;
+	font-family: 'FontAwesome';
+}
