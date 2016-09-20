@@ -134,7 +134,6 @@ class Conversation < ApplicationRecord
   def add_message(from, body)
     message = Message.new(
       sender: from,
-      recipient: users_except(from),
       body: body
     )
     messages << message

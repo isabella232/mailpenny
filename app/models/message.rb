@@ -42,8 +42,8 @@ class Message < ApplicationRecord
   belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
 
   before_create :proceed_if_conversation_is_open
-  before_create :update_conversation_status
-  before_validation :set_defaults
+  before_validation :set_recipient
+  before_commit :update_conversation_status
 
   private
 
@@ -54,7 +54,7 @@ class Message < ApplicationRecord
 
     # updates the conversation status depending on the current message
     def update_conversation_status
-      if conversation.recipient_id == sender_id && # original recipient was the sender
+      if conversation.recipient == sender && # original recipient was the sender
          conversation.messages_by_recipient.count.zero? && # this is his first message
          conversation.status != 'expired' # the conversation is not expired
         conversation.complete
@@ -62,8 +62,7 @@ class Message < ApplicationRecord
     end
 
     # set the defaults of the message based on the conversation
-    def set_defaults
-      self.recipient = conversation.recipient
-      self.sender = conversation.initiator
+    def set_recipient
+      self.recipient = conversation.users_except sender
     end
 end

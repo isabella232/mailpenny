@@ -38,7 +38,10 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.new(conversation_params)
     @conversation.initiator = current_user
     @conversation.recipient = recipient_from_params
-    @conversation.messages << Message.new(message_params)
+
+    message = Message.new(message_params)
+    message.sender = current_user
+    @conversation.messages << message
 
     authorize @conversation
     if @conversation.save

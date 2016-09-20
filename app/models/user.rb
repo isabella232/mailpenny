@@ -83,7 +83,7 @@ class User < ApplicationRecord
       recipient: to,
       subject: subject
     )
-    conversation.messages << Message.new(body: body)
+    conversation.messages << Message.new(sender: self, body: body)
     conversation if conversation.save
   end
 
