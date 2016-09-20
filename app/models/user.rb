@@ -78,13 +78,13 @@ class User < ApplicationRecord
   #
   # @return conversation [Conversation]
   def send_message(to, subject, body)
-    conversation = Conversation.create(
+    conversation = Conversation.new(
       initiator: self,
       recipient: to,
       subject: subject
     )
-    conversation.add_message(self, body)
-    conversation
+    conversation.messages << Message.new(body: body)
+    conversation if conversation.save
   end
 
   # Conversations initiated by this user
