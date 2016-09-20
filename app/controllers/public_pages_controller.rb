@@ -7,12 +7,17 @@ class PublicPagesController < ApplicationController
   end
 
   def profile
-    profile_username = params[:username]
-    @profile_user = User.find_by(username: profile_username)
+    @profile_user = User.find_by params_username
+    not_found if @profile_user.nil? || @profile_user.profile.nil?
     @profile = @profile_user.profile
-    not_found if @profile.nil?
 
     @conversation = Conversation.new if user_signed_in?
     render 'own_profile' if user_signed_in? && current_user == @profile_user
   end
+
+  private
+
+    def params_username
+      params.permit[:username]
+    end
 end
