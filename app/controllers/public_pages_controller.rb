@@ -12,6 +12,10 @@ class PublicPagesController < ApplicationController
     not_found if @profile_user.nil?
     @profile = @profile_user.profile
     not_found if @profile.nil?
+
+    @conversation = Conversation.new if user_signed_in?
     render 'own_profile' if user_signed_in? && current_user == @profile_user
   end
+
+  private
 end
