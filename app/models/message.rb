@@ -43,7 +43,7 @@ class Message < ApplicationRecord
 
   before_create :proceed_if_conversation_is_open
   before_validation :set_recipient
-  before_commit :update_conversation_status
+  before_create :update_conversation_status
 
   private
 
