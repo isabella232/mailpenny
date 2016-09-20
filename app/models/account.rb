@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `accounts`
@@ -28,6 +29,7 @@
 # * `fk_rails_de2588dd91`:
 #     * **`conversation_id => conversations.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # Accounting entities that can make transfers and hold balances
 class Account < ApplicationRecord

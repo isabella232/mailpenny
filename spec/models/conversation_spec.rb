@@ -5,16 +5,18 @@
 #
 # ### Columns
 #
-# Name                | Type               | Attributes
-# ------------------- | ------------------ | ---------------------------
-# **`id`**            | `integer`          | `not null, primary key`
-# **`subject`**       | `string`           |
-# **`initiator_id`**  | `integer`          |
-# **`recipient_id`**  | `integer`          |
-# **`status`**        | `integer`          |
-# **`created_at`**    | `datetime`         | `not null`
-# **`updated_at`**    | `datetime`         | `not null`
-# **`open`**          | `boolean`          |
+# Name                               | Type               | Attributes
+# ---------------------------------- | ------------------ | ---------------------------
+# **`id`**                           | `integer`          | `not null, primary key`
+# **`subject`**                      | `string`           |
+# **`initiator_id`**                 | `integer`          |
+# **`recipient_id`**                 | `integer`          |
+# **`status`**                       | `integer`          |
+# **`created_at`**                   | `datetime`         | `not null`
+# **`updated_at`**                   | `datetime`         | `not null`
+# **`open`**                         | `boolean`          |
+# **`last_opened_by_initiator_at`**  | `datetime`         |
+# **`last_opened_by_recipient_at`**  | `datetime`         |
 #
 # ### Indexes
 #

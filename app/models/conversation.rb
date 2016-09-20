@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `conversations`
@@ -31,6 +32,7 @@
 # * `fk_rails_f0edaae389`:
 #     * **`recipient_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # A conversation groups several messages together
 class Conversation < ApplicationRecord
