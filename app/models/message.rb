@@ -63,6 +63,7 @@ class Message < ApplicationRecord
 
     # set the defaults of the message based on the conversation
     def set_defaults
-      self.recipient = conversation.users_except(sender)
+      self.recipient = conversation.recipient
+      self.sender = conversation.initiator
     end
 end
