@@ -18,6 +18,6 @@ class PublicPagesController < ApplicationController
   private
 
     def params_username
-      params.permit[:username]
+      params.permit(:username)
     end
 end
