@@ -17,20 +17,11 @@
                             <strong><%= link_to "mailpenny.com/#{@profile_user.username}", "/#{@profile_user.username}" %></strong>
                         </li>
                     </ul>
-                    <button class="md-trigger btn-primary" data-modal="modal-1">
+                    <button class="md-trigger btn-primary" data-modal="new-message">
                         <i class="fa fa-envelope-o"></i>
                         Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
-                    <div class="md-modal md-effect-1" id="modal-1">
-                        <div class="popup-box">
-                            <input name="email" type="email" placeholder="To: alice_alice"/>
-                            <input name="text" type="text" placeholder="To: alice_alice"/>
-                            <textarea name="textarea" placeholder="Type something  Alice Smith "></textarea>
-                            <i class="fa fa-paperclip"></i>
-                            <div class="btn-primary pull-right">
-                                <a href="#">Send</a>
-                            </div>
-                            <a class="md-close fa fa-close"></a>
-                        </div>
+                    <div class="md-modal md-effect-1" id="new-message">
+                        <%= render 'new_message' if user_signed_in? %>
                     </div>
                     <div class="clearfix"></div>
                     <ul class="list2">

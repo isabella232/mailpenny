@@ -1,0 +1,16 @@
+<div class="popup-box">
+    <%= form_for @conversation do |f| %>
+    <%= f.label :subject %>
+    <%= f.text_field :subject, class: "form-control" %>
+    <%= hidden_field :profile_user, :id %>
+    <%#= fields_for @conversation.recipient do |fr| %>
+    <%#= fr.hidden_field_tag :id, @profile_user.id %>
+    <%# end %>
+    <%= fields_for :message do |fm| %>
+    <%= fm.text_area :body, class: "form-control" %>
+    <% end %>
+    <%= f.button 'Submit', class: 'btn-primary pull-right' %>
+    <% end %>
+    <i class="fa fa-paperclip"></i>
+    <a class="md-close fa fa-close"></a>
+</div>
