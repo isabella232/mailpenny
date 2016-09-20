@@ -34,17 +34,19 @@ class ConversationsController < ApplicationController
 
   # POST /conversations
   # POST /conversations.json
-  # def create
-  #   @conversation = Conversation.new(conversation_params)
-  #   @conversation.conversation = Conversation.find(conversation_id_param[:id])
-  #   @conversation.sender = current_user
-  #   authorize @conversation
-  #   if @conversation.save
-  #     redirect_to :back, notice: 'Conversation was successfully created.'
-  #   else
-  #     redirect_to :back, notice: 'Conversation was not sent!'
-  #   end
-  # end
+  def create
+    @conversation = Conversation.new(conversation_params)
+    @conversation.initiator = current_user
+    @conversation.recipient = recipient_from_params
+    @conversation.messages << Message.new(message_params)
+
+    authorize @conversation
+    if @conversation.save
+      redirect_to :back, notice: 'Conversation was successfully created.'
+    else
+      redirect_to :back, notice: 'Conversation was not sent!'
+    end
+  end
 
   # # PATCH/PUT /conversations/1
   # # PATCH/PUT /conversations/1.json
@@ -79,10 +81,15 @@ class ConversationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def conversation_params
-      params.require(:conversation).permit(:body)
+      params.require(:conversation).permit(:subject)
     end
 
-    def conversation_id_param
-      params.require(:conversation).permit(:id)
+    def message_params
+      params.require(:message).permit(:body)
+    end
+
+    def recipient_from_params
+      id = params.require(:profile_user).permit(:id)
+      User.find_by(id)
     end
 end
