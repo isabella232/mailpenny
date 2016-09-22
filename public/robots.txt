@@ -6,8 +6,8 @@
 # |   |   ||  |  | |  | |     ||  | |     ||  |  ||  |  ||     |
 # |___|___||__|__||____||_____||__| |_____||__|__||__|__||____/
 #
-# Bond: “I always enjoyed learning a new tongue.”
-# Moneypenny: “You always were a cunning linguist, James.”
+# Bond: I always enjoyed learning a new tongue.
+# Moneypenny: You always were a cunning linguist, James.
 # -- Tomorrow Never Dies (1997)
 #
 # careers@payload.tech
