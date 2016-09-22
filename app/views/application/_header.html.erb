@@ -18,9 +18,6 @@
         <% if user_signed_in? %>
         <div class="menu-outer">
             <ul class="nav navbar-nav pull-right header-right-box">
-                <li class="invite">
-                    <a href="#">Referals</a>
-                </li>
                 <li>
                     <%= link_to(dashboard_inbox_path) do %>
                     <% unless unread_count_for(current_user).zero? %>
