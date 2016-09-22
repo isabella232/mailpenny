@@ -142,6 +142,8 @@ GEM
     http_parser.rb (0.6.0)
     httpclient (2.8.2.3)
     i18n (0.7.0)
+    intercom-rails (0.3.2)
+      activesupport (> 3.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -372,6 +374,7 @@ DEPENDENCIES
   guard-livereload
   guard-rspec
   guard-rubocop
+  intercom-rails
   jbuilder (~> 2.5)
   jquery-rails
   kramdown

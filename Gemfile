@@ -41,6 +41,8 @@ gem 'paperclip'
 gem 'aws-sdk'
 # for authorization
 gem 'pundit'
+# intercom rails
+gem 'intercom-rails'
 
 group :test do
   gem 'database_cleaner'
