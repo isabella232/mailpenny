@@ -6,10 +6,9 @@
 # |   |   ||  |  | |  | |     ||  | |     ||  |  ||  |  ||     |
 # |___|___||__|__||____||_____||__| |_____||__|__||__|__||____/
 #
-# Sir James: Ah, this is where you come in Moneypenny.
-#   I want you to go through all the Auxiliary Files.
-# Miss Moneypenny: The lot, sir? It'll take all night.
-# Sir James: Your mother did some of her best work at night.
+# Bond: “I always enjoyed learning a new tongue.”
+# Moneypenny: “You always were a cunning linguist, James.”
+# -- Tomorrow Never Dies (1997)
 #
 # careers@payload.tech
 # Subject: I am not a robot
