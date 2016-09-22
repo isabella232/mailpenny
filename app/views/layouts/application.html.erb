@@ -17,17 +17,6 @@
         <%= render 'flash_messages'%>
         <%= yield :body %>
         <%= render 'footer' %>
-        <% if user_signed_in? %>
-        <!-- begin user information -->
-        <%= tag("div", class: 'hidden-user-information', data: {
-          intercom_app_id: 'qvnmie0g',
-          user_id: current_user.id,
-          user_name: current_user.profile.name,
-          user_email: current_user.email,
-          user_created_at: current_user.created_at.to_i
-          })  %>
-        <!-- end user information -->
-        <% end %>
         <%= javascript_include_tag 'application' %>
 
         <% if Rails.env.development? %>
