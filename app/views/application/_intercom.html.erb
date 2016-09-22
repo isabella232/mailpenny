@@ -6,7 +6,7 @@
   :name => current_user.profile.name,
   :created_at => current_user.created_at
 }, {
-  :secret => 'your-apps-api-secret',
+  :secret => Rails.application.secrets.intercom_secure_mode_secret_key,
   :widget => {:activator => '#Intercom'},
   :nonce => content_security_policy_nonce(:script)
 }) %>
