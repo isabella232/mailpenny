@@ -29,6 +29,7 @@ class Transfer < ApplicationRecord
   belongs_to :from, foreign_key: :from_id, class_name: 'Account'
   belongs_to :to, foreign_key: :to_id, class_name: 'Account'
   belongs_to :escrow_transfer, required: false
+  after_save :update_account_balances
 
   validates :from_id,
             presence: true
@@ -45,8 +46,17 @@ class Transfer < ApplicationRecord
     reversal: 3,
     deposit: 4,
     withdrawal: 5,
-    fees: 6,
+    fee: 6,
     coupon: 7,
     referal: 8
   }
+
+  private
+
+    def update_account_balances
+      Transfer.transaction do
+        from.decrease_balance(amount)
+        to.increase_balance(amount)
+      end
+    end
 end

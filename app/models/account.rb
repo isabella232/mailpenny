@@ -171,9 +171,6 @@ class Account < ApplicationRecord
             from: from,
             to: to
           )
-          from.decrease_balance(amount)
-          to.increase_balance(amount)
-
           if fee
             fee_account = Account.find_by(account_type: 'fee')
             Transfer.transaction do
@@ -183,8 +180,6 @@ class Account < ApplicationRecord
                 from: to,
                 to: fee_account
               )
-              to.increase_balance(fee)
-              fee_account.decrease_balance(fee)
             end
           end
         end
