@@ -45,7 +45,7 @@ class ConversationsController < ApplicationController
 
     authorize @conversation
     if @conversation.save
-      redirect_to :back, notice: 'Conversation was successfully created.'
+      redirect_to @conversation, notice: 'Yayy!! Message sent, waiting for a reply!'
     else
       redirect_to :back, notice: 'Conversation was not sent!'
     end
