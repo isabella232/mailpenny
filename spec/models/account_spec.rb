@@ -34,6 +34,58 @@
 require 'rails_helper'
 
 RSpec.describe Account, type: :model do
+  # context 'Human Readable transfers' do
+  #   before :each do
+  #     # generate some transfers
+  #     @alice = create(:user)
+  #     @alice.profile = build :profile
+  #
+  #     @bob = create(:user)
+  #     @bob.profile = build :profile
+  #
+  #     @bob.account.deposit 500
+  #     @bob.withdraw 100
+  #     @bob.withdraw 100
+  #     @bob.withdraw 100
+  #     @bob.withdraw 100
+  #
+  #     @alice.account.deposit 500
+  #     @alice.withdraw 100
+  #     @alice.withdraw 100
+  #     @alice.withdraw 100
+  #     @alice.withdraw 100
+  #
+  #     conversation = @bob.send_message(@alice, 'subject', 'initiate')
+  #     conversation.add_message(@bob, 'reply')
+  #     conversation = @bob.send_message(@alice, 'subject', 'initiate')
+  #     conversation.add_message(@bob, 'reply')
+  #     conversation = @bob.send_message(@alice, 'subject', 'initiate')
+  #     conversation.add_message(@bob, 'reply')
+  #   end
+  #
+  #   it 'should have a reference' do
+  #     expect { @alice.account.transfers_for_humans.first.reference }.to_not raise_error
+  #   end
+  #
+  #   it 'should have a amount' do
+  #     expect { @alice.account.transfers_for_humans.first.amount }.to_not raise_error
+  #   end
+  #
+  #   it 'should have a fee' do
+  #     expect { @alice.account.transfers_for_humans.first.fee }.to_not raise_error
+  #   end
+  #
+  #   it 'should have a total' do
+  #     expect { @alice.account.transfers_for_humans.first.total }.to_not raise_error
+  #   end
+  #
+  #   it 'should have a date' do
+  #     expect { @alice.account.transfers_for_humans.first.date }.to_not raise_error
+  #   end
+  #   it 'should have a total' do
+  #     expect { @alice.account.transfers_for_humans.first.total }.to_not raise_error
+  #   end
+  # end
   context 'User accounts' do
     before do
       @alice = create(:user)
@@ -71,7 +123,7 @@ RSpec.describe Account, type: :model do
 
   context 'Escrow accounts' do
     context 'when a conversation will be completed it', order: :defined do
-      before do
+      before :each do
         @alice = create :user
         @alice.account.deposit(500)
         @alice_opening_balance = @alice.account.balance
