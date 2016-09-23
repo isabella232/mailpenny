@@ -71,30 +71,18 @@
                 <table>
                     <tbody>
                         <tr>
-                            <th>Transactions</th>
-                            <th>Tipe</th>
-                            <th>Total</th>
+                            <th>Reference</th>
+                            <th>Amount</th>
                             <th>Status</th>
                         </tr>
+                        <% current_user.account.transfers.each do |t| %>
                         <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td><%= t.to %></td>
+                            <td><%= t.amount %></td>
                             <td>&nbsp;</td>
                         </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </tbody>
+                        <% end  %>
+                  </tbody>
                 </table>
                 <!--box-inner-->
             </div>
