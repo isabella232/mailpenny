@@ -123,8 +123,9 @@ class Account < ApplicationRecord
 
   def escrow_complete
     if account_type == 'escrow'
+      fee_amount = balance / 2
       recipient_account = conversation.recipient.account
-      create_transfer 'escrow', balance, self, recipient_account
+      create_transfer 'escrow', balance, self, recipient_account, fee_amount
     end
   end
 
@@ -159,7 +160,9 @@ class Account < ApplicationRecord
     # @param amount [Integer]
     # @param from [Account]
     # @param to [Account]
-    def create_transfer(transfer_type, amount, from, to)
+    # @param fee [Integer] optionally, deduct a fee from the second account post
+    #   transfer
+    def create_transfer(transfer_type, amount, from, to, fee = nil)
       Account.transaction do
         Transfer.transaction do
           Transfer.create(
@@ -170,6 +173,20 @@ class Account < ApplicationRecord
           )
           from.decrease_balance(amount)
           to.increase_balance(amount)
+
+          if fee
+            fee_account = Account.find_by(account_type: 'fee')
+            Transfer.transaction do
+              Transfer.create(
+                transfer_type: 'fee',
+                amount: fee,
+                from: to,
+                to: fee_account
+              )
+              to.increase_balance(fee)
+              fee_account.decrease_balance(fee)
+            end
+          end
         end
       end
     end
