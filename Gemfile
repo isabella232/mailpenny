@@ -43,6 +43,8 @@ gem 'aws-sdk'
 gem 'pundit'
 # intercom rails
 gem 'intercom-rails'
+# paypal
+gem 'braintree'
 
 group :test do
   gem 'database_cleaner'
@@ -105,4 +107,5 @@ gem 'font-awesome-rails' # the asset pipeline wasn't working properly
 source 'https://rails-assets.org' do
   gem 'rails-assets-bootstrap'
   gem 'rails-assets-classie'
+  gem 'rails-assets-braintree-web'
 end

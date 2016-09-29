@@ -52,9 +52,23 @@
                         <input name="text" type="text" placeholder="$10.00"/>
                     </li>
                 </ul>
-                <div class="btn-primary red-bg btn1">
-                    <a href="#">Deposit</a>
-                </div>
+                  <script src="https://www.paypalobjects.com/api/button.js?"
+                       data-merchant="braintree"
+                       data-id="paypal-deposit-button"
+                       data-button="checkout"
+                       data-color="blue"
+                       data-size="medium"
+                       data-shape="pill"
+                       data-button_type="submit"
+                       data-button_disabled="false"
+                   ></script>
+                  <!-- Configuration options:
+                    data-color: "blue", "gold", "silver"
+                    data-size: "tiny", "small", "medium"
+                    data-shape: "pill", "rect"
+                    data-button_disabled: "false", "true"
+                    data-button_type: "submit", "button"
+                  --->
                 <div class="btn-primary btn1">
                     <a href="#">Withdraw</a>
                 </div>

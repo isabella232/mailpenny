@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get 'privacy' => 'text_pages#privacy', as: :privacy_page
 
   # everything in the dashboard
-  get 'dashboard', to: redirect('/dashboard/overview'), status: 302
+  get 'dashboard', to: redirect('/dashboard/inbox'), status: 302
   get 'dashboard/account'  => 'dashboard#account'
   get 'dashboard/billing'  => 'dashboard#billing'
   get 'dashboard/inbox' => 'dashboard#inbox'
@@ -28,6 +28,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     unlocks: 'users/unlocks'
   }
+
+  # Paypal API
+  get 'paypal/client_token'
+  post 'paypal/checkout'
 
   # public pages
   get 'search' => 'public_pages#search'

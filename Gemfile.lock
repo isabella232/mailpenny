@@ -54,6 +54,8 @@ GEM
     aws-sdk-resources (2.6.0)
       aws-sdk-core (= 2.6.0)
     bcrypt (3.1.11)
+    braintree (2.66.0)
+      builder (>= 2.0.0)
     buftok (0.2.0)
     builder (3.2.2)
     byebug (9.0.5)
@@ -224,6 +226,7 @@ GEM
       sprockets-rails (>= 2.0.0)
     rails-assets-bootstrap (3.3.7)
       rails-assets-jquery (>= 1.9.1, < 4)
+    rails-assets-braintree-web (3.3.0)
     rails-assets-classie (1.0.1)
     rails-assets-jquery (3.1.0)
     rails-dom-testing (2.0.1)
@@ -361,6 +364,7 @@ DEPENDENCIES
   annotate
   authy
   aws-sdk
+  braintree
   bundler (>= 1.8.4)
   byebug
   capybara
@@ -386,6 +390,7 @@ DEPENDENCIES
   pundit
   rails (~> 5.0.0)
   rails-assets-bootstrap!
+  rails-assets-braintree-web!
   rails-assets-classie!
   rails_real_favicon
   rdiscount
