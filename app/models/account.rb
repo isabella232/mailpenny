@@ -122,18 +122,16 @@ class Account < ApplicationRecord
   end
 
   def escrow_complete
-    if account_type == 'escrow'
-      fee_amount = balance / 2
-      recipient_account = conversation.recipient.account
-      create_transfer 'escrow', balance, self, recipient_account, fee_amount
-    end
+    raise 'Not an escrow account' unless account_type == 'escrow'
+    fee_amount = balance / 2
+    recipient_account = conversation.recipient.account
+    create_transfer 'escrow', balance, self, recipient_account, fee_amount
   end
 
   def escrow_reverse
-    if account_type == 'escrow'
-      initiator_account = conversation.initiator.account
-      create_transfer 'escrow', balance, self, initiator_account
-    end
+    raise 'Not an escrow account' unless account_type == 'escrow'
+    initiator_account = conversation.initiator.account
+    create_transfer 'escrow', balance, self, initiator_account
   end
 
   ## increments and decrements to the balance
@@ -193,6 +191,8 @@ class Account < ApplicationRecord
         rate = conversation.recipient.profile.rate
         initiator_account = conversation.initiator.account
         create_transfer 'escrow', rate, initiator_account, self
+      else
+        true
       end
     end
 
