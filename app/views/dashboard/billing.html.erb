@@ -1,44 +1,56 @@
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
+    <div class="blackwhite-box Balance col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h4>Balance</h4>
+        <div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <i class="fa fa-trophy"></i>
+            Current Balance</label>
+        <p>
+            $
+            <%= current_user.account.balance %>
+        </p>
+        <!-- Begin deposit -->
+        <button class="btn-primary btn1" data-toggle="modal" data-target="#depositModal">
+            <a href="#">Top up</a>
+        </button>
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
-        <div class="blackwhite-box Balance col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h4>Balance</h4>
-            <div class="box-inner col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <i class="fa fa-trophy"></i>
-                            Current Balance</label>
-                        <p>
-                          $ <%= current_user.account.balance %>
-                        </p>
-<!-- Begin deposit -->
-                <button class="btn-primary btn1" data-toggle="modal" data-target="#depositModal">
-                    <a href="#">Top up</a>
-                </button>
+        <!-- Modal -->
+        <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <%= form_tag deposit_handler_path, method: :post, class: '' do %>
 
-<!-- Modal -->
-<div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Topup Balance</h4>
-      </div>
-      <div class="modal-body">
-        $ <input type="text" name="amount" value="5">
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Let's go</button>
-      </div>
-    </div>
-  </div>
-</div>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Topup Balance</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%= text_field_tag(
+                            :amount,
+                            params[:amount],
+                            class: "form-control"
+                        ) %>
+                        <%= label_tag(:method_paypal, "Paypal") %>
+                        <%= radio_button_tag(:method, "paypal") %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <%= submit_tag("Topup", class: 'btn btn-primary') %>
+                    </div>
+                    <% end %>
 
-<!-- End deposit -->
-                <button class="btn-primary btn1">
-                    <a href="#">Withdraw</a>
-                </button>
-                <!--box-inner-->
+                </div>
             </div>
-            <!--blackwhite-box-->
         </div>
-        <!--col-->
+
+        <!-- End deposit -->
+        <button class="btn-primary btn1">
+            <a href="#">Withdraw</a>
+        </button>
+        <!--box-inner-->
     </div>
+    <!--blackwhite-box-->
+</div>
+<!--col-->
+</div>
