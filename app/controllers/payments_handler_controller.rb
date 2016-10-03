@@ -21,7 +21,7 @@ class PaymentsHandlerController < ApplicationController
       params.permit(:method, :amount)
     end
 
-    def withdrawal
+    def withdrawal_params
       params.permit(:method, :amount)
     end
 end
