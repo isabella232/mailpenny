@@ -8,12 +8,12 @@
             $
             <%= current_user.account.balance %>
         </p>
-        <!-- Begin deposit -->
+        <!-- Begin deposit section -->
         <button class="btn-primary btn1" data-toggle="modal" data-target="#depositModal">
             <a href="#">Top up</a>
         </button>
 
-        <!-- Modal -->
+        <!-- Deposit Modal -->
         <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -26,6 +26,7 @@
                         <h4 class="modal-title" id="myModalLabel">Topup Balance</h4>
                     </div>
                     <div class="modal-body">
+                      <%= label_tag(:amount, "Amount") %>
                         <%= text_field_tag(
                             :amount,
                             params[:amount],
@@ -33,6 +34,10 @@
                         ) %>
                         <%= label_tag(:method_paypal, "Paypal") %>
                         <%= radio_button_tag(:method, "paypal") %>
+                        <% if Rails.env.development? %>
+                        <%= label_tag(:method_test, "Test") %>
+                        <%= radio_button_tag(:method, "test") %>
+                        <% end %>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -45,9 +50,48 @@
         </div>
 
         <!-- End deposit -->
-        <button class="btn-primary btn1">
+        <!-- Begin withdrawal section -->
+        <button class="btn-primary btn1" data-toggle="modal" data-target="#withdrawalModal">
             <a href="#">Withdraw</a>
         </button>
+
+        <!-- Deposit Modal -->
+        <div class="modal fade" id="withdrawalModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <%= form_tag withdrawal_handler_path, method: :post, class: '' do %>
+
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Withdraw Balance</h4>
+                    </div>
+                    <div class="modal-body">
+                      <%= label_tag(:amount, "Amount") %>
+                        <%= text_field_tag(
+                            :amount,
+                            params[:amount],
+                            class: "form-control"
+                        ) %>
+                        <%= label_tag(:method_paypal, "Paypal") %>
+                        <%= radio_button_tag(:method, "paypal") %>
+                        <% if Rails.env.development? %>
+                        <%= label_tag(:method_test, "Test") %>
+                        <%= radio_button_tag(:method, "test") %>
+                        <% end %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <%= submit_tag("Withdraw", class: 'btn btn-primary') %>
+                    </div>
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- End withdrawal -->
         <!--box-inner-->
     </div>
     <!--blackwhite-box-->
