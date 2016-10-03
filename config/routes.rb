@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'payments_handler/deposit'
+
+  get 'payments_handler/withdrawal'
+
   resources :social_media_accounts
   resources :phone_numbers
   resources :profiles
