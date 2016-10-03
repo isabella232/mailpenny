@@ -103,9 +103,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # bower components needed
-gem 'font-awesome-rails' # the asset pipeline wasn't working properly
+gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 source 'https://rails-assets.org' do
-  gem 'rails-assets-bootstrap'
-  gem 'rails-assets-classie'
   gem 'rails-assets-braintree-web'
 end
