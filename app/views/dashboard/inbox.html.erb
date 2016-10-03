@@ -34,7 +34,8 @@
                 <figure class="mail-icon"><%= image_tag 'mail-icon2.png' %></figure>
                 <span class="conversation-name"><%= conversation.users_except(current_user).username %></span><br>
                 <p>
-                  status: <%= conversation.status %>
+                    status:
+                    <%= conversation.status %>
                 </p>
                 <div class="pull-right">
                     <% unless conversation.read_by? current_user %>
@@ -47,7 +48,10 @@
                 <div class="conversation-subject">
                     <%= (conversation.subject.length > 8) ? "#{conversation.subject[0,8]}..." : conversation.subject %>
                 </div>
-                <div class="conversation-prewivew">
+                <div class="conversation-preview">
+                    <%= (conversation.messages.last.body.length > 30) ? "#{conversation.messages.last.body[0,30]}..." : conversation.messages.last.body %>
+                </div>
+                <div class="conversation-preview">
                     <%= (conversation.messages.last.body.length > 30) ? "#{conversation.messages.last.body[0,30]}..." : conversation.messages.last.body %>
                 </div>
             </a>
