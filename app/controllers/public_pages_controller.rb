@@ -12,7 +12,6 @@ class PublicPagesController < ApplicationController
     @profile = @profile_user.profile
 
     @conversation = Conversation.new if user_signed_in?
-    render 'own_profile' if user_signed_in? && current_user == @profile_user
   end
 
   private

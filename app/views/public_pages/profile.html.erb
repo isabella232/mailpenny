@@ -1,243 +1,50 @@
-<!-- =========== -->
-<!--  Body Area  -->
-<!-- =========== -->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 light-grey-bg padding20">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center">
-                <div class="user-details col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <figure class="profile-img"><%= image_tag 'avatar.svg', size: '150x150', class: 'img-circle' %></figure>
-                    <ul class="list1">
-                        <li><%= @profile.name %></li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-twitter"></i>&nbsp;<%= @profile.twitter_username %></a>
-                        </li>
-                        <li>
-                            <strong><%= link_to "mailpenny.com/#{@profile_user.username}", "/#{@profile_user.username}" %></strong>
-                        </li>
-                    </ul>
-                    <button class="md-trigger btn-primary" data-modal="new-message">
-                        <i class="fa fa-envelope-o"></i>
-                        Start a conversation for $<%= number_with_precision @profile.rate, precision: 2 %></button>
-                    <div class="md-modal md-effect-1" id="new-message">
-                        <%= render 'new_message' if user_signed_in? %>
-                    </div>
-                    <div class="clearfix"></div>
-                    <ul class="list2">
-                        <li>
-                            <i class="fa fa-map-marker"></i><%= @profile.location %></li>
-                        <li>
-                            <i class="fa fa-briefcase"></i><%= @profile.work_title %></li>
-                        <li>
-                            <i class="fa fa-building-o"></i><%= @profile.work_company %></li>
-                    </ul>
-                    <p><%= @profile.bio %></p>
-                    <div class="md-overlay"></div>
-                    <!--user-details-->
+<div class="ui container">
+    <div class="ui center aligned three column stackable grid">
+        <div class="card column">
+            <div class="ui card">
+                <div class="image">
+                    <%= image_tag @profile.avatar.url(:medium), size: '150x150', class: 'img-circle' %>
                 </div>
-                <!--col-->
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="row">
-                    <div class="user-talkTo col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <span class="heading pull-left">Browse others</span>
-                        <div class="clearfix"></div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center">
-                            <div class="client-box col-lg-12 col-md-12 col-sm-12 col-xs-6">
-                                <div class="client-lt pull-left">
-                                    <figure class="pull-left"><%= image_tag 'client-img' %></figure>
-                                    <div class="clearfix"></div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-envelope-o"></i>
-                                        </a>
-                                    </div>
-                                    <div class="client-icon pull-left">
-                                        <a href="#">
-                                            <i class="fa fa-comment-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <ul class="pull-right">
-                                    <li>Liza Burdenuk</li>
-                                    <li>Scrum Master at RIT</li>
-                                    <li>
-                                        <i class="fa fa-map-marker"></i>
-                                        Kyiv, Ukraine</li>
-                                    <li>
-                                        <i class="fa fa-twitter"></i>
-                                        <a href="#">lizaburdenuk</a>
-                                    </li>
-                                </ul>
-                                <!--client-box-->
-                            </div>
-                            <!--col-->
-                        </div>
-                        <!--user-talkTo-->
+                <div class="content">
+                    <a class="header">
+                        <%= @profile.name %>
+                    </a>
+                    <div class="meta">
+                        <a href="/<%= @profile.user.username %>">mailpenny.com/<%= @profile.user.username %></a>
                     </div>
-                    <!--row-->
+                    <div class="description">
+                        <span class="title"><%= @profile.work_title %></span>
+                        at
+                        <span class-"company"><%= @profile.work_company %></span>
+                    </div>
                 </div>
-                <!--col-->
+                <div class="extra content">
+                    <a>
+                        <i class="mail icon"></i>
+                        Start a conversation for $<%= @profile.rate %>
+                    </a>
+                </div>
             </div>
-            <!--row-->
         </div>
-        <!--container-->
+        <div class="description column">
+          <div class="content">
+            <div class="twitter">
+                <i class="twitter icon"></i>
+                <%= @profile.twitter_username %>
+            </div>
+            <div class="personal bio">
+                <%= @profile.bio %>
+            </div>
+            <div class="personal location">
+                <i class="marker icon"></i>
+                <%= @profile.location %>
+            </div>
+            <button class="ui button">
+              Start a conversation $<%= @profile.rate %>
+            </button>
+          </div>
+        </div>
+        <div class="green column">
+        </div>
     </div>
-    <!--col-->
 </div>

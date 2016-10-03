@@ -1,97 +1,14 @@
-<!-- =========== -->
-<!-- Header Area -->
-<!-- =========== -->
-<div class="container">
-    <div class="row">
-        <header class="header col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="logo pull-left">
-                <%= link_to(root_path) {image_tag 'logo-black.png'} %></a>
-        </div>
-        <div class="input-group search-box pull-left col-xs-offset-1 col-lg-3 col-md-3 col-sm-5 col-xs-5">
-            <input type="text" class="  search-query form-control" placeholder="Search"/>
-            <span class="input-group-btn">
-                <button class="btn" type="button">
-                    <span class=" glyphicon glyphicon-search"></span>
-                </button>
-            </span>
-        </div>
-        <% if user_signed_in? %>
-        <div class="menu-outer">
-            <ul class="nav navbar-nav pull-right header-right-box">
-                <li>
-                    <%= link_to(dashboard_inbox_path) do %>
-                    <% unless unread_count_for(current_user).zero? %>
-                    <span class="msg"><%= unread_count_for(current_user) %></span>
-                    <% end %>
-                    <i class="fa fa-envelope-o"></i>
-                    <% end %>
-                </li>
-                <li>
-                    <%= link_to "$#{number_with_precision(current_user.account.balance, precision: 2)}", dashboard_billing_path %></a>
-            </li>
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <figure class="pull-left">
-                      <%= image_tag current_user.profile.avatar.url(:thumb), size: '37x37', class: 'img-circle' %>
-                    </figure>
-                    <span class="fa fa-angle-down"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <%= link_to 'Profile', user_profile_path(current_user) %>
-                    </li>
-                    <li>
-                        <%= link_to 'Account', dashboard_account_path %>
-                    </li>
-                    <li>
-                        <%= link_to dashboard_inbox_path do %>
-                        Inbox<%= " (#{unread_count_for(current_user)})" unless unread_count_for(current_user).zero? %>
-                        <% end %>
-                    </li>
-                    <li>
-                        <%= link_to 'Billing', dashboard_billing_path %>
-                    </li>
-                    <li>
-                        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+<!-- Following Menu -->
+<div class="ui large hidden menu">
+  <div class="ui container">
+    <a href="<%= root_path %>" class="brand item">Mailpenny</span>
+    <div class="right menu">
+      <div class="item">
+        <a class="ui button">Log in</a>
+      </div>
+      <div class="item">
+        <a class="ui primary button">Sign Up</a>
+      </div>
     </div>
-<% else %>
-    <nav class="navbar navbar-default pull-right main-navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <%= link_to 'About', about_page_path %>
-                    </li>
-                    <li>
-                        <%= link_to 'Terms', terms_page_path %>
-                    </li>
-                    <li>
-                        <%= link_to 'Privacy', privacy_page_path %>
-                    </li>
-
-                    <li>
-                        <%= link_to 'Register', new_user_registration_path %>
-                    </li>
-                    <li class="login"><%= link_to "Login", new_user_session_path %></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-    <% end %>
-</header>
+  </div>
 </div>
-</div>
-<!--header-->

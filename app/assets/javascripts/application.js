@@ -12,8 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap
-//= require classie
+//= require semantic-ui
 //= require braintree-web/client
 //= require braintree-web/paypal
 //= require_tree .
