@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'payments_handler/deposit'
-
-  get 'payments_handler/withdrawal'
+  # handling payments
+  post 'payments_handler/deposit', as: :deposit_handler
+  post 'payments_handler/withdrawal', as: :withdrawal_handler
 
   resources :social_media_accounts
   resources :phone_numbers
