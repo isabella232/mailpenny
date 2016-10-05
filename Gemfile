@@ -103,7 +103,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # bower components needed
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 source 'https://rails-assets.org' do
   gem 'rails-assets-braintree-web'
+  gem 'rails-assets-semantic'
 end

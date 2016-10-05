@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require semantic-ui
+//= require semantic
 //= require braintree-web/client
 //= require braintree-web/paypal
 //= require_tree .
