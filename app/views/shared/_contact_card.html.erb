@@ -6,10 +6,10 @@
           <%= user.profile.name %>
         </div>
         <div class="meta">
-            New Member
+            <%= user.profile.work_title %>
         </div>
         <div class="description">
-          <%= user.profile.bio %>
+          <%= user.profile.bio.truncate_words(5) %>
         </div>
     </div>
     <div class="extra content">
