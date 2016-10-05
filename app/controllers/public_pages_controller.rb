@@ -11,6 +11,8 @@ class PublicPagesController < ApplicationController
     not_found if @profile_user.nil? || @profile_user.profile.nil?
     @profile = @profile_user.profile
 
+    @others = User.order('RANDOM()').first(5)
+
     @conversation = Conversation.new if user_signed_in?
   end
 

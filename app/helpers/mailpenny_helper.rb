@@ -14,4 +14,8 @@ module MailpennyHelper
     def unread_count_for(user)
       user.conversations.select { |c| !c.read_by? user }.count
     end
+
+    def contact_card_for(user)
+      render 'shared/contact_card', locals: { user: user }
+    end
 end

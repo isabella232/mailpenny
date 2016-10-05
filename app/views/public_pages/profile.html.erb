@@ -27,24 +27,29 @@
             </div>
         </div>
         <div class="description column">
-          <div class="content">
-            <div class="twitter">
-                <i class="twitter icon"></i>
-                <%= @profile.twitter_username %>
+            <div class="content">
+                <div class="twitter">
+                    <i class="twitter icon"></i>
+                    <%= @profile.twitter_username %>
+                </div>
+                <div class="personal bio">
+                    <%= @profile.bio %>
+                </div>
+                <div class="personal location">
+                    <i class="marker icon"></i>
+                    <%= @profile.location %>
+                </div>
+                <button class="ui button">
+                    Start a conversation $<%= @profile.rate %>
+                </button>
             </div>
-            <div class="personal bio">
-                <%= @profile.bio %>
-            </div>
-            <div class="personal location">
-                <i class="marker icon"></i>
-                <%= @profile.location %>
-            </div>
-            <button class="ui button">
-              Start a conversation $<%= @profile.rate %>
-            </button>
-          </div>
         </div>
-        <div class="green column">
+        <div class="others column">
+          <div class="ui two stackable cards">
+            <% @others.each do |other| %>
+              <%= contact_card_for other %>
+            <% end %>
+          </div>
         </div>
     </div>
 </div>
