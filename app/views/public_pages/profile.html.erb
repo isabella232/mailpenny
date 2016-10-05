@@ -1,5 +1,5 @@
-<div class="ui container">
-    <div class="ui center aligned three column stackable grid">
+
+    <div class="ui center aligned four column grid container">
         <div class="card column">
             <div class="ui card">
                 <div class="image">
@@ -44,12 +44,11 @@
                 </button>
             </div>
         </div>
-        <div class="others column">
-          <div class="ui two stackable cards">
-            <% @others.each do |other| %>
-              <%= contact_card_for other %>
-            <% end %>
-          </div>
+        <div class="others eight wide column">
+            <div class="ui two stackable cards">
+                <% @others.each do |other| %>
+                <%= contact_card_for other %>
+                <% end %>
+            </div>
         </div>
-    </div>
 </div>
