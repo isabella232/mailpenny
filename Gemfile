@@ -92,6 +92,7 @@ group :development do
   gem 'yard'
   gem 'kramdown'
   gem 'rails_real_favicon'
+  gem 'rails-erd'
 end
 
 group :production do
