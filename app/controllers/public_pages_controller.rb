@@ -1,6 +1,7 @@
 # pages that contain user information but aren't private
 class PublicPagesController < ApplicationController
   def home
+    @random_users = User.order('RANDOM()').limit(10)
   end
 
   def search

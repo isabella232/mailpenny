@@ -1,5 +1,5 @@
 <div class="ui container">
-	<div class="ui center aligned three column collapsable grid">
+	<div class="ui stackable center aligned three column collapsable grid">
 
 		<div class="row">
 			<div class="column">
@@ -30,8 +30,10 @@
 
 		<div class="row">
 			<div class="column">
-				<h4>Some already on Mailpenny</h4>
-				<%= contact_card_for User.first %>
+				<h2>Some already on Mailpenny</h2>
+				<div class="home contact card">
+					<%= contact_card_for @random_users.first %>
+				</div>
 			</div>
 		</div>
 
@@ -41,6 +43,5 @@
 					Join</a>
 			</div>
 		</div>
-
 	</div>
 </div>
