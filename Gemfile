@@ -61,6 +61,7 @@ group :development, :test do
   # guard is nice, with all the extras
   gem 'guard', require: false
   gem 'guard-livereload', require: false
+  gem 'rack-livereload'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
   # blackbox testing by faking user interaction

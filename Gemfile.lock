@@ -207,6 +207,8 @@ GEM
     pundit (1.1.0)
       activesupport (>= 3.0.0)
     rack (2.0.1)
+    rack-livereload (0.3.16)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.0.1)
@@ -390,6 +392,7 @@ DEPENDENCIES
   poltergeist
   puma (~> 3.0)
   pundit
+  rack-livereload
   rails (~> 5.0.0)
   rails-assets-braintree-web!
   rails-assets-semantic!
