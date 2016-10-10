@@ -1,14 +1,36 @@
-<!-- Following Menu -->
-<div class="ui large hidden menu">
-  <div class="ui container">
-    <a href="<%= root_path %>" class="brand item">Mailpenny</span>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui primary button">Sign Up</a>
-      </div>
+<div class="ui large hidden container">
+    <div class="ui menu">
+        <div class="header item">Mailpenny</div>
+        <div class="item">
+            <div class="ui action left icon input">
+                <i class="search icon"></i>
+                <input type="text" placeholder="Search">
+                <button class="ui button">Submit</button>
+            </div>
+        </div>
+        <div class="right menu">
+          <% if user_signed_in? %>
+          <div class="ui simple dropdown item" tabindex="0">
+              Dropdown
+              <i class="dropdown icon"></i>
+              <div class="menu transition hidden" tabindex="-1">
+                  <div class="item">Action</div>
+                  <div class="item">Another Action</div>
+                  <div class="item">Something else here</div>
+                  <div class="divider"></div>
+                  <div class="item">Separated Link</div>
+                  <div class="divider"></div>
+                  <div class="item">One more separated link</div>
+              </div>
+          </div>
+          <% else %>
+          <div class="item">
+              <a href="<%= new_user_session_path %>" class="ui button">Log in</a>
+          </div>
+          <div class="item">
+              <a href="<%= new_user_registration_path %>" class="ui primary button">Sign Up</a>
+          </div>
+          <% end %>
+        </div>
     </div>
-  </div>
 </div>
