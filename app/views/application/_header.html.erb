@@ -10,7 +10,17 @@
         </div>
         <div class="right menu">
           <% if user_signed_in? %>
-          <div class="ui simple dropdown item" tabindex="0">
+          <div class="item">
+            <i class="user icon"></i>
+            Profile
+          </div>
+          <a href="#">
+          <div class="item">
+            <i class="mail icon"></i>
+            Inbox
+          </div>
+          </a>
+          <div class="dropdown item" tabindex="0">
               Dropdown
               <i class="dropdown icon"></i>
               <div class="menu transition hidden" tabindex="-1">
