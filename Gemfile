@@ -59,18 +59,18 @@ group :development, :test do
   # Style guide to make developer lives hell
   gem 'rubocop', require: false
   # guard is nice, with all the extras
-  gem 'guard'
-  gem 'guard-livereload'
+  gem 'guard', require: false
+  gem 'guard-livereload', require: false
   gem 'guard-rspec', require: false
-  gem 'guard-rubocop'
+  gem 'guard-rubocop', require: false
   # blackbox testing by faking user interaction
-  gem 'capybara'
+  gem 'capybara', require: false
   # poltergeist is a capybara driver to interface with phantomjs
-  gem 'poltergeist'
+  gem 'poltergeist', require: false
   # factories make for better testing models
   gem 'factory_girl_rails', require: false
   # automtically generated fake data
-  gem 'faker'
+  gem 'faker', require: false
   # load environment variables from .env
   gem 'dotenv-rails'
   # code coverage
