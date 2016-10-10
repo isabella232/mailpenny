@@ -1,77 +1,46 @@
-<!-- =========== -->
-<!--  Body Area  -->
-<!-- =========== -->
-<div class="container">
-	<div class="row">
-		<div class="content_height">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center paddingbox client-details">
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="contact-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<figure><%= image_tag 'contact-info1.png' %></figure>
-						Your contact card for the Internet
-						<!--contact-info-->
-					</div>
-					<!--col-->
+<div class="ui container">
+	<div class="ui center aligned three column collapsable grid">
+
+		<div class="row">
+			<div class="column">
+				<div class="ui infographic segment">
+					<div class="infographic image"><%= image_tag 'contact-info1.png' %></div>
+					<div class="ui clearing divider"></div>
+					Your contact card for the Internet
 				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="contact-info col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<figure><%= image_tag 'contact-info2.png' %></figure>
-						Receive messages without sharing personal information
-						<!--contact-info-->
-					</div>
-					<!--col-->
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-					<div class="contact-info contact-info2 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<figure><%= image_tag 'contact-info3.png' %></figure>
-						Charge people to start a conversation
-						<!--contact-info-->
-					</div>
-					<!--col-->
-				</div>
-				<div class="">
-					<h4>
-						Some already on Mailpenny
-					</h4>
-				</div>
-				<div class="client-box col-lg-3 col-md-3 col-sm-5 col-xs-6">
-					<div class="client-lt pull-left">
-						<figure class="pull-left"><%= image_tag 'client-img.jpg' %></figure>
-						<div class="clearfix"></div>
-						<div class="client-icon pull-left">
-							<a href="#">
-								<i class="fa fa-envelope-o"></i>
-							</a>
-						</div>
-						<div class="client-icon pull-left">
-							<a href="#">
-								<i class="fa fa-comment-o"></i>
-							</a>
-						</div>
-					</div>
-					<ul class="pull-right">
-						<li>Liza Burdenuk</li>
-						<li>Scrum Master at RIT</li>
-						<li>
-							<i class="fa fa-map-marker"></i>
-							Kyiv, Ukraine</li>
-						<li>
-							<a href="#">
-								<i class="fa fa-twitter"></i>
-								lizaburdenuk</a>
-						</li>
-					</ul>
-					<!--client-box-->
-				</div>
-				<div class="clearfix"></div>
-				<div class="btn-primary red-bg col-lg-3 col-md-3 col-sm-5 col-xs-6">
-					<%= link_to 'Join', new_user_registration_path %>
-				</div>
-				<!--col-->
+
 			</div>
-			<!--content_height-->
+
+			<div class="column">
+				<div class="ui infographic segment">
+					<div class="infographic image"><%= image_tag 'contact-info2.png' %></div>
+					<div class="ui clearing divider"></div>
+					<figcaption>Receive messages without sharing personal information</figcaption>
+				</div>
+			</div>
+
+			<div class="column">
+				<div class="ui infographic segment">
+					<div class="infographic image"><%= image_tag 'contact-info3.png' %></div>
+					<div class="ui clearing divider"></div>
+					<figcaption>Charge people to start a conversation</figcaption>
+				</div>
+			</div>
 		</div>
-		<!--row-->
+
+		<div class="row">
+			<div class="column">
+				<h4>Some already on Mailpenny</h4>
+				<%= contact_card_for User.first %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="column">
+				<a href="<%= new_user_registration_path %>" class="ui button">
+					Join</a>
+			</div>
+		</div>
+
 	</div>
-	<!--container-->
 </div>
