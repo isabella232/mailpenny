@@ -10,15 +10,13 @@
         </div>
         <div class="right menu">
           <% if user_signed_in? %>
-          <div class="item">
+          <a href="#" class="item">
             <i class="user icon"></i>
             Profile
-          </div>
-          <a href="#">
-          <div class="item">
+          </a>
+          <a href="#" class="item">
             <i class="mail icon"></i>
             Inbox
-          </div>
           </a>
           <div class="dropdown item" tabindex="0">
               Dropdown
@@ -41,6 +39,6 @@
               <a href="<%= new_user_registration_path %>" class="ui primary button">Sign Up</a>
           </div>
           <% end %>
-        </div>
+        </a>
     </div>
 </div>
