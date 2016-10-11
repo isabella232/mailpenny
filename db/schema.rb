@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161011000938) do
+ActiveRecord::Schema.define(version: 20161011001523) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
-    t.decimal  "balance",         default: "0.0"
-    t.integer  "account_type",                    null: false
+    t.decimal  "balance",         precision: 15, scale: 2, default: "0.0", null: false
+    t.integer  "account_type",                                             null: false
     t.integer  "user_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.integer  "conversation_id"
     t.index ["conversation_id"], name: "index_accounts_on_conversation_id", using: :btree
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
@@ -98,10 +98,10 @@ ActiveRecord::Schema.define(version: 20161011000938) do
   create_table "transfers", force: :cascade do |t|
     t.integer  "from_id"
     t.integer  "to_id"
-    t.decimal  "amount",        default: "0.0"
-    t.integer  "transfer_type",                 null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.decimal  "amount",        precision: 15, scale: 2, default: "0.0", null: false
+    t.integer  "transfer_type",                                          null: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.index ["from_id"], name: "index_transfers_on_from_id", using: :btree
     t.index ["to_id"], name: "index_transfers_on_to_id", using: :btree
   end

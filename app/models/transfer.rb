@@ -1,4 +1,3 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `transfers`
@@ -10,7 +9,7 @@
 # **`id`**             | `integer`          | `not null, primary key`
 # **`from_id`**        | `integer`          |
 # **`to_id`**          | `integer`          |
-# **`amount`**         | `decimal(, )`      | `default(0.0)`
+# **`amount`**         | `decimal(15, 2)`   | `default(0.0), not null`
 # **`transfer_type`**  | `integer`          | `not null`
 # **`created_at`**     | `datetime`         | `not null`
 # **`updated_at`**     | `datetime`         | `not null`
@@ -22,7 +21,6 @@
 # * `index_transfers_on_to_id`:
 #     * **`to_id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 # A record of the transfers between accounts
 class Transfer < ApplicationRecord

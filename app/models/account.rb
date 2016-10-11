@@ -1,4 +1,3 @@
-# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `accounts`
@@ -8,7 +7,7 @@
 # Name                   | Type               | Attributes
 # ---------------------- | ------------------ | ---------------------------
 # **`id`**               | `integer`          | `not null, primary key`
-# **`balance`**          | `decimal(, )`      | `default(0.0)`
+# **`balance`**          | `decimal(15, 2)`   | `default(0.0), not null`
 # **`account_type`**     | `integer`          | `not null`
 # **`user_id`**          | `integer`          |
 # **`created_at`**       | `datetime`         | `not null`
@@ -29,7 +28,6 @@
 # * `fk_rails_de2588dd91`:
 #     * **`conversation_id => conversations.id`**
 #
-# <!-- END GENERATED ANNOTATION -->
 
 # Accounting entities that can make transfers and hold balances
 class Account < ApplicationRecord
