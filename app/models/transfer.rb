@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `transfers`
@@ -21,6 +22,7 @@
 # * `index_transfers_on_to_id`:
 #     * **`to_id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 # A record of the transfers between accounts
 class Transfer < ApplicationRecord

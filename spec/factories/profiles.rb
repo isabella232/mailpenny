@@ -14,7 +14,7 @@
 # **`work_title`**           | `string`           |
 # **`location`**             | `string`           |
 # **`twitter_username`**     | `string`           |
-# **`rate`**                 | `decimal(, )`      | `default(0.0), not null`
+# **`rate`**                 | `decimal(15, 2)`   | `default(0.0), not null`
 # **`created_at`**           | `datetime`         | `not null`
 # **`updated_at`**           | `datetime`         | `not null`
 # **`user_id`**              | `integer`          |

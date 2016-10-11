@@ -1,3 +1,4 @@
+# <!-- BEGIN GENERATED ANNOTATION -->
 # ## Schema Information
 #
 # Table name: `profiles`
@@ -34,6 +35,7 @@
 # * `fk_rails_e424190865`:
 #     * **`user_id => users.id`**
 #
+# <!-- END GENERATED ANNOTATION -->
 
 class Profile < ApplicationRecord
   before_validation :set_defaults

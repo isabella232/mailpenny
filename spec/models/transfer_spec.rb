@@ -10,7 +10,7 @@
 # **`id`**             | `integer`          | `not null, primary key`
 # **`from_id`**        | `integer`          |
 # **`to_id`**          | `integer`          |
-# **`amount`**         | `decimal(, )`      | `default(0.0)`
+# **`amount`**         | `decimal(15, 2)`   | `default(0.0), not null`
 # **`transfer_type`**  | `integer`          | `not null`
 # **`created_at`**     | `datetime`         | `not null`
 # **`updated_at`**     | `datetime`         | `not null`
