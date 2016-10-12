@@ -1,7 +1,7 @@
 [![Travis](https://img.shields.io/travis/payloadtech/mailpenny/dev.svg?maxAge=2592000)](https://travis-ci.org/payloadtech/mailpenny)
 [![Coverage Status](https://coveralls.io/repos/github/payloadtech/mailpenny/badge.svg?branch=dev)](https://coveralls.io/github/payloadtech/mailpenny?branch=dev)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/payloadtech/mailpenny/dev/frames)
-
+[![Docs Coverage](http://inch-ci.org/github/payloadtech/mailpenny.svg?branch=dev)](http://inch-ci.org/github/payloadtech/mailpenny)
 Mailpenny
 =========
 
