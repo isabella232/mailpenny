@@ -1,4 +1,5 @@
 [![Travis](https://img.shields.io/travis/payloadtech/mailpenny.svg?maxAge=2592000)]()
+[![Coverage Status](https://coveralls.io/repos/github/payloadtech/mailpenny/badge.svg?branch=master)](https://coveralls.io/github/payloadtech/mailpenny?branch=master)
 [![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/payloadtech/mailpenny/master/frames)
 
 Mailpenny
