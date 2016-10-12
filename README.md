@@ -1,7 +1,7 @@
 Mailpenny
 =========
 
-This is the entire codebase for the Mailpenny app. Mailpenny uses [Mailgun](http://mailgun.com) to send/recieve email, and [Coinbase](http://coinbase.com) to store bitcoin.
+This is the entire codebase for the Mailpenny app. Mailpenny uses [Mailgun](http://mailgun.com) to send/receive email.
 
 ## Setup
 
@@ -24,8 +24,7 @@ It's a good idea to run five consoles:
 
 Generate docs using the `yard` command, and they will be saved in `doc/`.
 
-Run `yard server
---reload` which generates a fresh docs from your code on refresh, to keep an
+Run `yard server --reload` which generates a fresh docs from your code on refresh, to keep an
 eye on your method docs.
 
 ## Tests
