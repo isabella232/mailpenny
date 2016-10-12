@@ -1,3 +1,6 @@
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg?maxAge=2592000)]()
+[![Yard Docs](http://img.shields.io/badge/yard-docs-blue.svg)](http://www.rubydoc.info/github/payloadtech/mailpenny/master/frames)
+
 Mailpenny
 =========
 
