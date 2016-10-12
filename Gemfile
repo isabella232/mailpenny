@@ -48,6 +48,7 @@ gem 'braintree'
 
 group :test do
   gem 'database_cleaner'
+  gem 'coveralls', require: false
 end
 
 group :development, :test do
