@@ -8,8 +8,6 @@ class PaymentsHandlerController < ApplicationController
       current_user.account.withdraw amount
     elsif params[:method] == 'test'
       raise 'Test is not available in production'
-    else
-      # TODO handle legit deposits
     end
   end
 
@@ -20,8 +18,6 @@ class PaymentsHandlerController < ApplicationController
       current_user.account.withdraw amount
     elsif params[:method] == 'test'
       raise 'Test is not available in production'
-    else
-      # TODO handle legit deposits
     end
   end
 
