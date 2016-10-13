@@ -24,15 +24,15 @@ feature 'Dashboard' do
     expect(page).to have_content 'password is invalid'
   end
 
-  context 'in account settings' do
-    scenario 'change username successfully' do
-      visit '/dashboard/account'
-      within '#edit_user' do
-        fill_in 'Username', with: @user_changed.username
-        fill_in 'Old pass', with: @user.password
-      end
-      click_button 'Update'
-      expect(page).to have_content 'Your account has been updated successfully.'
-    end
-  end
+  # context 'in account settings' do
+  #   scenario 'change username successfully' do
+  #     visit '/dashboard/account'
+  #     within '#edit_user' do
+  #       fill_in 'Username', with: @user_changed.username
+  #       fill_in 'Old pass', with: @user.password
+  #     end
+  #     click_button 'Update'
+  #     expect(page).to have_content 'Your account has been updated successfully.'
+  #   end
+  # end
 end
