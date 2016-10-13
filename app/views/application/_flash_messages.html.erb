@@ -1,16 +1,13 @@
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-sm-12">
-            <% flash.each do |key, value| %>
-              <% unless key == 'timedout' # devise pollutes flash messages. See https://github.com/plataformatec/devise/issues/1777 %>
-              <div class="alert alert-<%= bootstrap_class_for key %> alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  <%= value %>
-              </div>
-              <% end %>
-            <% end %>
+<div class="ui flash messages container">
+  <% flash.each do |key, value| %>
+  <% unless key == 'timedout' # devise pollutes flash messages. See https://github.com/plataformatec/devise/issues/1777 %>
+    <div class="ui <%= message_class_for key %> message">
+        <i class="close icon"></i>
+        <div class="header">
+            <%= value %>
         </div>
+        <p></p>
     </div>
-</div> -->
+    <% end %>
+    <% end %>
+</div>
